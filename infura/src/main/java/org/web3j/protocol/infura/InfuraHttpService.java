@@ -1,9 +1,9 @@
-package org.web3j.protocol.infura;
+package org.chain3j.protocol.infura;
 
 import java.util.Collections;
 import java.util.Map;
 
-import org.web3j.protocol.http.HttpService;
+import org.chain3j.protocol.http.HttpService;
 
 /**
  * HttpService for working with <a href="https://infura.io/">Infura</a> clients.

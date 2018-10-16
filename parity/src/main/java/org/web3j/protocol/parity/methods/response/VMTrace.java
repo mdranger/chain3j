@@ -1,4 +1,4 @@
-package org.web3j.protocol.parity.methods.response;
+package org.chain3j.protocol.parity.methods.response;
 
 import java.math.BigInteger;
 import java.util.List;

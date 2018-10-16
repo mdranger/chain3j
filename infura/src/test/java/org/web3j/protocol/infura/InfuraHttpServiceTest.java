@@ -1,4 +1,4 @@
-package org.web3j.protocol.infura;
+package org.chain3j.protocol.infura;
 
 import java.util.Collections;
 
@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.web3j.protocol.infura.InfuraHttpService.buildClientVersionHeader;
+import static org.chain3j.protocol.infura.InfuraHttpService.buildClientVersionHeader;
 
 public class InfuraHttpServiceTest {
 

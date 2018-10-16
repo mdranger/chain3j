@@ -1,4 +1,4 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -15,18 +15,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
 
-import org.web3j.protocol.core.RemoteCall;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.tx.FastRawTransactionManager;
-import org.web3j.tx.Transfer;
-import org.web3j.tx.response.Callback;
-import org.web3j.tx.response.PollingTransactionReceiptProcessor;
-import org.web3j.tx.response.QueuingTransactionReceiptProcessor;
-import org.web3j.utils.Convert;
+import org.chain3j.protocol.core.RemoteCall;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.tx.FastRawTransactionManager;
+import org.chain3j.tx.Transfer;
+import org.chain3j.tx.response.Callback;
+import org.chain3j.tx.response.PollingTransactionReceiptProcessor;
+import org.chain3j.tx.response.QueuingTransactionReceiptProcessor;
+import org.chain3j.utils.Convert;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.web3j.tx.TransactionManager.DEFAULT_POLLING_ATTEMPTS_PER_TX_HASH;
+import static org.chain3j.tx.TransactionManager.DEFAULT_POLLING_ATTEMPTS_PER_TX_HASH;
 
 public class FastRawTransactionManagerIT extends Scenario {
 
@@ -41,11 +41,11 @@ public class FastRawTransactionManagerIT extends Scenario {
 
         List<Future<TransactionReceipt>> transactionReceipts = new LinkedList<>();
         FastRawTransactionManager transactionManager = new FastRawTransactionManager(
-                web3j, ALICE,
+                chain3j, ALICE,
                 new PollingTransactionReceiptProcessor(
-                        web3j, POLLING_FREQUENCY, DEFAULT_POLLING_ATTEMPTS_PER_TX_HASH));
+                        chain3j, POLLING_FREQUENCY, DEFAULT_POLLING_ATTEMPTS_PER_TX_HASH));
 
-        Transfer transfer = new Transfer(web3j, transactionManager);
+        Transfer transfer = new Transfer(chain3j, transactionManager);
         BigInteger gasPrice = transfer.requestCurrentGasPrice();
 
         for (int i = 0; i < COUNT; i++) {
@@ -83,8 +83,8 @@ public class FastRawTransactionManagerIT extends Scenario {
                 new ConcurrentLinkedQueue<>();
 
         FastRawTransactionManager transactionManager = new FastRawTransactionManager(
-                web3j, ALICE,
-                new QueuingTransactionReceiptProcessor(web3j, new Callback() {
+                chain3j, ALICE,
+                new QueuingTransactionReceiptProcessor(chain3j, new Callback() {
                     @Override
                     public void accept(TransactionReceipt transactionReceipt) {
                         transactionReceipts.add(transactionReceipt);
@@ -96,7 +96,7 @@ public class FastRawTransactionManagerIT extends Scenario {
                     }
                 }, DEFAULT_POLLING_ATTEMPTS_PER_TX_HASH, POLLING_FREQUENCY));
 
-        Transfer transfer = new Transfer(web3j, transactionManager);
+        Transfer transfer = new Transfer(chain3j, transactionManager);
 
         BigInteger gasPrice = transfer.requestCurrentGasPrice();
 

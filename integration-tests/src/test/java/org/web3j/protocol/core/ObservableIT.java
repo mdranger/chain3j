@@ -1,4 +1,4 @@
-package org.web3j.protocol.core;
+package org.chain3j.protocol.core;
 
 import java.math.BigInteger;
 import java.util.concurrent.CountDownLatch;
@@ -9,10 +9,10 @@ import org.junit.Test;
 import rx.Observable;
 import rx.Subscription;
 
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.methods.request.EthFilter;
-import org.web3j.protocol.core.methods.response.EthBlock;
-import org.web3j.protocol.http.HttpService;
+import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.response.EthBlock;
+import org.chain3j.protocol.http.HttpService;
 
 import static org.junit.Assert.assertTrue;
 
@@ -24,46 +24,46 @@ public class ObservableIT {
     private static final int EVENT_COUNT = 5;
     private static final int TIMEOUT_MINUTES = 5;
 
-    private Web3j web3j;
+    private chain3j chain3j;
 
     @Before
     public void setUp() {
-        this.web3j = Web3j.build(new HttpService());
+        this.chain3j = chain3j.build(new HttpService());
     }
 
     @Test
     public void testBlockObservable() throws Exception {
-        run(web3j.blockObservable(false));
+        run(chain3j.blockObservable(false));
     }
 
     @Test
     public void testPendingTransactionObservable() throws Exception {
-        run(web3j.pendingTransactionObservable());
+        run(chain3j.pendingTransactionObservable());
     }
 
     @Test
     public void testTransactionObservable() throws Exception {
-        run(web3j.transactionObservable());
+        run(chain3j.transactionObservable());
     }
 
     @Test
     public void testLogObservable() throws Exception {
-        run(web3j.ethLogObservable(new EthFilter()));
+        run(chain3j.ethLogObservable(new EthFilter()));
     }
 
     @Test
     public void testReplayObservable() throws Exception {
-        run(web3j.replayBlocksObservable(
+        run(chain3j.replayBlocksObservable(
                 new DefaultBlockParameterNumber(0),
                 new DefaultBlockParameterNumber(EVENT_COUNT), true));
     }
 
     @Test
     public void testCatchUpToLatestAndSubscribeToNewBlocksObservable() throws Exception {
-        EthBlock ethBlock = web3j.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, false)
+        EthBlock ethBlock = chain3j.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, false)
                 .send();
         BigInteger latestBlockNumber = ethBlock.getBlock().getNumber();
-        run(web3j.catchUpToLatestAndSubscribeToNewBlocksObservable(
+        run(chain3j.catchUpToLatestAndSubscribeToNewBlocksObservable(
                 new DefaultBlockParameterNumber(latestBlockNumber.subtract(BigInteger.ONE)),
                 false));
     }

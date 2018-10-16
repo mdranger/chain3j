@@ -1,37 +1,37 @@
-package org.web3j.generated;
+package org.chain3j.generated;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.web3j.abi.EventEncoder;
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Event;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.generated.Uint256;
-import org.web3j.crypto.Credentials;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.DefaultBlockParameter;
-import org.web3j.protocol.core.RemoteCall;
-import org.web3j.protocol.core.methods.request.EthFilter;
-import org.web3j.protocol.core.methods.response.Log;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.tx.Contract;
-import org.web3j.tx.TransactionManager;
-import org.web3j.tx.gas.ContractGasProvider;
+import org.chain3j.abi.EventEncoder;
+import org.chain3j.abi.TypeReference;
+import org.chain3j.abi.datatypes.Event;
+import org.chain3j.abi.datatypes.Function;
+import org.chain3j.abi.datatypes.Type;
+import org.chain3j.abi.datatypes.generated.Uint256;
+import org.chain3j.crypto.Credentials;
+import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.core.DefaultBlockParameter;
+import org.chain3j.protocol.core.RemoteCall;
+import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.response.Log;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.tx.Contract;
+import org.chain3j.tx.TransactionManager;
+import org.chain3j.tx.gas.ContractGasProvider;
 import rx.Observable;
 import rx.functions.Func1;
 
 /**
  * <p>Auto generated code.
  * <p><strong>Do not modify!</strong>
- * <p>Please use the <a href="https://docs.web3j.io/command_line.html">web3j command line tools</a>,
- * or the org.web3j.codegen.SolidityFunctionWrapperGenerator in the 
- * <a href="https://github.com/web3j/web3j/tree/master/codegen">codegen module</a> to update.
+ * <p>Please use the <a href="https://docs.chain3j.io/command_line.html">chain3j command line tools</a>,
+ * or the org.chain3j.codegen.SolidityFunctionWrapperGenerator in the 
+ * <a href="https://github.com/chain3j/chain3j/tree/master/codegen">codegen module</a> to update.
  *
- * <p>Generated with web3j version 3.6.0-SNAPSHOT.
+ * <p>Generated with chain3j version 3.6.0-SNAPSHOT.
  */
 public class Fibonacci extends Contract {
     private static final String BINARY = "608060405234801561001057600080fd5b5061014f806100206000396000f30060806040526004361061004b5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416633c7fdc70811461005057806361047ff41461007a575b600080fd5b34801561005c57600080fd5b50610068600435610092565b60408051918252519081900360200190f35b34801561008657600080fd5b506100686004356100e0565b600061009d826100e0565b604080518481526020810183905281519293507f71e71a8458267085d5ab16980fd5f114d2d37f232479c245d523ce8d23ca40ed929081900390910190a1919050565b60008115156100f15750600061011e565b81600114156101025750600161011e565b61010e600283036100e0565b61011a600184036100e0565b0190505b9190505600a165627a7a723058209acf25d1bcddb7f4384fca6815063cfa89ffe456b82b5ad7135867f4b3d9d3500029";
@@ -45,34 +45,34 @@ public class Fibonacci extends Contract {
     ;
 
     @Deprecated
-    protected Fibonacci(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        super(BINARY, contractAddress, web3j, credentials, gasPrice, gasLimit);
+    protected Fibonacci(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+        super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected Fibonacci(String contractAddress, Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
-        super(BINARY, contractAddress, web3j, credentials, contractGasProvider);
+    protected Fibonacci(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+        super(BINARY, contractAddress, chain3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected Fibonacci(String contractAddress, Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        super(BINARY, contractAddress, web3j, transactionManager, gasPrice, gasLimit);
+    protected Fibonacci(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+        super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected Fibonacci(String contractAddress, Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        super(BINARY, contractAddress, web3j, transactionManager, contractGasProvider);
+    protected Fibonacci(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+        super(BINARY, contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
     public RemoteCall<TransactionReceipt> fibonacciNotify(BigInteger number) {
         final Function function = new Function(
                 FUNC_FIBONACCINOTIFY, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(number)), 
+                Arrays.<Type>asList(new org.chain3j.abi.datatypes.generated.Uint256(number)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteCall<BigInteger> fibonacci(BigInteger number) {
         final Function function = new Function(FUNC_FIBONACCI, 
-                Arrays.<Type>asList(new org.web3j.abi.datatypes.generated.Uint256(number)), 
+                Arrays.<Type>asList(new org.chain3j.abi.datatypes.generated.Uint256(number)), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
@@ -91,7 +91,7 @@ public class Fibonacci extends Contract {
     }
 
     public Observable<NotifyEventResponse> notifyEventObservable(EthFilter filter) {
-        return web3j.ethLogObservable(filter).map(new Func1<Log, NotifyEventResponse>() {
+        return chain3j.ethLogObservable(filter).map(new Func1<Log, NotifyEventResponse>() {
             @Override
             public NotifyEventResponse call(Log log) {
                 Contract.EventValuesWithLog eventValues = extractEventParametersWithLog(NOTIFY_EVENT, log);
@@ -110,40 +110,40 @@ public class Fibonacci extends Contract {
         return notifyEventObservable(filter);
     }
 
-    public static RemoteCall<Fibonacci> deploy(Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(Fibonacci.class, web3j, credentials, contractGasProvider, BINARY, "");
+    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+        return deployRemoteCall(Fibonacci.class, chain3j, credentials, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<Fibonacci> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(Fibonacci.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
+    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+        return deployRemoteCall(Fibonacci.class, chain3j, credentials, gasPrice, gasLimit, BINARY, "");
     }
 
-    public static RemoteCall<Fibonacci> deploy(Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(Fibonacci.class, web3j, transactionManager, contractGasProvider, BINARY, "");
-    }
-
-    @Deprecated
-    public static RemoteCall<Fibonacci> deploy(Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(Fibonacci.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, "");
+    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+        return deployRemoteCall(Fibonacci.class, chain3j, transactionManager, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static Fibonacci load(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        return new Fibonacci(contractAddress, web3j, credentials, gasPrice, gasLimit);
+    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+        return deployRemoteCall(Fibonacci.class, chain3j, transactionManager, gasPrice, gasLimit, BINARY, "");
     }
 
     @Deprecated
-    public static Fibonacci load(String contractAddress, Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        return new Fibonacci(contractAddress, web3j, transactionManager, gasPrice, gasLimit);
+    public static Fibonacci load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+        return new Fibonacci(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    public static Fibonacci load(String contractAddress, Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
-        return new Fibonacci(contractAddress, web3j, credentials, contractGasProvider);
+    @Deprecated
+    public static Fibonacci load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+        return new Fibonacci(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    public static Fibonacci load(String contractAddress, Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        return new Fibonacci(contractAddress, web3j, transactionManager, contractGasProvider);
+    public static Fibonacci load(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+        return new Fibonacci(contractAddress, chain3j, credentials, contractGasProvider);
+    }
+
+    public static Fibonacci load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+        return new Fibonacci(contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
     public static class NotifyEventResponse {

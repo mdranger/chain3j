@@ -1,8 +1,8 @@
-package org.web3j.protocol.parity.methods.response;
+package org.chain3j.protocol.parity.methods.response;
 
 import java.util.Map;
 
-import org.web3j.protocol.core.Response;
+import org.chain3j.protocol.core.Response;
 
 /**
  * parity_allAccountsInfo.

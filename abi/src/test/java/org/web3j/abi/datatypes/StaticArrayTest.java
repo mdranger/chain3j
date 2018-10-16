@@ -1,11 +1,11 @@
-package org.web3j.abi.datatypes;
+package org.chain3j.abi.datatypes;
 
 import java.util.stream.IntStream;
 
 import org.junit.Test;
 
-import org.web3j.abi.datatypes.generated.StaticArray3;
-import org.web3j.abi.datatypes.generated.Uint8;
+import org.chain3j.abi.datatypes.generated.StaticArray3;
+import org.chain3j.abi.datatypes.generated.Uint8;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

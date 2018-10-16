@@ -1,17 +1,17 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigInteger;
 import java.util.List;
 
 import org.junit.Test;
 
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.FunctionReturnDecoder;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.abi.FunctionEncoder;
+import org.chain3j.abi.FunctionReturnDecoder;
+import org.chain3j.abi.datatypes.Function;
+import org.chain3j.abi.datatypes.Type;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.methods.request.Transaction;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -67,8 +67,8 @@ public class DeployContractIT extends Scenario {
                 BigInteger.ZERO,
                 getFibonacciSolidityBinary());
 
-        org.web3j.protocol.core.methods.response.EthSendTransaction
-                transactionResponse = web3j.ethSendTransaction(transaction)
+        org.chain3j.protocol.core.methods.response.EthSendTransaction
+                transactionResponse = chain3j.ethSendTransaction(transaction)
                 .sendAsync().get();
 
         return transactionResponse.getTransactionHash();
@@ -79,7 +79,7 @@ public class DeployContractIT extends Scenario {
 
         String encodedFunction = FunctionEncoder.encode(function);
 
-        org.web3j.protocol.core.methods.response.EthCall response = web3j.ethCall(
+        org.chain3j.protocol.core.methods.response.EthCall response = chain3j.ethCall(
                 Transaction.createEthCallTransaction(
                         ALICE.getAddress(), contractAddress, encodedFunction),
                 DefaultBlockParameterName.LATEST)

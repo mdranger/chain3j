@@ -1,4 +1,4 @@
-package org.web3j.protocol.parity.methods.request;
+package org.chain3j.protocol.parity.methods.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

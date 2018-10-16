@@ -1,15 +1,15 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigInteger;
 
 import org.junit.Test;
 
-import org.web3j.crypto.Hash;
-import org.web3j.crypto.RawTransaction;
-import org.web3j.crypto.TransactionEncoder;
-import org.web3j.protocol.core.methods.response.EthSign;
-import org.web3j.utils.Convert;
-import org.web3j.utils.Numeric;
+import org.chain3j.crypto.Hash;
+import org.chain3j.crypto.RawTransaction;
+import org.chain3j.crypto.TransactionEncoder;
+import org.chain3j.protocol.core.methods.response.EthSign;
+import org.chain3j.utils.Convert;
+import org.chain3j.utils.Numeric;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -30,7 +30,7 @@ public class SignTransactionIT extends Scenario {
         byte[] encoded = TransactionEncoder.encode(rawTransaction);
         byte[] hashed = Hash.sha3(encoded);
 
-        EthSign ethSign = web3j.ethSign(ALICE.getAddress(), Numeric.toHexString(hashed))
+        EthSign ethSign = chain3j.ethSign(ALICE.getAddress(), Numeric.toHexString(hashed))
                 .sendAsync().get();
 
         String signature = ethSign.getSignature();

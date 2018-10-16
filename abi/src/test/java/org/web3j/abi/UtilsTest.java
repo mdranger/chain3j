@@ -1,4 +1,4 @@
-package org.web3j.abi;
+package org.chain3j.abi;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -7,24 +7,24 @@ import java.util.List;
 
 import org.junit.Test;
 
-import org.web3j.abi.datatypes.Bool;
-import org.web3j.abi.datatypes.DynamicArray;
-import org.web3j.abi.datatypes.DynamicBytes;
-import org.web3j.abi.datatypes.Fixed;
-import org.web3j.abi.datatypes.Int;
-import org.web3j.abi.datatypes.StaticArray;
-import org.web3j.abi.datatypes.Ufixed;
-import org.web3j.abi.datatypes.Uint;
-import org.web3j.abi.datatypes.Utf8String;
-import org.web3j.abi.datatypes.generated.Int64;
-import org.web3j.abi.datatypes.generated.StaticArray2;
-import org.web3j.abi.datatypes.generated.Uint256;
-import org.web3j.abi.datatypes.generated.Uint64;
+import org.chain3j.abi.datatypes.Bool;
+import org.chain3j.abi.datatypes.DynamicArray;
+import org.chain3j.abi.datatypes.DynamicBytes;
+import org.chain3j.abi.datatypes.Fixed;
+import org.chain3j.abi.datatypes.Int;
+import org.chain3j.abi.datatypes.StaticArray;
+import org.chain3j.abi.datatypes.Ufixed;
+import org.chain3j.abi.datatypes.Uint;
+import org.chain3j.abi.datatypes.Utf8String;
+import org.chain3j.abi.datatypes.generated.Int64;
+import org.chain3j.abi.datatypes.generated.StaticArray2;
+import org.chain3j.abi.datatypes.generated.Uint256;
+import org.chain3j.abi.datatypes.generated.Uint64;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.web3j.abi.Utils.typeMap;
+import static org.chain3j.abi.Utils.typeMap;
 
 public class UtilsTest {
 

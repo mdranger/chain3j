@@ -1,4 +1,4 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -7,22 +7,22 @@ import java.util.List;
 
 import org.junit.Test;
 
-import org.web3j.abi.EventEncoder;
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.FunctionReturnDecoder;
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Event;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.generated.Uint256;
-import org.web3j.crypto.Credentials;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.request.EthFilter;
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.EthEstimateGas;
-import org.web3j.protocol.core.methods.response.EthLog;
-import org.web3j.protocol.core.methods.response.Log;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.abi.EventEncoder;
+import org.chain3j.abi.FunctionEncoder;
+import org.chain3j.abi.FunctionReturnDecoder;
+import org.chain3j.abi.TypeReference;
+import org.chain3j.abi.datatypes.Event;
+import org.chain3j.abi.datatypes.Function;
+import org.chain3j.abi.datatypes.Type;
+import org.chain3j.abi.datatypes.generated.Uint256;
+import org.chain3j.crypto.Credentials;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.request.Transaction;
+import org.chain3j.protocol.core.methods.response.EthEstimateGas;
+import org.chain3j.protocol.core.methods.response.EthLog;
+import org.chain3j.protocol.core.methods.response.Log;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.CoreMatchers.is;
@@ -83,7 +83,7 @@ public class EventFilterIT extends Scenario {
     }
 
     private BigInteger estimateGas(String encodedFunction) throws Exception {
-        EthEstimateGas ethEstimateGas = web3j.ethEstimateGas(
+        EthEstimateGas ethEstimateGas = chain3j.ethEstimateGas(
                 Transaction.createEthCallTransaction(ALICE.getAddress(), null, encodedFunction))
                 .sendAsync().get();
         // this was coming back as 50,000,000 which is > the block gas limit of 4,712,388
@@ -99,8 +99,8 @@ public class EventFilterIT extends Scenario {
                 credentials.getAddress(), nonce, Transaction.DEFAULT_GAS, gas, contractAddress,
                 encodedFunction);
 
-        org.web3j.protocol.core.methods.response.EthSendTransaction transactionResponse =
-                web3j.ethSendTransaction(transaction).sendAsync().get();
+        org.chain3j.protocol.core.methods.response.EthSendTransaction transactionResponse =
+                chain3j.ethSendTransaction(transaction).sendAsync().get();
 
         assertFalse(transactionResponse.hasError());
 
@@ -117,7 +117,7 @@ public class EventFilterIT extends Scenario {
 
         ethFilter.addSingleTopic(encodedEventSignature);
 
-        EthLog ethLog = web3j.ethGetLogs(ethFilter).send();
+        EthLog ethLog = chain3j.ethGetLogs(ethFilter).send();
         return ethLog.getLogs();
     }
 }

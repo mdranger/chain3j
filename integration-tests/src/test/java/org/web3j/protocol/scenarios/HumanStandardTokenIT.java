@@ -1,4 +1,4 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -7,27 +7,27 @@ import java.util.List;
 
 import org.junit.Test;
 
-import org.web3j.abi.EventEncoder;
-import org.web3j.abi.FunctionEncoder;
-import org.web3j.abi.FunctionReturnDecoder;
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.Bool;
-import org.web3j.abi.datatypes.Event;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.Utf8String;
-import org.web3j.abi.datatypes.generated.Uint256;
-import org.web3j.abi.datatypes.generated.Uint8;
-import org.web3j.crypto.Credentials;
-import org.web3j.crypto.RawTransaction;
-import org.web3j.crypto.TransactionEncoder;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.core.methods.response.Log;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.utils.Numeric;
+import org.chain3j.abi.EventEncoder;
+import org.chain3j.abi.FunctionEncoder;
+import org.chain3j.abi.FunctionReturnDecoder;
+import org.chain3j.abi.TypeReference;
+import org.chain3j.abi.datatypes.Address;
+import org.chain3j.abi.datatypes.Bool;
+import org.chain3j.abi.datatypes.Event;
+import org.chain3j.abi.datatypes.Function;
+import org.chain3j.abi.datatypes.Type;
+import org.chain3j.abi.datatypes.Utf8String;
+import org.chain3j.abi.datatypes.generated.Uint256;
+import org.chain3j.abi.datatypes.generated.Uint8;
+import org.chain3j.crypto.Credentials;
+import org.chain3j.crypto.RawTransaction;
+import org.chain3j.crypto.TransactionEncoder;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.methods.request.Transaction;
+import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.Log;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.utils.Numeric;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -153,7 +153,7 @@ public class HumanStandardTokenIT extends Scenario {
                 FunctionEncoder.encodeConstructor(
                         Arrays.asList(
                                 new Uint256(initialSupply),
-                                new Utf8String("web3j tokens"),
+                                new Utf8String("chain3j tokens"),
                                 new Uint8(BigInteger.TEN),
                                 new Utf8String("w3j$")));
 
@@ -167,7 +167,7 @@ public class HumanStandardTokenIT extends Scenario {
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction transactionResponse = web3j.ethSendRawTransaction(hexValue)
+        EthSendTransaction transactionResponse = chain3j.ethSendRawTransaction(hexValue)
                 .sendAsync().get();
 
         return transactionResponse.getTransactionHash();
@@ -288,7 +288,7 @@ public class HumanStandardTokenIT extends Scenario {
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction transactionResponse = web3j.ethSendRawTransaction(hexValue)
+        EthSendTransaction transactionResponse = chain3j.ethSendRawTransaction(hexValue)
                 .sendAsync().get();
 
         return transactionResponse.getTransactionHash();
@@ -298,7 +298,7 @@ public class HumanStandardTokenIT extends Scenario {
             Function function, String contractAddress) throws Exception {
         String encodedFunction = FunctionEncoder.encode(function);
 
-        org.web3j.protocol.core.methods.response.EthCall response = web3j.ethCall(
+        org.chain3j.protocol.core.methods.response.EthCall response = chain3j.ethCall(
                 Transaction.createEthCallTransaction(
                         ALICE.getAddress(), contractAddress, encodedFunction),
                 DefaultBlockParameterName.LATEST)

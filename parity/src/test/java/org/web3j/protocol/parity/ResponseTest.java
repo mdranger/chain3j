@@ -1,4 +1,4 @@
-package org.web3j.protocol.parity;
+package org.chain3j.protocol.parity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import org.web3j.crypto.WalletFile;
-import org.web3j.protocol.ResponseTester;
-import org.web3j.protocol.core.methods.response.VoidResponse;
-import org.web3j.protocol.parity.methods.response.FullTraceInfo;
-import org.web3j.protocol.parity.methods.response.ParityAddressesResponse;
-import org.web3j.protocol.parity.methods.response.ParityAllAccountsInfo;
-import org.web3j.protocol.parity.methods.response.ParityDefaultAddressResponse;
-import org.web3j.protocol.parity.methods.response.ParityDeriveAddress;
-import org.web3j.protocol.parity.methods.response.ParityExportAccount;
-import org.web3j.protocol.parity.methods.response.ParityFullTraceResponse;
-import org.web3j.protocol.parity.methods.response.ParityListRecentDapps;
-import org.web3j.protocol.parity.methods.response.StateDiff;
-import org.web3j.protocol.parity.methods.response.Trace;
-import org.web3j.protocol.parity.methods.response.VMTrace;
+import org.chain3j.crypto.WalletFile;
+import org.chain3j.protocol.ResponseTester;
+import org.chain3j.protocol.core.methods.response.VoidResponse;
+import org.chain3j.protocol.parity.methods.response.FullTraceInfo;
+import org.chain3j.protocol.parity.methods.response.ParityAddressesResponse;
+import org.chain3j.protocol.parity.methods.response.ParityAllAccountsInfo;
+import org.chain3j.protocol.parity.methods.response.ParityDefaultAddressResponse;
+import org.chain3j.protocol.parity.methods.response.ParityDeriveAddress;
+import org.chain3j.protocol.parity.methods.response.ParityExportAccount;
+import org.chain3j.protocol.parity.methods.response.ParityFullTraceResponse;
+import org.chain3j.protocol.parity.methods.response.ParityListRecentDapps;
+import org.chain3j.protocol.parity.methods.response.StateDiff;
+import org.chain3j.protocol.parity.methods.response.Trace;
+import org.chain3j.protocol.parity.methods.response.VMTrace;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -374,7 +374,7 @@ public class ResponseTest extends ResponseTester {
         assertNotNull(response);
 
         //CHECKSTYLE:OFF
-        org.web3j.protocol.parity.methods.response.Trace trace1 = new org.web3j.protocol.parity.methods.response.Trace();
+        org.chain3j.protocol.parity.methods.response.Trace trace1 = new org.chain3j.protocol.parity.methods.response.Trace();
         Trace.CreateAction action1 = new Trace.CreateAction();
         action1.setFrom("0x6c24f4387b31251fd7b6d7a1269d880b2108bf3a");
         action1.setGas("0x4bc1f5");
@@ -395,7 +395,7 @@ public class ResponseTest extends ResponseTester {
         trace1.setTransactionPosition(BigInteger.ONE);
         trace1.setType("create");
 
-        org.web3j.protocol.parity.methods.response.Trace trace2 = new org.web3j.protocol.parity.methods.response.Trace();
+        org.chain3j.protocol.parity.methods.response.Trace trace2 = new org.chain3j.protocol.parity.methods.response.Trace();
         Trace.CallAction action2 = new Trace.CallAction();
         action2.setCallType("call");
         action2.setFrom("0x14772e4f805b4dd2e69bd6d3f9b5edf0dfa5385a");
@@ -409,7 +409,7 @@ public class ResponseTest extends ResponseTester {
         trace2.setTraceAddress(Collections.emptyList());
         trace2.setType("call");
 
-        org.web3j.protocol.parity.methods.response.Trace trace3 = new org.web3j.protocol.parity.methods.response.Trace();
+        org.chain3j.protocol.parity.methods.response.Trace trace3 = new org.chain3j.protocol.parity.methods.response.Trace();
         Trace.SuicideAction action3 = new Trace.SuicideAction();
         action3.setAddress("0xb8d2ac822f3d0445f5b83d32b0b176c2cb3d0e60");
         action3.setBalance("0x0");
@@ -423,7 +423,7 @@ public class ResponseTest extends ResponseTester {
         trace3.setTransactionPosition(BigInteger.valueOf(2));
         trace3.setType("suicide");
 
-        org.web3j.protocol.parity.methods.response.Trace trace4 = new org.web3j.protocol.parity.methods.response.Trace();
+        org.chain3j.protocol.parity.methods.response.Trace trace4 = new org.chain3j.protocol.parity.methods.response.Trace();
         Trace.RewardAction action4 = new Trace.RewardAction();
         action4.setAuthor("0xb8d2ac822f3d0445f5b83d32b0b176c2cb3d0e60");
         action4.setValue("0x0");
@@ -436,7 +436,7 @@ public class ResponseTest extends ResponseTester {
         trace4.setType("reward");
         //CHECKSTYLE:ON
 
-        List<org.web3j.protocol.parity.methods.response.Trace> traces = new ArrayList<>();
+        List<org.chain3j.protocol.parity.methods.response.Trace> traces = new ArrayList<>();
         traces.add(trace1);
         traces.add(trace2);
         traces.add(trace3);

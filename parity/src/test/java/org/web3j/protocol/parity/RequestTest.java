@@ -1,4 +1,4 @@
-package org.web3j.protocol.parity;
+package org.chain3j.protocol.parity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -10,29 +10,29 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import org.web3j.crypto.WalletFile;
-import org.web3j.protocol.RequestTester;
-import org.web3j.protocol.core.DefaultBlockParameter;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.DefaultBlockParameterNumber;
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.protocol.parity.methods.request.Derivation;
-import org.web3j.protocol.parity.methods.request.TraceFilter;
-import org.web3j.utils.Numeric;
+import org.chain3j.crypto.WalletFile;
+import org.chain3j.protocol.RequestTester;
+import org.chain3j.protocol.core.DefaultBlockParameter;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.DefaultBlockParameterNumber;
+import org.chain3j.protocol.core.methods.request.Transaction;
+import org.chain3j.protocol.http.HttpService;
+import org.chain3j.protocol.parity.methods.request.Derivation;
+import org.chain3j.protocol.parity.methods.request.TraceFilter;
+import org.chain3j.utils.Numeric;
 
 public class RequestTest extends RequestTester {
 
-    private Parity web3j;
+    private Parity chain3j;
 
     @Override
     protected void initWeb3Client(HttpService httpService) {
-        web3j = Parity.build(httpService);
+        chain3j = Parity.build(httpService);
     }
 
     @Test
     public void testParityAllAccountsInfo() throws Exception {
-        web3j.parityAllAccountsInfo().send();
+        chain3j.parityAllAccountsInfo().send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_allAccountsInfo\","
                 + "\"params\":[],\"id\":1}");
@@ -41,7 +41,7 @@ public class RequestTest extends RequestTester {
     @Test
     public void testParityChangePassword() throws Exception {
         //CHECKSTYLE:OFF
-        web3j.parityChangePassword("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2", "bazqux5").send();
+        chain3j.parityChangePassword("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2", "bazqux5").send();
         
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_changePassword\","
                 + "\"params\":[\"0x407d73d8a49eeb85d32cf465507dd71d507100c1\",\"hunter2\",\"bazqux5\"],\"id\":1}");
@@ -53,7 +53,7 @@ public class RequestTest extends RequestTester {
         Derivation hashType = Derivation.createDerivationHash(
                 "0x2547ea3382099c7c76d33dd468063b32d41016aacb02cbd51ebc14ff5d2b6a43", "hard");
         
-        web3j.parityDeriveAddressHash("0x407d73d8a49eeb85d32cf465507dd71d507100c1", 
+        chain3j.parityDeriveAddressHash("0x407d73d8a49eeb85d32cf465507dd71d507100c1", 
                 "hunter2", hashType, false).send();
         
         //CHECKSTYLE:OFF
@@ -70,7 +70,7 @@ public class RequestTest extends RequestTester {
         indexType.add(Derivation.createDerivationIndex(2, "soft"));
         
         //CHECKSTYLE:OFF
-        web3j.parityDeriveAddressIndex("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2", indexType, false).send();
+        chain3j.parityDeriveAddressIndex("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2", indexType, false).send();
         
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_deriveAddressIndex\","
                 + "\"params\":[\"0x407d73d8a49eeb85d32cf465507dd71d507100c1\",\"hunter2\","
@@ -80,7 +80,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParityExportAccount() throws Exception {
-        web3j.parityExportAccount("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2").send();
+        chain3j.parityExportAccount("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2").send();
         
         //CHECKSTYLE:OFF
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_exportAccount\","
@@ -90,7 +90,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParityGetDappAddresses() throws Exception {
-        web3j.parityGetDappAddresses("web").send();
+        chain3j.parityGetDappAddresses("web").send();
         
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_getDappAddresses\","
                 + "\"params\":[\"web\"],\"id\":1}");
@@ -98,21 +98,21 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParityGetDefaultDappAddress() throws Exception {
-        web3j.parityGetDappDefaultAddress("web").send();
+        chain3j.parityGetDappDefaultAddress("web").send();
         
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_getDappDefaultAddress\","
                 + "\"params\":[\"web\"],\"id\":1}");
     }
     
     public void testParityGetNewDappsAddresses() throws Exception {
-        web3j.parityAllAccountsInfo().send();
+        chain3j.parityAllAccountsInfo().send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_getNewDappsAddresses\","
                 + "\"params\":[],\"id\":1}");
     }
     
     public void testParityGetNewDappsDefaultAddress() throws Exception {
-        web3j.parityGetNewDappsDefaultAddress().send();
+        chain3j.parityGetNewDappsDefaultAddress().send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_getNewDappsDefaultAddress\","
                 + "\"params\":[],\"id\":1}");
@@ -121,14 +121,14 @@ public class RequestTest extends RequestTester {
     public void testParityImportGethAccounts() throws Exception {
         ArrayList<String> gethAccounts = new ArrayList<>();
         gethAccounts.add("0x407d73d8a49eeb85d32cf465507dd71d507100c1");
-        web3j.parityImportGethAccounts(gethAccounts).send();
+        chain3j.parityImportGethAccounts(gethAccounts).send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_importGethAccounts\","
                 + "\"params\":[[\"0x407d73d8a49eeb85d32cf465507dd71d507100c1\"]],\"id\":1}");
     }
     
     public void testParityKillAccount() throws Exception {
-        web3j.parityKillAccount("0x407d73d8a49eeb85d32cf465507dd71d507100c1","hunter2").send();
+        chain3j.parityKillAccount("0x407d73d8a49eeb85d32cf465507dd71d507100c1","hunter2").send();
         
         //CHECKSTYLE:OFF
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_killAccount\","
@@ -139,7 +139,7 @@ public class RequestTest extends RequestTester {
     @Test
     public void testParityListAccountsNoAccountOffsetNoBlockTag() throws Exception {
         BigInteger maxQuantityReturned = BigInteger.valueOf(100);
-        web3j.parityListAccounts(maxQuantityReturned, null, null).send();
+        chain3j.parityListAccounts(maxQuantityReturned, null, null).send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_listAccounts\","
                 + "\"params\":[100,null],\"id\":1}");
@@ -149,7 +149,7 @@ public class RequestTest extends RequestTester {
     public void testParityListAccountsNoAccountOffsetWithBlockTag() throws Exception {
         BigInteger maxQuantityReturned = BigInteger.valueOf(100);
         DefaultBlockParameter blockParameter = new DefaultBlockParameterNumber(BigInteger.ONE);
-        web3j.parityListAccounts(maxQuantityReturned, null, blockParameter).send();
+        chain3j.parityListAccounts(maxQuantityReturned, null, blockParameter).send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_listAccounts\","
                 + "\"params\":[100,null,\"0x1\"],\"id\":1}");
@@ -159,7 +159,7 @@ public class RequestTest extends RequestTester {
     public void testParityListAccountsWithAccountOffsetWithBlockTag() throws Exception {
         BigInteger maxQuantityReturned = BigInteger.valueOf(100);
         DefaultBlockParameter blockParameter = DefaultBlockParameterName.LATEST;
-        web3j.parityListAccounts(maxQuantityReturned,
+        chain3j.parityListAccounts(maxQuantityReturned,
                 "0x407d73d8a49eeb85d32cf465507dd71d507100c1", blockParameter).send();
 
         //CHECKSTYLE:OFF
@@ -171,7 +171,7 @@ public class RequestTest extends RequestTester {
     @Test
     public void testParityListAccountsWithAccountOffsetNoBlockTag() throws Exception {
         BigInteger maxQuantityReturned = BigInteger.valueOf(100);
-        web3j.parityListAccounts(maxQuantityReturned,
+        chain3j.parityListAccounts(maxQuantityReturned,
                 "0x407d73d8a49eeb85d32cf465507dd71d507100c1", null).send();
 
         //CHECKSTYLE:OFF
@@ -181,14 +181,14 @@ public class RequestTest extends RequestTester {
     }
 
     public void testParityListGethAccounts() throws Exception {
-        web3j.parityListGethAccounts().send();
+        chain3j.parityListGethAccounts().send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_listGethAccounts\","
                 + "\"params\":[],\"id\":1}");
     }
     
     public void testParityListRecentDapps() throws Exception {
-        web3j.parityListRecentDapps().send();
+        chain3j.parityListRecentDapps().send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_listRecentDapps\","
                 + "\"params\":[],\"id\":1}");
@@ -196,7 +196,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParityNewAccountFromPhrase() throws Exception {
-        web3j.parityNewAccountFromPhrase("phrase", "password").send();
+        chain3j.parityNewAccountFromPhrase("phrase", "password").send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_newAccountFromPhrase\","
                 + "\"params\":[\"phrase\",\"password\"],\"id\":1}");
@@ -205,7 +205,7 @@ public class RequestTest extends RequestTester {
     @Test
     public void testParityNewAccountFromSecret() throws Exception {
         //CHECKSTYLE:OFF
-        web3j.parityNewAccountFromSecret("0x1db2c0cf57505d0f4a3d589414f0a0025ca97421d2cd596a9486bc7e2cd2bf8b", "password").send();
+        chain3j.parityNewAccountFromSecret("0x1db2c0cf57505d0f4a3d589414f0a0025ca97421d2cd596a9486bc7e2cd2bf8b", "password").send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_newAccountFromSecret\","
                 + "\"params\":[\"0x1db2c0cf57505d0f4a3d589414f0a0025ca97421d2cd596a9486bc7e2cd2bf8b\",\"password\"],\"id\":1}");
@@ -240,7 +240,7 @@ public class RequestTest extends RequestTester {
         walletFile.setId("cab06c9e-79a9-48ea-afc7-d3bdb3a59526");
         walletFile.setVersion(1);
 
-        web3j.parityNewAccountFromWallet(walletFile, "password").send();
+        chain3j.parityNewAccountFromWallet(walletFile, "password").send();
 
         //CHECKSTYLE:OFF
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_newAccountFromWallet\",\"params\":[{\"address\":\"0x...\",\"id\":\"cab06c9e-79a9-48ea-afc7-d3bdb3a59526\",\"version\":1,\"crypto\":{\"cipher\":\"CIPHER\",\"ciphertext\":\"CIPHERTEXT\",\"cipherparams\":{\"iv\":\"IV\"},\"kdf\":\"KDF\",\"kdfparams\":{\"dklen\":32,\"n\":1,\"p\":10,\"r\":100,\"salt\":\"SALT\"},\"mac\":\"MAC\"}},\"password\"],\"id\":1}");
@@ -248,7 +248,7 @@ public class RequestTest extends RequestTester {
     }
     
     public void testParityRemoveAddress() throws Exception {
-        web3j.parityRemoveAddress("0x407d73d8a49eeb85d32cf465507dd71d507100c1").send();
+        chain3j.parityRemoveAddress("0x407d73d8a49eeb85d32cf465507dd71d507100c1").send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_removeAddress\","
                 + "\"params\":[\"0x407d73d8a49eeb85d32cf465507dd71d507100c1\"],\"id\":1}");
@@ -258,7 +258,7 @@ public class RequestTest extends RequestTester {
     public void testParitySetAccountMeta() throws Exception {
         Map<String, Object> meta = new HashMap<>(1);
         meta.put("foo", "bar");
-        web3j.paritySetAccountMeta("0xfc390d8a8ddb591b010fda52f4db4945742c3809", meta).send();
+        chain3j.paritySetAccountMeta("0xfc390d8a8ddb591b010fda52f4db4945742c3809", meta).send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_setAccountMeta\","
                 + "\"params\":[\"0xfc390d8a8ddb591b010fda52f4db4945742c3809\",{\"foo\":\"bar\"}],"
@@ -267,7 +267,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParitySetAccountName() throws Exception {
-        web3j.paritySetAccountName("0xfc390d8a8ddb591b010fda52f4db4945742c3809", "Savings")
+        chain3j.paritySetAccountName("0xfc390d8a8ddb591b010fda52f4db4945742c3809", "Savings")
                 .send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_setAccountName\","
@@ -279,7 +279,7 @@ public class RequestTest extends RequestTester {
     public void testParitySetDappAddresses() throws Exception {
         ArrayList<String> dAppAddresses = new ArrayList<>();
         dAppAddresses.add("0x407d73d8a49eeb85d32cf465507dd71d507100c1");
-        web3j.paritySetDappAddresses("web", dAppAddresses)
+        chain3j.paritySetDappAddresses("web", dAppAddresses)
                 .send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_setDappAddresses\","
@@ -289,7 +289,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParitySetDappDefaultAddress() throws Exception {
-        web3j.paritySetDappDefaultAddress("web", "0x407d73d8a49eeb85d32cf465507dd71d507100c1")
+        chain3j.paritySetDappDefaultAddress("web", "0x407d73d8a49eeb85d32cf465507dd71d507100c1")
                 .send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_setDappDefaultAddress\","
@@ -301,7 +301,7 @@ public class RequestTest extends RequestTester {
     public void testParitySetNewDappsAddresses() throws Exception {
         ArrayList<String> dAppAddresses = new ArrayList<>();
         dAppAddresses.add("0x407d73d8a49eeb85d32cf465507dd71d507100c1");
-        web3j.paritySetNewDappsAddresses(dAppAddresses)
+        chain3j.paritySetNewDappsAddresses(dAppAddresses)
                 .send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_setNewDappsAddresses\","
@@ -311,7 +311,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParitySetNewDappsDefaultAddress() throws Exception {
-        web3j.paritySetNewDappsDefaultAddress("0x407d73d8a49eeb85d32cf465507dd71d507100c1")
+        chain3j.paritySetNewDappsDefaultAddress("0x407d73d8a49eeb85d32cf465507dd71d507100c1")
                 .send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_setNewDappsDefaultAddress\","
@@ -321,7 +321,7 @@ public class RequestTest extends RequestTester {
     
     @Test
     public void testParityTestPassword() throws Exception {
-        web3j.parityTestPassword("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2")
+        chain3j.parityTestPassword("0x407d73d8a49eeb85d32cf465507dd71d507100c1", "hunter2")
                 .send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_testPassword\","
@@ -332,7 +332,7 @@ public class RequestTest extends RequestTester {
     @Test
     public void testParitySignMessage() throws Exception {
         //CHECKSTYLE:OFF
-        web3j.paritySignMessage("0xc171033d5cbff7175f29dfd3a63dda3d6f8f385e","password1","0xbc36789e7a1e281436464229828f817d6612f7b477d66591ff96a9e064bcc98a").send();
+        chain3j.paritySignMessage("0xc171033d5cbff7175f29dfd3a63dda3d6f8f385e","password1","0xbc36789e7a1e281436464229828f817d6612f7b477d66591ff96a9e064bcc98a").send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"parity_signMessage\","
                 + "\"params\":[\"0xc171033d5cbff7175f29dfd3a63dda3d6f8f385e\",\"password1\","
@@ -352,7 +352,7 @@ public class RequestTest extends RequestTester {
                 "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb"
                     + "970870f072445675058bb8eb970870f072445675"
         );
-        web3j.traceCall(
+        chain3j.traceCall(
                 transaction,
                 Arrays.asList("trace", "vmTrace", "stateDiff"),
                 DefaultBlockParameterName.LATEST
@@ -377,7 +377,7 @@ public class RequestTest extends RequestTester {
     @Test
     public void testTraceRawTransaction() throws Exception {
         //CHECKSTYLE:OFF
-        web3j.traceRawTransaction(
+        chain3j.traceRawTransaction(
                 "0xf869808504e3b292008305499d94781ab1a38837e351bfe1e318c6587766848abffa8084b46300ec26a0b1ffd8f843e08a9dbf0a42b3c7dd5288a48885cd6e3bcdb2609e943d0b0053d4a07bfdb3c12a7cec896bfc2cfc7c346a2cb411e1aca62ad085e8d7abbb6532e128",
                 Arrays.asList("trace", "vmTrace", "stateDiff")
         ).send();
@@ -393,7 +393,7 @@ public class RequestTest extends RequestTester {
 
     @Test
     public void testTraceReplayTransaction() throws Exception {
-        web3j.traceReplayTransaction(
+        chain3j.traceReplayTransaction(
                 "0x090a4bbdeb57f15fe252cccc924255855eda45a2d8f65b12ec81f03e2cc33249",
                 Arrays.asList("trace", "vmTrace", "stateDiff")
         ).send();
@@ -407,7 +407,7 @@ public class RequestTest extends RequestTester {
 
     @Test
     public void testTraceBlock() throws Exception {
-        web3j.traceBlock(DefaultBlockParameterName.LATEST).send();
+        chain3j.traceBlock(DefaultBlockParameterName.LATEST).send();
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"trace_block\","
                 + "\"params\":[\"latest\"],"
@@ -416,7 +416,7 @@ public class RequestTest extends RequestTester {
 
     @Test
     public void testTraceFilter() throws Exception {
-        web3j.traceFilter(new TraceFilter(
+        chain3j.traceFilter(new TraceFilter(
                 DefaultBlockParameterName.EARLIEST,
                 DefaultBlockParameterName.LATEST,
                 Collections.singletonList("0xa9bebd4853ce06c3dc1b711bbafa1514ed5b5130"),
@@ -432,7 +432,7 @@ public class RequestTest extends RequestTester {
 
     @Test
     public void testTraceGet() throws Exception {
-        web3j.traceGet(
+        chain3j.traceGet(
                 "0x090a4bbdeb57f15fe252cccc924255855eda45a2d8f65b12ec81f03e2cc33249",
                 Arrays.asList(BigInteger.valueOf(2), BigInteger.ZERO, BigInteger.ZERO)
         ).send();

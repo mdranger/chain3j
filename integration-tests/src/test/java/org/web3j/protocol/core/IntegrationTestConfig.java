@@ -1,8 +1,8 @@
-package org.web3j.protocol.core;
+package org.chain3j.protocol.core;
 
 import java.math.BigInteger;
 
-import org.web3j.protocol.core.methods.request.Transaction;
+import org.chain3j.protocol.core.methods.request.Transaction;
 
 /**
  * Common values used by integration tests.

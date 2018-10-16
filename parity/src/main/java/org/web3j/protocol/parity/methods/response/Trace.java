@@ -1,4 +1,4 @@
-package org.web3j.protocol.parity.methods.response;
+package org.chain3j.protocol.parity.methods.response;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import org.web3j.utils.Numeric;
+import org.chain3j.utils.Numeric;
 
 /**
  * Trace used in following methods.

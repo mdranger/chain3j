@@ -1,4 +1,4 @@
-package org.web3j.protocol.parity;
+package org.chain3j.protocol.parity;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -7,11 +7,11 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 
-import org.web3j.protocol.parity.methods.response.FullTraceInfo;
-import org.web3j.protocol.parity.methods.response.ParityAllAccountsInfo;
-import org.web3j.protocol.parity.methods.response.StateDiff;
-import org.web3j.protocol.parity.methods.response.Trace;
-import org.web3j.protocol.parity.methods.response.VMTrace;
+import org.chain3j.protocol.parity.methods.response.FullTraceInfo;
+import org.chain3j.protocol.parity.methods.response.ParityAllAccountsInfo;
+import org.chain3j.protocol.parity.methods.response.StateDiff;
+import org.chain3j.protocol.parity.methods.response.Trace;
+import org.chain3j.protocol.parity.methods.response.VMTrace;
 
 public class EqualsVerifierParityResponseTest {
 

@@ -1,4 +1,4 @@
-package org.web3j.abi;
+package org.chain3j.abi;
 
 import org.junit.Test;
 

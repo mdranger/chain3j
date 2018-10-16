@@ -1,4 +1,4 @@
-package org.web3j.abi.datatypes;
+package org.chain3j.abi.datatypes;
 
 import org.junit.Test;
 

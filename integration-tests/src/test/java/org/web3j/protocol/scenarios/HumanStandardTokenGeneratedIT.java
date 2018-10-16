@@ -1,4 +1,4 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigInteger;
 import java.util.concurrent.CountDownLatch;
@@ -7,17 +7,17 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import rx.Subscription;
 
-import org.web3j.generated.HumanStandardToken;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.generated.HumanStandardToken;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.web3j.generated.HumanStandardToken.ApprovalEventResponse;
-import static org.web3j.generated.HumanStandardToken.TransferEventResponse;
-import static org.web3j.generated.HumanStandardToken.deploy;
-import static org.web3j.tx.TransactionManager.DEFAULT_POLLING_FREQUENCY;
+import static org.chain3j.generated.HumanStandardToken.ApprovalEventResponse;
+import static org.chain3j.generated.HumanStandardToken.TransferEventResponse;
+import static org.chain3j.generated.HumanStandardToken.deploy;
+import static org.chain3j.tx.TransactionManager.DEFAULT_POLLING_FREQUENCY;
 
 /**
  * Generated HumanStandardToken integration test for all supported scenarios.
@@ -30,9 +30,9 @@ public class HumanStandardTokenGeneratedIT extends Scenario {
         final String aliceAddress = ALICE.getAddress();
         final String bobAddress = BOB.getAddress();
 
-        HumanStandardToken contract = deploy(web3j, ALICE,
+        HumanStandardToken contract = deploy(chain3j, ALICE,
                 GAS_PRICE, GAS_LIMIT,
-                aliceQty, "web3j tokens",
+                aliceQty, "chain3j tokens",
                 BigInteger.valueOf(18), "w3j$").send();
 
         assertTrue(contract.isValid());
@@ -112,7 +112,7 @@ public class HumanStandardTokenGeneratedIT extends Scenario {
 
         // Bob requires his own contract instance
         HumanStandardToken bobsContract = HumanStandardToken.load(
-                contract.getContractAddress(), web3j, BOB, STATIC_GAS_PROVIDER);
+                contract.getContractAddress(), chain3j, BOB, STATIC_GAS_PROVIDER);
 
         TransactionReceipt bobTransferReceipt = bobsContract.transferFrom(
                 aliceAddress,

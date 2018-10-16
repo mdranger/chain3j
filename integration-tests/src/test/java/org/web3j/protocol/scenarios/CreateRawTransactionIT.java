@@ -1,17 +1,17 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigInteger;
 
 import org.junit.Test;
 
-import org.web3j.crypto.RawTransaction;
-import org.web3j.crypto.TransactionEncoder;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.utils.Convert;
-import org.web3j.utils.Numeric;
+import org.chain3j.crypto.RawTransaction;
+import org.chain3j.crypto.TransactionEncoder;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.utils.Convert;
+import org.chain3j.utils.Numeric;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -32,7 +32,7 @@ public class CreateRawTransactionIT extends Scenario {
         String hexValue = Numeric.toHexString(signedMessage);
 
         EthSendTransaction ethSendTransaction =
-                web3j.ethSendRawTransaction(hexValue).sendAsync().get();
+                chain3j.ethSendRawTransaction(hexValue).sendAsync().get();
         String transactionHash = ethSendTransaction.getTransactionHash();
 
         assertFalse(transactionHash.isEmpty());
@@ -52,7 +52,7 @@ public class CreateRawTransactionIT extends Scenario {
         String hexValue = Numeric.toHexString(signedMessage);
 
         EthSendTransaction ethSendTransaction =
-                web3j.ethSendRawTransaction(hexValue).sendAsync().get();
+                chain3j.ethSendRawTransaction(hexValue).sendAsync().get();
         String transactionHash = ethSendTransaction.getTransactionHash();
 
         assertFalse(transactionHash.isEmpty());
@@ -80,7 +80,7 @@ public class CreateRawTransactionIT extends Scenario {
     }
 
     BigInteger getNonce(String address) throws Exception {
-        EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
+        EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
                 address, DefaultBlockParameterName.LATEST).sendAsync().get();
 
         return ethGetTransactionCount.getTransactionCount();

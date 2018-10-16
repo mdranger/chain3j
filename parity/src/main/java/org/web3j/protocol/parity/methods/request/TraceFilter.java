@@ -1,10 +1,10 @@
-package org.web3j.protocol.parity.methods.request;
+package org.chain3j.protocol.parity.methods.request;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import org.web3j.protocol.core.DefaultBlockParameter;
+import org.chain3j.protocol.core.DefaultBlockParameter;
 
 /**
  * TraceFilter used in trace_filter.

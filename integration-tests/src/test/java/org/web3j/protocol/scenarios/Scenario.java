@@ -1,4 +1,4 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -11,19 +11,19 @@ import java.util.Optional;
 
 import org.junit.Before;
 
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Uint;
-import org.web3j.crypto.Credentials;
-import org.web3j.protocol.admin.Admin;
-import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
-import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.web3j.protocol.core.methods.response.EthGetTransactionReceipt;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.gas.ContractGasProvider;
-import org.web3j.tx.gas.StaticGasProvider;
+import org.chain3j.abi.TypeReference;
+import org.chain3j.abi.datatypes.Function;
+import org.chain3j.abi.datatypes.Uint;
+import org.chain3j.crypto.Credentials;
+import org.chain3j.protocol.admin.Admin;
+import org.chain3j.protocol.admin.methods.response.PersonalUnlockAccount;
+import org.chain3j.protocol.core.DefaultBlockParameterName;
+import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.protocol.http.HttpService;
+import org.chain3j.tx.gas.ContractGasProvider;
+import org.chain3j.tx.gas.StaticGasProvider;
 
 import static junit.framework.TestCase.fail;
 
@@ -60,18 +60,18 @@ public class Scenario {
     private static final int SLEEP_DURATION = 15000;
     private static final int ATTEMPTS = 40;
 
-    Admin web3j;
+    Admin chain3j;
 
     public Scenario() { }
 
     @Before
     public void setUp() {
-        this.web3j = Admin.build(new HttpService());
+        this.chain3j = Admin.build(new HttpService());
     }
 
     boolean unlockAccount() throws Exception {
         PersonalUnlockAccount personalUnlockAccount =
-                web3j.personalUnlockAccount(
+                chain3j.personalUnlockAccount(
                         ALICE.getAddress(), WALLET_PASSWORD, ACCOUNT_UNLOCK_DURATION)
                         .sendAsync().get();
         return personalUnlockAccount.accountUnlocked();
@@ -110,13 +110,13 @@ public class Scenario {
     private Optional<TransactionReceipt> sendTransactionReceiptRequest(
             String transactionHash) throws Exception {
         EthGetTransactionReceipt transactionReceipt =
-                web3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
+                chain3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
 
         return transactionReceipt.getTransactionReceipt();
     }
 
     BigInteger getNonce(String address) throws Exception {
-        EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
+        EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
                 address, DefaultBlockParameterName.LATEST).sendAsync().get();
 
         return ethGetTransactionCount.getTransactionCount();

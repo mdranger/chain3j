@@ -1,15 +1,15 @@
-package org.web3j.protocol.scenarios;
+package org.chain3j.protocol.scenarios;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.junit.Test;
 
-import org.web3j.protocol.core.methods.request.Transaction;
-import org.web3j.protocol.core.methods.response.EthSendTransaction;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.tx.Transfer;
-import org.web3j.utils.Convert;
+import org.chain3j.protocol.core.methods.request.Transaction;
+import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
+import org.chain3j.tx.Transfer;
+import org.chain3j.utils.Convert;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -31,7 +31,7 @@ public class SendEtherIT extends Scenario {
                 ALICE.getAddress(), nonce, GAS_PRICE, GAS_LIMIT, BOB.getAddress(), value);
 
         EthSendTransaction ethSendTransaction =
-                web3j.ethSendTransaction(transaction).sendAsync().get();
+                chain3j.ethSendTransaction(transaction).sendAsync().get();
 
         String transactionHash = ethSendTransaction.getTransactionHash();
 
@@ -66,7 +66,7 @@ public class SendEtherIT extends Scenario {
     @Test
     public void testTransfer() throws Exception {
         TransactionReceipt transactionReceipt = Transfer.sendFunds(
-                web3j, ALICE, BOB.getAddress(), BigDecimal.valueOf(0.2), Convert.Unit.ETHER)
+                chain3j, ALICE, BOB.getAddress(), BigDecimal.valueOf(0.2), Convert.Unit.ETHER)
                 .send();
         assertFalse(transactionReceipt.getBlockHash().isEmpty());
     }
