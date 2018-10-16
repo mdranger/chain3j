@@ -1,0 +1,12 @@
+*.class
+codegen/
+*.settings
+console/bin/
+core/bin/
+crypto/bin/
+integration-tests/bin
+.gradle/
+.classpath
+.project
+.vscode
+build.gradle
