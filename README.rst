@@ -1,33 +1,16 @@
 .. To build this file locally ensure docutils Python package is installed and run:
    $ rst2html.py README.rst README.html
 
-web3j: Web3 Java Ethereum Ðapp API
+chain3j: Chain3 Java MOAC Ðapp API
 ==================================
 
-.. image:: https://readthedocs.org/projects/web3j/badge/?version=latest
-   :target: http://docs.web3j.io
-   :alt: Documentation Status
+chain3j is a lightweight, highly modular, reactive, type safe Java and Android library for working with
+Smart Contracts and integrating with clients (nodes) on the MOAC network:
 
-.. image:: https://travis-ci.org/web3j/web3j.svg?branch=master
-   :target: https://travis-ci.org/web3j/web3j
-   :alt: Build Status
-
-.. image:: https://codecov.io/gh/web3j/web3j/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/web3j/web3j
-   :alt: codecov
-
-.. image:: https://badges.gitter.im/web3j/web3j.svg
-   :target: https://gitter.im/web3j/web3j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-   :alt: Join the chat at https://gitter.im/web3j/web3j
-
-web3j is a lightweight, highly modular, reactive, type safe Java and Android library for working with
-Smart Contracts and integrating with clients (nodes) on the Ethereum network:
-
-.. image:: https://raw.githubusercontent.com/web3j/web3j/master/docs/source/images/web3j_network.png
-
-This allows you to work with the `Ethereum <https://www.ethereum.org/>`_ blockchain, without the
+This allows you to work with the `MOAC <https://www.moac.io/>`_ blockchain, without the
 additional overhead of having to write your own integration code for the platform.
 
+This project is developed based on the 
 The `Java and the Blockchain <https://www.youtube.com/watch?v=ea3miXs_P6Y>`_ talk provides an
 overview of blockchain, Ethereum and web3j.
 
@@ -35,9 +18,10 @@ overview of blockchain, Ethereum and web3j.
 Features
 --------
 
-- Complete implementation of Ethereum's `JSON-RPC <https://github.com/ethereum/wiki/wiki/JSON-RPC>`_
+- Complete implementation of Ethereum's `JSON-RPC <https://github.com/MOACChain/moac-core/wiki/JSON-RPC>`_
   client API over HTTP and IPC
-- Ethereum wallet support
+  // TODO
+- MOAC wallet support
 - Auto-generation of Java smart contract wrappers to create, deploy, transact with and call smart
   contracts from native Java code
   (`Solidity <http://solidity.readthedocs.io/en/latest/using-the-compiler.html#using-the-commandline-compiler>`_

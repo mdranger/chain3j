@@ -1,4 +1,4 @@
-package org.web3j.crypto;
+package org.chain3j.crypto;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 
-import org.web3j.utils.Numeric;
+import org.chain3j.utils.Numeric;
 
 /**
  * Cryptographic hash functions.

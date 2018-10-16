@@ -1,4 +1,4 @@
-package org.web3j.exceptions;
+package org.chain3j.exceptions;
 
 /**
  * Encoding exception.
