@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import rx.Observable;
 
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 
 public class Request<S, T extends Response> {
     private static AtomicLong nextId = new AtomicLong(0);
@@ -17,7 +17,7 @@ public class Request<S, T extends Response> {
     private List<S> params;
     private long id;
 
-    private Web3jService web3jService;
+    private Chain3jService chain3jService;
 
     // Unfortunately require an instance of the type too, see
     // http://stackoverflow.com/a/3437930/3211687
@@ -27,11 +27,11 @@ public class Request<S, T extends Response> {
     }
 
     public Request(String method, List<S> params,
-                   Web3jService web3jService, Class<T> type) {
+                   Chain3jService chain3jService, Class<T> type) {
         this.method = method;
         this.params = params;
         this.id = nextId.getAndIncrement();
-        this.web3jService = web3jService;
+        this.chain3jService = chain3jService;
         this.responseType = type;
     }
 
@@ -68,11 +68,11 @@ public class Request<S, T extends Response> {
     }
 
     public T send() throws IOException {
-        return web3jService.send(this, responseType);
+        return chain3jService.send(this, responseType);
     }
 
     public CompletableFuture<T> sendAsync() {
-        return  web3jService.sendAsync(this, responseType);
+        return  chain3jService.sendAsync(this, responseType);
     }
 
     public Observable<T> observable() {

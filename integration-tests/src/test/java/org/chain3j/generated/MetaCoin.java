@@ -14,7 +14,7 @@ import org.chain3j.abi.datatypes.Function;
 import org.chain3j.abi.datatypes.Type;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.request.EthFilter;
@@ -51,11 +51,11 @@ public class MetaCoin extends Contract {
         _addresses.put("4", "0xaea9d31a4aeda9e510f7d85559261c16ea0b6b8b");
     }
 
-    protected MetaCoin(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    protected MetaCoin(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected MetaCoin(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    protected MetaCoin(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
@@ -117,19 +117,19 @@ public class MetaCoin extends Contract {
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
-    public static RemoteCall<MetaCoin> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<MetaCoin> deploy(Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(MetaCoin.class, chain3j, credentials, gasPrice, gasLimit, BINARY, "");
     }
 
-    public static RemoteCall<MetaCoin> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<MetaCoin> deploy(Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(MetaCoin.class, chain3j, transactionManager, gasPrice, gasLimit, BINARY, "");
     }
 
-    public static MetaCoin load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static MetaCoin load(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new MetaCoin(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    public static MetaCoin load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static MetaCoin load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new MetaCoin(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 

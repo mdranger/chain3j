@@ -12,7 +12,7 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.DefaultBlockParameterNumber;
@@ -33,7 +33,7 @@ public class JsonRpc2_0Rx {
     private final ScheduledExecutorService scheduledExecutorService;
     private final Scheduler scheduler;
 
-    public JsonRpc2_0Rx(chain3j chain3j, ScheduledExecutorService scheduledExecutorService) {
+    public JsonRpc2_0Rx(Chain3j chain3j, ScheduledExecutorService scheduledExecutorService) {
         this.chain3j = chain3j;
         this.scheduledExecutorService = scheduledExecutorService;
         this.scheduler = Schedulers.from(scheduledExecutorService);
@@ -82,7 +82,7 @@ public class JsonRpc2_0Rx {
     public Observable<Transaction> pendingTransactionObservable(long pollingInterval) {
         return ethPendingTransactionHashObservable(pollingInterval)
                 .flatMap(transactionHash ->
-                        chain3j.ethGetTransactionByHash(transactionHash).observable())
+                        chain3j.mcGetTransactionByHash(transactionHash).observable())
                 .filter(ethTransaction -> ethTransaction.getTransaction().isPresent())
                 .map(ethTransaction -> ethTransaction.getTransaction().get());
     }
@@ -91,7 +91,7 @@ public class JsonRpc2_0Rx {
             boolean fullTransactionObjects, long pollingInterval) {
         return ethBlockHashObservable(pollingInterval)
                 .flatMap(blockHash ->
-                        chain3j.ethGetBlockByHash(blockHash, fullTransactionObjects).observable());
+                        chain3j.mcGetBlockByHash(blockHash, fullTransactionObjects).observable());
     }
 
     public Observable<McBlock> replayBlocksObservable(
@@ -130,12 +130,12 @@ public class JsonRpc2_0Rx {
 
         if (ascending) {
             return Observables.range(startBlockNumber, endBlockNumber)
-                    .flatMap(i -> chain3j.ethGetBlockByNumber(
+                    .flatMap(i -> chain3j.mcGetBlockByNumber(
                             new DefaultBlockParameterNumber(i),
                             fullTransactionObjects).observable());
         } else {
             return Observables.range(startBlockNumber, endBlockNumber, false)
-                    .flatMap(i -> chain3j.ethGetBlockByNumber(
+                    .flatMap(i -> chain3j.mcGetBlockByNumber(
                             new DefaultBlockParameterNumber(i),
                             fullTransactionObjects).observable());
         }
@@ -223,7 +223,7 @@ public class JsonRpc2_0Rx {
         if (defaultBlockParameter instanceof DefaultBlockParameterNumber) {
             return ((DefaultBlockParameterNumber) defaultBlockParameter).getBlockNumber();
         } else {
-            McBlock latestEthBlock = chain3j.ethGetBlockByNumber(
+            McBlock latestEthBlock = chain3j.mcGetBlockByNumber(
                     defaultBlockParameter, false).send();
             return latestEthBlock.getBlock().getNumber();
         }

@@ -11,7 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import rx.Observable;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.Chain3jService;
 // import org.chain3j.protocol.core.methods.request.ShhFilter;
 // import org.chain3j.protocol.core.methods.request.ShhPost;
@@ -79,48 +79,48 @@ public class JsonRpc2_0Chain3j implements Chain3j {
 
     public static final int DEFAULT_BLOCK_TIME = 15 * 1000;
 
-    protected final Chain3jService web3jService;
+    protected final Chain3jService chain3jService;
     private final JsonRpc2_0Rx web3jRx;
     private final long blockTime;
     private final ScheduledExecutorService scheduledExecutorService;
 
-    public JsonRpc2_0Chain3j(Chain3jService web3jService) {
-        this(web3jService, DEFAULT_BLOCK_TIME, Async.defaultExecutorService());
+    public JsonRpc2_0Chain3j(Chain3jService chain3jService) {
+        this(chain3jService, DEFAULT_BLOCK_TIME, Async.defaultExecutorService());
     }
 
     public JsonRpc2_0Chain3j(
-            Chain3jService web3jService, long pollingInterval,
+            Chain3jService chain3jService, long pollingInterval,
             ScheduledExecutorService scheduledExecutorService) {
-        this.web3jService = web3jService;
+        this.chain3jService = chain3jService;
         this.web3jRx = new JsonRpc2_0Rx(this, scheduledExecutorService);
         this.blockTime = pollingInterval;
         this.scheduledExecutorService = scheduledExecutorService;
     }
 
-    @Override
-    public Request<?, Chain3ClientVersion> web3ClientVersion() {
-        return new Request<>(
-                "chain3_clientVersion",
-                Collections.<String>emptyList(),
-                web3jService,
-                Chain3ClientVersion.class);
-    }
+//     @Override
+//     public Request<?, Chain3ClientVersion> web3ClientVersion() {
+//         return new Request<>(
+//                 "chain3_clientVersion",
+//                 Collections.<String>emptyList(),
+//                 chain3jService,
+//                 Chain3ClientVersion.class);
+//     }
 
-    @Override
-    public Request<?, Chain3Sha3> web3Sha3(String data) {
-        return new Request<>(
-                "chain3_sha3",
-                Arrays.asList(data),
-                web3jService,
-                Chain3Sha3.class);
-    }
+//     @Override
+//     public Request<?, Chain3Sha3> chain3Sha3(String data) {
+//         return new Request<>(
+//                 "chain3_sha3",
+//                 Arrays.asList(data),
+//                 chain3jService,
+//                 Chain3Sha3.class);
+//     }
 
     @Override
     public Request<?, NetVersion> netVersion() {
         return new Request<>(
                 "net_version",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 NetVersion.class);
     }
 
@@ -129,7 +129,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "net_listening",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 NetListening.class);
     }
 
@@ -138,7 +138,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "net_peerCount",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 NetPeerCount.class);
     }
 
@@ -147,7 +147,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_protocolVersion",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McProtocolVersion.class);
     }
 
@@ -156,7 +156,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_coinbase",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McCoinbase.class);
     }
 
@@ -165,7 +165,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_syncing",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McSyncing.class);
     }
 
@@ -174,7 +174,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_mining",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McMining.class);
     }
 
@@ -183,7 +183,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_hashrate",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McHashrate.class);
     }
 
@@ -192,7 +192,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_gasPrice",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McGasPrice.class);
     }
 
@@ -201,7 +201,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_accounts",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McAccounts.class);
     }
 
@@ -210,7 +210,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_blockNumber",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McBlockNumber.class);
     }
 
@@ -220,7 +220,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getBalance",
                 Arrays.asList(address, defaultBlockParameter.getValue()),
-                web3jService,
+                chain3jService,
                 McGetBalance.class);
     }
 
@@ -233,7 +233,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                         address,
                         Numeric.encodeQuantity(position),
                         defaultBlockParameter.getValue()),
-                web3jService,
+                chain3jService,
                 McGetStorageAt.class);
     }
 
@@ -243,7 +243,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getTransactionCount",
                 Arrays.asList(address, defaultBlockParameter.getValue()),
-                web3jService,
+                chain3jService,
                 McGetTransactionCount.class);
     }
 
@@ -253,7 +253,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getBlockTransactionCountByHash",
                 Arrays.asList(blockHash),
-                web3jService,
+                chain3jService,
                 McGetBlockTransactionCountByHash.class);
     }
 
@@ -263,7 +263,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getBlockTransactionCountByNumber",
                 Arrays.asList(defaultBlockParameter.getValue()),
-                web3jService,
+                chain3jService,
                 McGetBlockTransactionCountByNumber.class);
     }
 
@@ -272,7 +272,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getUncleCountByBlockHash",
                 Arrays.asList(blockHash),
-                web3jService,
+                chain3jService,
                 McGetUncleCountByBlockHash.class);
     }
 
@@ -282,7 +282,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getUncleCountByBlockNumber",
                 Arrays.asList(defaultBlockParameter.getValue()),
-                web3jService,
+                chain3jService,
                 McGetUncleCountByBlockNumber.class);
     }
 
@@ -292,7 +292,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getCode",
                 Arrays.asList(address, defaultBlockParameter.getValue()),
-                web3jService,
+                chain3jService,
                 McGetCode.class);
     }
 
@@ -301,7 +301,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_sign",
                 Arrays.asList(address, sha3HashOfDataToSign),
-                web3jService,
+                chain3jService,
                 McSign.class);
     }
 
@@ -312,7 +312,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_sendTransaction",
                 Arrays.asList(transaction),
-                web3jService,
+                chain3jService,
                 org.chain3j.protocol.core.methods.response.McSendTransaction.class);
     }
 
@@ -323,7 +323,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_sendRawTransaction",
                 Arrays.asList(signedTransactionData),
-                web3jService,
+                chain3jService,
                 org.chain3j.protocol.core.methods.response.McSendTransaction.class);
     }
 
@@ -333,7 +333,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_call",
                 Arrays.asList(transaction, defaultBlockParameter),
-                web3jService,
+                chain3jService,
                 org.chain3j.protocol.core.methods.response.McCall.class);
     }
 
@@ -342,7 +342,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_estimateGas",
                 Arrays.asList(transaction),
-                web3jService,
+                chain3jService,
                 McEstimateGas.class);
     }
 
@@ -354,7 +354,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 Arrays.asList(
                         blockHash,
                         returnFullTransactionObjects),
-                web3jService,
+                chain3jService,
                 McBlock.class);
     }
 
@@ -367,7 +367,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 Arrays.asList(
                         defaultBlockParameter.getValue(),
                         returnFullTransactionObjects),
-                web3jService,
+                chain3jService,
                 McBlock.class);
     }
 
@@ -376,7 +376,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getTransactionByHash",
                 Arrays.asList(transactionHash),
-                web3jService,
+                chain3jService,
                 McTransaction.class);
     }
 
@@ -388,7 +388,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 Arrays.asList(
                         blockHash,
                         Numeric.encodeQuantity(transactionIndex)),
-                web3jService,
+                chain3jService,
                 McTransaction.class);
     }
 
@@ -400,7 +400,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 Arrays.asList(
                         defaultBlockParameter.getValue(),
                         Numeric.encodeQuantity(transactionIndex)),
-                web3jService,
+                chain3jService,
                 McTransaction.class);
     }
 
@@ -409,7 +409,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getTransactionReceipt",
                 Arrays.asList(transactionHash),
-                web3jService,
+                chain3jService,
                 McGetTransactionReceipt.class);
     }
 
@@ -421,7 +421,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 Arrays.asList(
                         blockHash,
                         Numeric.encodeQuantity(transactionIndex)),
-                web3jService,
+                chain3jService,
                 McBlock.class);
     }
 
@@ -433,7 +433,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 Arrays.asList(
                         defaultBlockParameter.getValue(),
                         Numeric.encodeQuantity(uncleIndex)),
-                web3jService,
+                chain3jService,
                 McBlock.class);
     }
 
@@ -442,7 +442,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getCompilers",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McGetCompilers.class);
     }
 
@@ -451,27 +451,27 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_compileLLL",
                 Arrays.asList(sourceCode),
-                web3jService,
+                chain3jService,
                 McCompileLLL.class);
     }
 
-    @Override
-    public Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode) {
-        return new Request<>(
-                "mc_compileSolidity",
-                Arrays.asList(sourceCode),
-                web3jService,
-                McCompileSolidity.class);
-    }
+//     @Override
+//     public Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode) {
+//         return new Request<>(
+//                 "mc_compileSolidity",
+//                 Arrays.asList(sourceCode),
+//                 chain3jService,
+//                 McCompileSolidity.class);
+//     }
 
-    @Override
-    public Request<?, McCompileSerpent> mcCompileSerpent(String sourceCode) {
-        return new Request<>(
-                "mc_compileSerpent",
-                Arrays.asList(sourceCode),
-                web3jService,
-                McCompileSerpent.class);
-    }
+//     @Override
+//     public Request<?, McCompileSerpent> mcCompileSerpent(String sourceCode) {
+//         return new Request<>(
+//                 "mc_compileSerpent",
+//                 Arrays.asList(sourceCode),
+//                 chain3jService,
+//                 McCompileSerpent.class);
+//     }
 
     @Override
     public Request<?, McFilter> mcNewFilter(
@@ -479,7 +479,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_newFilter",
                 Arrays.asList(mcFilter),
-                web3jService,
+                chain3jService,
                 McFilter.class);
     }
 
@@ -488,7 +488,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_newBlockFilter",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McFilter.class);
     }
 
@@ -497,7 +497,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_newPendingTransactionFilter",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McFilter.class);
     }
 
@@ -506,7 +506,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_uninstallFilter",
                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-                web3jService,
+                chain3jService,
                 McUninstallFilter.class);
     }
 
@@ -515,7 +515,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getFilterChanges",
                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-                web3jService,
+                chain3jService,
                 McLog.class);
     }
 
@@ -524,7 +524,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getFilterLogs",
                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-                web3jService,
+                chain3jService,
                 McLog.class);
     }
 
@@ -534,7 +534,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getLogs",
                 Arrays.asList(mcFilter),
-                web3jService,
+                chain3jService,
                 McLog.class);
     }
 
@@ -543,7 +543,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_getWork",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 McGetWork.class);
     }
 
@@ -553,7 +553,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_submitWork",
                 Arrays.asList(nonce, headerPowHash, mixDigest),
-                web3jService,
+                chain3jService,
                 McSubmitWork.class);
     }
 
@@ -562,144 +562,144 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return new Request<>(
                 "mc_submitHashrate",
                 Arrays.asList(hashrate, clientId),
-                web3jService,
+                chain3jService,
                 McSubmitHashrate.class);
     }
 
-    @Override
-    public Request<?, DbPutString> dbPutString(
-            String databaseName, String keyName, String stringToStore) {
-        return new Request<>(
-                "db_putString",
-                Arrays.asList(databaseName, keyName, stringToStore),
-                web3jService,
-                DbPutString.class);
-    }
+//     @Override
+//     public Request<?, DbPutString> dbPutString(
+//             String databaseName, String keyName, String stringToStore) {
+//         return new Request<>(
+//                 "db_putString",
+//                 Arrays.asList(databaseName, keyName, stringToStore),
+//                 chain3jService,
+//                 DbPutString.class);
+//     }
 
-    @Override
-    public Request<?, DbGetString> dbGetString(String databaseName, String keyName) {
-        return new Request<>(
-                "db_getString",
-                Arrays.asList(databaseName, keyName),
-                web3jService,
-                DbGetString.class);
-    }
+//     @Override
+//     public Request<?, DbGetString> dbGetString(String databaseName, String keyName) {
+//         return new Request<>(
+//                 "db_getString",
+//                 Arrays.asList(databaseName, keyName),
+//                 chain3jService,
+//                 DbGetString.class);
+//     }
 
-    @Override
-    public Request<?, DbPutHex> dbPutHex(String databaseName, String keyName, String dataToStore) {
-        return new Request<>(
-                "db_putHex",
-                Arrays.asList(databaseName, keyName, dataToStore),
-                web3jService,
-                DbPutHex.class);
-    }
+//     @Override
+//     public Request<?, DbPutHex> dbPutHex(String databaseName, String keyName, String dataToStore) {
+//         return new Request<>(
+//                 "db_putHex",
+//                 Arrays.asList(databaseName, keyName, dataToStore),
+//                 chain3jService,
+//                 DbPutHex.class);
+//     }
 
-    @Override
-    public Request<?, DbGetHex> dbGetHex(String databaseName, String keyName) {
-        return new Request<>(
-                "db_getHex",
-                Arrays.asList(databaseName, keyName),
-                web3jService,
-                DbGetHex.class);
-    }
+//     @Override
+//     public Request<?, DbGetHex> dbGetHex(String databaseName, String keyName) {
+//         return new Request<>(
+//                 "db_getHex",
+//                 Arrays.asList(databaseName, keyName),
+//                 chain3jService,
+//                 DbGetHex.class);
+//     }
 
-    @Override
-    public Request<?, org.chain3j.protocol.core.methods.response.ShhPost> shhPost(ShhPost shhPost) {
-        return new Request<>(
-                "shh_post",
-                Arrays.asList(shhPost),
-                web3jService,
-                org.chain3j.protocol.core.methods.response.ShhPost.class);
-    }
+//     @Override
+//     public Request<?, org.chain3j.protocol.core.methods.response.ShhPost> shhPost(ShhPost shhPost) {
+//         return new Request<>(
+//                 "shh_post",
+//                 Arrays.asList(shhPost),
+//                 chain3jService,
+//                 org.chain3j.protocol.core.methods.response.ShhPost.class);
+//     }
 
-    @Override
-    public Request<?, ShhVersion> shhVersion() {
-        return new Request<>(
-                "shh_version",
-                Collections.<String>emptyList(),
-                web3jService,
-                ShhVersion.class);
-    }
+//     @Override
+//     public Request<?, ShhVersion> shhVersion() {
+//         return new Request<>(
+//                 "shh_version",
+//                 Collections.<String>emptyList(),
+//                 chain3jService,
+//                 ShhVersion.class);
+//     }
 
-    @Override
-    public Request<?, ShhNewIdentity> shhNewIdentity() {
-        return new Request<>(
-                "shh_newIdentity",
-                Collections.<String>emptyList(),
-                web3jService,
-                ShhNewIdentity.class);
-    }
+//     @Override
+//     public Request<?, ShhNewIdentity> shhNewIdentity() {
+//         return new Request<>(
+//                 "shh_newIdentity",
+//                 Collections.<String>emptyList(),
+//                 chain3jService,
+//                 ShhNewIdentity.class);
+//     }
 
-    @Override
-    public Request<?, ShhHasIdentity> shhHasIdentity(String identityAddress) {
-        return new Request<>(
-                "shh_hasIdentity",
-                Arrays.asList(identityAddress),
-                web3jService,
-                ShhHasIdentity.class);
-    }
+//     @Override
+//     public Request<?, ShhHasIdentity> shhHasIdentity(String identityAddress) {
+//         return new Request<>(
+//                 "shh_hasIdentity",
+//                 Arrays.asList(identityAddress),
+//                 chain3jService,
+//                 ShhHasIdentity.class);
+//     }
 
-    @Override
-    public Request<?, ShhNewGroup> shhNewGroup() {
-        return new Request<>(
-                "shh_newGroup",
-                Collections.<String>emptyList(),
-                web3jService,
-                ShhNewGroup.class);
-    }
+//     @Override
+//     public Request<?, ShhNewGroup> shhNewGroup() {
+//         return new Request<>(
+//                 "shh_newGroup",
+//                 Collections.<String>emptyList(),
+//                 chain3jService,
+//                 ShhNewGroup.class);
+//     }
 
-    @Override
-    public Request<?, ShhAddToGroup> shhAddToGroup(String identityAddress) {
-        return new Request<>(
-                "shh_addToGroup",
-                Arrays.asList(identityAddress),
-                web3jService,
-                ShhAddToGroup.class);
-    }
+//     @Override
+//     public Request<?, ShhAddToGroup> shhAddToGroup(String identityAddress) {
+//         return new Request<>(
+//                 "shh_addToGroup",
+//                 Arrays.asList(identityAddress),
+//                 chain3jService,
+//                 ShhAddToGroup.class);
+//     }
 
-    @Override
-    public Request<?, ShhNewFilter> shhNewFilter(ShhFilter shhFilter) {
-        return new Request<>(
-                "shh_newFilter",
-                Arrays.asList(shhFilter),
-                web3jService,
-                ShhNewFilter.class);
-    }
+//     @Override
+//     public Request<?, ShhNewFilter> shhNewFilter(ShhFilter shhFilter) {
+//         return new Request<>(
+//                 "shh_newFilter",
+//                 Arrays.asList(shhFilter),
+//                 chain3jService,
+//                 ShhNewFilter.class);
+//     }
 
-    @Override
-    public Request<?, ShhUninstallFilter> shhUninstallFilter(BigInteger filterId) {
-        return new Request<>(
-                "shh_uninstallFilter",
-                Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-                web3jService,
-                ShhUninstallFilter.class);
-    }
+//     @Override
+//     public Request<?, ShhUninstallFilter> shhUninstallFilter(BigInteger filterId) {
+//         return new Request<>(
+//                 "shh_uninstallFilter",
+//                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
+//                 chain3jService,
+//                 ShhUninstallFilter.class);
+//     }
 
-    @Override
-    public Request<?, ShhMessages> shhGetFilterChanges(BigInteger filterId) {
-        return new Request<>(
-                "shh_getFilterChanges",
-                Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-                web3jService,
-                ShhMessages.class);
-    }
+//     @Override
+//     public Request<?, ShhMessages> shhGetFilterChanges(BigInteger filterId) {
+//         return new Request<>(
+//                 "shh_getFilterChanges",
+//                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
+//                 chain3jService,
+//                 ShhMessages.class);
+//     }
 
-    @Override
-    public Request<?, ShhMessages> shhGetMessages(BigInteger filterId) {
-        return new Request<>(
-                "shh_getMessages",
-                Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-                web3jService,
-                ShhMessages.class);
-    }
+//     @Override
+//     public Request<?, ShhMessages> shhGetMessages(BigInteger filterId) {
+//         return new Request<>(
+//                 "shh_getMessages",
+//                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
+//                 chain3jService,
+//                 ShhMessages.class);
+//     }
 
     @Override
     public Observable<NewHeadsNotification> newHeadsNotifications() {
-        return web3jService.subscribe(
+        return chain3jService.subscribe(
                 new Request<>(
                         "mc_subscribe",
                         Collections.singletonList("newHeads"),
-                        web3jService,
+                        chain3jService,
                         McSubscribe.class),
                 "mc_unsubscribe",
                 NewHeadsNotification.class
@@ -712,11 +712,11 @@ public class JsonRpc2_0Chain3j implements Chain3j {
 
         Map<String, Object> params = createLogsParams(addresses, topics);
 
-        return web3jService.subscribe(
+        return chain3jService.subscribe(
                 new Request<>(
                         "mc_subscribe",
                         Arrays.asList("logs", params),
-                        web3jService,
+                        chain3jService,
                         McSubscribe.class),
                 "mc_unsubscribe",
                 LogNotification.class
@@ -734,21 +734,21 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return params;
     }
 
-    @Override
-    public Observable<String> mcBlockHashObservable() {
-        return web3jRx.mcBlockHashObservable(blockTime);
-    }
+//     @Override
+//     public Observable<String> mcBlockHashObservable() {
+//         return web3jRx.mcBlockHashObservable(blockTime);
+//     }
 
-    @Override
-    public Observable<String> mcPendingTransactionHashObservable() {
-        return web3jRx.mcPendingTransactionHashObservable(blockTime);
-    }
+//     @Override
+//     public Observable<String> mcPendingTransactionHashObservable() {
+//         return web3jRx.mcPendingTransactionHashObservable(blockTime);
+//     }
 
-    @Override
-    public Observable<Log> mcLogObservable(
-            org.chain3j.protocol.core.methods.request.McFilter mcFilter) {
-        return web3jRx.mcLogObservable(mcFilter, blockTime);
-    }
+//     @Override
+//     public Observable<Log> mcLogObservable(
+//             org.chain3j.protocol.core.methods.request.McFilter mcFilter) {
+//         return web3jRx.mcLogObservable(mcFilter, blockTime);
+//     }
 
     @Override
     public Observable<org.chain3j.protocol.core.methods.response.Transaction>
@@ -828,7 +828,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
     public void shutdown() {
         scheduledExecutorService.shutdown();
         try {
-            web3jService.close();
+            chain3jService.close();
         } catch (IOException e) {
             throw new RuntimeException("Failed to close chain3j service", e);
         }

@@ -3,7 +3,7 @@ package org.chain3j.tx.response;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 
@@ -15,7 +15,7 @@ public class PollingTransactionReceiptProcessor extends TransactionReceiptProces
     private final long sleepDuration;
     private final int attempts;
 
-    public PollingTransactionReceiptProcessor(chain3j chain3j, long sleepDuration, int attempts) {
+    public PollingTransactionReceiptProcessor(Chain3j chain3j, long sleepDuration, int attempts) {
         super(chain3j);
         this.sleepDuration = sleepDuration;
         this.attempts = attempts;

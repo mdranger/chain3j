@@ -9,7 +9,7 @@ import org.chain3j.abi.datatypes.Function;
 import org.chain3j.abi.datatypes.Type;
 import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.tx.Contract;
@@ -35,20 +35,20 @@ public class Greeter extends Contract {
     public static final String FUNC_GREET = "greet";
 
     @Deprecated
-    protected Greeter(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    protected Greeter(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected Greeter(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    protected Greeter(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected Greeter(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    protected Greeter(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected Greeter(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    protected Greeter(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
@@ -75,43 +75,43 @@ public class Greeter extends Contract {
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
-    public static RemoteCall<Greeter> deploy(chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider, String _greeting) {
+    public static RemoteCall<Greeter> deploy(Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider, String _greeting) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.Utf8String(_greeting)));
         return deployRemoteCall(Greeter.class, chain3j, credentials, contractGasProvider, BINARY, encodedConstructor);
     }
 
-    public static RemoteCall<Greeter> deploy(chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider, String _greeting) {
+    public static RemoteCall<Greeter> deploy(Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider, String _greeting) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.Utf8String(_greeting)));
         return deployRemoteCall(Greeter.class, chain3j, transactionManager, contractGasProvider, BINARY, encodedConstructor);
     }
 
     @Deprecated
-    public static RemoteCall<Greeter> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit, String _greeting) {
+    public static RemoteCall<Greeter> deploy(Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit, String _greeting) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.Utf8String(_greeting)));
         return deployRemoteCall(Greeter.class, chain3j, credentials, gasPrice, gasLimit, BINARY, encodedConstructor);
     }
 
     @Deprecated
-    public static RemoteCall<Greeter> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit, String _greeting) {
+    public static RemoteCall<Greeter> deploy(Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit, String _greeting) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.Utf8String(_greeting)));
         return deployRemoteCall(Greeter.class, chain3j, transactionManager, gasPrice, gasLimit, BINARY, encodedConstructor);
     }
 
     @Deprecated
-    public static Greeter load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static Greeter load(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new Greeter(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
-    public static Greeter load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static Greeter load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new Greeter(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    public static Greeter load(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static Greeter load(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return new Greeter(contractAddress, chain3j, credentials, contractGasProvider);
     }
 
-    public static Greeter load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static Greeter load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return new Greeter(contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 }

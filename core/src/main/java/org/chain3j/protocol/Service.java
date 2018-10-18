@@ -16,7 +16,7 @@ import org.chain3j.utils.Async;
 /**
  * Base service implementation.
  */
-public abstract class Service implements Web3jService {
+public abstract class Service implements Chain3jService {
 
     protected final ObjectMapper objectMapper;
 

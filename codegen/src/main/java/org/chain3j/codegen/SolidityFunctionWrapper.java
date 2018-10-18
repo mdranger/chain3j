@@ -46,7 +46,7 @@ import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.abi.datatypes.generated.AbiTypes;
 import org.chain3j.crypto.Credentials;
 import org.chain3j.protocol.ObjectMapperFactory;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.request.EthFilter;

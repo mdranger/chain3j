@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import org.chain3j.protocol.RequestTester;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.request.EthFilter;
 import org.chain3j.protocol.core.methods.request.ShhFilter;
 import org.chain3j.protocol.core.methods.request.ShhPost;
@@ -16,7 +16,7 @@ import org.chain3j.utils.Numeric;
 
 public class RequestTest extends RequestTester {
 
-    private chain3j chain3j;
+    private Chain3j chain3j;
 
     @Override
     protected void initWeb3Client(HttpService httpService) {

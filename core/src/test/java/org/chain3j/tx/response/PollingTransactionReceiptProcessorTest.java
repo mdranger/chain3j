@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
 import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class PollingTransactionReceiptProcessorTest {
     private static final String TRANSACTION_HASH = "0x00";
-    private chain3j chain3j;
+    private Chain3j chain3j;
     private long sleepDuration;
     private int attempts;
     private PollingTransactionReceiptProcessor processor;

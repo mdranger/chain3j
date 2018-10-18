@@ -7,10 +7,10 @@ import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.Hash;
 import org.chain3j.crypto.RawTransaction;
 import org.chain3j.crypto.TransactionEncoder;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.tx.exceptions.TxHashMismatchException;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
 import org.chain3j.utils.Numeric;
@@ -25,14 +25,14 @@ import org.chain3j.utils.TxHashVerifier;
  */
 public class RawTransactionManager extends TransactionManager {
 
-    private final chain3j chain3j;
+    private final Chain3j chain3j;
     final Credentials credentials;
 
     private final byte chainId;
 
     protected TxHashVerifier txHashVerifier = new TxHashVerifier();
 
-    public RawTransactionManager(chain3j chain3j, Credentials credentials, byte chainId) {
+    public RawTransactionManager(Chain3j chain3j, Credentials credentials, byte chainId) {
         super(chain3j, credentials.getAddress());
 
         this.chain3j = chain3j;
@@ -42,7 +42,7 @@ public class RawTransactionManager extends TransactionManager {
     }
 
     public RawTransactionManager(
-            chain3j chain3j, Credentials credentials, byte chainId,
+            Chain3j chain3j, Credentials credentials, byte chainId,
             TransactionReceiptProcessor transactionReceiptProcessor) {
         super(transactionReceiptProcessor, credentials.getAddress());
 
@@ -53,7 +53,7 @@ public class RawTransactionManager extends TransactionManager {
     }
 
     public RawTransactionManager(
-            chain3j chain3j, Credentials credentials, byte chainId, int attempts, long sleepDuration) {
+            Chain3j chain3j, Credentials credentials, byte chainId, int attempts, long sleepDuration) {
         super(chain3j, attempts, sleepDuration, credentials.getAddress());
 
         this.chain3j = chain3j;
@@ -62,20 +62,20 @@ public class RawTransactionManager extends TransactionManager {
         this.chainId = chainId;
     }
 
-    public RawTransactionManager(chain3j chain3j, Credentials credentials) {
+    public RawTransactionManager(Chain3j chain3j, Credentials credentials) {
         this(chain3j, credentials, ChainId.NONE);
     }
 
     public RawTransactionManager(
-            chain3j chain3j, Credentials credentials, int attempts, int sleepDuration) {
+            Chain3j chain3j, Credentials credentials, int attempts, int sleepDuration) {
         this(chain3j, credentials, ChainId.NONE, attempts, sleepDuration);
     }
 
     protected BigInteger getNonce() throws IOException {
-        EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
+        EthGetTransactionCount mcGetTransactionCount = chain3j.mcGetTransactionCount(
                 credentials.getAddress(), DefaultBlockParameterName.PENDING).send();
 
-        return ethGetTransactionCount.getTransactionCount();
+        return mcGetTransactionCount.getTransactionCount();
     }
 
     public TxHashVerifier getTxHashVerifier() {
@@ -87,7 +87,7 @@ public class RawTransactionManager extends TransactionManager {
     }
 
     @Override
-    public EthSendTransaction sendTransaction(
+    public McSendTransaction sendTransaction(
             BigInteger gasPrice, BigInteger gasLimit, String to,
             String data, BigInteger value) throws IOException {
 
@@ -104,7 +104,7 @@ public class RawTransactionManager extends TransactionManager {
         return signAndSend(rawTransaction);
     }
 
-    public EthSendTransaction signAndSend(RawTransaction rawTransaction)
+    public McSendTransaction signAndSend(RawTransaction rawTransaction)
             throws IOException {
 
         byte[] signedMessage;
@@ -116,7 +116,7 @@ public class RawTransactionManager extends TransactionManager {
         }
 
         String hexValue = Numeric.toHexString(signedMessage);
-        EthSendTransaction ethSendTransaction = chain3j.ethSendRawTransaction(hexValue).send();
+        McSendTransaction ethSendTransaction = chain3j.ethSendRawTransaction(hexValue).send();
 
         if (ethSendTransaction != null && !ethSendTransaction.hasError()) {
             String txHashLocal = Hash.sha3(hexValue);

@@ -9,7 +9,7 @@ import org.junit.Test;
 import rx.Observable;
 import rx.Subscription;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.request.EthFilter;
 import org.chain3j.protocol.core.methods.response.EthBlock;
 import org.chain3j.protocol.http.HttpService;
@@ -24,7 +24,7 @@ public class ObservableIT {
     private static final int EVENT_COUNT = 5;
     private static final int TIMEOUT_MINUTES = 5;
 
-    private chain3j chain3j;
+    private Chain3j chain3j;
 
     @Before
     public void setUp() {

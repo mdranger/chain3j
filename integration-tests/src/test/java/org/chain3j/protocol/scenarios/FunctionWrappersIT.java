@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.generated.Fibonacci;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.http.HttpService;
 

@@ -13,7 +13,7 @@ import org.chain3j.abi.datatypes.generated.Bytes32;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.abi.datatypes.generated.Uint8;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.tuples.generated.Tuple8;
 import org.chain3j.tx.Contract;
@@ -35,20 +35,20 @@ public class ShipIt extends Contract {
     public static final String FUNC_SHIPMENTS = "shipments";
 
     @Deprecated
-    protected ShipIt(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    protected ShipIt(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected ShipIt(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    protected ShipIt(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected ShipIt(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    protected ShipIt(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected ShipIt(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    protected ShipIt(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
@@ -74,39 +74,39 @@ public class ShipIt extends Contract {
                 });
     }
 
-    public static RemoteCall<ShipIt> deploy(chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static RemoteCall<ShipIt> deploy(Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return deployRemoteCall(ShipIt.class, chain3j, credentials, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<ShipIt> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<ShipIt> deploy(Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(ShipIt.class, chain3j, credentials, gasPrice, gasLimit, BINARY, "");
     }
 
-    public static RemoteCall<ShipIt> deploy(chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static RemoteCall<ShipIt> deploy(Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return deployRemoteCall(ShipIt.class, chain3j, transactionManager, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<ShipIt> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<ShipIt> deploy(Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(ShipIt.class, chain3j, transactionManager, gasPrice, gasLimit, BINARY, "");
     }
 
     @Deprecated
-    public static ShipIt load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static ShipIt load(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new ShipIt(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
-    public static ShipIt load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static ShipIt load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new ShipIt(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    public static ShipIt load(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static ShipIt load(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return new ShipIt(contractAddress, chain3j, credentials, contractGasProvider);
     }
 
-    public static ShipIt load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static ShipIt load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return new ShipIt(contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 }

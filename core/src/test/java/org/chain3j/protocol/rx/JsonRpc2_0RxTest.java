@@ -16,7 +16,7 @@ import rx.Observable;
 import rx.Subscription;
 
 import org.chain3j.protocol.ObjectMapperFactory;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.Web3jService;
 import org.chain3j.protocol.core.DefaultBlockParameterNumber;
 import org.chain3j.protocol.core.Request;
@@ -39,7 +39,7 @@ public class JsonRpc2_0RxTest {
 
     private final ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
 
-    private chain3j chain3j;
+    private Chain3j chain3j;
 
     private Web3jService web3jService;
 

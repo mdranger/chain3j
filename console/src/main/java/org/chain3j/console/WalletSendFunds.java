@@ -9,7 +9,7 @@ import java.util.concurrent.Future;
 import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.WalletUtils;
 import org.chain3j.ens.EnsResolver;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
 import org.chain3j.protocol.exceptions.TransactionException;
@@ -45,7 +45,7 @@ public class WalletSendFunds extends WalletManager {
             exitError("Invalid destination address specified");
         }
 
-        chain3j chain3j = getEthereumClient();
+        Chain3j chain3j = getMoacClient();
 
         BigDecimal amountToTransfer = getAmountToTransfer();
         Convert.Unit transferUnit = getTransferUnit();
@@ -105,7 +105,7 @@ public class WalletSendFunds extends WalletManager {
     }
 
     private TransactionReceipt performTransfer(
-            chain3j chain3j, String destinationAddress, Credentials credentials,
+            Chain3j chain3j, String destinationAddress, Credentials credentials,
             BigDecimal amountInWei) {
 
         console.printf("Commencing transfer (this may take a few minutes) ");
@@ -126,13 +126,13 @@ public class WalletSendFunds extends WalletManager {
         throw new RuntimeException("Application exit failure");
     }
 
-    private chain3j getEthereumClient() {
+    private Chain3j getMoacClient() {
         String clientAddress = console.readLine(
                 "Please confirm address of running Ethereum client you wish to send "
                 + "the transfer request to [" + HttpService.DEFAULT_URL + "]: ")
                 .trim();
 
-        chain3j chain3j;
+        Chain3j chain3j;
         if (clientAddress.equals("")) {
             chain3j = chain3j.build(new HttpService());
         } else if (clientAddress.contains("infura.io")) {

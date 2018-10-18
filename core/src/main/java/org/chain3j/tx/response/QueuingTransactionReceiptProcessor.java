@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 import org.chain3j.utils.Async;
@@ -28,7 +28,7 @@ public class QueuingTransactionReceiptProcessor extends TransactionReceiptProces
     private final BlockingQueue<RequestWrapper> pendingTransactions;
 
     public QueuingTransactionReceiptProcessor(
-            chain3j chain3j, Callback callback,
+            Chain3j chain3j, Callback callback,
             int pollingAttemptsPerTxHash, long pollingFrequency) {
         super(chain3j);
         this.scheduledExecutorService = Async.defaultExecutorService();

@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.EthAccounts;
 import org.chain3j.protocol.core.methods.response.EthBlock;
 import org.chain3j.protocol.core.methods.response.EthBlockNumber;
@@ -61,7 +61,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class CoreIT {
 
-    private chain3j chain3j;
+    private Chain3j chain3j;
 
     private IntegrationTestConfig config = new TestnetConfig();
 

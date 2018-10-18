@@ -16,7 +16,7 @@ import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.abi.datatypes.generated.Uint8;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.request.EthFilter;
@@ -71,20 +71,20 @@ public class HumanStandardToken extends Contract {
     ;
 
     @Deprecated
-    protected HumanStandardToken(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    protected HumanStandardToken(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected HumanStandardToken(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    protected HumanStandardToken(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected HumanStandardToken(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    protected HumanStandardToken(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected HumanStandardToken(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    protected HumanStandardToken(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
@@ -176,7 +176,7 @@ public class HumanStandardToken extends Contract {
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
-    public static RemoteCall<HumanStandardToken> deploy(chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
+    public static RemoteCall<HumanStandardToken> deploy(Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.generated.Uint256(_initialAmount), 
                 new org.chain3j.abi.datatypes.Utf8String(_tokenName), 
                 new org.chain3j.abi.datatypes.generated.Uint8(_decimalUnits), 
@@ -184,7 +184,7 @@ public class HumanStandardToken extends Contract {
         return deployRemoteCall(HumanStandardToken.class, chain3j, credentials, contractGasProvider, BINARY, encodedConstructor);
     }
 
-    public static RemoteCall<HumanStandardToken> deploy(chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
+    public static RemoteCall<HumanStandardToken> deploy(Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.generated.Uint256(_initialAmount), 
                 new org.chain3j.abi.datatypes.Utf8String(_tokenName), 
                 new org.chain3j.abi.datatypes.generated.Uint8(_decimalUnits), 
@@ -193,7 +193,7 @@ public class HumanStandardToken extends Contract {
     }
 
     @Deprecated
-    public static RemoteCall<HumanStandardToken> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
+    public static RemoteCall<HumanStandardToken> deploy(Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.generated.Uint256(_initialAmount), 
                 new org.chain3j.abi.datatypes.Utf8String(_tokenName), 
                 new org.chain3j.abi.datatypes.generated.Uint8(_decimalUnits), 
@@ -202,7 +202,7 @@ public class HumanStandardToken extends Contract {
     }
 
     @Deprecated
-    public static RemoteCall<HumanStandardToken> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
+    public static RemoteCall<HumanStandardToken> deploy(Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit, BigInteger _initialAmount, String _tokenName, BigInteger _decimalUnits, String _tokenSymbol) {
         String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.chain3j.abi.datatypes.generated.Uint256(_initialAmount), 
                 new org.chain3j.abi.datatypes.Utf8String(_tokenName), 
                 new org.chain3j.abi.datatypes.generated.Uint8(_decimalUnits), 
@@ -281,20 +281,20 @@ public class HumanStandardToken extends Contract {
     }
 
     @Deprecated
-    public static HumanStandardToken load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static HumanStandardToken load(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new HumanStandardToken(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
-    public static HumanStandardToken load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static HumanStandardToken load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new HumanStandardToken(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    public static HumanStandardToken load(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static HumanStandardToken load(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return new HumanStandardToken(contractAddress, chain3j, credentials, contractGasProvider);
     }
 
-    public static HumanStandardToken load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static HumanStandardToken load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return new HumanStandardToken(contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 

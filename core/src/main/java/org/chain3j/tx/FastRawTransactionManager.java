@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.tx.response.Callback;
 import org.chain3j.tx.response.QueuingTransactionReceiptProcessor;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
@@ -17,22 +17,22 @@ public class FastRawTransactionManager extends RawTransactionManager {
 
     private volatile BigInteger nonce = BigInteger.valueOf(-1);
 
-    public FastRawTransactionManager(chain3j chain3j, Credentials credentials, byte chainId) {
+    public FastRawTransactionManager(Chain3j chain3j, Credentials credentials, byte chainId) {
         super(chain3j, credentials, chainId);
     }
 
-    public FastRawTransactionManager(chain3j chain3j, Credentials credentials) {
+    public FastRawTransactionManager(Chain3j chain3j, Credentials credentials) {
         super(chain3j, credentials);
     }
 
     public FastRawTransactionManager(
-            chain3j chain3j, Credentials credentials,
+            Chain3j chain3j, Credentials credentials,
             TransactionReceiptProcessor transactionReceiptProcessor) {
         super(chain3j, credentials, ChainId.NONE, transactionReceiptProcessor);
     }
 
     public FastRawTransactionManager(
-            chain3j chain3j, Credentials credentials, byte chainId,
+            Chain3j chain3j, Credentials credentials, byte chainId,
             TransactionReceiptProcessor transactionReceiptProcessor) {
         super(chain3j, credentials, chainId, transactionReceiptProcessor);
     }

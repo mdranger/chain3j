@@ -1,6 +1,6 @@
 package org.chain3j.protocol.websocket.events;
 
-import org.chain3j.protocol.core.methods.response.EthSyncing;
+import org.chain3j.protocol.core.methods.response.McSyncing;
 
-public class SyncingNotfication extends Notification<EthSyncing> {
+public class SyncingNotfication extends Notification<McSyncing> {
 }

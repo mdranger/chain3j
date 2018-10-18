@@ -8,7 +8,7 @@ import org.chain3j.abi.datatypes.Function;
 import org.chain3j.abi.datatypes.Type;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.tx.Contract;
@@ -32,20 +32,20 @@ public class SimpleStorage extends Contract {
     public static final String FUNC_GET = "get";
 
     @Deprecated
-    protected SimpleStorage(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    protected SimpleStorage(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected SimpleStorage(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    protected SimpleStorage(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected SimpleStorage(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    protected SimpleStorage(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected SimpleStorage(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    protected SimpleStorage(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
@@ -64,39 +64,39 @@ public class SimpleStorage extends Contract {
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
-    public static RemoteCall<SimpleStorage> deploy(chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static RemoteCall<SimpleStorage> deploy(Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return deployRemoteCall(SimpleStorage.class, chain3j, credentials, contractGasProvider, BINARY, "");
     }
 
-    public static RemoteCall<SimpleStorage> deploy(chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static RemoteCall<SimpleStorage> deploy(Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return deployRemoteCall(SimpleStorage.class, chain3j, transactionManager, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<SimpleStorage> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<SimpleStorage> deploy(Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(SimpleStorage.class, chain3j, credentials, gasPrice, gasLimit, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<SimpleStorage> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<SimpleStorage> deploy(Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(SimpleStorage.class, chain3j, transactionManager, gasPrice, gasLimit, BINARY, "");
     }
 
     @Deprecated
-    public static SimpleStorage load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static SimpleStorage load(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new SimpleStorage(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
-    public static SimpleStorage load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static SimpleStorage load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new SimpleStorage(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    public static SimpleStorage load(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static SimpleStorage load(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return new SimpleStorage(contractAddress, chain3j, credentials, contractGasProvider);
     }
 
-    public static SimpleStorage load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static SimpleStorage load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return new SimpleStorage(contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 }

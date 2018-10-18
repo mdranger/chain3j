@@ -3,14 +3,14 @@ package org.chain3j.tx;
 import java.io.IOException;
 import java.math.BigInteger;
 
-import org.chain3j.protocol.chain3j;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 import org.chain3j.tx.response.PollingTransactionReceiptProcessor;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
 
-import static org.chain3j.protocol.core.JsonRpc2_0Web3j.DEFAULT_BLOCK_TIME;
+import static org.chain3j.protocol.core.JsonRpc2_0Chain3j.DEFAULT_BLOCK_TIME;
 
 /**
  * Transaction manager abstraction for executing transactions with Ethereum client via
@@ -30,14 +30,14 @@ public abstract class TransactionManager {
         this.fromAddress = fromAddress;
     }
 
-    protected TransactionManager(chain3j chain3j, String fromAddress) {
+    protected TransactionManager(Chain3j chain3j, String fromAddress) {
         this(new PollingTransactionReceiptProcessor(
                         chain3j, DEFAULT_POLLING_FREQUENCY, DEFAULT_POLLING_ATTEMPTS_PER_TX_HASH),
                 fromAddress);
     }
 
     protected TransactionManager(
-            chain3j chain3j, int attempts, long sleepDuration, String fromAddress) {
+            Chain3j chain3j, int attempts, long sleepDuration, String fromAddress) {
         this(new PollingTransactionReceiptProcessor(chain3j, sleepDuration, attempts), fromAddress);
     }
 
@@ -46,12 +46,12 @@ public abstract class TransactionManager {
             String data, BigInteger value)
             throws IOException, TransactionException {
 
-        EthSendTransaction ethSendTransaction = sendTransaction(
+        McSendTransaction ethSendTransaction = sendTransaction(
                 gasPrice, gasLimit, to, data, value);
         return processResponse(ethSendTransaction);
     }
 
-    public abstract EthSendTransaction sendTransaction(
+    public abstract McSendTransaction sendTransaction(
             BigInteger gasPrice, BigInteger gasLimit, String to,
             String data, BigInteger value)
             throws IOException;
@@ -60,7 +60,7 @@ public abstract class TransactionManager {
         return fromAddress;
     }
 
-    private TransactionReceipt processResponse(EthSendTransaction transactionResponse)
+    private TransactionReceipt processResponse(McSendTransaction transactionResponse)
             throws IOException, TransactionException {
         if (transactionResponse.hasError()) {
             throw new RuntimeException("Error processing transaction request: "

@@ -12,7 +12,7 @@ import org.chain3j.abi.datatypes.Function;
 import org.chain3j.abi.datatypes.Type;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.request.EthFilter;
@@ -45,20 +45,20 @@ public class Fibonacci extends Contract {
     ;
 
     @Deprecated
-    protected Fibonacci(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    protected Fibonacci(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
-    protected Fibonacci(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    protected Fibonacci(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, credentials, contractGasProvider);
     }
 
     @Deprecated
-    protected Fibonacci(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    protected Fibonacci(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         super(BINARY, contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    protected Fibonacci(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    protected Fibonacci(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 
@@ -110,39 +110,39 @@ public class Fibonacci extends Contract {
         return notifyEventObservable(filter);
     }
 
-    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static RemoteCall<Fibonacci> deploy(Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return deployRemoteCall(Fibonacci.class, chain3j, credentials, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<Fibonacci> deploy(Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(Fibonacci.class, chain3j, credentials, gasPrice, gasLimit, BINARY, "");
     }
 
-    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static RemoteCall<Fibonacci> deploy(Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return deployRemoteCall(Fibonacci.class, chain3j, transactionManager, contractGasProvider, BINARY, "");
     }
 
     @Deprecated
-    public static RemoteCall<Fibonacci> deploy(chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static RemoteCall<Fibonacci> deploy(Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(Fibonacci.class, chain3j, transactionManager, gasPrice, gasLimit, BINARY, "");
     }
 
     @Deprecated
-    public static Fibonacci load(String contractAddress, chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    public static Fibonacci load(String contractAddress, Chain3j chain3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new Fibonacci(contractAddress, chain3j, credentials, gasPrice, gasLimit);
     }
 
     @Deprecated
-    public static Fibonacci load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+    public static Fibonacci load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
         return new Fibonacci(contractAddress, chain3j, transactionManager, gasPrice, gasLimit);
     }
 
-    public static Fibonacci load(String contractAddress, chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+    public static Fibonacci load(String contractAddress, Chain3j chain3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return new Fibonacci(contractAddress, chain3j, credentials, contractGasProvider);
     }
 
-    public static Fibonacci load(String contractAddress, chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+    public static Fibonacci load(String contractAddress, Chain3j chain3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         return new Fibonacci(contractAddress, chain3j, transactionManager, contractGasProvider);
     }
 

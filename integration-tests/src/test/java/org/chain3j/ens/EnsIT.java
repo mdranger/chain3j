@@ -2,7 +2,7 @@ package org.chain3j.ens;
 
 import org.junit.Test;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.http.HttpService;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -13,7 +13,7 @@ public class EnsIT {
     @Test
     public void testEns() throws Exception {
 
-        chain3j chain3j = chain3j.build(new HttpService());
+        Chain3j chain3j = chain3j.build(new HttpService());
         EnsResolver ensResolver = new EnsResolver(chain3j);
 
         assertThat(ensResolver.resolve("chain3j.test"),

@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.chain3j.abi.TypeDecoder;
 import org.chain3j.abi.TypeEncoder;
 import org.chain3j.abi.datatypes.Utf8String;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.Web3jService;
 import org.chain3j.protocol.core.JsonRpc2_0Web3j;
 import org.chain3j.protocol.core.Request;
@@ -34,7 +34,7 @@ import static org.chain3j.ens.EnsResolver.isValidEnsName;
 
 public class EnsResolverTest {
 
-    private chain3j chain3j;
+    private Chain3j chain3j;
     private Web3jService web3jService;
     private EnsResolver ensResolver;
 

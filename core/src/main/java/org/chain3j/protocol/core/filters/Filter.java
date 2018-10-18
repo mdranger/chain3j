@@ -12,15 +12,15 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
 import org.chain3j.protocol.core.Response.Error;
 import org.chain3j.protocol.core.RpcErrors;
 import org.chain3j.protocol.core.methods.response.McFilter;
-import org.chain3j.protocol.core.methods.response.EthLog;
-import org.chain3j.protocol.core.methods.response.EthUninstallFilter;
+import org.chain3j.protocol.core.methods.response.McLog;
+import org.chain3j.protocol.core.methods.response.McUninstallFilter;
 
 
 /**
@@ -30,7 +30,7 @@ public abstract class Filter<T> {
 
     private static final Logger log = LoggerFactory.getLogger(Filter.class);
 
-    final chain3j chain3j;
+    final Chain3j chain3j;
     final Callback<T> callback;
 
     private volatile BigInteger filterId;
@@ -41,7 +41,7 @@ public abstract class Filter<T> {
 
     private long blockTime;
 
-    public Filter(chain3j chain3j, Callback<T> callback) {
+    public Filter(Chain3j chain3j, Callback<T> callback) {
         this.chain3j = chain3j;
         this.callback = callback;
     }
@@ -113,7 +113,7 @@ public abstract class Filter<T> {
     private void pollFilter(McFilter ethFilter) {
         EthLog ethLog = null;
         try {
-            ethLog = chain3j.ethGetFilterChanges(filterId).send();
+            ethLog = chain3j.mcGetFilterChanges(filterId).send();
         } catch (IOException e) {
             throwException(e);
         }

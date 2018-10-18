@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import org.chain3j.ens.EnsResolver;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.McGasPrice;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
@@ -21,13 +21,13 @@ public abstract class ManagedTransaction {
      */
     public static final BigInteger GAS_PRICE = BigInteger.valueOf(22_000_000_000L);
 
-    protected chain3j chain3j;
+    protected Chain3j chain3j;
 
     protected TransactionManager transactionManager;
 
     protected EnsResolver ensResolver;
 
-    protected ManagedTransaction(chain3j chain3j, TransactionManager transactionManager) {
+    protected ManagedTransaction(Chain3j chain3j, TransactionManager transactionManager) {
         this.transactionManager = transactionManager;
         this.chain3j = chain3j;
         this.ensResolver = new EnsResolver(chain3j);
@@ -75,7 +75,7 @@ public abstract class ManagedTransaction {
      * @throws IOException if there's a problem communicating with the ethereum node
      */
     public BigInteger requestCurrentGasPrice() throws IOException {
-        EthGasPrice ethGasPrice = chain3j.ethGasPrice().send();
+        McGasPrice ethGasPrice = chain3j.mcGasPrice().send();
 
         return ethGasPrice.getGasPrice();
     }

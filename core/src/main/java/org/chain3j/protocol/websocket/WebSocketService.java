@@ -26,11 +26,11 @@ import rx.Observable;
 import rx.subjects.BehaviorSubject;
 
 import org.chain3j.protocol.ObjectMapperFactory;
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
-import org.chain3j.protocol.core.methods.response.EthSubscribe;
-import org.chain3j.protocol.core.methods.response.EthUnsubscribe;
+import org.chain3j.protocol.core.methods.response.McSubscribe;
+import org.chain3j.protocol.core.methods.response.McUnsubscribe;
 import org.chain3j.protocol.websocket.events.Notification;
 
 /**
@@ -44,7 +44,7 @@ import org.chain3j.protocol.websocket.events.Notification;
  * <p>To unsubscribe from a stream of notifications it should send another JSON-RPC
  * request.
  */
-public class WebSocketService implements Web3jService {
+public class WebSocketService implements Chain3jService {
 
     private static final Logger log = LoggerFactory.getLogger(WebSocketService.class);
 
@@ -201,8 +201,8 @@ public class WebSocketService implements Web3jService {
             Object reply = objectMapper.convertValue(replyJson, request.getResponseType());
             // Instead of sending a reply to a caller asynchronously we need to process it here
             // to avoid race conditions we need to modify state of this class.
-            if (reply instanceof EthSubscribe) {
-                processSubscriptionResponse(replyId, (EthSubscribe) reply);
+            if (reply instanceof McSubscribe) {
+                processSubscriptionResponse(replyId, (McSubscribe) reply);
             }
 
             sendReplyToListener(request, reply);
@@ -211,7 +211,7 @@ public class WebSocketService implements Web3jService {
         }
     }
 
-    private void processSubscriptionResponse(long replyId, EthSubscribe reply) throws IOException {
+    private void processSubscriptionResponse(long replyId, McSubscribe reply) throws IOException {
         WebSocketSubscription subscription = subscriptionRequestForId.get(replyId);
         processSubscriptionResponse(
                 reply,
@@ -221,7 +221,7 @@ public class WebSocketService implements Web3jService {
     }
 
     private <T extends Notification<?>> void processSubscriptionResponse(
-            EthSubscribe subscriptionReply,
+            McSubscribe subscriptionReply,
             BehaviorSubject<T> subject,
             Class<T> responseType) throws IOException {
         if (!subscriptionReply.hasError()) {
@@ -232,7 +232,7 @@ public class WebSocketService implements Web3jService {
     }
 
     private <T extends Notification<?>> void establishSubscription(
-            BehaviorSubject<T> subject, Class<T> responseType, EthSubscribe subscriptionReply) {
+            BehaviorSubject<T> subject, Class<T> responseType, McSubscribe subscriptionReply) {
         log.info("Subscribed to RPC events with id {}",
                 subscriptionReply.getSubscriptionId());
         subscriptionForId.put(
@@ -249,7 +249,7 @@ public class WebSocketService implements Web3jService {
     }
 
     private <T extends Notification<?>> void reportSubscriptionError(
-            BehaviorSubject<T> subject, EthSubscribe subscriptionReply) {
+            BehaviorSubject<T> subject, McSubscribe subscriptionReply) {
         Response.Error error = subscriptionReply.getError();
         log.error("Subscription request returned error: {}", error.getMessage());
         subject.onError(
@@ -377,7 +377,7 @@ public class WebSocketService implements Web3jService {
                 request.getId(),
                 new WebSocketSubscription<>(subject, responseType));
         try {
-            send(request, EthSubscribe.class);
+            send(request, McSubscribe.class);
         } catch (IOException e) {
             log.error("Failed to subscribe to RPC events with request id {}",
                     request.getId());
@@ -398,7 +398,7 @@ public class WebSocketService implements Web3jService {
     }
 
     private void unsubscribeFromEventsStream(String subscriptionId, String unsubscribeMethod) {
-        sendAsync(unsubscribeRequest(subscriptionId, unsubscribeMethod), EthUnsubscribe.class)
+        sendAsync(unsubscribeRequest(subscriptionId, unsubscribeMethod), McUnsubscribe.class)
                 .thenAccept(ethUnsubscribe -> {
                     log.debug("Successfully unsubscribed from subscription with id {}",
                             subscriptionId);
@@ -409,13 +409,13 @@ public class WebSocketService implements Web3jService {
                 });
     }
 
-    private Request<String, EthUnsubscribe> unsubscribeRequest(
+    private Request<String, McUnsubscribe> unsubscribeRequest(
             String subscriptionId, String unsubscribeMethod) {
         return new Request<>(
                         unsubscribeMethod,
                         Collections.singletonList(subscriptionId),
                         this,
-                        EthUnsubscribe.class);
+                        McUnsubscribe.class);
     }
 
     @Override

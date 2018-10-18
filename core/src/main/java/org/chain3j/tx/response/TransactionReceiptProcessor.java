@@ -3,8 +3,8 @@ package org.chain3j.tx.response;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.chain3j.protocol.chain3j;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
+import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.core.methods.response.McGetTransactionReceipt;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 
@@ -13,9 +13,9 @@ import org.chain3j.protocol.exceptions.TransactionException;
  */
 public abstract class TransactionReceiptProcessor {
 
-    private final chain3j chain3j;
+    private final Chain3j chain3j;
 
-    public TransactionReceiptProcessor(chain3j chain3j) {
+    public TransactionReceiptProcessor(Chain3j chain3j) {
         this.chain3j = chain3j;
     }
 
@@ -26,7 +26,7 @@ public abstract class TransactionReceiptProcessor {
     Optional<TransactionReceipt> sendTransactionReceiptRequest(
             String transactionHash) throws IOException, TransactionException {
         EthGetTransactionReceipt transactionReceipt =
-                chain3j.ethGetTransactionReceipt(transactionHash).send();
+                chain3j.mcGetTransactionReceipt(transactionHash).send();
         if (transactionReceipt.hasError()) {
             throw new TransactionException("Error processing request: "
                     + transactionReceipt.getError().getMessage());

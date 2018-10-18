@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.SampleKeys;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.response.EthGasPrice;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;

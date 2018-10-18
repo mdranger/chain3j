@@ -9,9 +9,9 @@ import org.chain3j.utils.Numeric;
 /**
  * Transaction request object used the below methods.
  * <ol>
- *     <li>eth_call</li>
- *     <li>eth_sendTransaction</li>
- *     <li>eth_estimateGas</li>
+ *     <li>mc_call</li>
+ *     <li>mc_sendTransaction</li>
+ *     <li>mc_estimateGas</li>
  * </ol>
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -25,7 +25,7 @@ public class Transaction {
     private BigInteger gasPrice;
     private BigInteger value;
     private String data;
-    private BigInteger nonce;  // nonce field is not present on eth_call/eth_estimateGas
+    private BigInteger nonce;  // nonce field is not present on mc_call/mc_estimateGas
 
     public Transaction(String from, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit,
                        String to, BigInteger value, String data) {
@@ -55,7 +55,7 @@ public class Transaction {
         return createContractTransaction(from, nonce, gasPrice, null, null, init);
     }
 
-    public static Transaction createEtherTransaction(
+    public static Transaction createMcTransaction(
             String from, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
             BigInteger value) {
 

@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
@@ -22,7 +22,7 @@ public class Transfer extends ManagedTransaction {
     // This is the cost to send Ether between parties
     public static final BigInteger GAS_LIMIT = BigInteger.valueOf(21000);
 
-    public Transfer(chain3j chain3j, TransactionManager transactionManager) {
+    public Transfer(Chain3j chain3j, TransactionManager transactionManager) {
         super(chain3j, transactionManager);
     }
 
@@ -66,7 +66,7 @@ public class Transfer extends ManagedTransaction {
     }
 
     public static RemoteCall<TransactionReceipt> sendFunds(
-            chain3j chain3j, Credentials credentials,
+            Chain3j chain3j, Credentials credentials,
             String toAddress, BigDecimal value, Convert.Unit unit) throws InterruptedException,
             IOException, TransactionException {
 

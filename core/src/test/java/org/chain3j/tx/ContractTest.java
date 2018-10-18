@@ -26,7 +26,7 @@ import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.SampleKeys;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.Request;
@@ -443,14 +443,14 @@ public class ContractTest extends ManagedTransactionTester {
 
     private static class TestContract extends Contract {
         public TestContract(
-                String contractAddress, chain3j chain3j, Credentials credentials,
+                String contractAddress, Chain3j chain3j, Credentials credentials,
                 BigInteger gasPrice, BigInteger gasLimit) {
             super(TEST_CONTRACT_BINARY, contractAddress, chain3j, credentials, gasPrice, gasLimit);
         }
 
         public TestContract(
                 String contractAddress,
-                chain3j chain3j, TransactionManager transactionManager,
+                Chain3j chain3j, TransactionManager transactionManager,
                 ContractGasProvider gasProvider) {
             super(TEST_CONTRACT_BINARY, contractAddress, chain3j, transactionManager, gasProvider);
         }

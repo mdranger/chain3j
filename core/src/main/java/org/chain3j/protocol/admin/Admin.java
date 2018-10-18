@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.concurrent.ScheduledExecutorService;
 
 import org.chain3j.protocol.Chain3j;
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 import org.chain3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.chain3j.protocol.admin.methods.response.PersonalListAccounts;
 import org.chain3j.protocol.admin.methods.response.PersonalUnlockAccount;
@@ -15,16 +15,16 @@ import org.chain3j.protocol.core.methods.response.McSendTransaction;
 /**
  * JSON-RPC Request object building factory for common Parity and Geth. 
  */
-public interface Admin extends chain3j {
+public interface Admin extends Chain3j {
 
-    static Admin build(Web3jService web3jService) {
-        return new JsonRpc2_0Admin(web3jService);
+    static Admin build(Chain3jService chain3jService) {
+        return new JsonRpc2_0Admin(chain3jService);
     }
     
     static Admin build(
-            Web3jService web3jService, long pollingInterval,
+            Chain3jService chain3jService, long pollingInterval,
             ScheduledExecutorService scheduledExecutorService) {
-        return new JsonRpc2_0Admin(web3jService, pollingInterval, scheduledExecutorService);
+        return new JsonRpc2_0Admin(chain3jService, pollingInterval, scheduledExecutorService);
     }
 
     public Request<?, PersonalListAccounts> personalListAccounts();

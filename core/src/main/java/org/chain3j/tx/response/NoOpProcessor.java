@@ -2,7 +2,7 @@ package org.chain3j.tx.response;
 
 import java.io.IOException;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 
@@ -12,7 +12,7 @@ import org.chain3j.protocol.exceptions.TransactionException;
  */
 public class NoOpProcessor extends TransactionReceiptProcessor {
 
-    public NoOpProcessor(chain3j chain3j) {
+    public NoOpProcessor(Chain3j chain3j) {
         super(chain3j);
     }
 

@@ -6,7 +6,7 @@ import org.junit.Before;
 
 import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.SampleKeys;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.response.EthGasPrice;
@@ -25,7 +25,7 @@ public abstract class ManagedTransactionTester {
 
     static final String ADDRESS = "0x3d6cb163f7c72d20b0fcd6baae5889329d138a4a";
     static final String TRANSACTION_HASH = "0xHASH";
-    protected chain3j chain3j;
+    protected Chain3j chain3j;
     protected TxHashVerifier txHashVerifier;
 
     @Before

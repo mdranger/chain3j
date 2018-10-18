@@ -3,9 +3,9 @@ package org.chain3j.tx;
 import java.io.IOException;
 import java.math.BigInteger;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
 
 /**
@@ -15,29 +15,29 @@ import org.chain3j.tx.response.TransactionReceiptProcessor;
  */
 public class ClientTransactionManager extends TransactionManager {
 
-    private final chain3j chain3j;
+    private final Chain3j chain3j;
 
     public ClientTransactionManager(
-            chain3j chain3j, String fromAddress) {
+            Chain3j chain3j, String fromAddress) {
         super(chain3j, fromAddress);
         this.chain3j = chain3j;
     }
 
     public ClientTransactionManager(
-            chain3j chain3j, String fromAddress, int attempts, int sleepDuration) {
+            Chain3j chain3j, String fromAddress, int attempts, int sleepDuration) {
         super(chain3j, attempts, sleepDuration, fromAddress);
         this.chain3j = chain3j;
     }
 
     public ClientTransactionManager(
-            chain3j chain3j, String fromAddress,
+            Chain3j chain3j, String fromAddress,
             TransactionReceiptProcessor transactionReceiptProcessor) {
         super(transactionReceiptProcessor, fromAddress);
         this.chain3j = chain3j;
     }
 
     @Override
-    public EthSendTransaction sendTransaction(
+    public McSendTransaction sendTransaction(
             BigInteger gasPrice, BigInteger gasLimit, String to,
             String data, BigInteger value)
             throws IOException {
@@ -45,7 +45,7 @@ public class ClientTransactionManager extends TransactionManager {
         Transaction transaction = new Transaction(
                 getFromAddress(), null, gasPrice, gasLimit, to, value, data);
 
-        return chain3j.ethSendTransaction(transaction)
+        return chain3j.mcSendTransaction(transaction)
                 .send();
     }
 }

@@ -3,7 +3,7 @@ package org.chain3j.ens;
 import org.chain3j.crypto.WalletUtils;
 import org.chain3j.ens.contracts.generated.ENS;
 import org.chain3j.ens.contracts.generated.PublicResolver;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.McSyncing;
@@ -22,17 +22,17 @@ public class EnsResolver {
     static final long DEFAULT_SYNC_THRESHOLD = 1000 * 60 * 3;
     static final String REVERSE_NAME_SUFFIX = ".addr.reverse";
 
-    private final chain3j chain3j;
+    private final Chain3j chain3j;
     private final TransactionManager transactionManager;
     private long syncThreshold;  // non-final in case this value needs to be tweaked
 
-    public EnsResolver(chain3j chain3j, long syncThreshold) {
+    public EnsResolver(Chain3j chain3j, long syncThreshold) {
         this.chain3j = chain3j;
         transactionManager = new ClientTransactionManager(chain3j, null);  // don't use empty string
         this.syncThreshold = syncThreshold;
     }
 
-    public EnsResolver(chain3j chain3j) {
+    public EnsResolver(Chain3j chain3j) {
         this(chain3j, DEFAULT_SYNC_THRESHOLD);
     }
 

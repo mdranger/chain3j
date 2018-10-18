@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 import org.chain3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.chain3j.protocol.admin.methods.response.PersonalListAccounts;
 import org.chain3j.protocol.admin.methods.response.PersonalUnlockAccount;
-import org.chain3j.protocol.core.JsonRpc2_0Web3j;
+import org.chain3j.protocol.core.JsonRpc2_0Chain3j;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.request.Transaction;
 import org.chain3j.protocol.core.methods.response.McSendTransaction;
@@ -19,15 +19,15 @@ import org.chain3j.protocol.core.methods.response.McSendTransaction;
 /**
  * JSON-RPC 2.0 factory implementation for common Parity and Geth.
  */
-public class JsonRpc2_0Admin extends JsonRpc2_0Web3j implements Admin {
+public class JsonRpc2_0Admin extends JsonRpc2_0Chain3j implements Admin {
 
-    public JsonRpc2_0Admin(Web3jService web3jService) {
-        super(web3jService);
+    public JsonRpc2_0Admin(Chain3jService chain3jService) {
+        super(chain3jService);
     }
     
-    public JsonRpc2_0Admin(Web3jService web3jService, long pollingInterval,
+    public JsonRpc2_0Admin(Chain3jService chain3jService, long pollingInterval,
             ScheduledExecutorService scheduledExecutorService) {
-        super(web3jService, pollingInterval, scheduledExecutorService);
+        super(chain3jService, pollingInterval, scheduledExecutorService);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class JsonRpc2_0Admin extends JsonRpc2_0Web3j implements Admin {
         return new Request<>(
                 "personal_listAccounts",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 PersonalListAccounts.class);
     }
 
@@ -44,7 +44,7 @@ public class JsonRpc2_0Admin extends JsonRpc2_0Web3j implements Admin {
         return new Request<>(
                 "personal_newAccount",
                 Arrays.asList(password),
-                web3jService,
+                chain3jService,
                 NewAccountIdentifier.class);
     }   
 
@@ -68,7 +68,7 @@ public class JsonRpc2_0Admin extends JsonRpc2_0Web3j implements Admin {
         return new Request<>(
                 "personal_unlockAccount",
                 attributes,
-                web3jService,
+                chain3jService,
                 PersonalUnlockAccount.class);
     }
     
@@ -80,13 +80,13 @@ public class JsonRpc2_0Admin extends JsonRpc2_0Web3j implements Admin {
     }
     
     @Override
-    public Request<?, EthSendTransaction> personalSendTransaction(
+    public Request<?, McSendTransaction> personalSendTransaction(
             Transaction transaction, String passphrase) {
         return new Request<>(
                 "personal_sendTransaction",
                 Arrays.asList(transaction, passphrase),
-                web3jService,
-                EthSendTransaction.class);
+                chain3jService,
+                McSendTransaction.class);
     }
     
 }

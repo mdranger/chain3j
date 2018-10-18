@@ -16,7 +16,7 @@ import rx.Observable;
 import rx.Subscription;
 
 import org.chain3j.protocol.ObjectMapperFactory;
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.Web3jService;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.response.EthFilter;
@@ -35,7 +35,7 @@ import static org.mockito.Mockito.when;
 public abstract class FilterTester {
 
     private Web3jService web3jService;
-    chain3j chain3j;
+    Chain3j chain3j;
 
     final ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
     final ScheduledExecutorService scheduledExecutorService =
