@@ -18,7 +18,7 @@ import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
 import org.chain3j.protocol.core.Response.Error;
 import org.chain3j.protocol.core.RpcErrors;
-import org.chain3j.protocol.core.methods.response.EthFilter;
+import org.chain3j.protocol.core.methods.response.McFilter;
 import org.chain3j.protocol.core.methods.response.EthLog;
 import org.chain3j.protocol.core.methods.response.EthUninstallFilter;
 
@@ -48,7 +48,7 @@ public abstract class Filter<T> {
 
     public void run(ScheduledExecutorService scheduledExecutorService, long blockTime) {
         try {
-            EthFilter ethFilter = sendRequest();
+            McFilter ethFilter = sendRequest();
             if (ethFilter.hasError()) {
                 throwException(ethFilter.getError());
             }
@@ -110,7 +110,7 @@ public abstract class Filter<T> {
         }
     }
 
-    private void pollFilter(EthFilter ethFilter) {
+    private void pollFilter(McFilter ethFilter) {
         EthLog ethLog = null;
         try {
             ethLog = chain3j.ethGetFilterChanges(filterId).send();
@@ -130,7 +130,7 @@ public abstract class Filter<T> {
         }
     }
 
-    abstract EthFilter sendRequest() throws IOException;
+    abstract McFilter sendRequest() throws IOException;
 
     abstract void process(List<EthLog.LogResult> logResults);
     

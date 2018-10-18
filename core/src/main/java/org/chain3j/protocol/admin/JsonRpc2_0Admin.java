@@ -14,7 +14,7 @@ import org.chain3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.chain3j.protocol.core.JsonRpc2_0Web3j;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 
 /**
  * JSON-RPC 2.0 factory implementation for common Parity and Geth.

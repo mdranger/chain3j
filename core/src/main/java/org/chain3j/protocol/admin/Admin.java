@@ -3,14 +3,14 @@ package org.chain3j.protocol.admin;
 import java.math.BigInteger;
 import java.util.concurrent.ScheduledExecutorService;
 
-import org.chain3j.protocol.chain3j;
+import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.Web3jService;
 import org.chain3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.chain3j.protocol.admin.methods.response.PersonalListAccounts;
 import org.chain3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 
 /**
  * JSON-RPC Request object building factory for common Parity and Geth. 
@@ -37,7 +37,7 @@ public interface Admin extends chain3j {
     public Request<?, PersonalUnlockAccount> personalUnlockAccount(
             String address, String passphrase);
     
-    public Request<?, EthSendTransaction> personalSendTransaction(
+    public Request<?, McSendTransaction> personalSendTransaction(
             Transaction transaction, String password);
 
 }   

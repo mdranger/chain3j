@@ -7,7 +7,7 @@ import java.util.List;
 import org.chain3j.utils.Numeric;
 
 /**
- * TransactionReceipt object used by {@link EthGetTransactionReceipt}.
+ * TransactionReceipt object used by {@link McGetTransactionReceipt}.
  */
 public class TransactionReceipt {
     private String transactionHash;

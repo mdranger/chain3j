@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.chain3j.protocol.chain3j;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthFilter;
+import org.chain3j.protocol.core.methods.response.McFilter;
 import org.chain3j.protocol.core.methods.response.EthLog;
 
 /**
@@ -20,7 +20,7 @@ public class BlockFilter extends Filter<String> {
     }
 
     @Override
-    EthFilter sendRequest() throws IOException {
+    McFilter sendRequest() throws IOException {
         return chain3j.ethNewBlockFilter().send();
     }
 

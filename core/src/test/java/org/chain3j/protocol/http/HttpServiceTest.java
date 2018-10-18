@@ -16,8 +16,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthBlockNumber;
-import org.chain3j.protocol.core.methods.response.EthSubscribe;
+import org.chain3j.protocol.core.methods.response.McBlockNumber;
+import org.chain3j.protocol.core.methods.response.McSubscribe;
 import org.chain3j.protocol.exceptions.ClientConnectionException;
 import org.chain3j.protocol.websocket.events.NewHeadsNotification;
 
@@ -76,13 +76,13 @@ public class HttpServiceTest {
                 });
         HttpService mockedHttpService = new HttpService(httpClient);
 
-        Request<String, EthBlockNumber> request = new Request<>(
-                "eth_blockNumber1",
+        Request<String, McBlockNumber> request = new Request<>(
+                "mc_blockNumber1",
                 Collections.emptyList(),
                 mockedHttpService,
-                EthBlockNumber.class);
+                McBlockNumber.class);
         try {
-            mockedHttpService.send(request, EthBlockNumber.class);
+            mockedHttpService.send(request, McBlockNumber.class);
         } catch (ClientConnectionException e) {
             Assert.assertEquals(
                     e.getMessage(),
@@ -96,15 +96,15 @@ public class HttpServiceTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void subscriptionNotSupported() {
-        Request<Object, EthSubscribe> subscribeRequest = new Request<>(
-                "eth_subscribe",
+        Request<Object, McSubscribe> subscribeRequest = new Request<>(
+                "mc_subscribe",
                 Arrays.asList("newHeads", Collections.emptyMap()),
                 httpService,
-                EthSubscribe.class);
+                McSubscribe.class);
 
         httpService.subscribe(
                 subscribeRequest,
-                "eth_unsubscribe",
+                "mc_unsubscribe",
                 NewHeadsNotification.class
         );
     }

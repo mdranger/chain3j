@@ -27,7 +27,7 @@ import org.chain3j.crypto.Credentials;
 import org.chain3j.protocol.chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
-import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.request.McFilter;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.tuples.generated.Tuple2;
@@ -71,7 +71,7 @@ public final class PublicResolver extends Contract {
     public Observable<AddrChangedEventResponse> addrChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
         final Event event = new Event("AddrChanged", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Address>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, AddrChangedEventResponse>() {
             @Override
@@ -102,7 +102,7 @@ public final class PublicResolver extends Contract {
     public Observable<ContentChangedEventResponse> contentChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
         final Event event = new Event("ContentChanged", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Bytes32>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, ContentChangedEventResponse>() {
             @Override
@@ -133,7 +133,7 @@ public final class PublicResolver extends Contract {
     public Observable<NameChangedEventResponse> nameChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
         final Event event = new Event("NameChanged", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Utf8String>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, NameChangedEventResponse>() {
             @Override
@@ -164,7 +164,7 @@ public final class PublicResolver extends Contract {
     public Observable<ABIChangedEventResponse> aBIChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
         final Event event = new Event("ABIChanged", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Uint256>(true) {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, ABIChangedEventResponse>() {
             @Override
@@ -196,7 +196,7 @@ public final class PublicResolver extends Contract {
     public Observable<PubkeyChangedEventResponse> pubkeyChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
         final Event event = new Event("PubkeyChanged", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Bytes32>() {}, new TypeReference<Bytes32>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, PubkeyChangedEventResponse>() {
             @Override
@@ -229,7 +229,7 @@ public final class PublicResolver extends Contract {
     public Observable<TextChangedEventResponse> textChangedEventObservable(DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
         final Event event = new Event("TextChanged", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Utf8String>(true) {}, new TypeReference<Utf8String>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, TextChangedEventResponse>() {
             @Override

@@ -5,8 +5,8 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import org.junit.Test;
 
-import org.chain3j.protocol.chain3j;
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.Chain3jService;
 
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -16,9 +16,9 @@ public class JsonRpc2_0Web3jTest {
 
     private ScheduledExecutorService scheduledExecutorService
             = mock(ScheduledExecutorService.class);
-    private Web3jService service = mock(Web3jService.class);
+    private Chain3jService service = mock(Chain3jService.class);
 
-    private chain3j chain3j = chain3j.build(service, 10, scheduledExecutorService);
+    private Chain3j chain3j = Chain3j.build(service, 10, scheduledExecutorService);
 
     @Test
     public void testStopExecutorOnShutdown() throws Exception {

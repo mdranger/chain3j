@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import org.chain3j.utils.Numeric;
 
 /**
- * Transaction object used by both {@link EthTransaction} and {@link EthBlock}.
+ * Transaction object used by both {@link McTransaction} and {@link McBlock}.
  */
 public class Transaction {
     private static final int CHAIN_ID_INC = 35;

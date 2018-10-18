@@ -5,8 +5,8 @@ import org.chain3j.ens.contracts.generated.ENS;
 import org.chain3j.ens.contracts.generated.PublicResolver;
 import org.chain3j.protocol.chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
-import org.chain3j.protocol.core.methods.response.EthBlock;
-import org.chain3j.protocol.core.methods.response.EthSyncing;
+import org.chain3j.protocol.core.methods.response.McBlock;
+import org.chain3j.protocol.core.methods.response.McSyncing;
 import org.chain3j.protocol.core.methods.response.NetVersion;
 import org.chain3j.tx.ClientTransactionManager;
 import org.chain3j.tx.ManagedTransaction;
@@ -136,12 +136,12 @@ public class EnsResolver {
     }
 
     boolean isSynced() throws Exception {
-        EthSyncing ethSyncing = chain3j.ethSyncing().send();
+        McSyncing ethSyncing = chain3j.mcSyncing().send();
         if (ethSyncing.isSyncing()) {
             return false;
         } else {
-            EthBlock ethBlock =
-                    chain3j.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, false).send();
+            McBlock ethBlock =
+                    chain3j.mcGetBlockByNumber(DefaultBlockParameterName.LATEST, false).send();
             long timestamp = ethBlock.getBlock().getTimestamp().longValueExact() * 1000;
 
             return System.currentTimeMillis() - syncThreshold < timestamp;

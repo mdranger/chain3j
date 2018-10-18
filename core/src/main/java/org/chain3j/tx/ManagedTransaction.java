@@ -5,7 +5,7 @@ import java.math.BigInteger;
 
 import org.chain3j.ens.EnsResolver;
 import org.chain3j.protocol.chain3j;
-import org.chain3j.protocol.core.methods.response.EthGasPrice;
+import org.chain3j.protocol.core.methods.response.McGasPrice;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 

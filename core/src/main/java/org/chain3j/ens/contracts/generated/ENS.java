@@ -22,7 +22,7 @@ import org.chain3j.crypto.Credentials;
 import org.chain3j.protocol.chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
-import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.request.McFilter;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.tx.Contract;
@@ -69,7 +69,7 @@ public final class ENS extends Contract {
         final Event event = new Event("NewOwner", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Bytes32>(true) {},
                         new TypeReference<Address>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, NewOwnerEventResponse>() {
             @Override
@@ -103,7 +103,7 @@ public final class ENS extends Contract {
         final Event event = new Event("Transfer", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {},
                         new TypeReference<Address>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, TransferEventResponse>() {
             @Override
@@ -136,7 +136,7 @@ public final class ENS extends Contract {
         final Event event = new Event("NewResolver", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {},
                         new TypeReference<Address>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, NewResolverEventResponse>() {
             @Override
@@ -169,7 +169,7 @@ public final class ENS extends Contract {
         final Event event = new Event("NewTTL", 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {},
                         new TypeReference<Uint64>() {}));
-        EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
+        McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
         return chain3j.ethLogObservable(filter).map(new Func1<Log, NewTTLEventResponse>() {
             @Override

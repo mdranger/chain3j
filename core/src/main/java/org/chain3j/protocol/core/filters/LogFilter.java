@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.chain3j.protocol.chain3j;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthFilter;
+import org.chain3j.protocol.core.methods.response.McFilter;
 import org.chain3j.protocol.core.methods.response.EthLog;
 import org.chain3j.protocol.core.methods.response.Log;
 
@@ -16,18 +16,18 @@ import org.chain3j.protocol.core.methods.response.Log;
  */
 public class LogFilter extends Filter<Log> {
 
-    private final org.chain3j.protocol.core.methods.request.EthFilter ethFilter;
+    private final org.chain3j.protocol.core.methods.request.McFilter ethFilter;
 
     public LogFilter(
             chain3j chain3j, Callback<Log> callback,
-            org.chain3j.protocol.core.methods.request.EthFilter ethFilter) {
+            org.chain3j.protocol.core.methods.request.McFilter ethFilter) {
         super(chain3j, callback);
         this.ethFilter = ethFilter;
     }
 
 
     @Override
-    EthFilter sendRequest() throws IOException {
+    McFilter sendRequest() throws IOException {
         return chain3j.ethNewFilter(ethFilter).send();
     }
 

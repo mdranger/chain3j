@@ -19,7 +19,7 @@ import org.chain3j.protocol.core.DefaultBlockParameterNumber;
 import org.chain3j.protocol.core.filters.BlockFilter;
 import org.chain3j.protocol.core.filters.LogFilter;
 import org.chain3j.protocol.core.filters.PendingTransactionFilter;
-import org.chain3j.protocol.core.methods.response.EthBlock;
+import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.Transaction;
 import org.chain3j.utils.Observables;
@@ -29,7 +29,7 @@ import org.chain3j.utils.Observables;
  */
 public class JsonRpc2_0Rx {
 
-    private final chain3j chain3j;
+    private final Chain3j chain3j;
     private final ScheduledExecutorService scheduledExecutorService;
     private final Scheduler scheduler;
 
@@ -57,7 +57,7 @@ public class JsonRpc2_0Rx {
     }
 
     public Observable<Log> ethLogObservable(
-            org.chain3j.protocol.core.methods.request.EthFilter ethFilter, long pollingInterval) {
+            org.chain3j.protocol.core.methods.request.McFilter ethFilter, long pollingInterval) {
         return Observable.create((Subscriber<? super Log> subscriber) -> {
             LogFilter logFilter = new LogFilter(
                     chain3j, subscriber::onNext, ethFilter);
@@ -87,20 +87,20 @@ public class JsonRpc2_0Rx {
                 .map(ethTransaction -> ethTransaction.getTransaction().get());
     }
 
-    public Observable<EthBlock> blockObservable(
+    public Observable<McBlock> blockObservable(
             boolean fullTransactionObjects, long pollingInterval) {
         return ethBlockHashObservable(pollingInterval)
                 .flatMap(blockHash ->
                         chain3j.ethGetBlockByHash(blockHash, fullTransactionObjects).observable());
     }
 
-    public Observable<EthBlock> replayBlocksObservable(
+    public Observable<McBlock> replayBlocksObservable(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock,
             boolean fullTransactionObjects) {
         return replayBlocksObservable(startBlock, endBlock, fullTransactionObjects, true);
     }
 
-    public Observable<EthBlock> replayBlocksObservable(
+    public Observable<McBlock> replayBlocksObservable(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock,
             boolean fullTransactionObjects, boolean ascending) {
         // We use a scheduler to ensure this Observable runs asynchronously for users to be
@@ -109,13 +109,13 @@ public class JsonRpc2_0Rx {
                 .subscribeOn(scheduler);
     }
 
-    private Observable<EthBlock> replayBlocksObservableSync(
+    private Observable<McBlock> replayBlocksObservableSync(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock,
             boolean fullTransactionObjects) {
         return replayBlocksObservableSync(startBlock, endBlock, fullTransactionObjects, true);
     }
 
-    private Observable<EthBlock> replayBlocksObservableSync(
+    private Observable<McBlock> replayBlocksObservableSync(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock,
             boolean fullTransactionObjects, boolean ascending) {
 
@@ -147,9 +147,9 @@ public class JsonRpc2_0Rx {
                 .flatMapIterable(JsonRpc2_0Rx::toTransactions);
     }
 
-    public Observable<EthBlock> catchUpToLatestBlockObservable(
+    public Observable<McBlock> catchUpToLatestBlockObservable(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects,
-            Observable<EthBlock> onCompleteObservable) {
+            Observable<McBlock> onCompleteObservable) {
         // We use a scheduler to ensure this Observable runs asynchronously for users to be
         // consistent with the other Observables
         return catchUpToLatestBlockObservableSync(
@@ -157,15 +157,15 @@ public class JsonRpc2_0Rx {
                 .subscribeOn(scheduler);
     }
 
-    public Observable<EthBlock> catchUpToLatestBlockObservable(
+    public Observable<McBlock> catchUpToLatestBlockObservable(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects) {
         return catchUpToLatestBlockObservable(
                 startBlock, fullTransactionObjects, Observable.empty());
     }
 
-    private Observable<EthBlock> catchUpToLatestBlockObservableSync(
+    private Observable<McBlock> catchUpToLatestBlockObservableSync(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects,
-            Observable<EthBlock> onCompleteObservable) {
+            Observable<McBlock> onCompleteObservable) {
 
         BigInteger startBlockNumber;
         BigInteger latestBlockNumber;
@@ -198,7 +198,7 @@ public class JsonRpc2_0Rx {
                 .flatMapIterable(JsonRpc2_0Rx::toTransactions);
     }
 
-    public Observable<EthBlock> catchUpToLatestAndSubscribeToNewBlocksObservable(
+    public Observable<McBlock> catchUpToLatestAndSubscribeToNewBlocksObservable(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects,
             long pollingInterval) {
 
@@ -223,13 +223,13 @@ public class JsonRpc2_0Rx {
         if (defaultBlockParameter instanceof DefaultBlockParameterNumber) {
             return ((DefaultBlockParameterNumber) defaultBlockParameter).getBlockNumber();
         } else {
-            EthBlock latestEthBlock = chain3j.ethGetBlockByNumber(
+            McBlock latestEthBlock = chain3j.ethGetBlockByNumber(
                     defaultBlockParameter, false).send();
             return latestEthBlock.getBlock().getNumber();
         }
     }
 
-    private static List<Transaction> toTransactions(EthBlock ethBlock) {
+    private static List<Transaction> toTransactions(McBlock ethBlock) {
         // If you ever see an exception thrown here, it's probably due to an incomplete chain in
         // Geth/Parity. You should resync to solve.
         return ethBlock.getBlock().getTransactions().stream()
