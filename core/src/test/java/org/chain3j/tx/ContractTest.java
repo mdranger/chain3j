@@ -32,10 +32,10 @@ import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthCall;
-import org.chain3j.protocol.core.methods.response.EthGetCode;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McCall;
+import org.chain3j.protocol.core.methods.response.McGetCode;
+import org.chain3j.protocol.core.methods.response.McGetTransactionReceipt;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
@@ -168,10 +168,10 @@ public class ContractTest extends ManagedTransactionTester {
     public void testCallSingleValue() throws Exception {
         // Example taken from FunctionReturnDecoderTest
 
-        EthCall ethCall = new EthCall();
-        ethCall.setResult("0x0000000000000000000000000000000000000000000000000000000000000020"
+        McCall mcCall = new McCall();
+        mcCall.setResult("0x0000000000000000000000000000000000000000000000000000000000000020"
                 + "0000000000000000000000000000000000000000000000000000000000000000");
-        prepareCall(ethCall);
+        prepareCall(mcCall);
 
         assertThat(contract.callSingleValue().send(), equalTo(new Utf8String("")));
     }
@@ -180,19 +180,19 @@ public class ContractTest extends ManagedTransactionTester {
     public void testCallSingleValueEmpty() throws Exception {
         // Example taken from FunctionReturnDecoderTest
 
-        EthCall ethCall = new EthCall();
-        ethCall.setResult("0x");
-        prepareCall(ethCall);
+        McCall mcCall = new McCall();
+        mcCall.setResult("0x");
+        prepareCall(mcCall);
 
         assertNull(contract.callSingleValue().send());
     }
 
     @Test
     public void testCallMultipleValue() throws Exception {
-        EthCall ethCall = new EthCall();
-        ethCall.setResult("0x0000000000000000000000000000000000000000000000000000000000000037"
+        McCall mcCall = new McCall();
+        mcCall.setResult("0x0000000000000000000000000000000000000000000000000000000000000037"
                 + "0000000000000000000000000000000000000000000000000000000000000007");
-        prepareCall(ethCall);
+        prepareCall(mcCall);
 
         assertThat(contract.callMultipleValue().send(),
                 equalTo(Arrays.asList(
@@ -202,20 +202,20 @@ public class ContractTest extends ManagedTransactionTester {
 
     @Test
     public void testCallMultipleValueEmpty() throws Exception {
-        EthCall ethCall = new EthCall();
-        ethCall.setResult("0x");
-        prepareCall(ethCall);
+        McCall mcCall = new McCall();
+        mcCall.setResult("0x");
+        prepareCall(mcCall);
 
         assertThat(contract.callMultipleValue().send(),
                 equalTo(emptyList()));
     }
 
     @SuppressWarnings("unchecked")
-    private void prepareCall(EthCall ethCall) throws IOException {
-        Request<?, EthCall> request = mock(Request.class);
-        when(request.send()).thenReturn(ethCall);
+    private void prepareCall(McCall mcCall) throws IOException {
+        Request<?, McCall> request = mock(Request.class);
+        when(request.send()).thenReturn(mcCall);
 
-        when(chain3j.ethCall(any(Transaction.class), eq(DefaultBlockParameterName.LATEST)))
+        when(chain3j.mcCall(any(Transaction.class), eq(DefaultBlockParameterName.LATEST)))
                 .thenReturn((Request) request);
     }
 
@@ -290,12 +290,12 @@ public class ContractTest extends ManagedTransactionTester {
     public void testInvalidTransactionResponse() throws Throwable {
         prepareNonceRequest();
 
-        EthSendTransaction ethSendTransaction = new EthSendTransaction();
-        ethSendTransaction.setError(new Response.Error(1, "Invalid transaction"));
+        McSendTransaction mcSendTransaction = new McSendTransaction();
+        mcSendTransaction.setError(new Response.Error(1, "Invalid transaction"));
 
-        Request<?, EthSendTransaction> rawTransactionRequest = mock(Request.class);
-        when(rawTransactionRequest.sendAsync()).thenReturn(Async.run(() -> ethSendTransaction));
-        when(chain3j.ethSendRawTransaction(any(String.class)))
+        Request<?, McSendTransaction> rawTransactionRequest = mock(Request.class);
+        when(rawTransactionRequest.sendAsync()).thenReturn(Async.run(() -> mcSendTransaction));
+        when(chain3j.mcSendRawTransaction(any(String.class)))
                 .thenReturn((Request) rawTransactionRequest);
 
         testErrorScenario();
@@ -341,13 +341,13 @@ public class ContractTest extends ManagedTransactionTester {
         prepareNonceRequest();
         prepareTransactionRequest();
 
-        EthGetTransactionReceipt ethGetTransactionReceipt = new EthGetTransactionReceipt();
-        ethGetTransactionReceipt.setError(new Response.Error(1, "Invalid transaction receipt"));
+        McGetTransactionReceipt mcGetTransactionReceipt = new McGetTransactionReceipt();
+        mcGetTransactionReceipt.setError(new Response.Error(1, "Invalid transaction receipt"));
 
-        Request<?, EthGetTransactionReceipt> getTransactionReceiptRequest = mock(Request.class);
+        Request<?, McGetTransactionReceipt> getTransactionReceiptRequest = mock(Request.class);
         when(getTransactionReceiptRequest.sendAsync())
-                .thenReturn(Async.run(() -> ethGetTransactionReceipt));
-        when(chain3j.ethGetTransactionReceipt(TRANSACTION_HASH))
+                .thenReturn(Async.run(() -> mcGetTransactionReceipt));
+        when(chain3j.mcGetTransactionReceipt(TRANSACTION_HASH))
                 .thenReturn((Request) getTransactionReceiptRequest);
 
         testErrorScenario();
@@ -431,13 +431,13 @@ public class ContractTest extends ManagedTransactionTester {
 
     @SuppressWarnings("unchecked")
     private void prepareEthGetCode(String binary) throws IOException {
-        EthGetCode ethGetCode = new EthGetCode();
+        McGetCode ethGetCode = new McGetCode();
         ethGetCode.setResult(Numeric.prependHexPrefix(binary));
 
-        Request<?, EthGetCode> ethGetCodeRequest = mock(Request.class);
+        Request<?, McGetCode> ethGetCodeRequest = mock(Request.class);
         when(ethGetCodeRequest.send())
                 .thenReturn(ethGetCode);
-        when(chain3j.ethGetCode(ADDRESS, DefaultBlockParameterName.LATEST))
+        when(chain3j.mcGetCode(ADDRESS, DefaultBlockParameterName.LATEST))
                 .thenReturn((Request) ethGetCodeRequest);
     }
 

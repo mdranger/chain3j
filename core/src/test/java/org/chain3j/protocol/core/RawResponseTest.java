@@ -3,8 +3,8 @@ package org.chain3j.protocol.core;
 import org.junit.Test;
 
 import org.chain3j.protocol.ResponseTester;
-import org.chain3j.protocol.core.methods.response.EthBlock;
-import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
+import org.chain3j.protocol.core.methods.response.McBlock;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -28,8 +28,8 @@ public class RawResponseTest extends ResponseTester {
     @Test
     public void testRawResponseEnabled() {
         configureWeb3Service(true);
-        final Web3ClientVersion web3ClientVersion = deserialiseWeb3ClientVersionResponse();
-        assertThat(web3ClientVersion.getRawResponse(), is(RAW_RESPONSE));
+        final Chain3ClientVersion chain3ClientVersion = deserialiseWeb3ClientVersionResponse();
+        assertThat(chain3ClientVersion.getRawResponse(), is(RAW_RESPONSE));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class RawResponseTest extends ResponseTester {
 
         buildResponse(LARGE_RAW_RESPONSE);
 
-        EthBlock ethBlock = deserialiseResponse(EthBlock.class);
+        McBlock ethBlock = deserialiseResponse(McBlock.class);
 
         assertThat(ethBlock.getRawResponse(), is(LARGE_RAW_RESPONSE));
     }
@@ -46,13 +46,13 @@ public class RawResponseTest extends ResponseTester {
     @Test
     public void testRawResponseDisabled() {
         configureWeb3Service(false);
-        final Web3ClientVersion web3ClientVersion = deserialiseWeb3ClientVersionResponse();
-        assertThat(web3ClientVersion.getRawResponse(), nullValue());
+        final Chain3ClientVersion chain3ClientVersion = deserialiseWeb3ClientVersionResponse();
+        assertThat(chain3ClientVersion.getRawResponse(), nullValue());
     }
 
-    private Web3ClientVersion deserialiseWeb3ClientVersionResponse() {
+    private Chain3ClientVersion deserialiseWeb3ClientVersionResponse() {
         buildResponse(RAW_RESPONSE);
 
-        return deserialiseResponse(Web3ClientVersion.class);
+        return deserialiseResponse(Chain3ClientVersion.class);
     }
 }

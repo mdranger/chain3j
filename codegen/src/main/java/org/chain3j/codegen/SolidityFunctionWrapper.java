@@ -49,7 +49,7 @@ import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
-import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.request.McFilter;
 import org.chain3j.protocol.core.methods.response.AbiDefinition;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
@@ -341,7 +341,7 @@ public class SolidityFunctionWrapper extends Generator {
         MethodSpec.Builder toReturn = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PROTECTED)
                 .addParameter(String.class, CONTRACT_ADDRESS)
-                .addParameter(chain3j.class, chain3j)
+                .addParameter(Chain3j.class, chain3j)
                 .addParameter(authType, authName);
 
         if (withGasProvider) {
@@ -445,7 +445,7 @@ public class SolidityFunctionWrapper extends Generator {
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(
                         buildRemoteCall(TypeVariableName.get(className, Type.class)))
-                .addParameter(chain3j.class, chain3j)
+                .addParameter(Chain3j.class, chain3j)
                 .addParameter(authType, authName);
         if (isPayable && !withGasProvider) {
             return builder.addParameter(BigInteger.class, GAS_PRICE)
@@ -468,7 +468,7 @@ public class SolidityFunctionWrapper extends Generator {
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(TypeVariableName.get(className, Type.class))
                 .addParameter(String.class, CONTRACT_ADDRESS)
-                .addParameter(chain3j.class, chain3j)
+                .addParameter(Chain3j.class, chain3j)
                 .addParameter(authType, authName);
 
         if (withGasProvider) {
@@ -852,7 +852,7 @@ public class SolidityFunctionWrapper extends Generator {
         MethodSpec.Builder observableMethodBuilder =
                 MethodSpec.methodBuilder(generatedFunctionName)
                         .addModifiers(Modifier.PUBLIC)
-                        .addParameter(EthFilter.class, FILTER)
+                        .addParameter(McFilter.class, FILTER)
                         .returns(parameterizedTypeName);
 
         TypeSpec converter = TypeSpec.anonymousClassBuilder("")
@@ -877,7 +877,7 @@ public class SolidityFunctionWrapper extends Generator {
                 .build();
 
         observableMethodBuilder
-                .addStatement("return chain3j.ethLogObservable(filter).map($L)", converter);
+                .addStatement("return chain3j.mcLogObservable(filter).map($L)", converter);
 
         return observableMethodBuilder
                 .build();
@@ -900,7 +900,7 @@ public class SolidityFunctionWrapper extends Generator {
                         .returns(parameterizedTypeName);
 
         observableMethodBuilder.addStatement("$1T filter = new $1T($2L, $3L, "
-                + "getContractAddress())", EthFilter.class, START_BLOCK, END_BLOCK)
+                + "getContractAddress())", McFilter.class, START_BLOCK, END_BLOCK)
                 .addStatement("filter.addSingleTopic($T.encode("
                         + buildEventDefinitionName(functionName) + "))", EventEncoder.class)
                 .addStatement("return " + generatedFunctionName + "(filter)");

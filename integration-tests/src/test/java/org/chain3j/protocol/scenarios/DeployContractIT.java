@@ -67,8 +67,8 @@ public class DeployContractIT extends Scenario {
                 BigInteger.ZERO,
                 getFibonacciSolidityBinary());
 
-        org.chain3j.protocol.core.methods.response.EthSendTransaction
-                transactionResponse = chain3j.ethSendTransaction(transaction)
+        org.chain3j.protocol.core.methods.response.McSendTransaction
+                transactionResponse = chain3j.mcSendTransaction(transaction)
                 .sendAsync().get();
 
         return transactionResponse.getTransactionHash();
@@ -79,8 +79,8 @@ public class DeployContractIT extends Scenario {
 
         String encodedFunction = FunctionEncoder.encode(function);
 
-        org.chain3j.protocol.core.methods.response.EthCall response = chain3j.ethCall(
-                Transaction.createEthCallTransaction(
+        org.chain3j.protocol.core.methods.response.McCall response = chain3j.mcCall(
+                Transaction.createMcCallTransaction(
                         ALICE.getAddress(), contractAddress, encodedFunction),
                 DefaultBlockParameterName.LATEST)
                 .sendAsync().get();

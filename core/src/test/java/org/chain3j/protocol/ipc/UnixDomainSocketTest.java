@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
@@ -115,6 +115,6 @@ public class UnixDomainSocketTest {
                 return unixDomainSocket;
             }
         };
-        ipcService.send(new Request(), Web3ClientVersion.class);
+        ipcService.send(new Request(), Chain3ClientVersion.class);
     }
 }

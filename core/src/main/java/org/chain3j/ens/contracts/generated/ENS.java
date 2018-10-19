@@ -71,7 +71,7 @@ public final class ENS extends Contract {
                         new TypeReference<Address>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, NewOwnerEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, NewOwnerEventResponse>() {
             @Override
             public NewOwnerEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -105,7 +105,7 @@ public final class ENS extends Contract {
                         new TypeReference<Address>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, TransferEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, TransferEventResponse>() {
             @Override
             public TransferEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -138,7 +138,7 @@ public final class ENS extends Contract {
                         new TypeReference<Address>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, NewResolverEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, NewResolverEventResponse>() {
             @Override
             public NewResolverEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -171,7 +171,7 @@ public final class ENS extends Contract {
                         new TypeReference<Uint64>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, NewTTLEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, NewTTLEventResponse>() {
             @Override
             public NewTTLEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);

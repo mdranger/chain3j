@@ -25,7 +25,7 @@ public abstract class TransactionReceiptProcessor {
 
     Optional<TransactionReceipt> sendTransactionReceiptRequest(
             String transactionHash) throws IOException, TransactionException {
-        EthGetTransactionReceipt transactionReceipt =
+        McGetTransactionReceipt transactionReceipt =
                 chain3j.mcGetTransactionReceipt(transactionHash).send();
         if (transactionReceipt.hasError()) {
             throw new TransactionException("Error processing request: "

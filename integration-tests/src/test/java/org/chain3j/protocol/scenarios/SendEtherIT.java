@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import org.junit.Test;
 
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.tx.Transfer;
 import org.chain3j.utils.Convert;
@@ -27,13 +27,13 @@ public class SendEtherIT extends Scenario {
         BigInteger nonce = getNonce(ALICE.getAddress());
         BigInteger value = Convert.toWei("0.5", Convert.Unit.ETHER).toBigInteger();
 
-        Transaction transaction = Transaction.createEtherTransaction(
+        Transaction transaction = Transaction.createMcTransaction(
                 ALICE.getAddress(), nonce, GAS_PRICE, GAS_LIMIT, BOB.getAddress(), value);
 
-        EthSendTransaction ethSendTransaction =
-                chain3j.ethSendTransaction(transaction).sendAsync().get();
+        McSendTransaction mcSendTransaction =
+                chain3j.mcSendTransaction(transaction).sendAsync().get();
 
-        String transactionHash = ethSendTransaction.getTransactionHash();
+        String transactionHash = mcSendTransaction.getTransactionHash();
 
         assertFalse(transactionHash.isEmpty());
 

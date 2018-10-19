@@ -18,8 +18,8 @@ import org.chain3j.crypto.Credentials;
 import org.chain3j.protocol.admin.Admin;
 import org.chain3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
+import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.McGetTransactionReceipt;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.http.HttpService;
 import org.chain3j.tx.gas.ContractGasProvider;
@@ -109,17 +109,17 @@ public class Scenario {
 
     private Optional<TransactionReceipt> sendTransactionReceiptRequest(
             String transactionHash) throws Exception {
-        EthGetTransactionReceipt transactionReceipt =
-                chain3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
+        McGetTransactionReceipt transactionReceipt =
+                chain3j.mcGetTransactionReceipt(transactionHash).sendAsync().get();
 
         return transactionReceipt.getTransactionReceipt();
     }
 
     BigInteger getNonce(String address) throws Exception {
-        EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
+        McGetTransactionCount mcGetTransactionCount = chain3j.mcGetTransactionCount(
                 address, DefaultBlockParameterName.LATEST).sendAsync().get();
 
-        return ethGetTransactionCount.getTransactionCount();
+        return mcGetTransactionCount.getTransactionCount();
     }
 
     Function createFibonacciFunction() {

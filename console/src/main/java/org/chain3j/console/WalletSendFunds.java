@@ -11,7 +11,7 @@ import org.chain3j.crypto.WalletUtils;
 import org.chain3j.ens.EnsResolver;
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
-import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
 import org.chain3j.protocol.exceptions.TransactionException;
 import org.chain3j.protocol.http.HttpService;
 import org.chain3j.protocol.infura.InfuraHttpService;
@@ -128,27 +128,28 @@ public class WalletSendFunds extends WalletManager {
 
     private Chain3j getMoacClient() {
         String clientAddress = console.readLine(
-                "Please confirm address of running Ethereum client you wish to send "
+                "Please confirm address of running MOAC client you wish to send "
                 + "the transfer request to [" + HttpService.DEFAULT_URL + "]: ")
                 .trim();
 
         Chain3j chain3j;
+        //Note we need to remove the infura.io for MOAC
         if (clientAddress.equals("")) {
-            chain3j = chain3j.build(new HttpService());
-        } else if (clientAddress.contains("infura.io")) {
-            chain3j = chain3j.build(new InfuraHttpService(clientAddress));
+            chain3j = Chain3j.build(new HttpService());
+        // } else if (clientAddress.contains("infura.io")) {
+        //     chain3j = Chain3j.build(new InfuraHttpService(clientAddress));
         } else {
-            chain3j = chain3j.build(new HttpService(clientAddress));
+            chain3j = Chain3j.build(new HttpService(clientAddress));
         }
 
         try {
-            Web3ClientVersion web3ClientVersion = chain3j.web3ClientVersion().sendAsync().get();
-            if (web3ClientVersion.hasError()) {
+            Chain3ClientVersion chain3ClientVersion = chain3j.chain3ClientVersion().sendAsync().get();
+            if (chain3ClientVersion.hasError()) {
                 exitError("Unable to process response from client: "
-                        + web3ClientVersion.getError());
+                        + chain3ClientVersion.getError());
             } else {
                 console.printf("Connected successfully to client: %s%n",
-                        web3ClientVersion.getWeb3ClientVersion());
+                        chain3ClientVersion.getChain3ClientVersion());
                 return chain3j;
             }
         } catch (InterruptedException | ExecutionException e) {

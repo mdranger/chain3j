@@ -10,12 +10,12 @@ import org.chain3j.abi.TypeDecoder;
 import org.chain3j.abi.TypeEncoder;
 import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.protocol.Chain3j;
-import org.chain3j.protocol.Web3jService;
-import org.chain3j.protocol.core.JsonRpc2_0Web3j;
+import org.chain3j.protocol.Chain3jService;
+import org.chain3j.protocol.core.JsonRpc2_0Chain3j;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthBlock;
-import org.chain3j.protocol.core.methods.response.EthCall;
-import org.chain3j.protocol.core.methods.response.EthSyncing;
+import org.chain3j.protocol.core.methods.response.McBlock;
+import org.chain3j.protocol.core.methods.response.McCall;
+import org.chain3j.protocol.core.methods.response.McSyncing;
 import org.chain3j.protocol.core.methods.response.NetVersion;
 import org.chain3j.protocol.http.HttpService;
 import org.chain3j.tx.ChainId;
@@ -35,13 +35,13 @@ import static org.chain3j.ens.EnsResolver.isValidEnsName;
 public class EnsResolverTest {
 
     private Chain3j chain3j;
-    private Web3jService web3jService;
+    private Chain3jService chain3jService;
     private EnsResolver ensResolver;
 
     @Before
     public void setUp() {
-        web3jService = mock(Web3jService.class);
-        chain3j = chain3j.build(web3jService);
+        chain3jService = mock(Chain3jService.class);
+        chain3j = Chain3j.build(chain3jService);
         ensResolver = new EnsResolver(chain3j);
     }
 
@@ -58,17 +58,17 @@ public class EnsResolverTest {
         String contractAddress =
                 "0x00000000000000000000000019e03255f667bdfd50a32722df860b1eeaf4d635";
 
-        EthCall resolverAddressResponse = new EthCall();
+        McCall resolverAddressResponse = new McCall();
         resolverAddressResponse.setResult(resolverAddress);
 
-        EthCall contractAddressResponse = new EthCall();
+        McCall contractAddressResponse = new McCall();
         contractAddressResponse.setResult(contractAddress);
 
-        when(web3jService.send(any(Request.class), eq(NetVersion.class)))
+        when(chain3jService.send(any(Request.class), eq(NetVersion.class)))
                 .thenReturn(netVersion);
-        when(web3jService.send(any(Request.class), eq(EthCall.class)))
+        when(chain3jService.send(any(Request.class), eq(McCall.class)))
                 .thenReturn(resolverAddressResponse);
-        when(web3jService.send(any(Request.class), eq(EthCall.class)))
+        when(chain3jService.send(any(Request.class), eq(McCall.class)))
                 .thenReturn(contractAddressResponse);
 
         assertThat(ensResolver.resolve("chain3j.eth"),
@@ -90,17 +90,17 @@ public class EnsResolverTest {
                 + TypeEncoder.encode(new Utf8String("chain3j.eth"));
         System.err.println(contractName);
 
-        EthCall resolverAddressResponse = new EthCall();
+        McCall resolverAddressResponse = new McCall();
         resolverAddressResponse.setResult(resolverAddress);
 
-        EthCall contractNameResponse = new EthCall();
+        McCall contractNameResponse = new McCall();
         contractNameResponse.setResult(contractName);
 
-        when(web3jService.send(any(Request.class), eq(NetVersion.class)))
+        when(chain3jService.send(any(Request.class), eq(NetVersion.class)))
                 .thenReturn(netVersion);
-        when(web3jService.send(any(Request.class), eq(EthCall.class)))
+        when(chain3jService.send(any(Request.class), eq(McCall.class)))
                 .thenReturn(resolverAddressResponse);
-        when(web3jService.send(any(Request.class), eq(EthCall.class)))
+        when(chain3jService.send(any(Request.class), eq(McCall.class)))
                 .thenReturn(contractNameResponse);
 
         assertThat(ensResolver.reverseResolve("0x19e03255f667bdfd50a32722df860b1eeaf4d635"),
@@ -131,22 +131,22 @@ public class EnsResolverTest {
     }
 
     private void configureSyncing(boolean isSyncing) throws IOException {
-        EthSyncing ethSyncing = new EthSyncing();
-        EthSyncing.Result result = new EthSyncing.Result();
+        McSyncing ethSyncing = new McSyncing();
+        McSyncing.Result result = new McSyncing.Result();
         result.setSyncing(isSyncing);
         ethSyncing.setResult(result);
 
-        when(web3jService.send(any(Request.class), eq(EthSyncing.class)))
+        when(chain3jService.send(any(Request.class), eq(McSyncing.class)))
                 .thenReturn(ethSyncing);
     }
 
     private void configureLatestBlock(long timestamp) throws IOException {
-        EthBlock.Block block = new EthBlock.Block();
+        McBlock.Block block = new McBlock.Block();
         block.setTimestamp(Numeric.encodeQuantity(BigInteger.valueOf(timestamp)));
-        EthBlock ethBlock = new EthBlock();
+        McBlock ethBlock = new McBlock();
         ethBlock.setResult(block);
 
-        when(web3jService.send(any(Request.class), eq(EthBlock.class)))
+        when(chain3jService.send(any(Request.class), eq(McBlock.class)))
                 .thenReturn(ethBlock);
     }
 

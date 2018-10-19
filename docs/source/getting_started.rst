@@ -211,7 +211,7 @@ There are a number of other transaction and block replay Observables described i
 
 Topic filters are also supported::
 
-   EthFilter filter = new EthFilter(DefaultBlockParameterName.EARLIEST,
+   McFilter filter = new McFilter(DefaultBlockParameterName.EARLIEST,
            DefaultBlockParameterName.LATEST, <contract-address>)
                 .addSingleTopic(...)|.addOptionalTopics(..., ...)|...;
    web3j.ethLogObservable(filter).subscribe(log -> {

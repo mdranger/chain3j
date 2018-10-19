@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.chain3j.crypto.Hash;
 import org.chain3j.crypto.RawTransaction;
 import org.chain3j.crypto.TransactionEncoder;
-import org.chain3j.protocol.core.methods.response.EthSign;
+import org.chain3j.protocol.core.methods.response.McSign;
 import org.chain3j.utils.Convert;
 import org.chain3j.utils.Numeric;
 
@@ -30,10 +30,10 @@ public class SignTransactionIT extends Scenario {
         byte[] encoded = TransactionEncoder.encode(rawTransaction);
         byte[] hashed = Hash.sha3(encoded);
 
-        EthSign ethSign = chain3j.ethSign(ALICE.getAddress(), Numeric.toHexString(hashed))
+        McSign mcSign = chain3j.mcSign(ALICE.getAddress(), Numeric.toHexString(hashed))
                 .sendAsync().get();
 
-        String signature = ethSign.getSignature();
+        String signature = mcSign.getSignature();
         assertNotNull(signature);
         assertFalse(signature.isEmpty());
     }
@@ -41,7 +41,7 @@ public class SignTransactionIT extends Scenario {
     private static RawTransaction createTransaction() {
         BigInteger value = Convert.toWei("1", Convert.Unit.ETHER).toBigInteger();
 
-        return RawTransaction.createEtherTransaction(
+        return RawTransaction.createMcTransaction(
                 BigInteger.valueOf(1048587), BigInteger.valueOf(500000), BigInteger.valueOf(500000),
                 "0x9C98E381Edc5Fe1Ac514935F3Cc3eDAA764cf004",
                 value);

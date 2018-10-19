@@ -13,7 +13,7 @@ public class EnsIT {
     @Test
     public void testEns() throws Exception {
 
-        Chain3j chain3j = chain3j.build(new HttpService());
+        Chain3j chain3j = Chain3j.build(new HttpService());
         EnsResolver ensResolver = new EnsResolver(chain3j);
 
         assertThat(ensResolver.resolve("chain3j.test"),

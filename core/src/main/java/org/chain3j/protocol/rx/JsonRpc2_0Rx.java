@@ -39,7 +39,7 @@ public class JsonRpc2_0Rx {
         this.scheduler = Schedulers.from(scheduledExecutorService);
     }
 
-    public Observable<String> ethBlockHashObservable(long pollingInterval) {
+    public Observable<String> mcBlockHashObservable(long pollingInterval) {
         return Observable.create(subscriber -> {
             BlockFilter blockFilter = new BlockFilter(
                     chain3j, subscriber::onNext);
@@ -47,7 +47,7 @@ public class JsonRpc2_0Rx {
         });
     }
 
-    public Observable<String> ethPendingTransactionHashObservable(long pollingInterval) {
+    public Observable<String> mcPendingTransactionHashObservable(long pollingInterval) {
         return Observable.create(subscriber -> {
             PendingTransactionFilter pendingTransactionFilter = new PendingTransactionFilter(
                     chain3j, subscriber::onNext);
@@ -56,11 +56,11 @@ public class JsonRpc2_0Rx {
         });
     }
 
-    public Observable<Log> ethLogObservable(
-            org.chain3j.protocol.core.methods.request.McFilter ethFilter, long pollingInterval) {
+    public Observable<Log> mcLogObservable(
+            org.chain3j.protocol.core.methods.request.McFilter mcFilter, long pollingInterval) {
         return Observable.create((Subscriber<? super Log> subscriber) -> {
             LogFilter logFilter = new LogFilter(
-                    chain3j, subscriber::onNext, ethFilter);
+                    chain3j, subscriber::onNext, mcFilter);
 
             run(logFilter, subscriber, pollingInterval);
         });
@@ -80,16 +80,16 @@ public class JsonRpc2_0Rx {
     }
 
     public Observable<Transaction> pendingTransactionObservable(long pollingInterval) {
-        return ethPendingTransactionHashObservable(pollingInterval)
+        return mcPendingTransactionHashObservable(pollingInterval)
                 .flatMap(transactionHash ->
                         chain3j.mcGetTransactionByHash(transactionHash).observable())
-                .filter(ethTransaction -> ethTransaction.getTransaction().isPresent())
-                .map(ethTransaction -> ethTransaction.getTransaction().get());
+                .filter(mcTransaction -> mcTransaction.getTransaction().isPresent())
+                .map(mcTransaction -> mcTransaction.getTransaction().get());
     }
 
     public Observable<McBlock> blockObservable(
             boolean fullTransactionObjects, long pollingInterval) {
-        return ethBlockHashObservable(pollingInterval)
+        return mcBlockHashObservable(pollingInterval)
                 .flatMap(blockHash ->
                         chain3j.mcGetBlockByHash(blockHash, fullTransactionObjects).observable());
     }
@@ -229,10 +229,10 @@ public class JsonRpc2_0Rx {
         }
     }
 
-    private static List<Transaction> toTransactions(McBlock ethBlock) {
+    private static List<Transaction> toTransactions(McBlock mcBlock) {
         // If you ever see an exception thrown here, it's probably due to an incomplete chain in
         // Geth/Parity. You should resync to solve.
-        return ethBlock.getBlock().getTransactions().stream()
+        return mcBlock.getBlock().getTransactions().stream()
                 .map(transactionResult -> (Transaction) transactionResult.get())
                 .collect(Collectors.toList());
     }

@@ -17,10 +17,10 @@ import org.chain3j.abi.datatypes.Type;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.crypto.Credentials;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
-import org.chain3j.protocol.core.methods.request.EthFilter;
+import org.chain3j.protocol.core.methods.request.McFilter;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthEstimateGas;
-import org.chain3j.protocol.core.methods.response.EthLog;
+import org.chain3j.protocol.core.methods.response.McEstimateGas;
+import org.chain3j.protocol.core.methods.response.McLog;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 
@@ -77,14 +77,14 @@ public class EventFilterIT extends Scenario {
                 new Uint256(BigInteger.valueOf(7)), new Uint256(BigInteger.valueOf(13)))));
 
         // finally check it shows up in the event filter
-        List<EthLog.LogResult> filterLogs = createFilterForEvent(
+        List<McLog.LogResult> filterLogs = createFilterForEvent(
                 encodedEventSignature, CONTRACT_ADDRESS);
         assertFalse(filterLogs.isEmpty());
     }
 
     private BigInteger estimateGas(String encodedFunction) throws Exception {
-        EthEstimateGas ethEstimateGas = chain3j.ethEstimateGas(
-                Transaction.createEthCallTransaction(ALICE.getAddress(), null, encodedFunction))
+        McEstimateGas ethEstimateGas = chain3j.mcEstimateGas(
+                Transaction.createMcCallTransaction(ALICE.getAddress(), null, encodedFunction))
                 .sendAsync().get();
         // this was coming back as 50,000,000 which is > the block gas limit of 4,712,388
         // see eth.getBlock("latest")
@@ -99,25 +99,25 @@ public class EventFilterIT extends Scenario {
                 credentials.getAddress(), nonce, Transaction.DEFAULT_GAS, gas, contractAddress,
                 encodedFunction);
 
-        org.chain3j.protocol.core.methods.response.EthSendTransaction transactionResponse =
-                chain3j.ethSendTransaction(transaction).sendAsync().get();
+        org.chain3j.protocol.core.methods.response.McSendTransaction transactionResponse =
+                chain3j.mcSendTransaction(transaction).sendAsync().get();
 
         assertFalse(transactionResponse.hasError());
 
         return transactionResponse.getTransactionHash();
     }
 
-    private List<EthLog.LogResult> createFilterForEvent(
+    private List<McLog.LogResult> createFilterForEvent(
             String encodedEventSignature, String contractAddress) throws Exception {
-        EthFilter ethFilter = new EthFilter(
+        McFilter mcFilter = new McFilter(
                 DefaultBlockParameterName.EARLIEST,
                 DefaultBlockParameterName.LATEST,
                 contractAddress
         );
 
-        ethFilter.addSingleTopic(encodedEventSignature);
+        mcFilter.addSingleTopic(encodedEventSignature);
 
-        EthLog ethLog = chain3j.ethGetLogs(ethFilter).send();
+        McLog ethLog = chain3j.mcGetLogs(mcFilter).send();
         return ethLog.getLogs();
     }
 }

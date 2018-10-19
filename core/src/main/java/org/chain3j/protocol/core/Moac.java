@@ -41,18 +41,18 @@ import org.chain3j.protocol.core.methods.response.NetVersion;
 // import org.chain3j.protocol.core.methods.response.ShhNewIdentity;
 // import org.chain3j.protocol.core.methods.response.ShhUninstallFilter;
 // import org.chain3j.protocol.core.methods.response.ShhVersion;
-// import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
-// import org.chain3j.protocol.core.methods.response.Web3Sha3;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 
 /**
  * Core MOAC JSON-RPC API.
- * Remove some unused RPC APIs, db, shh, compiler
+ * Remove some unused RPC APIs, db, shh, compilers
  * TODO: vnode, scs APIs.
  */
 public interface Moac {
-//     Request<?, Web3ClientVersion> web3ClientVersion();
+    Request<?, Chain3ClientVersion> chain3ClientVersion();
 
-//     Request<?, Web3Sha3> web3Sha3(String data);
+    Request<?, Chain3Sha3> chain3Sha3(String data);
 
     Request<?, NetVersion> netVersion();
 

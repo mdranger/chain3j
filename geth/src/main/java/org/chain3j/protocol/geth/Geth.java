@@ -2,7 +2,7 @@ package org.chain3j.protocol.geth;
 
 import rx.Observable;
 
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 import org.chain3j.protocol.admin.Admin;
 import org.chain3j.protocol.admin.methods.response.BooleanResponse;
 import org.chain3j.protocol.admin.methods.response.PersonalSign;
@@ -17,8 +17,8 @@ import org.chain3j.protocol.websocket.events.SyncingNotfication;
  * JSON-RPC Request object building factory for Geth. 
  */
 public interface Geth extends Admin {
-    static Geth build(Web3jService web3jService) {
-        return new JsonRpc2_0Geth(web3jService);
+    static Geth build(Chain3jService chain3jService) {
+        return new JsonRpc2_0Geth(chain3jService);
     }
         
     Request<?, PersonalImportRawKey> personalImportRawKey(String keydata, String password);

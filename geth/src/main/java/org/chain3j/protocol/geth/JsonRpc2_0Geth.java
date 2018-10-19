@@ -5,12 +5,12 @@ import java.util.Collections;
 
 import rx.Observable;
 
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 import org.chain3j.protocol.admin.JsonRpc2_0Admin;
 import org.chain3j.protocol.admin.methods.response.BooleanResponse;
 import org.chain3j.protocol.admin.methods.response.PersonalSign;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthSubscribe;
+import org.chain3j.protocol.core.methods.response.McSubscribe;
 import org.chain3j.protocol.core.methods.response.MinerStartResponse;
 import org.chain3j.protocol.geth.response.PersonalEcRecover;
 import org.chain3j.protocol.geth.response.PersonalImportRawKey;
@@ -22,8 +22,8 @@ import org.chain3j.protocol.websocket.events.SyncingNotfication;
  */
 public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
 
-    public JsonRpc2_0Geth(Web3jService web3jService) {
-        super(web3jService);
+    public JsonRpc2_0Geth(Chain3jService chain3jService) {
+        super(chain3jService);
     }
     
     @Override
@@ -32,7 +32,7 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
         return new Request<>(
                 "personal_importRawKey",
                 Arrays.asList(keydata, password),
-                web3jService,
+                chain3jService,
                 PersonalImportRawKey.class);
     }
 
@@ -41,7 +41,7 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
         return new Request<>(
                 "personal_lockAccount",
                 Arrays.asList(accountId),
-                web3jService,
+                chain3jService,
                 BooleanResponse.class);
     }
 
@@ -51,7 +51,7 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
         return new Request<>(
                 "personal_sign",
                 Arrays.asList(message,accountId,password),
-                web3jService,
+                chain3jService,
                 PersonalSign.class);
     }
 
@@ -61,7 +61,7 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
         return new Request<>(
                 "personal_ecRecover",
                 Arrays.asList(hexMessage,signedMessage),
-                web3jService,
+                chain3jService,
                 PersonalEcRecover.class);
     }
 
@@ -70,7 +70,7 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
         return new Request<>(
                 "miner_start",
                 Arrays.asList(threadCount),
-                web3jService,
+                chain3jService,
                 MinerStartResponse.class);
     }
 
@@ -79,31 +79,31 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
         return new Request<>(
                 "miner_stop",
                 Collections.<String>emptyList(),
-                web3jService,
+                chain3jService,
                 BooleanResponse.class);
     }
 
     public Observable<PendingTransactionNotification> newPendingTransactionsNotifications() {
-        return web3jService.subscribe(
+        return chain3jService.subscribe(
                 new Request<>(
-                        "eth_subscribe",
+                        "mc_subscribe",
                         Arrays.asList("newPendingTransactions"),
-                        web3jService,
-                        EthSubscribe.class),
-                "eth_unsubscribe",
+                        chain3jService,
+                        McSubscribe.class),
+                "mc_unsubscribe",
                 PendingTransactionNotification.class
         );
     }
 
     @Override
     public Observable<SyncingNotfication> syncingStatusNotifications() {
-        return web3jService.subscribe(
+        return chain3jService.subscribe(
                 new Request<>(
-                        "eth_subscribe",
+                        "mc_subscribe",
                         Arrays.asList("syncing"),
-                        web3jService,
-                        EthSubscribe.class),
-                "eth_unsubscribe",
+                        chain3jService,
+                        McSubscribe.class),
+                "mc_unsubscribe",
                 SyncingNotfication.class
         );
     }

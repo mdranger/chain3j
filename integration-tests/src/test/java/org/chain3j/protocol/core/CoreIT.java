@@ -8,35 +8,35 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import org.chain3j.protocol.Chain3j;
-import org.chain3j.protocol.core.methods.response.EthAccounts;
-import org.chain3j.protocol.core.methods.response.EthBlock;
-import org.chain3j.protocol.core.methods.response.EthBlockNumber;
-import org.chain3j.protocol.core.methods.response.EthCall;
-import org.chain3j.protocol.core.methods.response.EthCoinbase;
-import org.chain3j.protocol.core.methods.response.EthCompileLLL;
-import org.chain3j.protocol.core.methods.response.EthCompileSerpent;
-import org.chain3j.protocol.core.methods.response.EthCompileSolidity;
-import org.chain3j.protocol.core.methods.response.EthEstimateGas;
-import org.chain3j.protocol.core.methods.response.EthFilter;
-import org.chain3j.protocol.core.methods.response.EthGasPrice;
-import org.chain3j.protocol.core.methods.response.EthGetBalance;
-import org.chain3j.protocol.core.methods.response.EthGetBlockTransactionCountByHash;
-import org.chain3j.protocol.core.methods.response.EthGetBlockTransactionCountByNumber;
-import org.chain3j.protocol.core.methods.response.EthGetCode;
-import org.chain3j.protocol.core.methods.response.EthGetCompilers;
-import org.chain3j.protocol.core.methods.response.EthGetStorageAt;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
-import org.chain3j.protocol.core.methods.response.EthGetUncleCountByBlockHash;
-import org.chain3j.protocol.core.methods.response.EthGetUncleCountByBlockNumber;
-import org.chain3j.protocol.core.methods.response.EthHashrate;
-import org.chain3j.protocol.core.methods.response.EthLog;
-import org.chain3j.protocol.core.methods.response.EthMining;
-import org.chain3j.protocol.core.methods.response.EthProtocolVersion;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
-import org.chain3j.protocol.core.methods.response.EthSyncing;
-import org.chain3j.protocol.core.methods.response.EthTransaction;
-import org.chain3j.protocol.core.methods.response.EthUninstallFilter;
+import org.chain3j.protocol.core.methods.response.McAccounts;
+import org.chain3j.protocol.core.methods.response.McBlock;
+import org.chain3j.protocol.core.methods.response.McBlockNumber;
+import org.chain3j.protocol.core.methods.response.McCall;
+import org.chain3j.protocol.core.methods.response.McCoinbase;
+import org.chain3j.protocol.core.methods.response.McCompileLLL;
+import org.chain3j.protocol.core.methods.response.McCompileSerpent;
+import org.chain3j.protocol.core.methods.response.McCompileSolidity;
+import org.chain3j.protocol.core.methods.response.McEstimateGas;
+import org.chain3j.protocol.core.methods.response.McFilter;
+import org.chain3j.protocol.core.methods.response.McGasPrice;
+import org.chain3j.protocol.core.methods.response.McGetBalance;
+import org.chain3j.protocol.core.methods.response.McGetBlockTransactionCountByHash;
+import org.chain3j.protocol.core.methods.response.McGetBlockTransactionCountByNumber;
+import org.chain3j.protocol.core.methods.response.McGetCode;
+import org.chain3j.protocol.core.methods.response.McGetCompilers;
+import org.chain3j.protocol.core.methods.response.McGetStorageAt;
+import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.McGetTransactionReceipt;
+import org.chain3j.protocol.core.methods.response.McGetUncleCountByBlockHash;
+import org.chain3j.protocol.core.methods.response.McGetUncleCountByBlockNumber;
+import org.chain3j.protocol.core.methods.response.McHashrate;
+import org.chain3j.protocol.core.methods.response.McLog;
+import org.chain3j.protocol.core.methods.response.McMining;
+import org.chain3j.protocol.core.methods.response.McProtocolVersion;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
+import org.chain3j.protocol.core.methods.response.McSyncing;
+import org.chain3j.protocol.core.methods.response.McTransaction;
+import org.chain3j.protocol.core.methods.response.McUninstallFilter;
 import org.chain3j.protocol.core.methods.response.NetListening;
 import org.chain3j.protocol.core.methods.response.NetPeerCount;
 import org.chain3j.protocol.core.methods.response.NetVersion;
@@ -45,8 +45,8 @@ import org.chain3j.protocol.core.methods.response.ShhNewIdentity;
 import org.chain3j.protocol.core.methods.response.ShhVersion;
 import org.chain3j.protocol.core.methods.response.Transaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
-import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
-import org.chain3j.protocol.core.methods.response.Web3Sha3;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 import org.chain3j.protocol.http.HttpService;
 
 import static junit.framework.TestCase.assertFalse;
@@ -69,20 +69,20 @@ public class CoreIT {
 
     @Before
     public void setUp() {
-        this.chain3j = chain3j.build(new HttpService());
+        this.chain3j = Chain3j.build(new HttpService());
     }
 
     @Test
     public void testWeb3ClientVersion() throws Exception {
-        Web3ClientVersion web3ClientVersion = chain3j.web3ClientVersion().send();
-        String clientVersion = web3ClientVersion.getWeb3ClientVersion();
-        System.out.println("Ethereum client version: " + clientVersion);
+        Chain3ClientVersion chain3ClientVersion = chain3j.chain3ClientVersion().send();
+        String clientVersion = chain3ClientVersion.getChain3ClientVersion();
+        System.out.println("Mcereum client version: " + clientVersion);
         assertFalse(clientVersion.isEmpty());
     }
 
     @Test
-    public void testWeb3Sha3() throws Exception {
-        Web3Sha3 web3Sha3 = chain3j.web3Sha3("0x68656c6c6f20776f726c64").send();
+    public void testChain3Sha3() throws Exception {
+        Chain3Sha3 web3Sha3 = chain3j.chain3Sha3("0x68656c6c6f20776f726c64").send();
         assertThat(web3Sha3.getResult(),
                 is("0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad"));
     }
@@ -106,446 +106,446 @@ public class CoreIT {
     }
 
     @Test
-    public void testEthProtocolVersion() throws Exception {
-        EthProtocolVersion ethProtocolVersion = chain3j.ethProtocolVersion().send();
-        assertFalse(ethProtocolVersion.getProtocolVersion().isEmpty());
+    public void testMcProtocolVersion() throws Exception {
+        McProtocolVersion mcProtocolVersion = chain3j.mcProtocolVersion().send();
+        assertFalse(mcProtocolVersion.getProtocolVersion().isEmpty());
     }
 
     @Test
-    public void testEthSyncing() throws Exception {
-        EthSyncing ethSyncing = chain3j.ethSyncing().send();
-        assertNotNull(ethSyncing.getResult());
+    public void testMcSyncing() throws Exception {
+        McSyncing mcSyncing = chain3j.mcSyncing().send();
+        assertNotNull(mcSyncing.getResult());
     }
 
     @Test
-    public void testEthCoinbase() throws Exception {
-        EthCoinbase ethCoinbase = chain3j.ethCoinbase().send();
-        assertNotNull(ethCoinbase.getAddress());
+    public void testMcCoinbase() throws Exception {
+        McCoinbase mcCoinbase = chain3j.mcCoinbase().send();
+        assertNotNull(mcCoinbase.getAddress());
     }
 
     @Test
-    public void testEthMining() throws Exception {
-        EthMining ethMining = chain3j.ethMining().send();
-        assertNotNull(ethMining.getResult());
+    public void testMcMining() throws Exception {
+        McMining mcMining = chain3j.mcMining().send();
+        assertNotNull(mcMining.getResult());
     }
 
     @Test
-    public void testEthHashrate() throws Exception {
-        EthHashrate ethHashrate = chain3j.ethHashrate().send();
-        assertThat(ethHashrate.getHashrate(), is(BigInteger.ZERO));
+    public void testMcHashrate() throws Exception {
+        McHashrate mcHashrate = chain3j.mcHashrate().send();
+        assertThat(mcHashrate.getHashrate(), is(BigInteger.ZERO));
     }
 
     @Test
-    public void testEthGasPrice() throws Exception {
-        EthGasPrice ethGasPrice = chain3j.ethGasPrice().send();
-        assertTrue(ethGasPrice.getGasPrice().signum() == 1);
+    public void testMcGasPrice() throws Exception {
+        McGasPrice mcGasPrice = chain3j.mcGasPrice().send();
+        assertTrue(mcGasPrice.getGasPrice().signum() == 1);
     }
 
     @Test
-    public void testEthAccounts() throws Exception {
-        EthAccounts ethAccounts = chain3j.ethAccounts().send();
-        assertNotNull(ethAccounts.getAccounts());
+    public void testMcAccounts() throws Exception {
+        McAccounts mcAccounts = chain3j.mcAccounts().send();
+        assertNotNull(mcAccounts.getAccounts());
     }
 
     @Test
-    public void testEthBlockNumber() throws Exception {
-        EthBlockNumber ethBlockNumber = chain3j.ethBlockNumber().send();
-        assertTrue(ethBlockNumber.getBlockNumber().signum() == 1);
+    public void testMcBlockNumber() throws Exception {
+        McBlockNumber mcBlockNumber = chain3j.mcBlockNumber().send();
+        assertTrue(mcBlockNumber.getBlockNumber().signum() == 1);
     }
 
     @Test
-    public void testEthGetBalance() throws Exception {
-        EthGetBalance ethGetBalance = chain3j.ethGetBalance(
+    public void testMcGetBalance() throws Exception {
+        McGetBalance mcGetBalance = chain3j.mcGetBalance(
                 config.validAccount(), DefaultBlockParameter.valueOf("latest")).send();
-        assertTrue(ethGetBalance.getBalance().signum() == 1);
+        assertTrue(mcGetBalance.getBalance().signum() == 1);
     }
 
     @Test
-    public void testEthGetStorageAt() throws Exception {
-        EthGetStorageAt ethGetStorageAt = chain3j.ethGetStorageAt(
+    public void testMcGetStorageAt() throws Exception {
+        McGetStorageAt mcGetStorageAt = chain3j.mcGetStorageAt(
                 config.validContractAddress(),
                 BigInteger.valueOf(0),
                 DefaultBlockParameter.valueOf("latest")).send();
-        assertThat(ethGetStorageAt.getData(), is(config.validContractAddressPositionZero()));
+        assertThat(mcGetStorageAt.getData(), is(config.validContractAddressPositionZero()));
     }
 
     @Test
-    public void testEthGetTransactionCount() throws Exception {
-        EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
+    public void testMcGetTransactionCount() throws Exception {
+        McGetTransactionCount mcGetTransactionCount = chain3j.mcGetTransactionCount(
                 config.validAccount(),
                 DefaultBlockParameter.valueOf("latest")).send();
-        assertTrue(ethGetTransactionCount.getTransactionCount().signum() == 1);
+        assertTrue(mcGetTransactionCount.getTransactionCount().signum() == 1);
     }
 
     @Test
-    public void testEthGetBlockTransactionCountByHash() throws Exception {
-        EthGetBlockTransactionCountByHash ethGetBlockTransactionCountByHash =
-                chain3j.ethGetBlockTransactionCountByHash(
+    public void testMcGetBlockTransactionCountByHash() throws Exception {
+        McGetBlockTransactionCountByHash mcGetBlockTransactionCountByHash =
+                chain3j.mcGetBlockTransactionCountByHash(
                         config.validBlockHash()).send();
-        assertThat(ethGetBlockTransactionCountByHash.getTransactionCount(),
+        assertThat(mcGetBlockTransactionCountByHash.getTransactionCount(),
                 equalTo(config.validBlockTransactionCount()));
     }
 
     @Test
-    public void testEthGetBlockTransactionCountByNumber() throws Exception {
-        EthGetBlockTransactionCountByNumber ethGetBlockTransactionCountByNumber =
-                chain3j.ethGetBlockTransactionCountByNumber(
+    public void testMcGetBlockTransactionCountByNumber() throws Exception {
+        McGetBlockTransactionCountByNumber mcGetBlockTransactionCountByNumber =
+                chain3j.mcGetBlockTransactionCountByNumber(
                         DefaultBlockParameter.valueOf(config.validBlock())).send();
-        assertThat(ethGetBlockTransactionCountByNumber.getTransactionCount(),
+        assertThat(mcGetBlockTransactionCountByNumber.getTransactionCount(),
                 equalTo(config.validBlockTransactionCount()));
     }
 
     @Test
-    public void testEthGetUncleCountByBlockHash() throws Exception {
-        EthGetUncleCountByBlockHash ethGetUncleCountByBlockHash =
-                chain3j.ethGetUncleCountByBlockHash(config.validBlockHash()).send();
-        assertThat(ethGetUncleCountByBlockHash.getUncleCount(),
+    public void testMcGetUncleCountByBlockHash() throws Exception {
+        McGetUncleCountByBlockHash mcGetUncleCountByBlockHash =
+                chain3j.mcGetUncleCountByBlockHash(config.validBlockHash()).send();
+        assertThat(mcGetUncleCountByBlockHash.getUncleCount(),
                 equalTo(config.validBlockUncleCount()));
     }
 
     @Test
-    public void testEthGetUncleCountByBlockNumber() throws Exception {
-        EthGetUncleCountByBlockNumber ethGetUncleCountByBlockNumber =
-                chain3j.ethGetUncleCountByBlockNumber(
+    public void testMcGetUncleCountByBlockNumber() throws Exception {
+        McGetUncleCountByBlockNumber mcGetUncleCountByBlockNumber =
+                chain3j.mcGetUncleCountByBlockNumber(
                         DefaultBlockParameter.valueOf("latest")).send();
-        assertThat(ethGetUncleCountByBlockNumber.getUncleCount(),
+        assertThat(mcGetUncleCountByBlockNumber.getUncleCount(),
                 equalTo(config.validBlockUncleCount()));
     }
 
     @Test
-    public void testEthGetCode() throws Exception {
-        EthGetCode ethGetCode = chain3j.ethGetCode(config.validContractAddress(),
+    public void testMcGetCode() throws Exception {
+        McGetCode mcGetCode = chain3j.mcGetCode(config.validContractAddress(),
                 DefaultBlockParameter.valueOf(config.validBlock())).send();
-        assertThat(ethGetCode.getCode(), is(config.validContractCode()));
+        assertThat(mcGetCode.getCode(), is(config.validContractCode()));
     }
 
     @Ignore  // TODO: Once account unlock functionality is available
     @Test
-    public void testEthSign() throws Exception {
-        // EthSign ethSign = chain3j.ethSign();
+    public void testMcSign() throws Exception {
+        // McSign mcSign = chain3j.mcSign();
     }
 
     @Ignore  // TODO: Once account unlock functionality is available
     @Test
-    public void testEthSendTransaction() throws Exception {
-        EthSendTransaction ethSendTransaction = chain3j.ethSendTransaction(
+    public void testMcSendTransaction() throws Exception {
+        McSendTransaction mcSendTransaction = chain3j.mcSendTransaction(
                 config.buildTransaction()).send();
-        assertFalse(ethSendTransaction.getTransactionHash().isEmpty());
+        assertFalse(mcSendTransaction.getTransactionHash().isEmpty());
     }
 
     @Ignore  // TODO: Once account unlock functionality is available
     @Test
-    public void testEthSendRawTransaction() throws Exception {
+    public void testMcSendRawTransaction() throws Exception {
 
     }
 
     @Test
-    public void testEthCall() throws Exception {
-        EthCall ethCall = chain3j.ethCall(config.buildTransaction(),
+    public void testMcCall() throws Exception {
+        McCall mcCall = chain3j.mcCall(config.buildTransaction(),
                 DefaultBlockParameter.valueOf("latest")).send();
 
         assertThat(DefaultBlockParameterName.LATEST.getValue(), is("latest"));
-        assertThat(ethCall.getValue(), is("0x"));
+        assertThat(mcCall.getValue(), is("0x"));
     }
 
     @Test
-    public void testEthEstimateGas() throws Exception {
-        EthEstimateGas ethEstimateGas = chain3j.ethEstimateGas(config.buildTransaction())
+    public void testMcEstimateGas() throws Exception {
+        McEstimateGas mcEstimateGas = chain3j.mcEstimateGas(config.buildTransaction())
                 .send();
-        assertTrue(ethEstimateGas.getAmountUsed().signum() == 1);
+        assertTrue(mcEstimateGas.getAmountUsed().signum() == 1);
     }
 
     @Test
-    public void testEthGetBlockByHashReturnHashObjects() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetBlockByHash(config.validBlockHash(), false)
+    public void testMcGetBlockByHashReturnHashObjects() throws Exception {
+        McBlock mcBlock = chain3j.mcGetBlockByHash(config.validBlockHash(), false)
                 .send();
 
-        EthBlock.Block block = ethBlock.getBlock();
-        assertNotNull(ethBlock.getBlock());
+        McBlock.Block block = mcBlock.getBlock();
+        assertNotNull(mcBlock.getBlock());
         assertThat(block.getNumber(), equalTo(config.validBlock()));
         assertThat(block.getTransactions().size(),
                 is(config.validBlockTransactionCount().intValue()));
     }
 
     @Test
-    public void testEthGetBlockByHashReturnFullTransactionObjects() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetBlockByHash(config.validBlockHash(), true)
+    public void testMcGetBlockByHashReturnFullTransactionObjects() throws Exception {
+        McBlock mcBlock = chain3j.mcGetBlockByHash(config.validBlockHash(), true)
                 .send();
 
-        EthBlock.Block block = ethBlock.getBlock();
-        assertNotNull(ethBlock.getBlock());
+        McBlock.Block block = mcBlock.getBlock();
+        assertNotNull(mcBlock.getBlock());
         assertThat(block.getNumber(), equalTo(config.validBlock()));
         assertThat(block.getTransactions().size(),
                 equalTo(config.validBlockTransactionCount().intValue()));
     }
 
     @Test
-    public void testEthGetBlockByNumberReturnHashObjects() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetBlockByNumber(
+    public void testMcGetBlockByNumberReturnHashObjects() throws Exception {
+        McBlock mcBlock = chain3j.mcGetBlockByNumber(
                 DefaultBlockParameter.valueOf(config.validBlock()), false).send();
 
-        EthBlock.Block block = ethBlock.getBlock();
-        assertNotNull(ethBlock.getBlock());
+        McBlock.Block block = mcBlock.getBlock();
+        assertNotNull(mcBlock.getBlock());
         assertThat(block.getNumber(), equalTo(config.validBlock()));
         assertThat(block.getTransactions().size(),
                 equalTo(config.validBlockTransactionCount().intValue()));
     }
 
     @Test
-    public void testEthGetBlockByNumberReturnTransactionObjects() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetBlockByNumber(
+    public void testMcGetBlockByNumberReturnTransactionObjects() throws Exception {
+        McBlock mcBlock = chain3j.mcGetBlockByNumber(
                 DefaultBlockParameter.valueOf(config.validBlock()), true).send();
 
-        EthBlock.Block block = ethBlock.getBlock();
-        assertNotNull(ethBlock.getBlock());
+        McBlock.Block block = mcBlock.getBlock();
+        assertNotNull(mcBlock.getBlock());
         assertThat(block.getNumber(), equalTo(config.validBlock()));
         assertThat(block.getTransactions().size(),
                 equalTo(config.validBlockTransactionCount().intValue()));
     }
 
     @Test
-    public void testEthGetTransactionByHash() throws Exception {
-        EthTransaction ethTransaction = chain3j.ethGetTransactionByHash(
+    public void testMcGetTransactionByHash() throws Exception {
+        McTransaction mcTransaction = chain3j.mcGetTransactionByHash(
                 config.validTransactionHash()).send();
-        assertTrue(ethTransaction.getTransaction().isPresent());
-        Transaction transaction = ethTransaction.getTransaction().get();
+        assertTrue(mcTransaction.getTransaction().isPresent());
+        Transaction transaction = mcTransaction.getTransaction().get();
         assertThat(transaction.getBlockHash(), is(config.validBlockHash()));
     }
 
     @Test
-    public void testEthGetTransactionByBlockHashAndIndex() throws Exception {
+    public void testMcGetTransactionByBlockHashAndIndex() throws Exception {
         BigInteger index = BigInteger.ONE;
 
-        EthTransaction ethTransaction = chain3j.ethGetTransactionByBlockHashAndIndex(
+        McTransaction mcTransaction = chain3j.mcGetTransactionByBlockHashAndIndex(
                 config.validBlockHash(), index).send();
-        assertTrue(ethTransaction.getTransaction().isPresent());
-        Transaction transaction = ethTransaction.getTransaction().get();
+        assertTrue(mcTransaction.getTransaction().isPresent());
+        Transaction transaction = mcTransaction.getTransaction().get();
         assertThat(transaction.getBlockHash(), is(config.validBlockHash()));
         assertThat(transaction.getTransactionIndex(), equalTo(index));
     }
 
     @Test
-    public void testEthGetTransactionByBlockNumberAndIndex() throws Exception {
+    public void testMcGetTransactionByBlockNumberAndIndex() throws Exception {
         BigInteger index = BigInteger.ONE;
 
-        EthTransaction ethTransaction = chain3j.ethGetTransactionByBlockNumberAndIndex(
+        McTransaction mcTransaction = chain3j.mcGetTransactionByBlockNumberAndIndex(
                 DefaultBlockParameter.valueOf(config.validBlock()), index).send();
-        assertTrue(ethTransaction.getTransaction().isPresent());
-        Transaction transaction = ethTransaction.getTransaction().get();
+        assertTrue(mcTransaction.getTransaction().isPresent());
+        Transaction transaction = mcTransaction.getTransaction().get();
         assertThat(transaction.getBlockHash(), is(config.validBlockHash()));
         assertThat(transaction.getTransactionIndex(), equalTo(index));
     }
 
     @Test
-    public void testEthGetTransactionReceipt() throws Exception {
-        EthGetTransactionReceipt ethGetTransactionReceipt = chain3j.ethGetTransactionReceipt(
+    public void testMcGetTransactionReceipt() throws Exception {
+        McGetTransactionReceipt mcGetTransactionReceipt = chain3j.mcGetTransactionReceipt(
                 config.validTransactionHash()).send();
-        assertTrue(ethGetTransactionReceipt.getTransactionReceipt().isPresent());
+        assertTrue(mcGetTransactionReceipt.getTransactionReceipt().isPresent());
         TransactionReceipt transactionReceipt =
-                ethGetTransactionReceipt.getTransactionReceipt().get();
+                mcGetTransactionReceipt.getTransactionReceipt().get();
         assertThat(transactionReceipt.getTransactionHash(), is(config.validTransactionHash()));
     }
 
     @Test
-    public void testEthGetUncleByBlockHashAndIndex() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetUncleByBlockHashAndIndex(
+    public void testMcGetUncleByBlockHashAndIndex() throws Exception {
+        McBlock mcBlock = chain3j.mcGetUncleByBlockHashAndIndex(
                 config.validUncleBlockHash(), BigInteger.ZERO).send();
-        assertNotNull(ethBlock.getBlock());
+        assertNotNull(mcBlock.getBlock());
     }
 
     @Test
-    public void testEthGetUncleByBlockNumberAndIndex() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetUncleByBlockNumberAndIndex(
+    public void testMcGetUncleByBlockNumberAndIndex() throws Exception {
+        McBlock mcBlock = chain3j.mcGetUncleByBlockNumberAndIndex(
                 DefaultBlockParameter.valueOf(config.validUncleBlock()), BigInteger.ZERO)
                 .send();
-        assertNotNull(ethBlock.getBlock());
+        assertNotNull(mcBlock.getBlock());
     }
 
     @Test
-    public void testEthGetCompilers() throws Exception {
-        EthGetCompilers ethGetCompilers = chain3j.ethGetCompilers().send();
-        assertNotNull(ethGetCompilers.getCompilers());
+    public void testMcGetCompilers() throws Exception {
+        McGetCompilers mcGetCompilers = chain3j.mcGetCompilers().send();
+        assertNotNull(mcGetCompilers.getCompilers());
     }
 
-    @Ignore  // The method eth_compileLLL does not exist/is not available
-    @Test
-    public void testEthCompileLLL() throws Exception {
-        EthCompileLLL ethCompileLLL = chain3j.ethCompileLLL(
-                "(returnlll (suicide (caller)))").send();
-        assertFalse(ethCompileLLL.getCompiledSourceCode().isEmpty());
-    }
+    // @Ignore  // The mmcod mc_compileLLL does not exist/is not available
+    // @Test
+    // public void testMcCompileLLL() throws Exception {
+    //     McCompileLLL mcCompileLLL = chain3j.mcCompileLLL(
+    //             "(returnlll (suicide (caller)))").send();
+    //     assertFalse(mcCompileLLL.getCompiledSourceCode().isEmpty());
+    // }
 
-    @Test
-    public void testEthCompileSolidity() throws Exception {
-        String sourceCode = "pragma solidity ^0.4.0;"
-                + "\ncontract test { function multiply(uint a) returns(uint d) {"
-                + "   return a * 7;   } }"
-                + "\ncontract test2 { function multiply2(uint a) returns(uint d) {"
-                + "   return a * 7;   } }";
-        EthCompileSolidity ethCompileSolidity = chain3j.ethCompileSolidity(sourceCode)
-                .send();
-        assertNotNull(ethCompileSolidity.getCompiledSolidity());
-        assertThat(
-                ethCompileSolidity.getCompiledSolidity().get("test2").getInfo().getSource(),
-                is(sourceCode));
-    }
+    // @Test
+    // public void testMcCompileSolidity() throws Exception {
+    //     String sourceCode = "pragma solidity ^0.4.0;"
+    //             + "\ncontract test { function multiply(uint a) returns(uint d) {"
+    //             + "   return a * 7;   } }"
+    //             + "\ncontract test2 { function multiply2(uint a) returns(uint d) {"
+    //             + "   return a * 7;   } }";
+    //     McCompileSolidity mcCompileSolidity = chain3j.mcCompileSolidity(sourceCode)
+    //             .send();
+    //     assertNotNull(mcCompileSolidity.getCompiledSolidity());
+    //     assertThat(
+    //             mcCompileSolidity.getCompiledSolidity().get("test2").getInfo().getSource(),
+    //             is(sourceCode));
+    // }
 
-    @Ignore  // The method eth_compileSerpent does not exist/is not available
-    @Test
-    public void testEthCompileSerpent() throws Exception {
-        EthCompileSerpent ethCompileSerpent = chain3j.ethCompileSerpent(
-                "/* some serpent */").send();
-        assertFalse(ethCompileSerpent.getCompiledSourceCode().isEmpty());
-    }
+    // @Ignore  // The mmcod mc_compileSerpent does not exist/is not available
+    // @Test
+    // public void testMcCompileSerpent() throws Exception {
+    //     McCompileSerpent mcCompileSerpent = chain3j.mcCompileSerpent(
+    //             "/* some serpent */").send();
+    //     assertFalse(mcCompileSerpent.getCompiledSourceCode().isEmpty());
+    // }
 
     @Test
     public void testFiltersByFilterId() throws Exception {
-        org.chain3j.protocol.core.methods.request.EthFilter ethFilter =
-                new org.chain3j.protocol.core.methods.request.EthFilter(
+        org.chain3j.protocol.core.methods.request.McFilter mcFilter =
+                new org.chain3j.protocol.core.methods.request.McFilter(
                 DefaultBlockParameterName.EARLIEST,
                 DefaultBlockParameterName.LATEST,
                 config.validContractAddress());
 
         String eventSignature = config.encodedEvent();
-        ethFilter.addSingleTopic(eventSignature);
+        mcFilter.addSingleTopic(eventSignature);
 
-        // eth_newFilter
-        EthFilter ethNewFilter = chain3j.ethNewFilter(ethFilter).send();
-        BigInteger filterId = ethNewFilter.getFilterId();
+        // mc_newFilter
+        McFilter mcNewFilter = chain3j.mcNewFilter(mcFilter).send();
+        BigInteger filterId = mcNewFilter.getFilterId();
 
-        // eth_getFilterLogs
-        EthLog ethFilterLogs = chain3j.ethGetFilterLogs(filterId).send();
-        List<EthLog.LogResult> filterLogs = ethFilterLogs.getLogs();
+        // mc_getFilterLogs
+        McLog mcFilterLogs = chain3j.mcGetFilterLogs(filterId).send();
+        List<McLog.LogResult> filterLogs = mcFilterLogs.getLogs();
         assertFalse(filterLogs.isEmpty());
 
-        // eth_getFilterChanges - nothing will have changed in this interval
-        EthLog ethLog = chain3j.ethGetFilterChanges(filterId).send();
-        assertTrue(ethLog.getLogs().isEmpty());
+        // mc_getFilterChanges - nothing will have changed in this interval
+        McLog mcLog = chain3j.mcGetFilterChanges(filterId).send();
+        assertTrue(mcLog.getLogs().isEmpty());
 
-        // eth_uninstallFilter
-        EthUninstallFilter ethUninstallFilter = chain3j.ethUninstallFilter(filterId).send();
-        assertTrue(ethUninstallFilter.isUninstalled());
+        // mc_uninstallFilter
+        McUninstallFilter mcUninstallFilter = chain3j.mcUninstallFilter(filterId).send();
+        assertTrue(mcUninstallFilter.isUninstalled());
     }
 
     @Test
-    public void testEthNewBlockFilter() throws Exception {
-        EthFilter ethNewBlockFilter = chain3j.ethNewBlockFilter().send();
-        assertNotNull(ethNewBlockFilter.getFilterId());
+    public void testMcNewBlockFilter() throws Exception {
+        McFilter mcNewBlockFilter = chain3j.mcNewBlockFilter().send();
+        assertNotNull(mcNewBlockFilter.getFilterId());
     }
 
     @Test
-    public void testEthNewPendingTransactionFilter() throws Exception {
-        EthFilter ethNewPendingTransactionFilter =
-                chain3j.ethNewPendingTransactionFilter().send();
-        assertNotNull(ethNewPendingTransactionFilter.getFilterId());
+    public void testMcNewPendingTransactionFilter() throws Exception {
+        McFilter mcNewPendingTransactionFilter =
+                chain3j.mcNewPendingTransactionFilter().send();
+        assertNotNull(mcNewPendingTransactionFilter.getFilterId());
     }
 
     @Test
-    public void testEthGetLogs() throws Exception {
-        org.chain3j.protocol.core.methods.request.EthFilter ethFilter =
-                new org.chain3j.protocol.core.methods.request.EthFilter(
+    public void testMcGetLogs() throws Exception {
+        org.chain3j.protocol.core.methods.request.McFilter mcFilter =
+                new org.chain3j.protocol.core.methods.request.McFilter(
                 DefaultBlockParameterName.EARLIEST,
                 DefaultBlockParameterName.LATEST,
                 config.validContractAddress()
         );
 
-        ethFilter.addSingleTopic(config.encodedEvent());
+        mcFilter.addSingleTopic(config.encodedEvent());
 
-        EthLog ethLog = chain3j.ethGetLogs(ethFilter).send();
-        List<EthLog.LogResult> logs = ethLog.getLogs();
+        McLog mcLog = chain3j.mcGetLogs(mcFilter).send();
+        List<McLog.LogResult> logs = mcLog.getLogs();
         assertFalse(logs.isEmpty());
     }
 
     // @Test
-    // public void testEthGetWork() throws Exception {
-    //     EthGetWork ethGetWork = requestFactory.ethGetWork();
-    //     assertNotNull(ethGetWork.getResult());
+    // public void testMcGetWork() throws Exception {
+    //     McGetWork mcGetWork = requestFactory.mcGetWork();
+    //     assertNotNull(mcGetWork.getResult());
     // }
 
     @Test
-    public void testEthSubmitWork() throws Exception {
+    public void testMcSubmitWork() throws Exception {
 
     }
 
     @Test
-    public void testEthSubmitHashrate() throws Exception {
+    public void testMcSubmitHashrate() throws Exception {
     
     }
 
-    @Test
-    public void testDbPutString() throws Exception {
+    // @Test
+    // public void testDbPutString() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testDbGetString() throws Exception {
+    // @Test
+    // public void testDbGetString() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testDbPutHex() throws Exception {
+    // @Test
+    // public void testDbPutHex() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testDbGetHex() throws Exception {
+    // @Test
+    // public void testDbGetHex() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testShhPost() throws Exception {
+    // @Test
+    // public void testShhPost() throws Exception {
     
-    }
+    // }
 
-    @Ignore // The method shh_version does not exist/is not available
-    @Test
-    public void testShhVersion() throws Exception {
-        ShhVersion shhVersion = chain3j.shhVersion().send();
-        assertNotNull(shhVersion.getVersion());
-    }
+    // @Ignore // The mmcod shh_version does not exist/is not available
+    // @Test
+    // public void testShhVersion() throws Exception {
+    //     ShhVersion shhVersion = chain3j.shhVersion().send();
+    //     assertNotNull(shhVersion.getVersion());
+    // }
 
-    @Ignore  // The method shh_newIdentity does not exist/is not available
-    @Test
-    public void testShhNewIdentity() throws Exception {
-        ShhNewIdentity shhNewIdentity = chain3j.shhNewIdentity().send();
-        assertNotNull(shhNewIdentity.getAddress());
-    }
+    // @Ignore  // The mmcod shh_newIdentity does not exist/is not available
+    // @Test
+    // public void testShhNewIdentity() throws Exception {
+    //     ShhNewIdentity shhNewIdentity = chain3j.shhNewIdentity().send();
+    //     assertNotNull(shhNewIdentity.getAddress());
+    // }
 
-    @Test
-    public void testShhHasIdentity() throws Exception {
+    // @Test
+    // public void testShhHasIdentity() throws Exception {
     
-    }
+    // }
 
-    @Ignore  // The method shh_newIdentity does not exist/is not available
-    @Test
-    public void testShhNewGroup() throws Exception {
-        ShhNewGroup shhNewGroup = chain3j.shhNewGroup().send();
-        assertNotNull(shhNewGroup.getAddress());
-    }
+    // @Ignore  // The mmcod shh_newIdentity does not exist/is not available
+    // @Test
+    // public void testShhNewGroup() throws Exception {
+    //     ShhNewGroup shhNewGroup = chain3j.shhNewGroup().send();
+    //     assertNotNull(shhNewGroup.getAddress());
+    // }
 
-    @Ignore  // The method shh_addToGroup does not exist/is not available
-    @Test
-    public void testShhAddToGroup() throws Exception {
+    // @Ignore  // The mmcod shh_addToGroup does not exist/is not available
+    // @Test
+    // public void testShhAddToGroup() throws Exception {
 
-    }
+    // }
 
-    @Test
-    public void testShhNewFilter() throws Exception {
+    // @Test
+    // public void testShhNewFilter() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testShhUninstallFilter() throws Exception {
+    // @Test
+    // public void testShhUninstallFilter() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testShhGetFilterChanges() throws Exception {
+    // @Test
+    // public void testShhGetFilterChanges() throws Exception {
     
-    }
+    // }
 
-    @Test
-    public void testShhGetMessages() throws Exception {
+    // @Test
+    // public void testShhGetMessages() throws Exception {
     
-    }
+    // }
 }

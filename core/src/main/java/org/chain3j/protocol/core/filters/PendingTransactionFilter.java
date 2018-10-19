@@ -21,14 +21,14 @@ public class PendingTransactionFilter extends Filter<String> {
 
     @Override
     McFilter sendRequest() throws IOException {
-        return chain3j.ethNewPendingTransactionFilter().send();
+        return chain3j.mcNewPendingTransactionFilter().send();
     }
 
     @Override
-    void process(List<EthLog.LogResult> logResults) {
-        for (EthLog.LogResult logResult : logResults) {
-            if (logResult instanceof EthLog.Hash) {
-                String transactionHash = ((EthLog.Hash) logResult).get();
+    void process(List<McLog.LogResult> logResults) {
+        for (McLog.LogResult logResult : logResults) {
+            if (logResult instanceof McLog.Hash) {
+                String transactionHash = ((McLog.Hash) logResult).get();
                 callback.onEvent(transactionHash);
             } else {
                 throw new FilterException(
@@ -46,7 +46,7 @@ public class PendingTransactionFilter extends Filter<String> {
      * Optional.empty()
      */
     @Override
-    protected Optional<Request<?, EthLog>> getFilterLogs(BigInteger filterId) {
+    protected Optional<Request<?, McLog>> getFilterLogs(BigInteger filterId) {
         return Optional.empty();
     }
 }

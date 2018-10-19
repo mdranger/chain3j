@@ -10,16 +10,16 @@ import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.SampleKeys;
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthGasPrice;
+import org.chain3j.protocol.core.methods.response.McGasPrice;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.utils.Convert;
 import org.chain3j.utils.TxHashVerifier;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+// import static org.mockito.Matchers.any;
+// import static org.mockito.Mockito.mock;
+// import static org.mockito.Mockito.when;
 
 public class TransferTest extends ManagedTransactionTester {
 

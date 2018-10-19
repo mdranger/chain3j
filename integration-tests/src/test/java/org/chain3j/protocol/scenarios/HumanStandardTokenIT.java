@@ -24,7 +24,7 @@ import org.chain3j.crypto.RawTransaction;
 import org.chain3j.crypto.TransactionEncoder;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.utils.Numeric;
@@ -167,7 +167,7 @@ public class HumanStandardTokenIT extends Scenario {
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction transactionResponse = chain3j.ethSendRawTransaction(hexValue)
+        McSendTransaction transactionResponse = chain3j.mcSendRawTransaction(hexValue)
                 .sendAsync().get();
 
         return transactionResponse.getTransactionHash();
@@ -288,7 +288,7 @@ public class HumanStandardTokenIT extends Scenario {
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction transactionResponse = chain3j.ethSendRawTransaction(hexValue)
+        McSendTransaction transactionResponse = chain3j.mcSendRawTransaction(hexValue)
                 .sendAsync().get();
 
         return transactionResponse.getTransactionHash();
@@ -298,8 +298,8 @@ public class HumanStandardTokenIT extends Scenario {
             Function function, String contractAddress) throws Exception {
         String encodedFunction = FunctionEncoder.encode(function);
 
-        org.chain3j.protocol.core.methods.response.EthCall response = chain3j.ethCall(
-                Transaction.createEthCallTransaction(
+        org.chain3j.protocol.core.methods.response.McCall response = chain3j.mcCall(
+                Transaction.createMcCallTransaction(
                         ALICE.getAddress(), contractAddress, encodedFunction),
                 DefaultBlockParameterName.LATEST)
                 .sendAsync().get();

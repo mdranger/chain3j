@@ -18,7 +18,7 @@ public class TransactionEncoderTest {
     @Test
     public void testSignMessage() {
         byte[] signedMessage = TransactionEncoder.signMessage(
-                createEtherTransaction(), SampleKeys.CREDENTIALS);
+                createMcTransaction(), SampleKeys.CREDENTIALS);
         String hexMessage = Numeric.toHexString(signedMessage);
         assertThat(hexMessage,
                 is("0xf85580010a840add5355887fffffffffffffff80"
@@ -29,7 +29,7 @@ public class TransactionEncoderTest {
 
     @Test
     public void testEtherTransactionAsRlpValues() {
-        List<RlpType> rlpStrings = TransactionEncoder.asRlpValues(createEtherTransaction(),
+        List<RlpType> rlpStrings = TransactionEncoder.asRlpValues(createMcTransaction(),
                 new Sign.SignatureData((byte) 0, new byte[32], new byte[32]));
         assertThat(rlpStrings.size(), is(9));
         assertThat(rlpStrings.get(3), equalTo(RlpString.create(new BigInteger("add5355", 16))));
@@ -66,8 +66,8 @@ public class TransactionEncoderTest {
                                 + "5c9f3dc64214b297fb1966a3b6d83")));
     }
 
-    private static RawTransaction createEtherTransaction() {
-        return RawTransaction.createEtherTransaction(
+    private static RawTransaction createMcTransaction() {
+        return RawTransaction.createMcTransaction(
                 BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN, "0xadd5355",
                 BigInteger.valueOf(Long.MAX_VALUE));
     }
@@ -79,7 +79,7 @@ public class TransactionEncoderTest {
     }
 
     private static RawTransaction createEip155RawTransaction() {
-        return RawTransaction.createEtherTransaction(
+        return RawTransaction.createMcTransaction(
                 BigInteger.valueOf(9), BigInteger.valueOf(20000000000L),
                 BigInteger.valueOf(21000), "0x3535353535353535353535353535353535353535",
                 BigInteger.valueOf(1000000000000000000L));

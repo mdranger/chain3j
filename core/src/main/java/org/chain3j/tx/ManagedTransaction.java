@@ -75,9 +75,9 @@ public abstract class ManagedTransaction {
      * @throws IOException if there's a problem communicating with the ethereum node
      */
     public BigInteger requestCurrentGasPrice() throws IOException {
-        McGasPrice ethGasPrice = chain3j.mcGasPrice().send();
+        McGasPrice mcGasPrice = chain3j.mcGasPrice().send();
 
-        return ethGasPrice.getGasPrice();
+        return mcGasPrice.getGasPrice();
     }
 
     protected TransactionReceipt send(

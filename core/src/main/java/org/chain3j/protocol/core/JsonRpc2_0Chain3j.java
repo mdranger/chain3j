@@ -16,10 +16,10 @@ import org.chain3j.protocol.Chain3jService;
 // import org.chain3j.protocol.core.methods.request.ShhFilter;
 // import org.chain3j.protocol.core.methods.request.ShhPost;
 import org.chain3j.protocol.core.methods.request.Transaction;
-import org.chain3j.protocol.core.methods.response.DbGetHex;
-import org.chain3j.protocol.core.methods.response.DbGetString;
-import org.chain3j.protocol.core.methods.response.DbPutHex;
-import org.chain3j.protocol.core.methods.response.DbPutString;
+// import org.chain3j.protocol.core.methods.response.DbGetHex;
+// import org.chain3j.protocol.core.methods.response.DbGetString;
+// import org.chain3j.protocol.core.methods.response.DbPutHex;
+// import org.chain3j.protocol.core.methods.response.DbPutString;
 import org.chain3j.protocol.core.methods.response.McAccounts;
 import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.McBlockNumber;
@@ -64,8 +64,8 @@ import org.chain3j.protocol.core.methods.response.NetVersion;
 // import org.chain3j.protocol.core.methods.response.ShhNewIdentity;
 // import org.chain3j.protocol.core.methods.response.ShhUninstallFilter;
 // import org.chain3j.protocol.core.methods.response.ShhVersion;
-// import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
-// import org.chain3j.protocol.core.methods.response.Chain3Sha3;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 import org.chain3j.protocol.rx.JsonRpc2_0Rx;
 import org.chain3j.protocol.websocket.events.LogNotification;
 import org.chain3j.protocol.websocket.events.NewHeadsNotification;
@@ -80,7 +80,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
     public static final int DEFAULT_BLOCK_TIME = 15 * 1000;
 
     protected final Chain3jService chain3jService;
-    private final JsonRpc2_0Rx web3jRx;
+    private final JsonRpc2_0Rx chain3jRx;
     private final long blockTime;
     private final ScheduledExecutorService scheduledExecutorService;
 
@@ -92,28 +92,28 @@ public class JsonRpc2_0Chain3j implements Chain3j {
             Chain3jService chain3jService, long pollingInterval,
             ScheduledExecutorService scheduledExecutorService) {
         this.chain3jService = chain3jService;
-        this.web3jRx = new JsonRpc2_0Rx(this, scheduledExecutorService);
+        this.chain3jRx = new JsonRpc2_0Rx(this, scheduledExecutorService);
         this.blockTime = pollingInterval;
         this.scheduledExecutorService = scheduledExecutorService;
     }
 
-//     @Override
-//     public Request<?, Chain3ClientVersion> web3ClientVersion() {
-//         return new Request<>(
-//                 "chain3_clientVersion",
-//                 Collections.<String>emptyList(),
-//                 chain3jService,
-//                 Chain3ClientVersion.class);
-//     }
+    @Override
+    public Request<?, Chain3ClientVersion> chain3ClientVersion() {
+        return new Request<>(
+                "chain3_clientVersion",
+                Collections.<String>emptyList(),
+                chain3jService,
+                Chain3ClientVersion.class);
+    }
 
-//     @Override
-//     public Request<?, Chain3Sha3> chain3Sha3(String data) {
-//         return new Request<>(
-//                 "chain3_sha3",
-//                 Arrays.asList(data),
-//                 chain3jService,
-//                 Chain3Sha3.class);
-//     }
+    @Override
+    public Request<?, Chain3Sha3> chain3Sha3(String data) {
+        return new Request<>(
+                "chain3_sha3",
+                Arrays.asList(data),
+                chain3jService,
+                Chain3Sha3.class);
+    }
 
     @Override
     public Request<?, NetVersion> netVersion() {
@@ -446,14 +446,14 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 McGetCompilers.class);
     }
 
-    @Override
-    public Request<?, McCompileLLL> mcCompileLLL(String sourceCode) {
-        return new Request<>(
-                "mc_compileLLL",
-                Arrays.asList(sourceCode),
-                chain3jService,
-                McCompileLLL.class);
-    }
+//     @Override
+//     public Request<?, McCompileLLL> mcCompileLLL(String sourceCode) {
+//         return new Request<>(
+//                 "mc_compileLLL",
+//                 Arrays.asList(sourceCode),
+//                 chain3jService,
+//                 McCompileLLL.class);
+//     }
 
 //     @Override
 //     public Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode) {
@@ -734,51 +734,51 @@ public class JsonRpc2_0Chain3j implements Chain3j {
         return params;
     }
 
-//     @Override
-//     public Observable<String> mcBlockHashObservable() {
-//         return web3jRx.mcBlockHashObservable(blockTime);
-//     }
+    @Override
+    public Observable<String> mcBlockHashObservable() {
+        return chain3jRx.mcBlockHashObservable(blockTime);
+    }
 
-//     @Override
-//     public Observable<String> mcPendingTransactionHashObservable() {
-//         return web3jRx.mcPendingTransactionHashObservable(blockTime);
-//     }
+    @Override
+    public Observable<String> mcPendingTransactionHashObservable() {
+        return chain3jRx.mcPendingTransactionHashObservable(blockTime);
+    }
 
-//     @Override
-//     public Observable<Log> mcLogObservable(
-//             org.chain3j.protocol.core.methods.request.McFilter mcFilter) {
-//         return web3jRx.mcLogObservable(mcFilter, blockTime);
-//     }
+    @Override
+    public Observable<Log> mcLogObservable(
+            org.chain3j.protocol.core.methods.request.McFilter mcFilter) {
+        return chain3jRx.mcLogObservable(mcFilter, blockTime);
+    }
 
     @Override
     public Observable<org.chain3j.protocol.core.methods.response.Transaction>
             transactionObservable() {
-        return web3jRx.transactionObservable(blockTime);
+        return chain3jRx.transactionObservable(blockTime);
     }
 
     @Override
     public Observable<org.chain3j.protocol.core.methods.response.Transaction>
             pendingTransactionObservable() {
-        return web3jRx.pendingTransactionObservable(blockTime);
+        return chain3jRx.pendingTransactionObservable(blockTime);
     }
 
     @Override
     public Observable<McBlock> blockObservable(boolean fullTransactionObjects) {
-        return web3jRx.blockObservable(fullTransactionObjects, blockTime);
+        return chain3jRx.blockObservable(fullTransactionObjects, blockTime);
     }
 
     @Override
     public Observable<McBlock> replayBlocksObservable(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock,
             boolean fullTransactionObjects) {
-        return web3jRx.replayBlocksObservable(startBlock, endBlock, fullTransactionObjects);
+        return chain3jRx.replayBlocksObservable(startBlock, endBlock, fullTransactionObjects);
     }
 
     @Override
     public Observable<McBlock> replayBlocksObservable(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock,
             boolean fullTransactionObjects, boolean ascending) {
-        return web3jRx.replayBlocksObservable(startBlock, endBlock,
+        return chain3jRx.replayBlocksObservable(startBlock, endBlock,
                 fullTransactionObjects, ascending);
     }
 
@@ -786,33 +786,33 @@ public class JsonRpc2_0Chain3j implements Chain3j {
     public Observable<org.chain3j.protocol.core.methods.response.Transaction>
             replayTransactionsObservable(
             DefaultBlockParameter startBlock, DefaultBlockParameter endBlock) {
-        return web3jRx.replayTransactionsObservable(startBlock, endBlock);
+        return chain3jRx.replayTransactionsObservable(startBlock, endBlock);
     }
 
     @Override
     public Observable<McBlock> catchUpToLatestBlockObservable(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects,
             Observable<McBlock> onCompleteObservable) {
-        return web3jRx.catchUpToLatestBlockObservable(
+        return chain3jRx.catchUpToLatestBlockObservable(
                 startBlock, fullTransactionObjects, onCompleteObservable);
     }
 
     @Override
     public Observable<McBlock> catchUpToLatestBlockObservable(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects) {
-        return web3jRx.catchUpToLatestBlockObservable(startBlock, fullTransactionObjects);
+        return chain3jRx.catchUpToLatestBlockObservable(startBlock, fullTransactionObjects);
     }
 
     @Override
     public Observable<org.chain3j.protocol.core.methods.response.Transaction>
             catchUpToLatestTransactionObservable(DefaultBlockParameter startBlock) {
-        return web3jRx.catchUpToLatestTransactionObservable(startBlock);
+        return chain3jRx.catchUpToLatestTransactionObservable(startBlock);
     }
 
     @Override
     public Observable<McBlock> catchUpToLatestAndSubscribeToNewBlocksObservable(
             DefaultBlockParameter startBlock, boolean fullTransactionObjects) {
-        return web3jRx.catchUpToLatestAndSubscribeToNewBlocksObservable(
+        return chain3jRx.catchUpToLatestAndSubscribeToNewBlocksObservable(
                 startBlock, fullTransactionObjects, blockTime);
     }
 
@@ -820,7 +820,7 @@ public class JsonRpc2_0Chain3j implements Chain3j {
     public Observable<org.chain3j.protocol.core.methods.response.Transaction>
             catchUpToLatestAndSubscribeToNewTransactionsObservable(
             DefaultBlockParameter startBlock) {
-        return web3jRx.catchUpToLatestAndSubscribeToNewTransactionsObservable(
+        return chain3jRx.catchUpToLatestAndSubscribeToNewTransactionsObservable(
                 startBlock, blockTime);
     }
 

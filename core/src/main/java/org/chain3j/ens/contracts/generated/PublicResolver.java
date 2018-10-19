@@ -73,7 +73,7 @@ public final class PublicResolver extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Address>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, AddrChangedEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, AddrChangedEventResponse>() {
             @Override
             public AddrChangedEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -104,7 +104,7 @@ public final class PublicResolver extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Bytes32>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, ContentChangedEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, ContentChangedEventResponse>() {
             @Override
             public ContentChangedEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -135,7 +135,7 @@ public final class PublicResolver extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Utf8String>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, NameChangedEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, NameChangedEventResponse>() {
             @Override
             public NameChangedEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -166,7 +166,7 @@ public final class PublicResolver extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Uint256>(true) {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, ABIChangedEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, ABIChangedEventResponse>() {
             @Override
             public ABIChangedEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -198,7 +198,7 @@ public final class PublicResolver extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Bytes32>() {}, new TypeReference<Bytes32>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, PubkeyChangedEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, PubkeyChangedEventResponse>() {
             @Override
             public PubkeyChangedEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);
@@ -231,7 +231,7 @@ public final class PublicResolver extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Bytes32>(true) {}, new TypeReference<Utf8String>(true) {}, new TypeReference<Utf8String>() {}));
         McFilter filter = new McFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
-        return chain3j.ethLogObservable(filter).map(new Func1<Log, TextChangedEventResponse>() {
+        return chain3j.mcLogObservable(filter).map(new Func1<Log, TextChangedEventResponse>() {
             @Override
             public TextChangedEventResponse call(Log log) {
                 EventValues eventValues = extractEventParameters(event, log);

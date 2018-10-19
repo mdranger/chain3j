@@ -72,7 +72,7 @@ public class RawTransactionManager extends TransactionManager {
     }
 
     protected BigInteger getNonce() throws IOException {
-        EthGetTransactionCount mcGetTransactionCount = chain3j.mcGetTransactionCount(
+        McGetTransactionCount mcGetTransactionCount = chain3j.mcGetTransactionCount(
                 credentials.getAddress(), DefaultBlockParameterName.PENDING).send();
 
         return mcGetTransactionCount.getTransactionCount();
@@ -116,16 +116,16 @@ public class RawTransactionManager extends TransactionManager {
         }
 
         String hexValue = Numeric.toHexString(signedMessage);
-        McSendTransaction ethSendTransaction = chain3j.ethSendRawTransaction(hexValue).send();
+        McSendTransaction mcSendTransaction = chain3j.mcSendRawTransaction(hexValue).send();
 
-        if (ethSendTransaction != null && !ethSendTransaction.hasError()) {
+        if (mcSendTransaction != null && !mcSendTransaction.hasError()) {
             String txHashLocal = Hash.sha3(hexValue);
-            String txHashRemote = ethSendTransaction.getTransactionHash();
+            String txHashRemote = mcSendTransaction.getTransactionHash();
             if (!txHashVerifier.verify(txHashLocal, txHashRemote)) {
                 throw new TxHashMismatchException(txHashLocal, txHashRemote);
             }
         }
 
-        return ethSendTransaction;
+        return mcSendTransaction;
     }
 }

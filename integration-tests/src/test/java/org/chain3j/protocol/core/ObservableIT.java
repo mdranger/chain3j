@@ -10,8 +10,8 @@ import rx.Observable;
 import rx.Subscription;
 
 import org.chain3j.protocol.Chain3j;
-import org.chain3j.protocol.core.methods.request.EthFilter;
-import org.chain3j.protocol.core.methods.response.EthBlock;
+import org.chain3j.protocol.core.methods.request.McFilter;
+import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.http.HttpService;
 
 import static org.junit.Assert.assertTrue;
@@ -28,7 +28,7 @@ public class ObservableIT {
 
     @Before
     public void setUp() {
-        this.chain3j = chain3j.build(new HttpService());
+        this.chain3j = Chain3j.build(new HttpService());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ObservableIT {
 
     @Test
     public void testLogObservable() throws Exception {
-        run(chain3j.ethLogObservable(new EthFilter()));
+        run(chain3j.mcLogObservable(new McFilter()));
     }
 
     @Test
@@ -60,9 +60,9 @@ public class ObservableIT {
 
     @Test
     public void testCatchUpToLatestAndSubscribeToNewBlocksObservable() throws Exception {
-        EthBlock ethBlock = chain3j.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, false)
+        McBlock mcBlock = chain3j.mcGetBlockByNumber(DefaultBlockParameterName.LATEST, false)
                 .send();
-        BigInteger latestBlockNumber = ethBlock.getBlock().getNumber();
+        BigInteger latestBlockNumber = mcBlock.getBlock().getNumber();
         run(chain3j.catchUpToLatestAndSubscribeToNewBlocksObservable(
                 new DefaultBlockParameterNumber(latestBlockNumber.subtract(BigInteger.ONE)),
                 false));

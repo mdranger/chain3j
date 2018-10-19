@@ -24,8 +24,8 @@ import rx.Subscription;
 
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
-import org.chain3j.protocol.core.methods.response.EthSubscribe;
-import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
+import org.chain3j.protocol.core.methods.response.McSubscribe;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
 import org.chain3j.protocol.websocket.events.NewHeadsNotification;
 
 import static org.junit.Assert.assertEquals;
@@ -50,15 +50,15 @@ public class WebSocketServiceTest {
 
     private WebSocketService service = new WebSocketService(webSocketClient, executorService, true);
 
-    private Request<?, Web3ClientVersion> request = new Request<>(
-            "web3_clientVersion",
+    private Request<?, Chain3ClientVersion> request = new Request<>(
+            "chain3_clientVersion",
             Collections.<String>emptyList(),
             service,
-            Web3ClientVersion.class);
+            Chain3ClientVersion.class);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    private Request<Object, EthSubscribe> subscribeRequest;
+    private Request<Object, McSubscribe> subscribeRequest;
 
     @Before
     public void before() throws InterruptedException {
@@ -104,22 +104,22 @@ public class WebSocketServiceTest {
 
     @Test
     public void testWaitingForReplyToSentRequest() throws Exception {
-        service.sendAsync(request, Web3ClientVersion.class);
+        service.sendAsync(request, Chain3ClientVersion.class);
 
         assertTrue(service.isWaitingForReply(request.getId()));
     }
 
     @Test
     public void testNoLongerWaitingForResponseAfterReply() throws Exception {
-        service.sendAsync(request, Web3ClientVersion.class);
-        sendGethVersionReply();
+        service.sendAsync(request, Chain3ClientVersion.class);
+        sendMoacVersionReply();
 
         assertFalse(service.isWaitingForReply(1));
     }
 
     @Test
     public void testSendWebSocketRequest() throws Exception {
-        service.sendAsync(request, Web3ClientVersion.class);
+        service.sendAsync(request, Chain3ClientVersion.class);
 
         verify(webSocketClient).send(
                 "{\"jsonrpc\":\"2.0\",\"method\":\"web3_clientVersion\",\"params\":[],\"id\":1}");
@@ -129,7 +129,7 @@ public class WebSocketServiceTest {
     public void testIgnoreInvalidReplies() throws Exception {
         thrown.expect(IOException.class);
         thrown.expectMessage("Failed to parse incoming WebSocket message");
-        service.sendAsync(request, Web3ClientVersion.class);
+        service.sendAsync(request, Chain3ClientVersion.class);
         service.onWebSocketMessage("{");
     }
 
@@ -137,7 +137,7 @@ public class WebSocketServiceTest {
     public void testThrowExceptionIfIdHasInvalidType() throws Exception {
         thrown.expect(IOException.class);
         thrown.expectMessage("'id' expected to be long, but it is: 'true'");
-        service.sendAsync(request, Web3ClientVersion.class);
+        service.sendAsync(request, Chain3ClientVersion.class);
         service.onWebSocketMessage("{\"id\":true}");
     }
 
@@ -145,7 +145,7 @@ public class WebSocketServiceTest {
     public void testThrowExceptionIfIdIsMissing() throws Exception {
         thrown.expect(IOException.class);
         thrown.expectMessage("Unknown message type");
-        service.sendAsync(request, Web3ClientVersion.class);
+        service.sendAsync(request, Chain3ClientVersion.class);
         service.onWebSocketMessage("{}");
     }
 
@@ -153,31 +153,31 @@ public class WebSocketServiceTest {
     public void testThrowExceptionIfUnexpectedIdIsReceived() throws Exception {
         thrown.expect(IOException.class);
         thrown.expectMessage("Received reply for unexpected request id: 12345");
-        service.sendAsync(request, Web3ClientVersion.class);
+        service.sendAsync(request, Chain3ClientVersion.class);
         service.onWebSocketMessage(
-                "{\"jsonrpc\":\"2.0\",\"id\":12345,\"result\":\"geth-version\"}");
+                "{\"jsonrpc\":\"2.0\",\"id\":12345,\"result\":\"moac-version\"}");
     }
 
     @Test
     public void testReceiveReply() throws Exception {
-        CompletableFuture<Web3ClientVersion> reply = service.sendAsync(
+        CompletableFuture<Chain3ClientVersion> reply = service.sendAsync(
                 request,
-                Web3ClientVersion.class);
-        sendGethVersionReply();
+                Chain3ClientVersion.class);
+        sendMoacVersionReply();
 
         assertTrue(reply.isDone());
-        assertEquals("geth-version", reply.get().getWeb3ClientVersion());
+        assertEquals("moac-version", reply.get().getChain3ClientVersion());
     }
 
     @Test
     public void testReceiveError() throws Exception {
-        CompletableFuture<Web3ClientVersion> reply = service.sendAsync(
+        CompletableFuture<Chain3ClientVersion> reply = service.sendAsync(
                 request,
-                Web3ClientVersion.class);
+                Chain3ClientVersion.class);
         sendErrorReply();
 
         assertTrue(reply.isDone());
-        Web3ClientVersion version = reply.get();
+        Chain3ClientVersion version = reply.get();
         assertTrue(version.hasError());
         assertEquals(
                 new Response.Error(-1, "Error message"),
@@ -187,9 +187,9 @@ public class WebSocketServiceTest {
     @Test
     public void testCloseRequestWhenConnectionIsClosed() throws Exception {
         thrown.expect(ExecutionException.class);
-        CompletableFuture<Web3ClientVersion> reply = service.sendAsync(
+        CompletableFuture<Chain3ClientVersion> reply = service.sendAsync(
                 request,
-                Web3ClientVersion.class);
+                Chain3ClientVersion.class);
         service.onWebSocketClose();
 
         assertTrue(reply.isDone());
@@ -208,9 +208,9 @@ public class WebSocketServiceTest {
                     return null;
                 });
 
-        CompletableFuture<Web3ClientVersion> reply = service.sendAsync(
+        CompletableFuture<Chain3ClientVersion> reply = service.sendAsync(
                 request,
-                Web3ClientVersion.class);
+                Chain3ClientVersion.class);
 
         assertTrue(reply.isDone());
         reply.get();
@@ -230,15 +230,15 @@ public class WebSocketServiceTest {
         runAsync(() -> {
             try {
                 requestSent.await(2, TimeUnit.SECONDS);
-                sendGethVersionReply();
+                sendMoacVersionReply();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
 
-        Web3ClientVersion reply = service.send(request, Web3ClientVersion.class);
+        Chain3ClientVersion reply = service.send(request, Chain3ClientVersion.class);
 
-        assertEquals(reply.getWeb3ClientVersion(), "geth-version");
+        assertEquals(reply.getChain3ClientVersion(), "moac-version");
     }
 
     @Test
@@ -420,15 +420,15 @@ public class WebSocketServiceTest {
 
     private Observable<NewHeadsNotification> subscribeToEvents() {
         subscribeRequest = new Request<>(
-                "eth_subscribe",
+                "mc_subscribe",
                 Arrays.asList("newHeads", Collections.emptyMap()),
                 service,
-                EthSubscribe.class);
+                McSubscribe.class);
         subscribeRequest.setId(1);
 
         return service.subscribe(
                 subscribeRequest,
-                "eth_unsubscribe",
+                "mc_unsubscribe",
                 NewHeadsNotification.class
         );
     }
@@ -446,24 +446,24 @@ public class WebSocketServiceTest {
                         + "}");
     }
 
-    private void sendGethVersionReply() throws IOException {
+    private void sendMoacVersionReply() throws IOException {
         service.onWebSocketMessage(
                 "{"
                         + "  \"jsonrpc\":\"2.0\","
                         + "  \"id\":1,"
-                        + "  \"result\":\"geth-version\""
+                        + "  \"result\":\"moac-version\""
                         + "}");
     }
 
     private void verifyStartedSubscriptionHadnshake() {
         verify(webSocketClient).send(
-                "{\"jsonrpc\":\"2.0\",\"method\":\"eth_subscribe\","
+                "{\"jsonrpc\":\"2.0\",\"method\":\"mc_subscribe\","
                         + "\"params\":[\"newHeads\",{}],\"id\":1}");
     }
 
     private void verifyUnsubscribed() {
         verify(webSocketClient).send(startsWith(
-                "{\"jsonrpc\":\"2.0\",\"method\":\"eth_unsubscribe\","
+                "{\"jsonrpc\":\"2.0\",\"method\":\"mc_unsubscribe\","
                         + "\"params\":[\"0xcd0c3e8af590364c09d0fa6a1210faf5\"]"));
     }
 
@@ -488,7 +488,7 @@ public class WebSocketServiceTest {
         service.onWebSocketMessage(
                 "{"
                         + "  \"jsonrpc\":\"2.0\","
-                        + "  \"method\":\"eth_subscription\","
+                        + "  \"method\":\"mc_subscription\","
                         + "  \"params\":{"
                         + "    \"subscription\":\"0xcd0c3e8af590364c09d0fa6a1210faf5\","
                         + "    \"result\":{"

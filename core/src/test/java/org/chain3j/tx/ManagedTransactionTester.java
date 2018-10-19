@@ -9,10 +9,10 @@ import org.chain3j.crypto.SampleKeys;
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthGasPrice;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McGasPrice;
+import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.McGetTransactionReceipt;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.utils.TxHashVerifier;
 
@@ -30,7 +30,7 @@ public abstract class ManagedTransactionTester {
 
     @Before
     public void setUp() throws Exception {
-        chain3j = mock(chain3j.class);
+        chain3j = mock(Chain3j.class);
         txHashVerifier = mock(TxHashVerifier.class);
         when(txHashVerifier.verify(any(), any())).thenReturn(true);
     }
@@ -57,36 +57,36 @@ public abstract class ManagedTransactionTester {
 
     @SuppressWarnings("unchecked")
     void prepareNonceRequest() throws IOException {
-        EthGetTransactionCount ethGetTransactionCount = new EthGetTransactionCount();
-        ethGetTransactionCount.setResult("0x1");
+        McGetTransactionCount mcGetTransactionCount = new McGetTransactionCount();
+        mcGetTransactionCount.setResult("0x1");
 
-        Request<?, EthGetTransactionCount> transactionCountRequest = mock(Request.class);
+        Request<?, McGetTransactionCount> transactionCountRequest = mock(Request.class);
         when(transactionCountRequest.send())
-                .thenReturn(ethGetTransactionCount);
-        when(chain3j.ethGetTransactionCount(SampleKeys.ADDRESS, DefaultBlockParameterName.PENDING))
+                .thenReturn(mcGetTransactionCount);
+        when(chain3j.mcGetTransactionCount(SampleKeys.ADDRESS, DefaultBlockParameterName.PENDING))
                 .thenReturn((Request) transactionCountRequest);
     }
 
     @SuppressWarnings("unchecked")
     void prepareTransactionRequest() throws IOException {
-        EthSendTransaction ethSendTransaction = new EthSendTransaction();
-        ethSendTransaction.setResult(TRANSACTION_HASH);
+        McSendTransaction mcSendTransaction = new McSendTransaction();
+        mcSendTransaction.setResult(TRANSACTION_HASH);
 
-        Request<?, EthSendTransaction> rawTransactionRequest = mock(Request.class);
-        when(rawTransactionRequest.send()).thenReturn(ethSendTransaction);
-        when(chain3j.ethSendRawTransaction(any(String.class)))
+        Request<?, McSendTransaction> rawTransactionRequest = mock(Request.class);
+        when(rawTransactionRequest.send()).thenReturn(mcSendTransaction);
+        when(chain3j.mcSendRawTransaction(any(String.class)))
                 .thenReturn((Request) rawTransactionRequest);
     }
 
     @SuppressWarnings("unchecked")
     void prepareTransactionReceipt(TransactionReceipt transactionReceipt) throws IOException {
-        EthGetTransactionReceipt ethGetTransactionReceipt = new EthGetTransactionReceipt();
-        ethGetTransactionReceipt.setResult(transactionReceipt);
+        McGetTransactionReceipt mcGetTransactionReceipt = new McGetTransactionReceipt();
+        mcGetTransactionReceipt.setResult(transactionReceipt);
 
-        Request<?, EthGetTransactionReceipt> getTransactionReceiptRequest = mock(Request.class);
+        Request<?, McGetTransactionReceipt> getTransactionReceiptRequest = mock(Request.class);
         when(getTransactionReceiptRequest.send())
-                .thenReturn(ethGetTransactionReceipt);
-        when(chain3j.ethGetTransactionReceipt(TRANSACTION_HASH))
+                .thenReturn(mcGetTransactionReceipt);
+        when(chain3j.mcGetTransactionReceipt(TRANSACTION_HASH))
                 .thenReturn((Request) getTransactionReceiptRequest);
     }
 
@@ -97,12 +97,12 @@ public abstract class ManagedTransactionTester {
         transactionReceipt.setStatus("0x1");
         prepareTransaction(transactionReceipt);
 
-        EthGasPrice ethGasPrice = new EthGasPrice();
-        ethGasPrice.setResult("0x1");
+        McGasPrice mcGasPrice = new McGasPrice();
+        mcGasPrice.setResult("0x1");
 
-        Request<?, EthGasPrice> gasPriceRequest = mock(Request.class);
-        when(gasPriceRequest.send()).thenReturn(ethGasPrice);
-        when(chain3j.ethGasPrice()).thenReturn((Request) gasPriceRequest);
+        Request<?, McGasPrice> gasPriceRequest = mock(Request.class);
+        when(gasPriceRequest.send()).thenReturn(mcGasPrice);
+        when(chain3j.mcGasPrice()).thenReturn((Request) gasPriceRequest);
 
         return transactionReceipt;
     }

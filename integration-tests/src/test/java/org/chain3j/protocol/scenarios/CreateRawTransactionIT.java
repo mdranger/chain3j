@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.chain3j.crypto.RawTransaction;
 import org.chain3j.crypto.TransactionEncoder;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionCount;
-import org.chain3j.protocol.core.methods.response.EthSendTransaction;
+import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
+import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.utils.Convert;
 import org.chain3j.utils.Numeric;
@@ -25,15 +25,15 @@ public class CreateRawTransactionIT extends Scenario {
     @Test
     public void testTransferEther() throws Exception {
         BigInteger nonce = getNonce(ALICE.getAddress());
-        RawTransaction rawTransaction = createEtherTransaction(
+        RawTransaction rawTransaction = createMcTransaction(
                 nonce, BOB.getAddress());
 
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, ALICE);
         String hexValue = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction ethSendTransaction =
-                chain3j.ethSendRawTransaction(hexValue).sendAsync().get();
-        String transactionHash = ethSendTransaction.getTransactionHash();
+        McSendTransaction mcSendTransaction =
+                chain3j.mcSendRawTransaction(hexValue).sendAsync().get();
+        String transactionHash = mcSendTransaction.getTransactionHash();
 
         assertFalse(transactionHash.isEmpty());
 
@@ -51,9 +51,9 @@ public class CreateRawTransactionIT extends Scenario {
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, ALICE);
         String hexValue = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction ethSendTransaction =
-                chain3j.ethSendRawTransaction(hexValue).sendAsync().get();
-        String transactionHash = ethSendTransaction.getTransactionHash();
+        McSendTransaction mcSendTransaction =
+                chain3j.mcSendRawTransaction(hexValue).sendAsync().get();
+        String transactionHash = mcSendTransaction.getTransactionHash();
 
         assertFalse(transactionHash.isEmpty());
 
@@ -66,10 +66,10 @@ public class CreateRawTransactionIT extends Scenario {
                 rawTransaction.getGasLimit().equals(transactionReceipt.getGasUsed()));
     }
 
-    private static RawTransaction createEtherTransaction(BigInteger nonce, String toAddress) {
+    private static RawTransaction createMcTransaction(BigInteger nonce, String toAddress) {
         BigInteger value = Convert.toWei("0.5", Convert.Unit.ETHER).toBigInteger();
 
-        return RawTransaction.createEtherTransaction(
+        return RawTransaction.createMcTransaction(
                 nonce, GAS_PRICE, GAS_LIMIT, toAddress, value);
     }
 
@@ -80,9 +80,9 @@ public class CreateRawTransactionIT extends Scenario {
     }
 
     BigInteger getNonce(String address) throws Exception {
-        EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
+        McGetTransactionCount mcGetTransactionCount = chain3j.mcGetTransactionCount(
                 address, DefaultBlockParameterName.LATEST).sendAsync().get();
 
-        return ethGetTransactionCount.getTransactionCount();
+        return mcGetTransactionCount.getTransactionCount();
     }
 }

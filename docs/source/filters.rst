@@ -128,12 +128,12 @@ The `Solidity documentation <http://solidity.readthedocs.io/en/develop/contracts
 provides a good overview of EVM events.
 
 You use the
-`EthFilter <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/core/methods/request/EthFilter.java>`_
+`McFilter <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/core/methods/request/McFilter.java>`_
 type to specify the topics that you wish to apply to the filter. This can include the address of
 the smart contract you wish to apply the filter to. You can also provide specific topics to filter
 on. Where the individual topics represent indexed parameters on the smart contract::
 
-   EthFilter filter = new EthFilter(DefaultBlockParameterName.EARLIEST,
+   McFilter filter = new McFilter(DefaultBlockParameterName.EARLIEST,
            DefaultBlockParameterName.LATEST, <contract-address>)
                 [.addSingleTopic(...) | .addOptionalTopics(..., ...) | ...];
 

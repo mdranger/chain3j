@@ -352,7 +352,7 @@ Topic filters are also supported:
 
 .. code-block:: java
 
-   EthFilter filter = new EthFilter(DefaultBlockParameterName.EARLIEST,
+   McFilter filter = new McFilter(DefaultBlockParameterName.EARLIEST,
            DefaultBlockParameterName.LATEST, <contract-address>)
                 .addSingleTopic(...)|.addOptionalTopics(..., ...)|...;
    web3j.ethLogObservable(filter).subscribe(log -> {

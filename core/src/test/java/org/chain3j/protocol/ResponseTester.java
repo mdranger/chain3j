@@ -20,7 +20,7 @@ import static org.chain3j.protocol.http.HttpService.JSON_MEDIA_TYPE;
  */
 public abstract class ResponseTester {
 
-    private HttpService web3jService;
+    private HttpService chain3jService;
     private OkHttpClient okHttpClient;
     private ResponseInterceptor responseInterceptor;
 
@@ -38,13 +38,13 @@ public abstract class ResponseTester {
     }
 
     protected void configureWeb3Service(boolean includeRawResponses) {
-        web3jService = new HttpService(okHttpClient, includeRawResponses);
+        chain3jService = new HttpService(okHttpClient, includeRawResponses);
     }
 
     protected <T extends Response> T deserialiseResponse(Class<T> type) {
         T response = null;
         try {
-            response = web3jService.send(new Request(), type);
+            response = chain3jService.send(new Request(), type);
         } catch (IOException e) {
             fail(e.getMessage());
         }

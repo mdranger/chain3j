@@ -46,9 +46,9 @@ public abstract class TransactionManager {
             String data, BigInteger value)
             throws IOException, TransactionException {
 
-        McSendTransaction ethSendTransaction = sendTransaction(
+        McSendTransaction mcSendTransaction = sendTransaction(
                 gasPrice, gasLimit, to, data, value);
-        return processResponse(ethSendTransaction);
+        return processResponse(mcSendTransaction);
     }
 
     public abstract McSendTransaction sendTransaction(

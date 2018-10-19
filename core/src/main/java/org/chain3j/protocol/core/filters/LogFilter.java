@@ -16,26 +16,26 @@ import org.chain3j.protocol.core.methods.response.Log;
  */
 public class LogFilter extends Filter<Log> {
 
-    private final org.chain3j.protocol.core.methods.request.McFilter ethFilter;
+    private final org.chain3j.protocol.core.methods.request.McFilter mcFilter;
 
     public LogFilter(
             Chain3j chain3j, Callback<Log> callback,
-            org.chain3j.protocol.core.methods.request.McFilter ethFilter) {
+            org.chain3j.protocol.core.methods.request.McFilter mcFilter) {
         super(chain3j, callback);
-        this.ethFilter = ethFilter;
+        this.mcFilter = mcFilter;
     }
 
 
     @Override
     McFilter sendRequest() throws IOException {
-        return chain3j.ethNewFilter(ethFilter).send();
+        return chain3j.mcNewFilter(mcFilter).send();
     }
 
     @Override
-    void process(List<EthLog.LogResult> logResults) {
-        for (EthLog.LogResult logResult : logResults) {
-            if (logResult instanceof EthLog.LogObject) {
-                Log log = ((EthLog.LogObject) logResult).get();
+    void process(List<McLog.LogResult> logResults) {
+        for (McLog.LogResult logResult : logResults) {
+            if (logResult instanceof McLog.LogObject) {
+                Log log = ((McLog.LogObject) logResult).get();
                 callback.onEvent(log);
             } else {
                 throw new FilterException(
@@ -45,7 +45,7 @@ public class LogFilter extends Filter<Log> {
     }
 
     @Override
-    protected Optional<Request<?, EthLog>> getFilterLogs(BigInteger filterId) {
+    protected Optional<Request<?, McLog>> getFilterLogs(BigInteger filterId) {
         return Optional.of(chain3j.mcGetFilterLogs(filterId));
     }
 }

@@ -95,15 +95,15 @@ public abstract class Filter<T> {
 
     private void getInitialFilterLogs() {
         try {
-            Optional<Request<?, EthLog>> maybeRequest = this.getFilterLogs(this.filterId);
-            EthLog ethLog = null;
+            Optional<Request<?, McLog>> maybeRequest = this.getFilterLogs(this.filterId);
+            McLog mcLog = null;
             if (maybeRequest.isPresent()) {
-                ethLog = maybeRequest.get().send();
+                mcLog = maybeRequest.get().send();
             } else {
-                ethLog = new EthLog();
-                ethLog.setResult(Collections.emptyList());
+                mcLog = new McLog();
+                mcLog.setResult(Collections.emptyList());
             }
-            process(ethLog.getLogs());
+            process(mcLog.getLogs());
 
         } catch (IOException e) {
             throwException(e);
@@ -111,14 +111,14 @@ public abstract class Filter<T> {
     }
 
     private void pollFilter(McFilter ethFilter) {
-        EthLog ethLog = null;
+        McLog mcLog = null;
         try {
-            ethLog = chain3j.mcGetFilterChanges(filterId).send();
+            mcLog = chain3j.mcGetFilterChanges(filterId).send();
         } catch (IOException e) {
             throwException(e);
         }
-        if (ethLog.hasError()) {
-            Error error = ethLog.getError();
+        if (mcLog.hasError()) {
+            Error error = mcLog.getError();
             switch (error.getCode()) {
                 case RpcErrors.FILTER_NOT_FOUND: reinstallFilter();
                     break;
@@ -126,13 +126,13 @@ public abstract class Filter<T> {
                     break;
             }
         } else {
-            process(ethLog.getLogs());
+            process(mcLog.getLogs());
         }
     }
 
     abstract McFilter sendRequest() throws IOException;
 
-    abstract void process(List<EthLog.LogResult> logResults);
+    abstract void process(List<McLog.LogResult> logResults);
     
     private void reinstallFilter() {
         log.warn("The filter has not been found. Filter id: " + filterId);
@@ -144,7 +144,7 @@ public abstract class Filter<T> {
         schedule.cancel(false);
 
         try {
-            EthUninstallFilter ethUninstallFilter = chain3j.ethUninstallFilter(filterId).send();
+            McUninstallFilter ethUninstallFilter = chain3j.mcUninstallFilter(filterId).send();
             if (ethUninstallFilter.hasError()) {
                 throwException(ethUninstallFilter.getError());
             }
@@ -160,12 +160,12 @@ public abstract class Filter<T> {
     /**
      * Retrieves historic filters for the filter with the given id.
      * Getting historic logs is not supported by all filters.
-     * If not the method should return an empty EthLog object
+     * If not the method should return an empty McLog object
      *
      * @param filterId Id of the filter for which the historic log should be retrieved
      * @return Historic logs, or an empty optional if the filter cannot retrieve historic logs
      */
-    protected abstract Optional<Request<?, EthLog>> getFilterLogs(BigInteger filterId);
+    protected abstract Optional<Request<?, McLog>> getFilterLogs(BigInteger filterId);
 
     void throwException(Response.Error error) {
         throw new FilterException("Invalid request: "

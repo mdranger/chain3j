@@ -17,11 +17,11 @@ import rx.Subscription;
 
 import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.Chain3j;
-import org.chain3j.protocol.Web3jService;
+import org.chain3j.protocol.Chain3jService;
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.EthFilter;
-import org.chain3j.protocol.core.methods.response.EthLog;
-import org.chain3j.protocol.core.methods.response.EthUninstallFilter;
+import org.chain3j.protocol.core.methods.response.McFilter;
+import org.chain3j.protocol.core.methods.response.McLog;
+import org.chain3j.protocol.core.methods.response.McUninstallFilter;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
 
 public abstract class FilterTester {
 
-    private Web3jService web3jService;
+    private Chain3jService chain3jService;
     Chain3j chain3j;
 
     final ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
@@ -43,25 +43,25 @@ public abstract class FilterTester {
 
     @Before
     public void setUp() {
-        web3jService = mock(Web3jService.class);
-        chain3j = chain3j.build(web3jService, 1000, scheduledExecutorService);
+        chain3jService = mock(Chain3jService.class);
+        chain3j = Chain3j.build(chain3jService, 1000, scheduledExecutorService);
     }
 
-    <T> void runTest(EthLog ethLog, Observable<T> observable) throws Exception {
-        EthFilter ethFilter = objectMapper.readValue(
+    <T> void runTest(McLog ethLog, Observable<T> observable) throws Exception {
+        McFilter ethFilter = objectMapper.readValue(
                 "{\n"
                         + "  \"id\":1,\n"
                         + "  \"jsonrpc\": \"2.0\",\n"
                         + "  \"result\": \"0x1\"\n"
-                        + "}", EthFilter.class);
+                        + "}", McFilter.class);
 
-        EthUninstallFilter ethUninstallFilter = objectMapper.readValue(
-                "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":true}", EthUninstallFilter.class);
+        McUninstallFilter ethUninstallFilter = objectMapper.readValue(
+                "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":true}", McUninstallFilter.class);
 
-        EthLog notFoundFilter = objectMapper.readValue(
+        McLog notFoundFilter = objectMapper.readValue(
                 "{\"jsonrpc\":\"2.0\",\"id\":1,"
                 + "\"error\":{\"code\":-32000,\"message\":\"filter not found\"}}",
-                EthLog.class);
+                McLog.class);
 
         @SuppressWarnings("unchecked")
         List<T> expected = createExpected(ethLog);
@@ -71,11 +71,11 @@ public abstract class FilterTester {
 
         CountDownLatch completedLatch = new CountDownLatch(1);
 
-        when(web3jService.send(any(Request.class), eq(EthFilter.class)))
+        when(chain3jService.send(any(Request.class), eq(McFilter.class)))
                 .thenReturn(ethFilter);
-        when(web3jService.send(any(Request.class), eq(EthLog.class)))
+        when(chain3jService.send(any(Request.class), eq(McLog.class)))
             .thenReturn(ethLog).thenReturn(notFoundFilter).thenReturn(ethLog);
-        when(web3jService.send(any(Request.class), eq(EthUninstallFilter.class)))
+        when(chain3jService.send(any(Request.class), eq(McUninstallFilter.class)))
                 .thenReturn(ethUninstallFilter);
 
         Subscription subscription = observable.subscribe(
@@ -95,8 +95,8 @@ public abstract class FilterTester {
         assertTrue(subscription.isUnsubscribed());
     }
 
-    List createExpected(EthLog ethLog) {
-        List<EthLog.LogResult> logResults = ethLog.getLogs();
+    List createExpected(McLog ethLog) {
+        List<McLog.LogResult> logResults = ethLog.getLogs();
         if (logResults.isEmpty()) {
             fail("Results cannot be empty");
         }

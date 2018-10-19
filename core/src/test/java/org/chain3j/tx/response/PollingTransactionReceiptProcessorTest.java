@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
-import org.chain3j.protocol.core.methods.response.EthGetTransactionReceipt;
+import org.chain3j.protocol.core.methods.response.McGetTransactionReceipt;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 
@@ -28,7 +28,7 @@ public class PollingTransactionReceiptProcessorTest {
 
     @Before
     public void setUp() {
-        chain3j = mock(chain3j.class);
+        chain3j = mock(Chain3j.class);
         sleepDuration = 100;
         attempts = 3;
         processor = new PollingTransactionReceiptProcessor(chain3j, sleepDuration, attempts);
@@ -38,7 +38,7 @@ public class PollingTransactionReceiptProcessorTest {
     public void returnsTransactionReceiptWhenItIsAvailableInstantly() throws Exception {
         TransactionReceipt transactionReceipt = new TransactionReceipt();
         doReturn(requestReturning(response(transactionReceipt)))
-                .when(chain3j).ethGetTransactionReceipt(TRANSACTION_HASH);
+                .when(chain3j).mcGetTransactionReceipt(TRANSACTION_HASH);
 
         TransactionReceipt receipt = processor.waitForTransactionReceipt(TRANSACTION_HASH);
 
@@ -48,7 +48,7 @@ public class PollingTransactionReceiptProcessorTest {
     @Test
     public void throwsTransactionExceptionWhenReceiptIsNotAvailableInTime() throws Exception {
         doReturn(requestReturning(response(null)))
-                .when(chain3j).ethGetTransactionReceipt(TRANSACTION_HASH);
+                .when(chain3j).mcGetTransactionReceipt(TRANSACTION_HASH);
 
         try {
             processor.waitForTransactionReceipt(TRANSACTION_HASH);
@@ -68,8 +68,8 @@ public class PollingTransactionReceiptProcessorTest {
         return request;
     }
 
-    private static EthGetTransactionReceipt response(TransactionReceipt transactionReceipt) {
-        EthGetTransactionReceipt response = new EthGetTransactionReceipt();
+    private static McGetTransactionReceipt response(TransactionReceipt transactionReceipt) {
+        McGetTransactionReceipt response = new McGetTransactionReceipt();
         response.setResult(transactionReceipt);
         return response;
     }

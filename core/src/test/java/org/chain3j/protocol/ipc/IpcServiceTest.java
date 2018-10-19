@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.chain3j.protocol.core.Request;
-import org.chain3j.protocol.core.methods.response.Web3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,7 +34,7 @@ public class IpcServiceTest {
                 "{\"jsonrpc\":\"2.0\",\"id\":1,"
                         + "\"result\":\"Geth/v1.5.4-stable-b70acf3c/darwin/go1.7.3\"}\n");
 
-        ipcService.send(new Request(), Web3ClientVersion.class);
+        ipcService.send(new Request(), Chain3ClientVersion.class);
 
         verify(ioFacade).write("{\"jsonrpc\":\"2.0\",\"method\":null,\"params\":null,\"id\":0}");
     }

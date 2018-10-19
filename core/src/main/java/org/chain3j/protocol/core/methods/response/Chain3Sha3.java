@@ -3,7 +3,7 @@ package org.chain3j.protocol.core.methods.response;
 import org.chain3j.protocol.core.Response;
 
 /**
- * web3_sha3.
+ * chain3_sha3.
  */
-public class Web3Sha3 extends Response<String> {
+public class Chain3Sha3 extends Response<String> {
 }

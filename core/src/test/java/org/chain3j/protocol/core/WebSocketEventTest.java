@@ -32,7 +32,7 @@ public class WebSocketEventTest {
             webSocketClient, true
     );
 
-    private Chain3j chain3j = chain3j.build(webSocketService);
+    private Chain3j chain3j = Chain3j.build(webSocketService);
 
     private final ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
 
