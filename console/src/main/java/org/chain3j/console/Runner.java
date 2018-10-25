@@ -15,14 +15,16 @@ public class Runner {
     private static String USAGE = "Usage: chain3j version|wallet|solidity ...";
 
     private static String LOGO = "\n" // generated at http://patorjk.com/software/taag
-            + "              _      _____ _     _        \n"
-            + "             | |    |____ (_)   (_)       \n"
-            + "__      _____| |__      / /_     _   ___  \n"
-            + "\\ \\ /\\ / / _ \\ '_ \\     \\ \\ |   | | / _ \\ \n"
-            + " \\ V  V /  __/ |_) |.___/ / | _ | || (_) |\n"
-            + "  \\_/\\_/ \\___|_.__/ \\____/| |(_)|_| \\___/ \n"
-            + "                         _/ |             \n"
-            + "                        |__/              \n";
+                                + "        _             _         ____   _   \n"
+                                + "       | |           (_)       |___ \\ (_)  \n"
+                                + "   ___ | |__    __ _  _  _ __    __) | _   \n"
+                                + "  / __|| '_ \\  / _` || || '_ \\  |__ < | |  \n"
+                                + " | (__ | | | || (_| || || | | | ___) || |  \n"
+                                + "  \\___||_| |_| \\__,_||_||_| |_||____/ | |  \n"
+                                + "                                     _/ |  \n"
+                                + "                                    |__/   \n";
+
+
 
     public static void main(String[] args) throws Exception {
         System.out.println(LOGO);
