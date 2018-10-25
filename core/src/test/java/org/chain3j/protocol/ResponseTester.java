@@ -12,8 +12,8 @@ import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
 import org.chain3j.protocol.http.HttpService;
 
-import static org.junit.Assert.fail;
 import static org.chain3j.protocol.http.HttpService.JSON_MEDIA_TYPE;
+import static org.junit.Assert.fail;
 
 /**
  * Protocol Response tests.

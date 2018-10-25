@@ -5,11 +5,6 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.chain3j.utils.Strings.capitaliseFirstLetter;
 import static org.chain3j.utils.Strings.isEmpty;
 import static org.chain3j.utils.Strings.join;
@@ -17,6 +12,11 @@ import static org.chain3j.utils.Strings.lowercaseFirstLetter;
 import static org.chain3j.utils.Strings.repeat;
 import static org.chain3j.utils.Strings.toCsv;
 import static org.chain3j.utils.Strings.zeros;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 public class StringsTest {

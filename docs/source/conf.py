@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# web3j documentation build configuration file, created by
+# chain3j documentation build configuration file, created by
 # sphinx-quickstart on Fri Oct 14 10:44:04 2016.
 #
 # This file is execfile()d with the current directory set to its
@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'web3j'
+project = u'chain3j'
 copyright = u'2016-2018, Conor Svensson'
 author = u'Conor Svensson'
 
@@ -113,16 +113,16 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    'logo': 'web3j.png',
+    'logo': 'chain3j.png',
     'logo_name': 'true',
-    'github_user': 'web3j',
-    'github_repo': 'web3j',
+    'github_user': 'chain3j',
+    'github_repo': 'chain3j',
     'github_type': 'star',
     'github_banner': 'true',
     'travis_button': 'true',
     'codecov_button': 'true',
     'description': 'Lightweight Java library for integration with Ethereum clients',
-    'canonical_url': 'https://web3j.readthedocs.io/',
+    'canonical_url': 'https://chain3j.readthedocs.io/',
     'analytics_id': 'UA-85710619-1',
 }
 
@@ -219,7 +219,7 @@ html_sidebars = {
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'web3jdoc'
+htmlhelp_basename = 'chain3jdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -241,7 +241,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'web3j.tex', u'web3j Documentation',
+    (master_doc, 'chain3j.tex', u'chain3j Documentation',
      u'Conor Svensson', 'manual'),
 ]
 
@@ -271,7 +271,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'web3j', u'web3j Documentation',
+    (master_doc, 'chain3j', u'chain3j Documentation',
      [author], 1)
 ]
 
@@ -285,8 +285,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'web3j', u'web3j Documentation',
-     author, 'web3j', 'Lightweight Java library for integration with Ethereum clients.',
+    (master_doc, 'chain3j', u'chain3j Documentation',
+     author, 'chain3j', 'Lightweight Java library for integration with Ethereum clients.',
      'Miscellaneous'),
 ]
 

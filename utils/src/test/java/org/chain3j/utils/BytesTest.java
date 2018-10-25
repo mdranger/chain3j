@@ -2,9 +2,9 @@ package org.chain3j.utils;
 
 import org.junit.Test;
 
+import static org.chain3j.utils.Bytes.trimLeadingZeroes;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.chain3j.utils.Bytes.trimLeadingZeroes;
 
 public class BytesTest {
 

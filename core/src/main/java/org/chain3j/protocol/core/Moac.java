@@ -2,6 +2,8 @@ package org.chain3j.protocol.core;
 
 import java.math.BigInteger;
 
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 import org.chain3j.protocol.core.methods.response.McAccounts;
 import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.McBlockNumber;
@@ -41,8 +43,6 @@ import org.chain3j.protocol.core.methods.response.NetVersion;
 // import org.chain3j.protocol.core.methods.response.ShhNewIdentity;
 // import org.chain3j.protocol.core.methods.response.ShhUninstallFilter;
 // import org.chain3j.protocol.core.methods.response.ShhVersion;
-import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
-import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 
 /**
  * Core MOAC JSON-RPC API.
@@ -138,11 +138,11 @@ public interface Moac {
 
     Request<?, McGetCompilers> mcGetCompilers();
 
-//     Request<?, McCompileLLL> mcCompileLLL(String sourceCode);
+    //     Request<?, McCompileLLL> mcCompileLLL(String sourceCode);
 
-//     Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode);
+    //     Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode);
 
-//     Request<?, McCompileSerpent> mcCompileSerpent(String sourceCode);
+    //     Request<?, McCompileSerpent> mcCompileSerpent(String sourceCode);
 
     Request<?, McFilter> mcNewFilter(org.chain3j.protocol.core.methods.request.McFilter mcFilter);
 
@@ -164,32 +164,32 @@ public interface Moac {
 
     Request<?, McSubmitHashrate> mcSubmitHashrate(String hashrate, String clientId);
 
-//     Request<?, DbPutString> dbPutString(String databaseName, String keyName, String stringToStore);
+    //     Request<?, DbPutString> dbPutString(String databaseName, String keyName, String stringToStore);
 
-//     Request<?, DbGetString> dbGetString(String databaseName, String keyName);
+    //     Request<?, DbGetString> dbGetString(String databaseName, String keyName);
 
-//     Request<?, DbPutHex> dbPutHex(String databaseName, String keyName, String dataToStore);
+    //     Request<?, DbPutHex> dbPutHex(String databaseName, String keyName, String dataToStore);
 
-//     Request<?, DbGetHex> dbGetHex(String databaseName, String keyName);
+    //     Request<?, DbGetHex> dbGetHex(String databaseName, String keyName);
 
-//     Request<?, org.chain3j.protocol.core.methods.response.ShhPost> shhPost(
-//             org.chain3j.protocol.core.methods.request.ShhPost shhPost);
+    //     Request<?, org.chain3j.protocol.core.methods.response.ShhPost> shhPost(
+    //             org.chain3j.protocol.core.methods.request.ShhPost shhPost);
 
-//     Request<?, ShhVersion> shhVersion();
+    //     Request<?, ShhVersion> shhVersion();
 
-//     Request<?, ShhNewIdentity> shhNewIdentity();
+    //     Request<?, ShhNewIdentity> shhNewIdentity();
 
-//     Request<?, ShhHasIdentity> shhHasIdentity(String identityAddress);
+    //     Request<?, ShhHasIdentity> shhHasIdentity(String identityAddress);
 
-//     Request<?, ShhNewGroup> shhNewGroup();
+    //     Request<?, ShhNewGroup> shhNewGroup();
 
-//     Request<?, ShhAddToGroup> shhAddToGroup(String identityAddress);
+    //     Request<?, ShhAddToGroup> shhAddToGroup(String identityAddress);
 
-//     Request<?, ShhNewFilter> shhNewFilter(ShhFilter shhFilter);
+    //     Request<?, ShhNewFilter> shhNewFilter(ShhFilter shhFilter);
 
-//     Request<?, ShhUninstallFilter> shhUninstallFilter(BigInteger filterId);
+    //     Request<?, ShhUninstallFilter> shhUninstallFilter(BigInteger filterId);
 
-//     Request<?, ShhMessages> shhGetFilterChanges(BigInteger filterId);
+    //     Request<?, ShhMessages> shhGetFilterChanges(BigInteger filterId);
 
-//     Request<?, ShhMessages> shhGetMessages(BigInteger filterId);
+    //     Request<?, ShhMessages> shhGetMessages(BigInteger filterId);
 }

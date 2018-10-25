@@ -16,7 +16,7 @@ Instructions for obtaining Ether are described below in :ref:`obtaining-ether`.
 Additionally, it is possible to query the state of a smart contract, this is described in
 :ref:`querying-state`.
 
-.. image:: /images/web3j_transaction.png
+.. image:: /images/chain3j_transaction.png
    :scale: 20%
 
 
@@ -66,7 +66,7 @@ Details of how to request Ether for the Kovan testnet are available
 `here <https://github.com/kovan-testnet/faucet>`_.
 
 If you need some Ether on the Ropsten testnet to get started, please post a message with your
-wallet address to the `web3j Gitter channel <https://gitter.im/web3j/web3j>`_ and you will be
+wallet address to the `chain3j Gitter channel <https://gitter.im/chain3j/chain3j>`_ and you will be
 sent some.
 
 
@@ -110,10 +110,10 @@ are used to dictate how much Ether you wish to spend in order for a tranaction t
 
 *Gas price*
 
-  This is the amount you are prepared in Ether per unit of gas. web3j uses a default price
+  This is the amount you are prepared in Ether per unit of gas. chain3j uses a default price
   of 22,000,000,000 Wei
   (22 x 10\ :sup:`-8` Ether). This is defined in
-  `ManagedTransaction <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/tx/ManagedTransaction.java>`_.
+  `ManagedTransaction <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/tx/ManagedTransaction.java>`_.
 
 
 *Gas limit*
@@ -140,7 +140,7 @@ transact with Ethereum.
 #. :ref:`signing-via-client`
 #. :ref:`offline-signing`
 
-Both mechanisms are supported via web3j.
+Both mechanisms are supported via chain3j.
 
 
 .. _signing-via-client:
@@ -160,22 +160,22 @@ via:
   for `Parity <https://github.com/paritytech/parity/wiki/JSONRPC-personal-module#personal_newaccount>`_
   or `Geth <https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_newaccount>`_
 
-With your wallet file created, you can unlock your account via web3j by first of all creating an
-instance of web3j that supports Parity/Geth admin commands::
+With your wallet file created, you can unlock your account via chain3j by first of all creating an
+instance of chain3j that supports Parity/Geth admin commands::
 
-   Admin web3j = Admin.build(new HttpService());
+   Admin chain3j = Admin.build(new HttpService());
 
 Then you can unlock the account, and providing this was successful, send a transaction::
 
-   PersonalUnlockAccount personalUnlockAccount = web3j.personalUnlockAccount("0x000...", "a password").send();
+   PersonalUnlockAccount personalUnlockAccount = chain3j.personalUnlockAccount("0x000...", "a password").send();
    if (personalUnlockAccount.accountUnlocked()) {
        // send a transaction
    }
 
 
 Transactions for sending in this manner should be created via
-`EthSendTransaction <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/core/methods/response/EthSendTransaction.java>`_,
-with the `Transaction <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/core/methods/request/Transaction.java>`_ type::
+`EthSendTransaction <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/core/methods/response/EthSendTransaction.java>`_,
+with the `Transaction <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/core/methods/request/Transaction.java>`_ type::
 
   Transaction transaction = Transaction.createContractTransaction(
                 <from address>,
@@ -184,23 +184,23 @@ with the `Transaction <https://github.com/web3j/web3j/blob/master/core/src/main/
                 "0x...<smart contract code to execute>"
         );
 
-        org.web3j.protocol.core.methods.response.EthSendTransaction
+        org.chain3j.protocol.core.methods.response.EthSendTransaction
                 transactionResponse = parity.ethSendTransaction(ethSendTransaction)
                 .send();
 
         String transactionHash = transactionResponse.getTransactionHash();
 
-        // poll for transaction response via org.web3j.protocol.Web3j.ethGetTransactionReceipt(<txHash>)
+        // poll for transaction response via org.chain3j.protocol.Chain3j.ethGetTransactionReceipt(<txHash>)
 
 Where the *<nonce>* value is obtained as per :ref:`below <nonce>`.
 
 Please refer to the integration test
-`DeployContractIT <https://github.com/web3j/web3j/blob/master/integration-tests/src/test/java/org/web3j/protocol/scenarios/DeployContractIT.java>`_
+`DeployContractIT <https://github.com/chain3j/chain3j/blob/master/integration-tests/src/test/java/org/chain3j/protocol/scenarios/DeployContractIT.java>`_
 and its superclass
-`Scenario <https://github.com/web3j/web3j/blob/master/integration-tests/src/test/java/org/web3j/protocol/scenarios/Scenario.java>`_
+`Scenario <https://github.com/chain3j/chain3j/blob/master/integration-tests/src/test/java/org/chain3j/protocol/scenarios/Scenario.java>`_
 for further details of this transaction workflow.
 
-Further details of working with the different admin commands supported by web3j are available in
+Further details of working with the different admin commands supported by chain3j are available in
 the section :doc:`management_apis`.
 
 
@@ -213,13 +213,13 @@ If you'd prefer not to manage your own Ethereum client, or do not want to provid
 such as your password to an Ethereum client, then offline transaction signing is the way to go.
 
 Offline transaction signing allows you to sign a transaction using your Ethereum Ethereum wallet
-within web3j, allowing you to have complete control over your private credentials. A transaction
+within chain3j, allowing you to have complete control over your private credentials. A transaction
 created offline can then be sent to any Ethereum client on the network, which will propagate the
 transaction out to other nodes, provided it is a valid transaction.
 
 You can also perform out of process transaction signing if required. This can be achieved by
 overriding the *sign* method in
-`ECKeyPair <https://github.com/web3j/web3j/blob/master/crypto/src/main/java/org/web3j/crypto/ECKeyPair.java#L41>`_.
+`ECKeyPair <https://github.com/chain3j/chain3j/blob/master/crypto/src/main/java/org/chain3j/crypto/ECKeyPair.java#L41>`_.
 
 
 .. _wallet-files:
@@ -230,7 +230,7 @@ Creating and working with wallet files
 In order to sign transactions offline, you need to have either your Ethereum wallet file or the
 public and private keys associated with an Ethereum wallet/account.
 
-web3j is able to both generate a new secure Ethereum wallet file for you, or work with an existing
+chain3j is able to both generate a new secure Ethereum wallet file for you, or work with an existing
 wallet file.
 
 To create a new wallet file::
@@ -256,7 +256,7 @@ Signing transactions
 --------------------
 
 Transactions to be used in an offline signing capacity, should use the
-`RawTransaction <https://github.com/web3j/web3j/blob/master/crypto/src/main/java/org/web3j/crypto/RawTransaction.java>`_
+`RawTransaction <https://github.com/chain3j/chain3j/blob/master/crypto/src/main/java/org/chain3j/crypto/RawTransaction.java>`_
 type for this purpose. The RawTransaction is similar to the previously mentioned Transaction type,
 however it does not require a *from* address, as this can be inferred from the signature.
 
@@ -287,13 +287,13 @@ Where the credentials are those loaded as per :ref:`wallet-files`.
 
 The transaction is then sent using `eth_sendRawTransaction <https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendrawtransaction>`_::
 
-   EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).sendAsync().get();
+   EthSendTransaction ethSendTransaction = chain3j.ethSendRawTransaction(hexValue).sendAsync().get();
    String transactionHash = ethSendTransaction.getTransactionHash();
-   // poll for transaction response via org.web3j.protocol.Web3j.ethGetTransactionReceipt(<txHash>)
+   // poll for transaction response via org.chain3j.protocol.Chain3j.ethGetTransactionReceipt(<txHash>)
 
 
 Please refer to the integration test
-`CreateRawTransactionIT <https://github.com/web3j/web3j/blob/master/integration-tests/src/test/java/org/web3j/protocol/scenarios/CreateRawTransactionIT.java>`_
+`CreateRawTransactionIT <https://github.com/chain3j/chain3j/blob/master/integration-tests/src/test/java/org/chain3j/protocol/scenarios/CreateRawTransactionIT.java>`_
 for a full example of creating and sending a raw transaction.
 
 
@@ -309,7 +309,7 @@ a transaction with the same nonce, however, once mined, any subsequent submissio
 You can obtain the next available nonce via the
 `eth_getTransactionCount <https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactioncount>`_ method::
 
-   EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
+   EthGetTransactionCount ethGetTransactionCount = chain3j.ethGetTransactionCount(
                 address, DefaultBlockParameterName.LATEST).sendAsync().get();
 
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
@@ -325,7 +325,7 @@ The nonce can then be used to create your transaction object::
 Transaction types
 -----------------
 
-The different types of transaction in web3j work with both Transaction and RawTransaction objects.
+The different types of transaction in chain3j work with both Transaction and RawTransaction objects.
 The key difference is that Transaction objects must always have a from address, so that the
 Ethereum client which processes the
 `eth_sendTransaction <https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction>`_
@@ -366,11 +366,11 @@ object:
    // send...
 
 However, it is recommended that you use the
-`Transfer class <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/tx/Transfer.java>`_
+`Transfer class <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/tx/Transfer.java>`_
 for sending Ether, which takes care of the nonce management and polling for a
 response for you::
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
    TransactionReceipt transactionReceipt = Transfer.sendFunds(
            web3, credentials, "0x<address>|<ensName>",
@@ -382,7 +382,7 @@ Recommended approach for working with smart contracts
 
 When working with smart contract wrappers as outlined below, you will have to perform all of
 the conversions from Solidity to native Java types manually. It is far more effective to use
-web3j's :ref:`smart-contract-wrappers` which take care of all code generation and this conversion
+chain3j's :ref:`smart-contract-wrappers` which take care of all code generation and this conversion
 for you.
 
 
@@ -412,7 +412,7 @@ To deploy a new smart contract, the following attributes will need to be provide
 
    // get contract address
    EthGetTransactionReceipt transactionReceipt =
-                web3j.ethGetTransactionReceipt(transactionHash).send();
+                chain3j.ethGetTransactionReceipt(transactionHash).send();
 
    if (transactionReceipt.getTransactionReceipt.isPresent()) {
        String contractAddress = transactionReceipt.get().getContractAddress();
@@ -457,7 +457,7 @@ To transact with an existing smart contract, the following attributes will need 
 *data*
   the encoded function selector and parameter arguments
 
-web3j takes care of the function encoding for you, for further details on the implementation refer
+chain3j takes care of the function encoding for you, for further details on the implementation refer
 to the :doc:`abi` section.
 
 ::
@@ -471,8 +471,8 @@ to the :doc:`abi` section.
    Transaction transaction = Transaction.createFunctionCallTransaction(
                 <from>, <gasPrice>, <gasLimit>, contractAddress, <funds>, encodedFunction);
 
-   org.web3j.protocol.core.methods.response.EthSendTransaction transactionResponse =
-                web3j.ethSendTransaction(transaction).sendAsync().get();
+   org.chain3j.protocol.core.methods.response.EthSendTransaction transactionResponse =
+                chain3j.ethSendTransaction(transaction).sendAsync().get();
 
    String transactionHash = transactionResponse.getTransactionHash();
 
@@ -501,7 +501,7 @@ contract method's called, it simply returns the value from them::
                 Arrays.asList(new TypeReference<Type>() {}, ...));
 
    String encodedFunction = FunctionEncoder.encode(function)
-   org.web3j.protocol.core.methods.response.EthCall response = web3j.ethCall(
+   org.chain3j.protocol.core.methods.response.EthCall response = chain3j.ethCall(
                 Transaction.createEthCallTransaction(<from>, contractAddress, encodedFunction),
                 DefaultBlockParameterName.LATEST)
                 .sendAsync().get();

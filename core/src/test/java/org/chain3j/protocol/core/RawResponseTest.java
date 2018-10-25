@@ -3,8 +3,8 @@ package org.chain3j.protocol.core;
 import org.junit.Test;
 
 import org.chain3j.protocol.ResponseTester;
-import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.McBlock;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;

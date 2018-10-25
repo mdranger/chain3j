@@ -10,11 +10,11 @@ import org.chain3j.exceptions.MessageDecodingException;
 import org.chain3j.exceptions.MessageEncodingException;
 
 import static junit.framework.TestCase.assertFalse;
+import static org.chain3j.utils.Numeric.asByte;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.chain3j.utils.Numeric.asByte;
 
 
 public class NumericTest {

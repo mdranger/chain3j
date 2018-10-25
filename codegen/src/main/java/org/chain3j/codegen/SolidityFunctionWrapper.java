@@ -45,8 +45,8 @@ import org.chain3j.abi.datatypes.Type;
 import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.abi.datatypes.generated.AbiTypes;
 import org.chain3j.crypto.Credentials;
-import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.core.DefaultBlockParameter;
 import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.request.McFilter;
@@ -200,7 +200,7 @@ public class SolidityFunctionWrapper extends Generator {
 
     private TypeSpec.Builder createClassBuilder(String className, String binary) {
 
-        String javadoc = CODEGEN_WARNING + getWeb3jVersion();
+        String javadoc = CODEGEN_WARNING + getChain3jVersion();
 
         return TypeSpec.classBuilder(className)
                 .addModifiers(Modifier.PUBLIC)
@@ -209,7 +209,7 @@ public class SolidityFunctionWrapper extends Generator {
                 .addField(createBinaryDefinition(binary));
     }
 
-    private String getWeb3jVersion() {
+    private String getChain3jVersion() {
         String version;
 
         try {

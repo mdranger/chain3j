@@ -20,7 +20,7 @@ if there are any updates to your filters due to the synchronous nature of HTTP a
 Additionally the block and transaction filters only provide the transaction or block hash, so a
 further request is required to obtain the actual transaction or block referred to by the hash.
 
-web3j's managed `Filter <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/core/filters/Filter.java>`_
+chain3j's managed `Filter <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/core/filters/Filter.java>`_
 implementation address these issues, so you have a fully asynchronous event based API for working
 with filters. It uses `RxJava <https://github.com/ReactiveX/RxJava>`_'s
 `Observables <http://reactivex.io/documentation/observable.html>`_ which provides a consistent API
@@ -36,20 +36,20 @@ Block and transaction filters
 To receive all new blocks as they are added to the blockchain (the false parameter specifies that
 we only want the blocks, not the embedded transactions too)::
 
-   Subscription subscription = web3j.blockObservable(false).subscribe(block -> {
+   Subscription subscription = chain3j.blockObservable(false).subscribe(block -> {
        ...
    });
 
 To receive all new transactions as they are added to the blockchain::
 
-   Subscription subscription = web3j.transactionObservable().subscribe(tx -> {
+   Subscription subscription = chain3j.transactionObservable().subscribe(tx -> {
        ...
    });
 
 To receive all pending transactions as they are submitted to the network (i.e. before they have
 been grouped into a block together)::
 
-   Subscription subscription = web3j.pendingTransactionObservable().subscribe(tx -> {
+   Subscription subscription = chain3j.pendingTransactionObservable().subscribe(tx -> {
        ...
    });
 
@@ -59,18 +59,18 @@ Subscriptions should always be cancelled when no longer required via *unsubscrib
 
 Other callbacks are also provided which provide simply the block or transaction hashes,
 for details of these refer to the
-`Web3jRx <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/rx/Web3jRx.java>`_
+`Chain3jRx <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/rx/Chain3jRx.java>`_
 interface.
 
 
 Replay filters
 --------------
 
-web3j also provides filters for replaying block and transaction history.
+chain3j also provides filters for replaying block and transaction history.
 
 To replay a range of blocks from the blockchain::
 
-   Subscription subscription = web3j.replayBlocksObservable(
+   Subscription subscription = chain3j.replayBlocksObservable(
            <startBlockNumber>, <endBlockNumber>, <fullTxObjects>)
            .subscribe(block -> {
                ...
@@ -78,16 +78,16 @@ To replay a range of blocks from the blockchain::
 
 To replay the individual transactions contained within a range of blocks::
 
-   Subscription subscription = web3j.replayTransactionsObservable(
+   Subscription subscription = chain3j.replayTransactionsObservable(
            <startBlockNumber>, <endBlockNumber>)
            .subscribe(tx -> {
                ...
    });
 
-You can also get web3j to replay all blocks up to the most current, and provide notification
+You can also get chain3j to replay all blocks up to the most current, and provide notification
 (via the submitted Observable) once you've caught up::
 
-   Subscription subscription = web3j.catchUpToLatestBlockObservable(
+   Subscription subscription = chain3j.catchUpToLatestBlockObservable(
            <startBlockNumber>, <fullTxObjects>, <onCompleteObservable>)
            .subscribe(block -> {
                ...
@@ -96,7 +96,7 @@ You can also get web3j to replay all blocks up to the most current, and provide 
 Or, if you'd rather replay all blocks to the most current, then be notified of new subsequent
 blocks being created::
 
-   Subscription subscription = web3j.catchUpToLatestAndSubscribeToNewBlocksObservable(
+   Subscription subscription = chain3j.catchUpToLatestAndSubscribeToNewBlocksObservable(
            <startBlockNumber>, <fullTxObjects>)
            .subscribe(block -> {
                ...
@@ -104,14 +104,14 @@ blocks being created::
 
 As above, but with transactions contained within blocks::
 
-   Subscription subscription = web3j.catchUpToLatestAndSubscribeToNewTransactionsObservable(
+   Subscription subscription = chain3j.catchUpToLatestAndSubscribeToNewTransactionsObservable(
            <startBlockNumber>)
            .subscribe(tx -> {
                ...
    });
 
 All of the above filters are exported via the
-`Web3jRx <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/rx/Web3jRx.java>`_
+`Chain3jRx <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/rx/Chain3jRx.java>`_
 interface.
 
 
@@ -128,7 +128,7 @@ The `Solidity documentation <http://solidity.readthedocs.io/en/develop/contracts
 provides a good overview of EVM events.
 
 You use the
-`McFilter <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/core/methods/request/McFilter.java>`_
+`McFilter <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/core/methods/request/McFilter.java>`_
 type to specify the topics that you wish to apply to the filter. This can include the address of
 the smart contract you wish to apply the filter to. You can also provide specific topics to filter
 on. Where the individual topics represent indexed parameters on the smart contract::
@@ -139,7 +139,7 @@ on. Where the individual topics represent indexed parameters on the smart contra
 
 This filter can then be created using a similar syntax to the block and transaction filters above::
 
-   web3j.ethLogObservable(filter).subscribe(log -> {
+   chain3j.ethLogObservable(filter).subscribe(log -> {
        ...
    });
 
@@ -155,19 +155,19 @@ the network will be captured by the filter.
 A note on functional composition
 --------------------------------
 
-In addition to *send()* and *sendAsync*, all JSON-RPC method implementations in web3j support the
+In addition to *send()* and *sendAsync*, all JSON-RPC method implementations in chain3j support the
 *observable()* method to create an Observable to execute the request asynchronously. This makes it
 very straight forwards to compose JSON-RPC calls together into new functions.
 
 For instance, the
-`blockObservable <https://github.com/web3j/web3j/blob/master/core/src/main/java/org/web3j/protocol/rx/JsonRpc2_0Rx.java>`_ is
+`blockObservable <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/protocol/rx/JsonRpc2_0Rx.java>`_ is
 itself composed of a number of separate JSON-RPC calls::
 
    public Observable<EthBlock> blockObservable(
            boolean fullTransactionObjects, long pollingInterval) {
        return this.ethBlockHashObservable(pollingInterval)
                .flatMap(blockHash ->
-                       web3j.ethGetBlockByHash(blockHash, fullTransactionObjects).observable());
+                       chain3j.ethGetBlockByHash(blockHash, fullTransactionObjects).observable());
    }
 
 Here we first create an observable that provides notifications of the block hash of each newly
@@ -179,8 +179,8 @@ Further examples
 ----------------
 
 Please refer to the integration test
-`ObservableIT <https://github.com/web3j/web3j/blob/master/integration-tests/src/test/java/org/web3j/protocol/core/ObservableIT.java>`_
+`ObservableIT <https://github.com/chain3j/chain3j/blob/master/integration-tests/src/test/java/org/chain3j/protocol/core/ObservableIT.java>`_
 for further examples.
 
 For a demonstration of using the manual filter API, you can take a look at the test
-`EventFilterIT <https://github.com/web3j/web3j/blob/master/integration-tests/src/test/java/org/web3j/protocol/scenarios/EventFilterIT.java>`_..
+`EventFilterIT <https://github.com/chain3j/chain3j/blob/master/integration-tests/src/test/java/org/chain3j/protocol/scenarios/EventFilterIT.java>`_..

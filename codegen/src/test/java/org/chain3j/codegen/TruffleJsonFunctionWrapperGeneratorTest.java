@@ -18,9 +18,9 @@ import org.junit.Test;
 import org.chain3j.TempFileProvider;
 import org.chain3j.utils.Strings;
 
-import static org.junit.Assert.assertTrue;
 import static org.chain3j.codegen.FunctionWrapperGenerator.JAVA_TYPES_ARG;
 import static org.chain3j.codegen.FunctionWrapperGenerator.SOLIDITY_TYPES_ARG;
+import static org.junit.Assert.assertTrue;
 
 public class TruffleJsonFunctionWrapperGeneratorTest extends TempFileProvider {
 

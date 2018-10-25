@@ -8,11 +8,11 @@ import org.junit.Test;
 
 import org.chain3j.protocol.core.methods.response.AbiDefinition;
 
+import static org.chain3j.codegen.TruffleJsonFunctionWrapperGenerator.Contract;
+import static org.chain3j.codegen.TruffleJsonFunctionWrapperGenerator.loadContractDefinition;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.chain3j.codegen.TruffleJsonFunctionWrapperGenerator.Contract;
-import static org.chain3j.codegen.TruffleJsonFunctionWrapperGenerator.loadContractDefinition;
 
 /**
  * Test that we can parse Truffle Contract from JSON file.

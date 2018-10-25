@@ -15,9 +15,9 @@ import org.mockito.stubbing.OngoingStubbing;
 import rx.Observable;
 import rx.Subscription;
 
-import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.Chain3jService;
+import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.core.DefaultBlockParameterNumber;
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.methods.response.McBlock;

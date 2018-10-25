@@ -12,7 +12,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class JsonRpc2_0Web3jTest {
+public class JsonRpc2_0Chain3jTest {
 
     private ScheduledExecutorService scheduledExecutorService
             = mock(ScheduledExecutorService.class);

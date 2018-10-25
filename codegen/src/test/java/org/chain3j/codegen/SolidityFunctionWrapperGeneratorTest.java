@@ -15,12 +15,12 @@ import org.junit.Test;
 import org.chain3j.TempFileProvider;
 import org.chain3j.utils.Strings;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.chain3j.codegen.SolidityFunctionWrapperGenerator.JAVA_TYPES_ARG;
 import static org.chain3j.codegen.SolidityFunctionWrapperGenerator.SOLIDITY_TYPES_ARG;
 import static org.chain3j.codegen.SolidityFunctionWrapperGenerator.getFileNameNoExtension;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 public class SolidityFunctionWrapperGeneratorTest extends TempFileProvider {

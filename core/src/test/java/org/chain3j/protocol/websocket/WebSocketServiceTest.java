@@ -24,8 +24,8 @@ import rx.Subscription;
 
 import org.chain3j.protocol.core.Request;
 import org.chain3j.protocol.core.Response;
-import org.chain3j.protocol.core.methods.response.McSubscribe;
 import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.McSubscribe;
 import org.chain3j.protocol.websocket.events.NewHeadsNotification;
 
 import static org.junit.Assert.assertEquals;
@@ -122,7 +122,7 @@ public class WebSocketServiceTest {
         service.sendAsync(request, Chain3ClientVersion.class);
 
         verify(webSocketClient).send(
-                "{\"jsonrpc\":\"2.0\",\"method\":\"web3_clientVersion\",\"params\":[],\"id\":1}");
+                "{\"jsonrpc\":\"2.0\",\"method\":\"chain3_clientVersion\",\"params\":[],\"id\":1}");
     }
 
     @Test

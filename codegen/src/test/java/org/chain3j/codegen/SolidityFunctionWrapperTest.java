@@ -29,16 +29,16 @@ import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.abi.datatypes.generated.Uint64;
 import org.chain3j.protocol.core.methods.response.AbiDefinition;
 
+import static org.chain3j.codegen.SolidityFunctionWrapper.buildTypeName;
+import static org.chain3j.codegen.SolidityFunctionWrapper.createValidParamName;
+import static org.chain3j.codegen.SolidityFunctionWrapper.getEventNativeType;
+import static org.chain3j.codegen.SolidityFunctionWrapper.getNativeType;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.chain3j.codegen.SolidityFunctionWrapper.buildTypeName;
-import static org.chain3j.codegen.SolidityFunctionWrapper.createValidParamName;
-import static org.chain3j.codegen.SolidityFunctionWrapper.getEventNativeType;
-import static org.chain3j.codegen.SolidityFunctionWrapper.getNativeType;
 
 
 public class SolidityFunctionWrapperTest extends TempFileProvider {

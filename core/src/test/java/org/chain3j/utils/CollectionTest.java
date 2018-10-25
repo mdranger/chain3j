@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.chain3j.utils.Collection.EMPTY_STRING_ARRAY;
 import static org.chain3j.utils.Collection.Function;
 import static org.chain3j.utils.Collection.create;
 import static org.chain3j.utils.Collection.join;
 import static org.chain3j.utils.Collection.tail;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class CollectionTest {
 

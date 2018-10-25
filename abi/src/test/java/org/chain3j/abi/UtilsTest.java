@@ -21,10 +21,10 @@ import org.chain3j.abi.datatypes.generated.StaticArray2;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.abi.datatypes.generated.Uint64;
 
+import static org.chain3j.abi.Utils.typeMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.chain3j.abi.Utils.typeMap;
 
 public class UtilsTest {
 

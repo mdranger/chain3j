@@ -4,8 +4,8 @@ import org.junit.Before;
 
 import org.chain3j.TempFileProvider;
 
-import static org.mockito.Mockito.mock;
 import static org.chain3j.crypto.SampleKeys.PASSWORD;
+import static org.mockito.Mockito.mock;
 
 public abstract class WalletTester extends TempFileProvider {
 

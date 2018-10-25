@@ -4,9 +4,9 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
+import static org.chain3j.crypto.ContractUtils.generateContractAddress;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.chain3j.crypto.ContractUtils.generateContractAddress;
 
 public class ContractUtilsTest {
 

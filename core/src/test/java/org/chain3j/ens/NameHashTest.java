@@ -2,11 +2,11 @@ package org.chain3j.ens;
 
 import org.junit.Test;
 
+import static org.chain3j.ens.NameHash.nameHash;
+import static org.chain3j.ens.NameHash.normalise;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static org.chain3j.ens.NameHash.nameHash;
-import static org.chain3j.ens.NameHash.normalise;
 
 public class NameHashTest {
 

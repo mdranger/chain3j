@@ -5,11 +5,11 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 
 import org.chain3j.protocol.core.methods.response.AbiDefinition;
+import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.McCompileSolidity;
 import org.chain3j.protocol.core.methods.response.McLog;
 import org.chain3j.protocol.core.methods.response.McSyncing;
-import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.ShhMessages;
 import org.chain3j.protocol.core.methods.response.Transaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;

@@ -8,6 +8,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 import org.chain3j.protocol.core.methods.response.McAccounts;
 import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.McBlockNumber;
@@ -45,8 +47,6 @@ import org.chain3j.protocol.core.methods.response.ShhNewIdentity;
 import org.chain3j.protocol.core.methods.response.ShhVersion;
 import org.chain3j.protocol.core.methods.response.Transaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
-import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
-import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 import org.chain3j.protocol.http.HttpService;
 
 import static junit.framework.TestCase.assertFalse;

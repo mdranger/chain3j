@@ -11,13 +11,13 @@ import org.chain3j.generated.HumanStandardToken;
 import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.chain3j.generated.HumanStandardToken.ApprovalEventResponse;
 import static org.chain3j.generated.HumanStandardToken.TransferEventResponse;
 import static org.chain3j.generated.HumanStandardToken.deploy;
 import static org.chain3j.tx.TransactionManager.DEFAULT_POLLING_FREQUENCY;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Generated HumanStandardToken integration test for all supported scenarios.

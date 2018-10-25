@@ -20,6 +20,9 @@ import org.chain3j.protocol.core.methods.request.Transaction;
 // import org.chain3j.protocol.core.methods.response.DbGetString;
 // import org.chain3j.protocol.core.methods.response.DbPutHex;
 // import org.chain3j.protocol.core.methods.response.DbPutString;
+import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.Chain3Sha3;
+import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.McAccounts;
 import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.McBlockNumber;
@@ -52,7 +55,6 @@ import org.chain3j.protocol.core.methods.response.McSubscribe;
 import org.chain3j.protocol.core.methods.response.McSyncing;
 import org.chain3j.protocol.core.methods.response.McTransaction;
 import org.chain3j.protocol.core.methods.response.McUninstallFilter;
-import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.NetListening;
 import org.chain3j.protocol.core.methods.response.NetPeerCount;
 import org.chain3j.protocol.core.methods.response.NetVersion;
@@ -64,8 +66,6 @@ import org.chain3j.protocol.core.methods.response.NetVersion;
 // import org.chain3j.protocol.core.methods.response.ShhNewIdentity;
 // import org.chain3j.protocol.core.methods.response.ShhUninstallFilter;
 // import org.chain3j.protocol.core.methods.response.ShhVersion;
-import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
-import org.chain3j.protocol.core.methods.response.Chain3Sha3;
 import org.chain3j.protocol.rx.JsonRpc2_0Rx;
 import org.chain3j.protocol.websocket.events.LogNotification;
 import org.chain3j.protocol.websocket.events.NewHeadsNotification;
@@ -446,32 +446,32 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 McGetCompilers.class);
     }
 
-//     @Override
-//     public Request<?, McCompileLLL> mcCompileLLL(String sourceCode) {
-//         return new Request<>(
-//                 "mc_compileLLL",
-//                 Arrays.asList(sourceCode),
-//                 chain3jService,
-//                 McCompileLLL.class);
-//     }
+    //     @Override
+    //     public Request<?, McCompileLLL> mcCompileLLL(String sourceCode) {
+    //         return new Request<>(
+    //                 "mc_compileLLL",
+    //                 Arrays.asList(sourceCode),
+    //                 chain3jService,
+    //                 McCompileLLL.class);
+    //     }
 
-//     @Override
-//     public Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode) {
-//         return new Request<>(
-//                 "mc_compileSolidity",
-//                 Arrays.asList(sourceCode),
-//                 chain3jService,
-//                 McCompileSolidity.class);
-//     }
+    //     @Override
+    //     public Request<?, McCompileSolidity> mcCompileSolidity(String sourceCode) {
+    //         return new Request<>(
+    //                 "mc_compileSolidity",
+    //                 Arrays.asList(sourceCode),
+    //                 chain3jService,
+    //                 McCompileSolidity.class);
+    //     }
 
-//     @Override
-//     public Request<?, McCompileSerpent> mcCompileSerpent(String sourceCode) {
-//         return new Request<>(
-//                 "mc_compileSerpent",
-//                 Arrays.asList(sourceCode),
-//                 chain3jService,
-//                 McCompileSerpent.class);
-//     }
+    //     @Override
+    //     public Request<?, McCompileSerpent> mcCompileSerpent(String sourceCode) {
+    //         return new Request<>(
+    //                 "mc_compileSerpent",
+    //                 Arrays.asList(sourceCode),
+    //                 chain3jService,
+    //                 McCompileSerpent.class);
+    //     }
 
     @Override
     public Request<?, McFilter> mcNewFilter(
@@ -566,132 +566,132 @@ public class JsonRpc2_0Chain3j implements Chain3j {
                 McSubmitHashrate.class);
     }
 
-//     @Override
-//     public Request<?, DbPutString> dbPutString(
-//             String databaseName, String keyName, String stringToStore) {
-//         return new Request<>(
-//                 "db_putString",
-//                 Arrays.asList(databaseName, keyName, stringToStore),
-//                 chain3jService,
-//                 DbPutString.class);
-//     }
+    //     @Override
+    //     public Request<?, DbPutString> dbPutString(
+    //             String databaseName, String keyName, String stringToStore) {
+    //         return new Request<>(
+    //                 "db_putString",
+    //                 Arrays.asList(databaseName, keyName, stringToStore),
+    //                 chain3jService,
+    //                 DbPutString.class);
+    //     }
 
-//     @Override
-//     public Request<?, DbGetString> dbGetString(String databaseName, String keyName) {
-//         return new Request<>(
-//                 "db_getString",
-//                 Arrays.asList(databaseName, keyName),
-//                 chain3jService,
-//                 DbGetString.class);
-//     }
+    //     @Override
+    //     public Request<?, DbGetString> dbGetString(String databaseName, String keyName) {
+    //         return new Request<>(
+    //                 "db_getString",
+    //                 Arrays.asList(databaseName, keyName),
+    //                 chain3jService,
+    //                 DbGetString.class);
+    //     }
 
-//     @Override
-//     public Request<?, DbPutHex> dbPutHex(String databaseName, String keyName, String dataToStore) {
-//         return new Request<>(
-//                 "db_putHex",
-//                 Arrays.asList(databaseName, keyName, dataToStore),
-//                 chain3jService,
-//                 DbPutHex.class);
-//     }
+    //     @Override
+    //     public Request<?, DbPutHex> dbPutHex(String databaseName, String keyName, String dataToStore) {
+    //         return new Request<>(
+    //                 "db_putHex",
+    //                 Arrays.asList(databaseName, keyName, dataToStore),
+    //                 chain3jService,
+    //                 DbPutHex.class);
+    //     }
 
-//     @Override
-//     public Request<?, DbGetHex> dbGetHex(String databaseName, String keyName) {
-//         return new Request<>(
-//                 "db_getHex",
-//                 Arrays.asList(databaseName, keyName),
-//                 chain3jService,
-//                 DbGetHex.class);
-//     }
+    //     @Override
+    //     public Request<?, DbGetHex> dbGetHex(String databaseName, String keyName) {
+    //         return new Request<>(
+    //                 "db_getHex",
+    //                 Arrays.asList(databaseName, keyName),
+    //                 chain3jService,
+    //                 DbGetHex.class);
+    //     }
 
-//     @Override
-//     public Request<?, org.chain3j.protocol.core.methods.response.ShhPost> shhPost(ShhPost shhPost) {
-//         return new Request<>(
-//                 "shh_post",
-//                 Arrays.asList(shhPost),
-//                 chain3jService,
-//                 org.chain3j.protocol.core.methods.response.ShhPost.class);
-//     }
+    //     @Override
+    //     public Request<?, org.chain3j.protocol.core.methods.response.ShhPost> shhPost(ShhPost shhPost) {
+    //         return new Request<>(
+    //                 "shh_post",
+    //                 Arrays.asList(shhPost),
+    //                 chain3jService,
+    //                 org.chain3j.protocol.core.methods.response.ShhPost.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhVersion> shhVersion() {
-//         return new Request<>(
-//                 "shh_version",
-//                 Collections.<String>emptyList(),
-//                 chain3jService,
-//                 ShhVersion.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhVersion> shhVersion() {
+    //         return new Request<>(
+    //                 "shh_version",
+    //                 Collections.<String>emptyList(),
+    //                 chain3jService,
+    //                 ShhVersion.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhNewIdentity> shhNewIdentity() {
-//         return new Request<>(
-//                 "shh_newIdentity",
-//                 Collections.<String>emptyList(),
-//                 chain3jService,
-//                 ShhNewIdentity.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhNewIdentity> shhNewIdentity() {
+    //         return new Request<>(
+    //                 "shh_newIdentity",
+    //                 Collections.<String>emptyList(),
+    //                 chain3jService,
+    //                 ShhNewIdentity.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhHasIdentity> shhHasIdentity(String identityAddress) {
-//         return new Request<>(
-//                 "shh_hasIdentity",
-//                 Arrays.asList(identityAddress),
-//                 chain3jService,
-//                 ShhHasIdentity.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhHasIdentity> shhHasIdentity(String identityAddress) {
+    //         return new Request<>(
+    //                 "shh_hasIdentity",
+    //                 Arrays.asList(identityAddress),
+    //                 chain3jService,
+    //                 ShhHasIdentity.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhNewGroup> shhNewGroup() {
-//         return new Request<>(
-//                 "shh_newGroup",
-//                 Collections.<String>emptyList(),
-//                 chain3jService,
-//                 ShhNewGroup.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhNewGroup> shhNewGroup() {
+    //         return new Request<>(
+    //                 "shh_newGroup",
+    //                 Collections.<String>emptyList(),
+    //                 chain3jService,
+    //                 ShhNewGroup.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhAddToGroup> shhAddToGroup(String identityAddress) {
-//         return new Request<>(
-//                 "shh_addToGroup",
-//                 Arrays.asList(identityAddress),
-//                 chain3jService,
-//                 ShhAddToGroup.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhAddToGroup> shhAddToGroup(String identityAddress) {
+    //         return new Request<>(
+    //                 "shh_addToGroup",
+    //                 Arrays.asList(identityAddress),
+    //                 chain3jService,
+    //                 ShhAddToGroup.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhNewFilter> shhNewFilter(ShhFilter shhFilter) {
-//         return new Request<>(
-//                 "shh_newFilter",
-//                 Arrays.asList(shhFilter),
-//                 chain3jService,
-//                 ShhNewFilter.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhNewFilter> shhNewFilter(ShhFilter shhFilter) {
+    //         return new Request<>(
+    //                 "shh_newFilter",
+    //                 Arrays.asList(shhFilter),
+    //                 chain3jService,
+    //                 ShhNewFilter.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhUninstallFilter> shhUninstallFilter(BigInteger filterId) {
-//         return new Request<>(
-//                 "shh_uninstallFilter",
-//                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-//                 chain3jService,
-//                 ShhUninstallFilter.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhUninstallFilter> shhUninstallFilter(BigInteger filterId) {
+    //         return new Request<>(
+    //                 "shh_uninstallFilter",
+    //                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
+    //                 chain3jService,
+    //                 ShhUninstallFilter.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhMessages> shhGetFilterChanges(BigInteger filterId) {
-//         return new Request<>(
-//                 "shh_getFilterChanges",
-//                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-//                 chain3jService,
-//                 ShhMessages.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhMessages> shhGetFilterChanges(BigInteger filterId) {
+    //         return new Request<>(
+    //                 "shh_getFilterChanges",
+    //                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
+    //                 chain3jService,
+    //                 ShhMessages.class);
+    //     }
 
-//     @Override
-//     public Request<?, ShhMessages> shhGetMessages(BigInteger filterId) {
-//         return new Request<>(
-//                 "shh_getMessages",
-//                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
-//                 chain3jService,
-//                 ShhMessages.class);
-//     }
+    //     @Override
+    //     public Request<?, ShhMessages> shhGetMessages(BigInteger filterId) {
+    //         return new Request<>(
+    //                 "shh_getMessages",
+    //                 Arrays.asList(Numeric.toHexStringWithPrefixSafe(filterId)),
+    //                 chain3jService,
+    //                 ShhMessages.class);
+    //     }
 
     @Override
     public Observable<NewHeadsNotification> newHeadsNotifications() {

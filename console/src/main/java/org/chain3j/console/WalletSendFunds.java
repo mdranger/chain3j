@@ -10,11 +10,11 @@ import org.chain3j.crypto.Credentials;
 import org.chain3j.crypto.WalletUtils;
 import org.chain3j.ens.EnsResolver;
 import org.chain3j.protocol.Chain3j;
-import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.core.methods.response.Chain3ClientVersion;
+import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.protocol.exceptions.TransactionException;
 import org.chain3j.protocol.http.HttpService;
-import org.chain3j.protocol.infura.InfuraHttpService;
+//import org.chain3j.protocol.infura.InfuraHttpService;
 import org.chain3j.tx.Transfer;
 import org.chain3j.utils.Convert;
 

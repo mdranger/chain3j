@@ -19,8 +19,8 @@ import org.chain3j.protocol.core.DefaultBlockParameterNumber;
 import org.chain3j.protocol.core.filters.BlockFilter;
 import org.chain3j.protocol.core.filters.LogFilter;
 import org.chain3j.protocol.core.filters.PendingTransactionFilter;
-import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.Log;
+import org.chain3j.protocol.core.methods.response.McBlock;
 import org.chain3j.protocol.core.methods.response.Transaction;
 import org.chain3j.utils.Observables;
 

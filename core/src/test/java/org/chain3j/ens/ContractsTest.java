@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import org.chain3j.tx.ChainId;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.chain3j.ens.Contracts.MAINNET;
 import static org.chain3j.ens.Contracts.RINKEBY;
 import static org.chain3j.ens.Contracts.ROPSTEN;
 import static org.chain3j.ens.Contracts.resolveRegistryContract;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class ContractsTest {
 

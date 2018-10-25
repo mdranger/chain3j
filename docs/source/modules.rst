@@ -1,7 +1,7 @@
 Modules
 =======
 
-To provide greater flexibility for developers wishing to work with web3j, the project is made up
+To provide greater flexibility for developers wishing to work with chain3j, the project is made up
 of a number of modules.
 
 In dependency order, they are as follows:
@@ -11,7 +11,7 @@ In dependency order, they are as follows:
 * abi - Application Binary Interface (ABI) encoders
 * crypto - cryptographic library for for transaction signing and key/wallet management in Ethereum
 * tuples - Simple tuples library
-* core - Much like the previous web3j core artifact without the code generators
+* core - Much like the previous chain3j core artifact without the code generators
 * codegen - code generators
 * console - command-line tools
 
@@ -30,7 +30,7 @@ All modules are published to both Maven Central and Bintray, with the published 
 using the names listed above, i.e.:
 
 For Java:
-  org.web3j:<module-name>:<version>
+  org.chain3j:<module-name>:<version>
 
 For Android:
-  org.web3j:<module-name>:<version>-android
+  org.chain3j:<module-name>:<version>-android

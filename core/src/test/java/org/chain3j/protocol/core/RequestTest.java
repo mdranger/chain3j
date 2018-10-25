@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import org.chain3j.protocol.RequestTester;
 import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.RequestTester;
 import org.chain3j.protocol.core.methods.request.McFilter;
 // import org.chain3j.protocol.core.methods.request.ShhFilter;
 // import org.chain3j.protocol.core.methods.request.ShhPost;
@@ -356,40 +356,40 @@ public class RequestTest extends RequestTester {
                 + "\"params\":[\"0x29c\",\"0x0\"],\"id\":1}");
     }
 
-//     @Test
-//     public void testMcGetCompilers() throws Exception {
-//         chain3j.mcGetCompilers().send();
+    //     @Test
+    //     public void testMcGetCompilers() throws Exception {
+    //         chain3j.mcGetCompilers().send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_getCompilers\","
-//                 + "\"params\":[],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_getCompilers\","
+    //                 + "\"params\":[],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testMcCompileSolidity() throws Exception {
-//         chain3j.ethCompileSolidity(
-//                 "contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }")
-//                 .send();
+    //     @Test
+    //     public void testMcCompileSolidity() throws Exception {
+    //         chain3j.ethCompileSolidity(
+    //                 "contract test { function multiply(uint a) returns(uint d) {   return a * 7;   } }")
+    //                 .send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_compileSolidity\","
-//                 + "\"params\":[\"contract test { function multiply(uint a) returns(uint d) {"
-//                 + "   return a * 7;   } }\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_compileSolidity\","
+    //                 + "\"params\":[\"contract test { function multiply(uint a) returns(uint d) {"
+    //                 + "   return a * 7;   } }\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testMcCompileLLL() throws Exception {
-//         chain3j.ethCompileLLL("(returnlll (suicide (caller)))").send();
+    //     @Test
+    //     public void testMcCompileLLL() throws Exception {
+    //         chain3j.ethCompileLLL("(returnlll (suicide (caller)))").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_compileLLL\","
-//                 + "\"params\":[\"(returnlll (suicide (caller)))\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_compileLLL\","
+    //                 + "\"params\":[\"(returnlll (suicide (caller)))\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testMcCompileSerpent() throws Exception {
-//         chain3j.ethCompileSerpent("/* some serpent */").send();
+    //     @Test
+    //     public void testMcCompileSerpent() throws Exception {
+    //         chain3j.ethCompileSerpent("/* some serpent */").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_compileSerpent\","
-//                 + "\"params\":[\"/* some serpent */\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_compileSerpent\","
+    //                 + "\"params\":[\"/* some serpent */\"],\"id\":1}");
+    //     }
 
     @Test
     public void testMcNewFilter() throws Exception {
@@ -500,125 +500,125 @@ public class RequestTest extends RequestTester {
                 + "\"id\":1}");
     }
 
-//     @Test
-//     public void testDbPutString() throws Exception {
-//         chain3j.dbPutString("testDB", "myKey", "myString").send();
+    //     @Test
+    //     public void testDbPutString() throws Exception {
+    //         chain3j.dbPutString("testDB", "myKey", "myString").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_putString\","
-//                 + "\"params\":[\"testDB\",\"myKey\",\"myString\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_putString\","
+    //                 + "\"params\":[\"testDB\",\"myKey\",\"myString\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testDbGetString() throws Exception {
-//         chain3j.dbGetString("testDB", "myKey").send();
+    //     @Test
+    //     public void testDbGetString() throws Exception {
+    //         chain3j.dbGetString("testDB", "myKey").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_getString\","
-//                 + "\"params\":[\"testDB\",\"myKey\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_getString\","
+    //                 + "\"params\":[\"testDB\",\"myKey\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testDbPutHex() throws Exception {
-//         chain3j.dbPutHex("testDB", "myKey", "0x68656c6c6f20776f726c64").send();
+    //     @Test
+    //     public void testDbPutHex() throws Exception {
+    //         chain3j.dbPutHex("testDB", "myKey", "0x68656c6c6f20776f726c64").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_putHex\","
-//                 + "\"params\":[\"testDB\",\"myKey\",\"0x68656c6c6f20776f726c64\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_putHex\","
+    //                 + "\"params\":[\"testDB\",\"myKey\",\"0x68656c6c6f20776f726c64\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testDbGetHex() throws Exception {
-//         chain3j.dbGetHex("testDB", "myKey").send();
+    //     @Test
+    //     public void testDbGetHex() throws Exception {
+    //         chain3j.dbGetHex("testDB", "myKey").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_getHex\","
-//                 + "\"params\":[\"testDB\",\"myKey\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"db_getHex\","
+    //                 + "\"params\":[\"testDB\",\"myKey\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testShhVersion() throws Exception {
-//         chain3j.shhVersion().send();
+    //     @Test
+    //     public void testShhVersion() throws Exception {
+    //         chain3j.shhVersion().send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_version\","
-//                 + "\"params\":[],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_version\","
+    //                 + "\"params\":[],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testShhPost() throws Exception {
-//         //CHECKSTYLE:OFF
-//         chain3j.shhPost(new ShhPost(
-//                 "0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1",
-//                 "0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1",
-//                 Arrays.asList("0x776869737065722d636861742d636c69656e74", "0x4d5a695276454c39425154466b61693532"),
-//                 "0x7b2274797065223a226d6",
-//                 Numeric.toBigInt("0x64"),
-//                 Numeric.toBigInt("0x64"))).send();
+    //     @Test
+    //     public void testShhPost() throws Exception {
+    //         //CHECKSTYLE:OFF
+    //         chain3j.shhPost(new ShhPost(
+    //                 "0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1",
+    //                 "0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1",
+    //                 Arrays.asList("0x776869737065722d636861742d636c69656e74", "0x4d5a695276454c39425154466b61693532"),
+    //                 "0x7b2274797065223a226d6",
+    //                 Numeric.toBigInt("0x64"),
+    //                 Numeric.toBigInt("0x64"))).send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_post\",\"params\":[{\"from\":\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\",\"to\":\"0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1\",\"topics\":[\"0x776869737065722d636861742d636c69656e74\",\"0x4d5a695276454c39425154466b61693532\"],\"payload\":\"0x7b2274797065223a226d6\",\"priority\":\"0x64\",\"ttl\":\"0x64\"}],\"id\":1}");
-//         //CHECKSTYLE:ON
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_post\",\"params\":[{\"from\":\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\",\"to\":\"0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1\",\"topics\":[\"0x776869737065722d636861742d636c69656e74\",\"0x4d5a695276454c39425154466b61693532\"],\"payload\":\"0x7b2274797065223a226d6\",\"priority\":\"0x64\",\"ttl\":\"0x64\"}],\"id\":1}");
+    //         //CHECKSTYLE:ON
+    //     }
 
-//     @Test
-//     public void testShhNewIdentity() throws Exception {
-//         chain3j.shhNewIdentity().send();
+    //     @Test
+    //     public void testShhNewIdentity() throws Exception {
+    //         chain3j.shhNewIdentity().send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_newIdentity\",\"params\":[],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_newIdentity\",\"params\":[],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testShhHasIdentity() throws Exception {
-//         //CHECKSTYLE:OFF
-//         chain3j.shhHasIdentity("0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1").send();
+    //     @Test
+    //     public void testShhHasIdentity() throws Exception {
+    //         //CHECKSTYLE:OFF
+    //         chain3j.shhHasIdentity("0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_hasIdentity\",\"params\":[\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\"],\"id\":1}");
-//         //CHECKSTYLE:ON
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_hasIdentity\",\"params\":[\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\"],\"id\":1}");
+    //         //CHECKSTYLE:ON
+    //     }
 
-//     @Test
-//     public void testShhNewGroup() throws Exception {
-//         chain3j.shhNewGroup().send();
+    //     @Test
+    //     public void testShhNewGroup() throws Exception {
+    //         chain3j.shhNewGroup().send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_newGroup\",\"params\":[],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_newGroup\",\"params\":[],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testShhAddToGroup() throws Exception {
-//         //CHECKSTYLE:OFF
-//         chain3j.shhAddToGroup("0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1").send();
+    //     @Test
+    //     public void testShhAddToGroup() throws Exception {
+    //         //CHECKSTYLE:OFF
+    //         chain3j.shhAddToGroup("0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1").send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_addToGroup\",\"params\":[\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\"],\"id\":1}");
-//         //CHECKSTYLE:ON
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_addToGroup\",\"params\":[\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\"],\"id\":1}");
+    //         //CHECKSTYLE:ON
+    //     }
 
-//     @Test
-//     public void testShhNewFilter() throws Exception {
-//         //CHECKSTYLE:OFF
-//         chain3j.shhNewFilter(
-//                 new ShhFilter("0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1")
-//                         .addSingleTopic("0x12341234bf4b564f")).send();
+    //     @Test
+    //     public void testShhNewFilter() throws Exception {
+    //         //CHECKSTYLE:OFF
+    //         chain3j.shhNewFilter(
+    //                 new ShhFilter("0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1")
+    //                         .addSingleTopic("0x12341234bf4b564f")).send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_newFilter\",\"params\":[{\"topics\":[\"0x12341234bf4b564f\"],\"to\":\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\"}],\"id\":1}");
-//         //CHECKSTYLE:ON
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_newFilter\",\"params\":[{\"topics\":[\"0x12341234bf4b564f\"],\"to\":\"0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1\"}],\"id\":1}");
+    //         //CHECKSTYLE:ON
+    //     }
 
-//     @Test
-//     public void testShhUninstallFilter() throws Exception {
-//         chain3j.shhUninstallFilter(Numeric.toBigInt("0x7")).send();
+    //     @Test
+    //     public void testShhUninstallFilter() throws Exception {
+    //         chain3j.shhUninstallFilter(Numeric.toBigInt("0x7")).send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_uninstallFilter\","
-//                 + "\"params\":[\"0x07\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_uninstallFilter\","
+    //                 + "\"params\":[\"0x07\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testShhGetFilterChanges() throws Exception {
-//         chain3j.shhGetFilterChanges(Numeric.toBigInt("0x7")).send();
+    //     @Test
+    //     public void testShhGetFilterChanges() throws Exception {
+    //         chain3j.shhGetFilterChanges(Numeric.toBigInt("0x7")).send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_getFilterChanges\","
-//                 + "\"params\":[\"0x07\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_getFilterChanges\","
+    //                 + "\"params\":[\"0x07\"],\"id\":1}");
+    //     }
 
-//     @Test
-//     public void testShhGetMessages() throws Exception {
-//         chain3j.shhGetMessages(Numeric.toBigInt("0x7")).send();
+    //     @Test
+    //     public void testShhGetMessages() throws Exception {
+    //         chain3j.shhGetMessages(Numeric.toBigInt("0x7")).send();
 
-//         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_getMessages\","
-//                 + "\"params\":[\"0x07\"],\"id\":1}");
-//     }
+    //         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"shh_getMessages\","
+    //                 + "\"params\":[\"0x07\"],\"id\":1}");
+    //     }
 }

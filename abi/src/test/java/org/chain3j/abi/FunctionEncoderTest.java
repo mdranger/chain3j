@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.Test;
+
 import org.chain3j.abi.datatypes.Bool;
 import org.chain3j.abi.datatypes.DynamicArray;
 import org.chain3j.abi.datatypes.DynamicBytes;
@@ -12,8 +14,6 @@ import org.chain3j.abi.datatypes.Uint;
 import org.chain3j.abi.datatypes.Utf8String;
 import org.chain3j.abi.datatypes.generated.Bytes10;
 import org.chain3j.abi.datatypes.generated.Uint32;
-
-import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

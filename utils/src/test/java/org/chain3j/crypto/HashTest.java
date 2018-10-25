@@ -2,9 +2,9 @@ package org.chain3j.crypto;
 
 import org.junit.Test;
 
+import static org.chain3j.utils.Numeric.asByte;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.chain3j.utils.Numeric.asByte;
 
 public class HashTest {
 

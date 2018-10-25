@@ -21,6 +21,8 @@ import org.chain3j.protocol.http.HttpService;
 import org.chain3j.tx.ChainId;
 import org.chain3j.utils.Numeric;
 
+import static org.chain3j.ens.EnsResolver.DEFAULT_SYNC_THRESHOLD;
+import static org.chain3j.ens.EnsResolver.isValidEnsName;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -29,8 +31,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.chain3j.ens.EnsResolver.DEFAULT_SYNC_THRESHOLD;
-import static org.chain3j.ens.EnsResolver.isValidEnsName;
 
 public class EnsResolverTest {
 

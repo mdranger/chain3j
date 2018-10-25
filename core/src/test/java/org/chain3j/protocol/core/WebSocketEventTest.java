@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.Chain3j;
+import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.websocket.WebSocketClient;
 import org.chain3j.protocol.websocket.WebSocketListener;
 import org.chain3j.protocol.websocket.WebSocketService;
@@ -63,7 +63,7 @@ public class WebSocketEventTest {
         chain3j.newHeadsNotifications();
 
         verify(webSocketClient).send(matches(
-                "\\{\"jsonrpc\":\"2.0\",\"method\":\"eth_subscribe\","
+                "\\{\"jsonrpc\":\"2.0\",\"method\":\"mc_subscribe\","
                         + "\"params\":\\[\"newHeads\"],\"id\":[0-9]{1,}}"));
     }
 
@@ -72,7 +72,7 @@ public class WebSocketEventTest {
         chain3j.logsNotifications(new ArrayList<>(), new ArrayList<>());
 
         verify(webSocketClient).send(matches(
-                "\\{\"jsonrpc\":\"2.0\",\"method\":\"eth_subscribe\","
+                "\\{\"jsonrpc\":\"2.0\",\"method\":\"mc_subscribe\","
                         + "\"params\":\\[\"logs\",\\{}],\"id\":[0-9]{1,}}"));
     }
 
@@ -83,7 +83,7 @@ public class WebSocketEventTest {
                 Collections.singletonList("0x2"));
 
         verify(webSocketClient).send(matches(
-                "\\{\"jsonrpc\":\"2.0\",\"method\":\"eth_subscribe\","
+                "\\{\"jsonrpc\":\"2.0\",\"method\":\"mc_subscribe\","
                         + "\"params\":\\[\"logs\",\\{\"address\":\\[\"0x1\"],"
                         + "\"topics\":\\[\"0x2\"]}],\"id\":[0-9]{1,}}"));
     }

@@ -11,10 +11,10 @@ simplestorage/build/SimpleStorage
 
 for target in ${targets}; do
 
-    web3j solidity generate \
+    chain3j solidity generate \
         ../../codegen/src/test/resources/solidity/${target}.bin \
         ../../codegen/src/test/resources/solidity/${target}.abi \
-        -o /Users/Conor/code/java/web3j/integration-tests/src/test/java \
-        -p org.web3j.generated
+        -o /Users/Conor/code/java/chain3j/integration-tests/src/test/java \
+        -p org.chain3j.generated
 
 done

@@ -2,9 +2,9 @@ package org.chain3j.crypto;
 
 import org.junit.Test;
 
+import static org.chain3j.crypto.TransactionUtils.generateTransactionHashHexEncoded;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.chain3j.crypto.TransactionUtils.generateTransactionHashHexEncoded;
 
 public class TransactionUtilsTest {
 

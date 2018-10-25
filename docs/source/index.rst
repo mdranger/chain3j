@@ -1,18 +1,18 @@
-.. web3j documentation master file
+.. chain3j documentation master file
 
-web3j
+chain3j
 =====
 
-web3j is a highly modular, reactive, type safe Java and Android library for working with
+chain3j is a highly modular, reactive, type safe Java and Android library for working with
 Smart Contracts and integrating with clients (nodes) on the Ethereum network:
 
-.. image:: /images/web3j_network.png
+.. image:: /images/chain3j_network.png
 
 This allows you to work with the `Ethereum <https://www.ethereum.org/>`_ blockchain, without the
 additional overhead of having to write your own integration code for the platform.
 
 The `Java and the Blockchain <https://www.youtube.com/watch?v=ea3miXs_P6Y>`_ talk provides an
-overview of blockchain, Ethereum and web3j.
+overview of blockchain, Ethereum and chain3j.
 
 
 Features
@@ -35,7 +35,7 @@ Features
 - Comprehensive integration tests demonstrating a number of the above scenarios
 - Command line tools
 - Android compatible
-- Support for JP Morgan's Quorum via `web3j-quorum <https://github.com/web3j/quorum>`_
+- Support for JP Morgan's Quorum via `chain3j-quorum <https://github.com/chain3j/quorum>`_
 
 
 Dependencies
@@ -59,7 +59,7 @@ wrappers
 Donate
 ======
 
-You can help fund the development of web3j by donating to the following wallet addresses:
+You can help fund the development of chain3j by donating to the following wallet addresses:
 
 +----------+--------------------------------------------+
 | Ethereum | 0x2dfBf35bb7c3c0A466A6C48BEBf3eF7576d3C420 |

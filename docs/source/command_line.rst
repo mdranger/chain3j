@@ -1,8 +1,8 @@
 Command Line Tools
 ==================
 
-A web3j fat jar is distributed with each release providing command line tools. The command line
-allow you to use some of the functionality of web3j from your terminal:
+A chain3j fat jar is distributed with each release providing command line tools. The command line
+allow you to use some of the functionality of chain3j from your terminal:
 
 These tools provide:
 
@@ -12,27 +12,27 @@ These tools provide:
 - Generation of Solidity smart contract wrappers
 
 The command line tools can be obtained as a zipfile/tarball from the
-`releases <https://github.com/web3j/web3j/releases/latest>`_ page of the project repository, under
+`releases <https://github.com/chain3j/chain3j/releases/latest>`_ page of the project repository, under
 the **Downloads** section, or for OS X users via
-`Homebrew <https://github.com/web3j/homebrew-web3j>`_, or for Arch linux users via the
-`AUR <https://aur.archlinux.org/packages/web3j/>`_.
+`Homebrew <https://github.com/chain3j/homebrew-chain3j>`_, or for Arch linux users via the
+`AUR <https://aur.archlinux.org/packages/chain3j/>`_.
 
 .. code-block:: bash
 
-   brew tap web3j/web3j
-   brew install web3j
+   brew tap chain3j/chain3j
+   brew install chain3j
 
 To run via the zipfile, simply extract the zipfile and run the binary:
 
 .. code-block:: console 
 
-   $ unzip web3j-<version>.zip
-      creating: web3j-3.0.0/lib/
-     inflating: web3j-3.0.0/lib/core-1.0.2-all.jar
-      creating: web3j-3.0.0/bin/
-     inflating: web3j-3.0.0/bin/web3j
-     inflating: web3j-3.0.0/bin/web3j.bat
-   $ ./web3j-<version>/bin/web3j
+   $ unzip chain3j-<version>.zip
+      creating: chain3j-3.0.0/lib/
+     inflating: chain3j-3.0.0/lib/core-1.0.2-all.jar
+      creating: chain3j-3.0.0/bin/
+     inflating: chain3j-3.0.0/bin/chain3j
+     inflating: chain3j-3.0.0/bin/chain3j.bat
+   $ ./chain3j-<version>/bin/chain3j
 
                  _      _____ _     _
                 | |    |____ (_)   (_)
@@ -43,7 +43,7 @@ To run via the zipfile, simply extract the zipfile and run the binary:
                             _/ |
                            |__/
 
-   Usage: web3j version|wallet|solidity ...
+   Usage: chain3j version|wallet|solidity ...
 
 
 Wallet tools
@@ -53,28 +53,28 @@ To generate a new Ethereum wallet:
 
 .. code-block:: bash
 
-   $ web3j wallet create
+   $ chain3j wallet create
 
 To update the password for an existing wallet:
 
 .. code-block:: bash
 
-   $ web3j wallet update <walletfile>
+   $ chain3j wallet update <walletfile>
 
 To send Ether to another address:
 
 .. code-block:: bash
 
-   $ web3j wallet send <walletfile> 0x<address>|<ensName>
+   $ chain3j wallet send <walletfile> 0x<address>|<ensName>
 
 When sending Ether to another address you will be asked a series of questions before the
 transaction takes place. See the below for a full example
 
-The following example demonstrates using web3j to send Ether to another wallet.
+The following example demonstrates using chain3j to send Ether to another wallet.
 
 .. code-block:: console
 
-   $ ./web3j-<version>/bin/web3j wallet send <walletfile> 0x<address>|<ensName>
+   $ ./chain3j-<version>/bin/chain3j wallet send <walletfile> 0x<address>|<ensName>
 
                  _      _____ _     _
                 | |    |____ (_)   (_)

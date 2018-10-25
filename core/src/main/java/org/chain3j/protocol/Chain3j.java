@@ -2,8 +2,8 @@ package org.chain3j.protocol;
 
 import java.util.concurrent.ScheduledExecutorService;
 
-import org.chain3j.protocol.core.Moac;
 import org.chain3j.protocol.core.JsonRpc2_0Chain3j;
+import org.chain3j.protocol.core.Moac;
 import org.chain3j.protocol.rx.Chain3jRx;
 
 /**

@@ -1,10 +1,10 @@
 Troubleshooting
 ===============
 
-Do you have a sample web3j project
+Do you have a sample chain3j project
 ----------------------------------
 
-Yes, refer to the web3j sample project outlined in the :doc:`quickstart`.
+Yes, refer to the chain3j sample project outlined in the :doc:`quickstart`.
 
 
 I'm submitting a transaction, but it's not being mined
@@ -18,7 +18,7 @@ always returns a blank value, indicating the transaction has not been mined::
    // you loop through the following expecting to eventually get a receipt once the transaction
    // is mined
    EthGetTransactionReceipt.TransactionReceipt transactionReceipt =
-           web3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
+           chain3j.ethGetTransactionReceipt(transactionHash).sendAsync().get();
 
    if (!transactionReceipt.isPresent()) {
        // try again, ad infinitum
@@ -44,14 +44,14 @@ being too low. Please refer to the section :ref:`nonce` for more information.
 I want to see details of the JSON-RPC requests and responses
 ------------------------------------------------------------
 
-web3j uses the `SLF4J <https://www.slf4j.org/>`_ logging facade, which you can easily integrate
+chain3j uses the `SLF4J <https://www.slf4j.org/>`_ logging facade, which you can easily integrate
 with your preferred logging framework. One lightweight approach is to use
 `LOGBack <https://logback.qos.ch/>`_, which is already configured in the integration-tests module.
 
 Include the LOGBack dependencies listed in
-`integration-tests/build.gradle <https://github.com/web3j/web3j/blob/master/integration-tests/build.gradle#L7>`_
+`integration-tests/build.gradle <https://github.com/chain3j/chain3j/blob/master/integration-tests/build.gradle#L7>`_
 and associated log configuration as per
-`integration-tests/src/test/resources/logback-test.xml <https://github.com/web3j/web3j/blob/master/integration-tests/src/test/resources/logback-test.xml>`_.
+`integration-tests/src/test/resources/logback-test.xml <https://github.com/chain3j/chain3j/blob/master/integration-tests/src/test/resources/logback-test.xml>`_.
 
 **Note:** if you are configuring logging for an application (not tests), you will need to ensure that
 the Logback dependencies are configured as *compile* dependencies, and that the configuration file
@@ -73,7 +73,7 @@ part of a transaction. If you wish to read a value during a transaction, you mus
 from smart contracts you must use a call, which is separate to a transaction. These methods should
 be marked as
 `constant <http://solidity.readthedocs.io/en/develop/contracts.html?highlight=constant#constant-functions>`_
-functions. :ref:`smart-contract-wrappers` created by web3j handle these differences for you.
+functions. :ref:`smart-contract-wrappers` created by chain3j handle these differences for you.
 
 The following StackExchange
 `post <http://ethereum.stackexchange.com/questions/765/what-is-the-difference-between-a-transaction-and-a-call>`__
@@ -93,7 +93,7 @@ of the transaction. This is demonstrated below::
    String hexValue = Numeric.toHexString(signedMessage);
 
    EthSendTransaction ethSendTransaction =
-           web3j.ethSendRawTransaction(hexValue).send();
+           chain3j.ethSendRawTransaction(hexValue).send();
    String transactionHash = ethSendTransaction.getTransactionHash();
    ...
 
@@ -113,7 +113,7 @@ match the original interface definitions, the produced binary will be blank.
 
 In the following example::
 
-   contract Web3jToken is ERC20Basic, Ownable {
+   contract Chain3jToken is ERC20Basic, Ownable {
        ...
        function transfer(address _from, address _to, uint256 _value) onlyOwner returns (bool) {
        ...
@@ -128,7 +128,7 @@ We forgot to define the *from* parameter in one of the inherited contracts::
    }
 
 The Solidity compiler will not complain about this, however, the produced binary file for the
-Web3jToken will be blank.
+Chain3jToken will be blank.
 
 
 My ENS lookups are failing
@@ -136,14 +136,14 @@ My ENS lookups are failing
 
 Are you sure that you are connecting to the correct network to perform the lookup?
 
-If web3j is telling you that the node is not in sync, you may need to change the *syncThreshold*
+If chain3j is telling you that the node is not in sync, you may need to change the *syncThreshold*
 in the :ref:`ENS resolver <ens-implementation>`.
 
 
 Do you have a project donation address?
 ---------------------------------------
 
-Absolutely, you can contribute Bitcoin or Ether to help fund the development of web3j.
+Absolutely, you can contribute Bitcoin or Ether to help fund the development of chain3j.
 
 +----------+--------------------------------------------+
 | Ethereum | 0x2dfBf35bb7c3c0A466A6C48BEBf3eF7576d3C420 |
@@ -152,7 +152,7 @@ Absolutely, you can contribute Bitcoin or Ether to help fund the development of 
 +----------+--------------------------------------------+
 
 
-Where can I get commercial support for web3j?
+Where can I get commercial support for chain3j?
 ---------------------------------------------
 
 Commercial support and training is available from `blk.io <https://blk.io>`_.

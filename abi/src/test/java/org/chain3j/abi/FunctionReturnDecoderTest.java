@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
+
 import org.chain3j.abi.datatypes.DynamicArray;
 import org.chain3j.abi.datatypes.DynamicBytes;
 import org.chain3j.abi.datatypes.Function;
@@ -18,8 +20,6 @@ import org.chain3j.abi.datatypes.generated.Bytes32;
 import org.chain3j.abi.datatypes.generated.Uint256;
 import org.chain3j.crypto.Hash;
 import org.chain3j.utils.Numeric;
-
-import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;

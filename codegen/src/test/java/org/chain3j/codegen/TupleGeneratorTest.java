@@ -14,9 +14,9 @@ import org.junit.Test;
 
 import org.chain3j.TempFileProvider;
 
-import static org.junit.Assert.assertTrue;
 import static org.chain3j.codegen.TupleGenerator.CLASS_NAME;
 import static org.chain3j.codegen.TupleGenerator.LIMIT;
+import static org.junit.Assert.assertTrue;
 
 public class TupleGeneratorTest extends TempFileProvider {
 

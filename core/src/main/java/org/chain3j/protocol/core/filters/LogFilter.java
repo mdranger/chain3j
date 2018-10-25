@@ -7,9 +7,9 @@ import java.util.Optional;
 
 import org.chain3j.protocol.Chain3j;
 import org.chain3j.protocol.core.Request;
+import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.McFilter;
 import org.chain3j.protocol.core.methods.response.McLog;
-import org.chain3j.protocol.core.methods.response.Log;
 
 /**
  * Log filter handler.
