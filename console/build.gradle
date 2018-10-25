@@ -4,8 +4,8 @@ apply plugin: 'application'
 description 'chain3j command line tools'
 
 dependencies {
-    compile project(':codegen'),
-            project(':infura')
+    compile project(':codegen')
+        //     project(':infura')
     runtime "org.slf4j:slf4j-nop:$slf4jVersion"  // prevent logging of the library to the console
     testCompile project(path: ':crypto', configuration: 'testArtifacts'),
             project(path: ':core', configuration: 'testArtifacts')
