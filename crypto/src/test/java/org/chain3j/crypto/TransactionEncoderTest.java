@@ -28,7 +28,7 @@ public class TransactionEncoderTest {
     }
 
     @Test
-    public void testEtherTransactionAsRlpValues() {
+    public void testMcTransactionAsRlpValues() {
         List<RlpType> rlpStrings = TransactionEncoder.asRlpValues(createMcTransaction(),
                 new Sign.SignatureData((byte) 0, new byte[32], new byte[32]));
         assertThat(rlpStrings.size(), is(9));

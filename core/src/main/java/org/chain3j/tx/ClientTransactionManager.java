@@ -9,7 +9,7 @@ import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
 
 /**
- * TransactionManager implementation for using an Ethereum node to transact.
+ * TransactionManager implementation for using an Moac node to transact.
  *
  * <p><b>Note</b>: accounts must be unlocked on the node for transactions to be successful.
  */

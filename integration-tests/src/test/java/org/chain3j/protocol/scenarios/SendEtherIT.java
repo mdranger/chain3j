@@ -16,16 +16,16 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Simple integration test to demonstrate sending of Ether between parties.
+ * Simple integration test to demonstrate sending of Mc between parties.
  */
-public class SendEtherIT extends Scenario {
+public class SendMcIT extends Scenario {
 
     @Test
-    public void testTransferEther() throws Exception {
+    public void testTransferMc() throws Exception {
         unlockAccount();
 
         BigInteger nonce = getNonce(ALICE.getAddress());
-        BigInteger value = Convert.toWei("0.5", Convert.Unit.ETHER).toBigInteger();
+        BigInteger value = Convert.toSha("0.5", Convert.Unit.MC).toBigInteger();
 
         Transaction transaction = Transaction.createMcTransaction(
                 ALICE.getAddress(), nonce, GAS_PRICE, GAS_LIMIT, BOB.getAddress(), value);
@@ -66,7 +66,7 @@ public class SendEtherIT extends Scenario {
     @Test
     public void testTransfer() throws Exception {
         TransactionReceipt transactionReceipt = Transfer.sendFunds(
-                chain3j, ALICE, BOB.getAddress(), BigDecimal.valueOf(0.2), Convert.Unit.ETHER)
+                chain3j, ALICE, BOB.getAddress(), BigDecimal.valueOf(0.2), Convert.Unit.MC)
                 .send();
         assertFalse(transactionReceipt.getBlockHash().isEmpty());
     }

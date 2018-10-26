@@ -210,12 +210,12 @@ public class SolidityFunctionWrapperTest extends TempFileProvider {
 
         //CHECKSTYLE:OFF
         String expected =
-                "public org.chain3j.protocol.core.RemoteCall<org.chain3j.protocol.core.methods.response.TransactionReceipt> functionName(java.math.BigInteger param, java.math.BigInteger weiValue) {\n"
+                "public org.chain3j.protocol.core.RemoteCall<org.chain3j.protocol.core.methods.response.TransactionReceipt> functionName(java.math.BigInteger param, java.math.BigInteger shaValue) {\n"
                         + "  final org.chain3j.abi.datatypes.Function function = new org.chain3j.abi.datatypes.Function(\n"
                         + "      FUNC_FUNCTIONNAME, \n"
                         + "      java.util.Arrays.<org.chain3j.abi.datatypes.Type>asList(new org.chain3j.abi.datatypes.generated.Uint8(param)), \n"
                         + "      java.util.Collections.<org.chain3j.abi.TypeReference<?>>emptyList());\n"
-                        + "  return executeRemoteCallTransaction(function, weiValue);\n"
+                        + "  return executeRemoteCallTransaction(function, shaValue);\n"
                         + "}\n";
         //CHECKSTYLE:ON
 

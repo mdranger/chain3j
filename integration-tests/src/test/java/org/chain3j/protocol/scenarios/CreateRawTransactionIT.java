@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
 public class CreateRawTransactionIT extends Scenario {
 
     @Test
-    public void testTransferEther() throws Exception {
+    public void testTransferMc() throws Exception {
         BigInteger nonce = getNonce(ALICE.getAddress());
         RawTransaction rawTransaction = createMcTransaction(
                 nonce, BOB.getAddress());
@@ -67,7 +67,7 @@ public class CreateRawTransactionIT extends Scenario {
     }
 
     private static RawTransaction createMcTransaction(BigInteger nonce, String toAddress) {
-        BigInteger value = Convert.toWei("0.5", Convert.Unit.ETHER).toBigInteger();
+        BigInteger value = Convert.toSha("0.5", Convert.Unit.MC).toBigInteger();
 
         return RawTransaction.createMcTransaction(
                 nonce, GAS_PRICE, GAS_LIMIT, toAddress, value);

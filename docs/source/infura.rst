@@ -23,7 +23,7 @@ Test Ethereum Network (Ropsten):
   https://ropsten.infura.io/<your-token>
 
 
-For obtaining ether to use in these networks, you can refer to :ref:`ethereum-testnets`
+For obtaining mc to use in these networks, you can refer to :ref:`ethereum-testnets`
 
 
 InfuraHttpClient

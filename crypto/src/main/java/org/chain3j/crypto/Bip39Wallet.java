@@ -1,7 +1,7 @@
 package org.chain3j.crypto;
 
 /**
- * Data class encapsulating a BIP-39 compatible Ethereum wallet.
+ * Data class encapsulating a BIP-39 compatible Moac wallet.
  */
 public class Bip39Wallet {
 

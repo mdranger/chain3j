@@ -82,7 +82,7 @@ public class WalletUtils {
     }
 
     /**
-     * Generates a BIP-39 compatible Ethereum wallet. The private key for the wallet can
+     * Generates a BIP-39 compatible Moac wallet. The private key for the wallet can
      * be calculated using following algorithm:
      * <pre>
      *     Key = SHA-256(BIP_39_SEED(mnemonic, password))
@@ -90,7 +90,7 @@ public class WalletUtils {
      *
      * @param password Will be used for both wallet encryption and passphrase for BIP-39 seed
      * @param destinationDirectory The directory containing the wallet
-     * @return A BIP-39 compatible Ethereum wallet
+     * @return A BIP-39 compatible Moac wallet
      * @throws CipherException if the underlying cipher is not available
      * @throws IOException if the destination cannot be written to
      */
@@ -141,10 +141,10 @@ public class WalletUtils {
 
         if (osName.startsWith("mac")) {
             return String.format(
-                    "%s%sLibrary%sEthereum", System.getProperty("user.home"), File.separator,
+                    "%s%sLibrary%sMoac", System.getProperty("user.home"), File.separator,
                     File.separator);
         } else if (osName.startsWith("win")) {
-            return String.format("%s%sEthereum", System.getenv("APPDATA"), File.separator);
+            return String.format("%s%sMoac", System.getenv("APPDATA"), File.separator);
         } else {
             return String.format("%s%s.ethereum", System.getProperty("user.home"), File.separator);
         }
@@ -159,14 +159,14 @@ public class WalletUtils {
         return String.format("%s%skeystore", getDefaultKeyDirectory(), File.separator);
     }
     
-    /**
-     * Get keystore destination directory for a Rinkeby network.
-     * @return a String containing destination directory
-     */
-    public static String getRinkebyKeyDirectory() {
-        return String.format(
-                "%s%srinkeby%skeystore", getDefaultKeyDirectory(), File.separator, File.separator);
-    }
+    // /**
+    //  * Get keystore destination directory for a Rinkeby network.
+    //  * @return a String containing destination directory
+    //  */
+    // public static String getRinkebyKeyDirectory() {
+    //     return String.format(
+    //             "%s%srinkeby%skeystore", getDefaultKeyDirectory(), File.separator, File.separator);
+    // }
 
     public static boolean isValidPrivateKey(String privateKey) {
         String cleanPrivateKey = Numeric.cleanHexPrefix(privateKey);

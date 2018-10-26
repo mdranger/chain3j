@@ -263,25 +263,25 @@ public abstract class Contract extends ManagedTransaction {
     }
 
     private TransactionReceipt executeTransaction(
-            Function function, BigInteger weiValue)
+            Function function, BigInteger shaValue)
             throws IOException, TransactionException {
-        return executeTransaction(FunctionEncoder.encode(function), weiValue, function.getName());
+        return executeTransaction(FunctionEncoder.encode(function), shaValue, function.getName());
     }
 
     /**
      * Given the duration required to execute a transaction.
      *
      * @param data  to send in transaction
-     * @param weiValue in Wei to send in transaction
+     * @param shaValue in Sha to send in transaction
      * @return {@link Optional} containing our transaction receipt
      * @throws IOException                 if the call to the node fails
      * @throws TransactionException if the transaction was not mined while waiting
      */
     TransactionReceipt executeTransaction(
-            String data, BigInteger weiValue, String funcName)
+            String data, BigInteger shaValue, String funcName)
             throws TransactionException, IOException {
 
-        TransactionReceipt receipt = send(contractAddress, data, weiValue,
+        TransactionReceipt receipt = send(contractAddress, data, shaValue,
                 gasProvider.getGasPrice(funcName),
                 gasProvider.getGasLimit(funcName));
 
@@ -315,8 +315,8 @@ public abstract class Contract extends ManagedTransaction {
     }
 
     protected RemoteCall<TransactionReceipt> executeRemoteCallTransaction(
-            Function function, BigInteger weiValue) {
-        return new RemoteCall<>(() -> executeTransaction(function, weiValue));
+            Function function, BigInteger shaValue) {
+        return new RemoteCall<>(() -> executeTransaction(function, shaValue));
     }
 
     private static <T extends Contract> T create(

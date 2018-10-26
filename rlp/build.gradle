@@ -1,5 +1,5 @@
 
-description 'Ethereum Recursive Length Prefix (RLP) encoding for serializing objects'
+description 'Moac Recursive Length Prefix (RLP) encoding for serializing objects'
 
 dependencies {
     compile project(':utils')

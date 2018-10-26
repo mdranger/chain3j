@@ -163,7 +163,7 @@ Or use `Infura <https://infura.io/>`_, which provides **free clients** running i
 For further information refer to
 `Using Infura with chain3j <https://chain3j.github.io/chain3j/infura.html>`_
 
-Instructions on obtaining Ether to transact on the network can be found in the
+Instructions on obtaining Mc to transact on the network can be found in the
 `testnet section of the docs <http://docs.chain3j.io/transactions.html#ethereum-testnets>`_.
 
 
@@ -378,7 +378,7 @@ Transactions
 chain3j provides support for both working with Ethereum wallet files (recommended) and Ethereum
 client admin commands for sending transactions.
 
-To send Ether to another party using your Ethereum wallet file:
+To send Mc to another party using your Ethereum wallet file:
 
 .. code-block:: java
 
@@ -386,7 +386,7 @@ To send Ether to another party using your Ethereum wallet file:
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
    TransactionReceipt transactionReceipt = Transfer.sendFunds(
            web3, credentials, "0x<address>|<ensName>",
-           BigDecimal.valueOf(1.0), Convert.Unit.ETHER)
+           BigDecimal.valueOf(1.0), Convert.Unit.MC)
            .send();
 
 Or if you wish to create your own custom transaction:
@@ -402,7 +402,7 @@ Or if you wish to create your own custom transaction:
    BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
    // create our transaction
-   RawTransaction rawTransaction  = RawTransaction.createEtherTransaction(
+   RawTransaction rawTransaction  = RawTransaction.createMcTransaction(
                 nonce, <gas price>, <gas limit>, <toAddress>, <value>);
 
    // sign & send our transaction
@@ -412,7 +412,7 @@ Or if you wish to create your own custom transaction:
    // ...
 
 Although it's far simpler using chain3j's `Transfer <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/tx/Transfer.java>`_
-for transacting with Ether.
+for transacting with Mc.
 
 Using an Ethereum client's admin commands (make sure you have your wallet in the client's
 keystore):
@@ -504,7 +504,7 @@ Projects using chain3j
 Please submit a pull request if you wish to include your project on the list:
 
 - `ERC-20 RESTful Service <https://github.com/blk-io/erc20-rest-service>`_
-- `Ether Wallet <https://play.google.com/store/apps/details?id=org.vikulin.etherwallet>`_ by
+- `Mc Wallet <https://play.google.com/store/apps/details?id=org.vikulin.etherwallet>`_ by
   `@vikulin <https://github.com/vikulin>`_
 - `eth-contract-api <https://github.com/adridadou/eth-contract-api>`_ by
   `@adridadou <https://github.com/adridadou>`_
@@ -516,7 +516,7 @@ Please submit a pull request if you wish to include your project on the list:
 - `Ethereum JDBC Connector <https://github.com/Impetus/eth-jdbc-connector/>`_ by `@impetus-opensource <https://github.com/impetus-opensource>`_
 - `Ethereum Tool <https://github.com/e-Contract/ethereum-tool>`_ for secure offline key management.
 - `Ethereum Java EE JCA Resource Adapter <https://github.com/e-Contract/ethereum-resource-adapter>`_ provides integration of Ethereum within Java EE 6+.
-- `Apache Camel Ethereum Component <https://github.com/apache/camel/blob/master/components/camel-chain3j/src/main/docs/chain3j-component.adoc>`_ by `@bibryam <https://github.com/bibryam/>`_.
+- `Apache Camel Mceum Component <https://github.com/apache/camel/blob/master/components/camel-chain3j/src/main/docs/chain3j-component.adoc>`_ by `@bibryam <https://github.com/bibryam/>`_.
 
 
 

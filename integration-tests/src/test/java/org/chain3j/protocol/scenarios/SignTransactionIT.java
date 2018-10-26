@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Sign transaction using Ethereum node.
+ * Sign transaction using Moac node.
  */
 public class SignTransactionIT extends Scenario {
 
@@ -39,7 +39,7 @@ public class SignTransactionIT extends Scenario {
     }
 
     private static RawTransaction createTransaction() {
-        BigInteger value = Convert.toWei("1", Convert.Unit.ETHER).toBigInteger();
+        BigInteger value = Convert.toSha("1", Convert.Unit.MC).toBigInteger();
 
         return RawTransaction.createMcTransaction(
                 BigInteger.valueOf(1048587), BigInteger.valueOf(500000), BigInteger.valueOf(500000),

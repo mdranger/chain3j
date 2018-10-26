@@ -35,14 +35,14 @@ public class TransferTest extends ManagedTransactionTester {
     @Test
     public void testSendFunds() throws Exception {
         assertThat(sendFunds(SampleKeys.CREDENTIALS, ADDRESS,
-                BigDecimal.TEN, Convert.Unit.ETHER),
+                BigDecimal.TEN, Convert.Unit.MC),
                 is(transactionReceipt));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testTransferInvalidValue() throws Exception {
         sendFunds(SampleKeys.CREDENTIALS, ADDRESS,
-                new BigDecimal(0.1), Convert.Unit.WEI);
+                new BigDecimal(0.1), Convert.Unit.SHA);
     }
 
     protected TransactionReceipt sendFunds(Credentials credentials, String toAddress,

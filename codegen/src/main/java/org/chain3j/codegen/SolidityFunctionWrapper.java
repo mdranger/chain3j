@@ -70,14 +70,14 @@ public class SolidityFunctionWrapper extends Generator {
     private static final String CREDENTIALS = "credentials";
     private static final String CONTRACT_GAS_PROVIDER = "contractGasProvider";
     private static final String TRANSACTION_MANAGER = "transactionManager";
-    private static final String INITIAL_VALUE = "initialWeiValue";
+    private static final String INITIAL_VALUE = "initialShaValue";
     private static final String CONTRACT_ADDRESS = "contractAddress";
     private static final String GAS_PRICE = "gasPrice";
     private static final String GAS_LIMIT = "gasLimit";
     private static final String FILTER = "filter";
     private static final String START_BLOCK = "startBlock";
     private static final String END_BLOCK = "endBlock";
-    private static final String WEI_VALUE = "weiValue";
+    private static final String SHA_VALUE = "shaValue";
     private static final String FUNC_NAME_PREFIX = "FUNC_";
 
     private static final ClassName LOG = ClassName.get(Log.class);
@@ -793,7 +793,7 @@ public class SolidityFunctionWrapper extends Generator {
         }
 
         if (functionDefinition.isPayable()) {
-            methodBuilder.addParameter(BigInteger.class, WEI_VALUE);
+            methodBuilder.addParameter(BigInteger.class, SHA_VALUE);
         }
 
         String functionName = functionDefinition.getName();
@@ -807,7 +807,7 @@ public class SolidityFunctionWrapper extends Generator {
                 TypeReference.class);
         if (functionDefinition.isPayable()) {
             methodBuilder.addStatement(
-                    "return executeRemoteCallTransaction(function, $N)", WEI_VALUE);
+                    "return executeRemoteCallTransaction(function, $N)", SHA_VALUE);
         } else {
             methodBuilder.addStatement("return executeRemoteCallTransaction(function)");
         }

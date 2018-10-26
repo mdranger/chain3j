@@ -7,11 +7,11 @@ Broadly speaking there are three types transactions supported on Ethereum:
 #. :ref:`creation-of-smart-contract`
 #. :ref:`transacting-with-contract`
 
-To undertake any of these transactions, it is necessary to have Ether (the fuel of the Ethereum
+To undertake any of these transactions, it is necessary to have Mc (the fuel of the Ethereum
 blockchain) residing in the Ethereum account which the transactions are taking place from. This is
 to pay for the :ref:`Gas` costs, which is the transaction execution cost for the Ethereum client that
 performs the transaction on your behalf, comitting the result to the Ethereum blockchain.
-Instructions for obtaining Ether are described below in :ref:`obtaining-ether`.
+Instructions for obtaining Mc are described below in :ref:`obtaining-ether`.
 
 Additionally, it is possible to query the state of a smart contract, this is described in
 :ref:`querying-state`.
@@ -22,13 +22,13 @@ Additionally, it is possible to query the state of a smart contract, this is des
 
 .. _obtaining-ether:
 
-Obtaining Ether
+Obtaining Mc
 ---------------
 
-To obtain Ether you have two options:
+To obtain Mc you have two options:
 
 #. Mine it yourself
-#. Obtain Ether from another party
+#. Obtain Mc from another party
 
 Mining it yourself in a private environment, or the public test environment (testnet) is very
 straight forwards. However, in the main live environment (mainnet) it requires significant
@@ -36,7 +36,7 @@ dedicated GPU time which is not likely to be feasible unless you already have a 
 multiple dedicated GPUs. If you wish to use a private environment, there is some guidance on the
 `Homestead documentation <https://ethereum-homestead.readthedocs.io/en/latest/network/test-networks.html#id3>`__.
 
-To purchase Ether you will need to go via an exchange. As different regions have different
+To purchase Mc you will need to go via an exchange. As different regions have different
 exchanges, you will need to research the best location for this yourself. The
 `Homestead documentation <https://ethereum-homestead.readthedocs.io/en/latest/ether.html#list-of-centralised-exchange-marketplaces>`__
 contains a number of exchanges which is a good place to start.
@@ -47,7 +47,7 @@ contains a number of exchanges which is a good place to start.
 Ethereum testnets
 -----------------
 
-There are a number of dedicated test networks in Ethereum, which are supported by various clients.
+There are a number of dedicated test networks in Mceum, which are supported by various clients.
 
 - Rinkeby (Geth only)
 - Kovan (Parity only)
@@ -59,13 +59,13 @@ a consistent and timely manner. The Ropsten testnet, although closest to the Mai
 Proof of Work (PoW) consensus, has been subject to attacks in the past and tends to be more
 problematic for developers.
 
-You can request Ether for the Rinkeby testnet via the Rinkeby Crypto Faucet, available at
+You can request Mc for the Rinkeby testnet via the Rinkeby Crypto Faucet, available at
 https://www.rinkeby.io/.
 
-Details of how to request Ether for the Kovan testnet are available
+Details of how to request Mc for the Kovan testnet are available
 `here <https://github.com/kovan-testnet/faucet>`_.
 
-If you need some Ether on the Ropsten testnet to get started, please post a message with your
+If you need some Mc on the Ropsten testnet to get started, please post a message with your
 wallet address to the `chain3j Gitter channel <https://gitter.im/chain3j/chain3j>`_ and you will be
 sent some.
 
@@ -75,7 +75,7 @@ Mining on testnet/private blockchains
 -------------------------------------
 
 In the Ethereum test environment (testnet), the mining difficulty is set lower then the main
-environment (mainnet). This means that you can mine new Ether with a regular CPU, such as your
+environment (mainnet). This means that you can mine new Mc with a regular CPU, such as your
 laptop. What you'll need to do is run an Ethereum client such as Geth or Parity to start building
 up reserves. Further instructions are available on the respective sites.
 
@@ -85,7 +85,7 @@ Geth
 Parity
   https://github.com/paritytech/parity/wiki/Mining
 
-Once you have mined some Ether, you can start transacting with the blockchain.
+Once you have mined some Mc, you can start transacting with the blockchain.
 
 However, as mentioned :ref:`above <ethereum-testnets>` it's simpler to use the Kovan or Rinkeby
 test networks.
@@ -106,13 +106,13 @@ in the Ethereum Virtual Machine. Please refer to the
 for further information.
 
 What this means for you when working with Ethereum clients is that there are two parameters which
-are used to dictate how much Ether you wish to spend in order for a tranaction to complete:
+are used to dictate how much Mc you wish to spend in order for a tranaction to complete:
 
 *Gas price*
 
-  This is the amount you are prepared in Ether per unit of gas. chain3j uses a default price
-  of 22,000,000,000 Wei
-  (22 x 10\ :sup:`-8` Ether). This is defined in
+  This is the amount you are prepared in Mc per unit of gas. chain3j uses a default price
+  of 22,000,000,000 Sha
+  (22 x 10\ :sup:`-8` Mc). This is defined in
   `ManagedTransaction <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/tx/ManagedTransaction.java>`_.
 
 
@@ -123,7 +123,7 @@ are used to dictate how much Ether you wish to spend in order for a tranaction t
   value typically to less then 6,700,000. The current gas limit is visible at https://ethstats.net/.
 
 
-These parameters taken together dictate the maximum amount of Ether you are willing to spend on
+These parameters taken together dictate the maximum amount of Mc you are willing to spend on
 transaction costs. i.e. you can spend no more then *gas price * gas limit*. The gas price can also
 affect how quickly a transaction takes place depending on what other transactions are available
 with a more profitable gas price for miners.
@@ -134,7 +134,7 @@ You may need to adjust these parameters to ensure that transactions take place i
 Transaction mechanisms
 ----------------------
 
-When you have a valid account created with some Ether, there are two mechanisms you can use to
+When you have a valid account created with some Mc, there are two mechanisms you can use to
 transact with Ethereum.
 
 #. :ref:`signing-via-client`
@@ -275,7 +275,7 @@ a transaction with the same nonce, however, once mined, any subsequent submissio
 Once you have obtained the next available :ref:`nonce <nonce>`, the value can then be used to
 create your transaction object::
 
-   RawTransaction rawTransaction  = RawTransaction.createEtherTransaction(
+   RawTransaction rawTransaction  = RawTransaction.createMcTransaction(
                 nonce, <gas price>, <gas limit>, <toAddress>, <value>);
 
 The transaction can then be signed and encoded::
@@ -316,7 +316,7 @@ You can obtain the next available nonce via the
 
 The nonce can then be used to create your transaction object::
 
-   RawTransaction rawTransaction  = RawTransaction.createEtherTransaction(
+   RawTransaction rawTransaction  = RawTransaction.createMcTransaction(
                 nonce, <gas price>, <gas limit>, <toAddress>, <value>);
 
 
@@ -346,35 +346,35 @@ Transaction and RawTransaction objects are used interchangeably in all of the su
 
 .. _transfer-of-ether:
 
-Transfer of Ether from one party to another
+Transfer of Mc from one party to another
 -------------------------------------------
 
-The sending of Ether between two parties requires a minimal number of details of the transaction
+The sending of Mc between two parties requires a minimal number of details of the transaction
 object:
 
 *to*
   the destination wallet address
 
 *value*
-  the amount of Ether you wish to send to the destination address
+  the amount of Mc you wish to send to the destination address
 
 ::
 
-   BigInteger value = Convert.toWei("1.0", Convert.Unit.ETHER).toBigInteger();
-   RawTransaction rawTransaction  = RawTransaction.createEtherTransaction(
+   BigInteger value = Convert.toSha("1.0", Convert.Unit.MC).toBigInteger();
+   RawTransaction rawTransaction  = RawTransaction.createMcTransaction(
                 <nonce>, <gas price>, <gas limit>, <toAddress>, value);
    // send...
 
 However, it is recommended that you use the
 `Transfer class <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/tx/Transfer.java>`_
-for sending Ether, which takes care of the nonce management and polling for a
+for sending Mc, which takes care of the nonce management and polling for a
 response for you::
 
    Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
    TransactionReceipt transactionReceipt = Transfer.sendFunds(
            web3, credentials, "0x<address>|<ensName>",
-           BigDecimal.valueOf(1.0), Convert.Unit.ETHER).send();
+           BigDecimal.valueOf(1.0), Convert.Unit.MC).send();
 
 
 Recommended approach for working with smart contracts
@@ -394,7 +394,7 @@ Creation of a smart contract
 To deploy a new smart contract, the following attributes will need to be provided
 
 *value*
-  the amount of Ether you wish to deposit in the smart contract (assumes zero if not provided)
+  the amount of Mc you wish to deposit in the smart contract (assumes zero if not provided)
 
 *data*
   the hex formatted, compiled smart contract creation code
@@ -451,7 +451,7 @@ To transact with an existing smart contract, the following attributes will need 
   the smart contract address
 
 *value*
-  the amount of Ether you wish to deposit in the smart contract (if the smart contract accepts
+  the amount of Mc you wish to deposit in the smart contract (if the smart contract accepts
   ether)
 
 *data*

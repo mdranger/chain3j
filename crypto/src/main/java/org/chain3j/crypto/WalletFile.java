@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Ethereum wallet file.
+ * Moac wallet file.
  */
 public class WalletFile {
     private String address;

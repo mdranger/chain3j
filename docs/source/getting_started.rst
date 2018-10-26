@@ -45,7 +45,7 @@ Android:
 Start a client
 --------------
 
-Start up an Ethereum client if you don't already have one running, such as
+Start up an Moac client if you don't already have one running, such as
 `Geth <https://github.com/ethereum/go-ethereum/wiki/geth>`_:
 
 .. code-block:: bash
@@ -66,7 +66,7 @@ Or use `Infura <https://infura.io/>`_, which provides **free clients** running i
 
 For further information refer to :doc:`infura`.
 
-Instructions on obtaining Ether to transact on the network can be found in the
+Instructions on obtaining Mc to transact on the network can be found in the
 :ref:`testnet section of the docs <ethereum-testnets>`.
 
 When you no longer need a `Chain3j` instance you need to call the `shutdown` method to close resources used by it.
@@ -232,16 +232,16 @@ interface.
 Transactions
 ------------
 
-chain3j provides support for both working with Ethereum wallet files (*recommended*) and Ethereum
+chain3j provides support for both working with Moac wallet files (*recommended*) and Moac
 client admin commands for sending transactions.
 
-To send Ether to another party using your Ethereum wallet file::
+To send Mc to another party using your Moac wallet file::
 
    Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
    TransactionReceipt transactionReceipt = Transfer.sendFunds(
            web3, credentials, "0x<address>|<ensName>",
-           BigDecimal.valueOf(1.0), Convert.Unit.ETHER)
+           BigDecimal.valueOf(1.0), Convert.Unit.MC)
            .send();
 
 Or if you wish to create your own custom transaction::
@@ -255,7 +255,7 @@ Or if you wish to create your own custom transaction::
    BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
    // create our transaction
-   RawTransaction rawTransaction  = RawTransaction.createEtherTransaction(
+   RawTransaction rawTransaction  = RawTransaction.createMcTransaction(
                 nonce, <gas price>, <gas limit>, <toAddress>, <value>);
 
    // sign & send our transaction
@@ -265,9 +265,9 @@ Or if you wish to create your own custom transaction::
    // ...
 
 Although it's far simpler using chain3j's `Transfer <https://github.com/chain3j/chain3j/blob/master/core/src/main/java/org/chain3j/tx/Transfer.java>`_
-for transacting with Ether.
+for transacting with Mc.
 
-Using an Ethereum client's admin commands (make sure you have your wallet in the client's
+Using an Moac client's admin commands (make sure you have your wallet in the client's
 keystore)::
 
    Admin chain3j = Admin.build(new HttpService());  // defaults to http://localhost:8545/

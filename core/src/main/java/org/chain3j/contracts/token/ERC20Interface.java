@@ -10,7 +10,7 @@ import org.chain3j.protocol.core.RemoteCall;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 
 /**
- * The Ethereum ERC-20 token standard.
+ * The Moac ERC-20 token standard.
  * <p>
  *     Implementations should provide the concrete <code>ApprovalEventResponse</code> and
  *     <code>TransferEventResponse</code> from their token as the generic types "R" amd "T".

@@ -49,12 +49,12 @@ public class WalletSendFunds extends WalletManager {
 
         BigDecimal amountToTransfer = getAmountToTransfer();
         Convert.Unit transferUnit = getTransferUnit();
-        BigDecimal amountInWei = Convert.toWei(amountToTransfer, transferUnit);
+        BigDecimal amountInSha = Convert.toSha(amountToTransfer, transferUnit);
 
-        confirmTransfer(amountToTransfer, transferUnit, amountInWei, destinationAddress);
+        confirmTransfer(amountToTransfer, transferUnit, amountInSha, destinationAddress);
 
         TransactionReceipt transactionReceipt = performTransfer(
-                chain3j, destinationAddress, credentials, amountInWei);
+                chain3j, destinationAddress, credentials, amountInSha);
 
         console.printf("Funds have been successfully transferred from %s to %s%n"
                         + "Transaction hash: %s%nMined block number: %s%n",
@@ -77,12 +77,12 @@ public class WalletSendFunds extends WalletManager {
     }
 
     private Convert.Unit getTransferUnit() {
-        String unit = console.readLine("Please specify the unit (ether, wei, ...) [ether]: ")
+        String unit = console.readLine("Please specify the unit (mc, sha, ...) [mc]: ")
                 .trim();
 
         Convert.Unit transferUnit;
         if (unit.equals("")) {
-            transferUnit = Convert.Unit.ETHER;
+            transferUnit = Convert.Unit.MC;
         } else {
             transferUnit = Convert.Unit.fromString(unit.toLowerCase());
         }
@@ -91,13 +91,13 @@ public class WalletSendFunds extends WalletManager {
     }
 
     private void confirmTransfer(
-            BigDecimal amountToTransfer, Convert.Unit transferUnit, BigDecimal amountInWei,
+            BigDecimal amountToTransfer, Convert.Unit transferUnit, BigDecimal amountInSha,
             String destinationAddress) {
 
         console.printf("Please confim that you wish to transfer %s %s (%s %s) to address %s%n",
                 amountToTransfer.stripTrailingZeros().toPlainString(), transferUnit,
-                amountInWei.stripTrailingZeros().toPlainString(),
-                Convert.Unit.WEI, destinationAddress);
+                amountInSha.stripTrailingZeros().toPlainString(),
+                Convert.Unit.SHA, destinationAddress);
         String confirm = console.readLine("Please type 'yes' to proceed: ").trim();
         if (!confirm.toLowerCase().equals("yes")) {
             exitError("OK, some other time perhaps...");
@@ -106,12 +106,12 @@ public class WalletSendFunds extends WalletManager {
 
     private TransactionReceipt performTransfer(
             Chain3j chain3j, String destinationAddress, Credentials credentials,
-            BigDecimal amountInWei) {
+            BigDecimal amountInSha) {
 
         console.printf("Commencing transfer (this may take a few minutes) ");
         try {
             Future<TransactionReceipt> future = Transfer.sendFunds(
-                    chain3j, credentials, destinationAddress, amountInWei, Convert.Unit.WEI)
+                    chain3j, credentials, destinationAddress, amountInSha, Convert.Unit.SHA)
                     .sendAsync();
 
             while (!future.isDone()) {

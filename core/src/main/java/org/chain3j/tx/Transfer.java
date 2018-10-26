@@ -15,11 +15,11 @@ import org.chain3j.utils.Convert;
 import org.chain3j.utils.Numeric;
 
 /**
- * Class for performing Ether transactions on the Ethereum blockchain.
+ * Class for performing Mc transactions on the Moac blockchain.
  */
 public class Transfer extends ManagedTransaction {
 
-    // This is the cost to send Ether between parties
+    // This is the cost to send Mc between parties
     public static final BigInteger GAS_LIMIT = BigInteger.valueOf(21000);
 
     public Transfer(Chain3j chain3j, TransactionManager transactionManager) {
@@ -54,15 +54,15 @@ public class Transfer extends ManagedTransaction {
             BigInteger gasLimit) throws IOException, InterruptedException,
             TransactionException {
 
-        BigDecimal weiValue = Convert.toWei(value, unit);
-        if (!Numeric.isIntegerValue(weiValue)) {
+        BigDecimal shaValue = Convert.toSha(value, unit);
+        if (!Numeric.isIntegerValue(shaValue)) {
             throw new UnsupportedOperationException(
-                    "Non decimal Wei value provided: " + value + " " + unit.toString()
-                            + " = " + weiValue + " Wei");
+                    "Non decimal Sha value provided: " + value + " " + unit.toString()
+                            + " = " + shaValue + " Sha");
         }
 
         String resolvedAddress = ensResolver.resolve(toAddress);
-        return send(resolvedAddress, "", weiValue.toBigIntegerExact(), gasPrice, gasLimit);
+        return send(resolvedAddress, "", shaValue.toBigIntegerExact(), gasPrice, gasLimit);
     }
 
     public static RemoteCall<TransactionReceipt> sendFunds(

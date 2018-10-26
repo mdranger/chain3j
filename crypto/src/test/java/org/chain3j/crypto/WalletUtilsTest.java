@@ -115,9 +115,9 @@ public class WalletUtilsTest {
         assertThat(credentials, equalTo(CREDENTIALS));
     }
 
-    @Ignore  // enable if users need to work with MyEtherWallet
+    @Ignore  // enable if users need to work with MyMcWallet
     @Test
-    public void testLoadCredentialsMyEtherWallet() throws Exception {
+    public void testLoadCredentialsMyMcWallet() throws Exception {
         Credentials credentials = WalletUtils.loadCredentials(
                 PASSWORD,
                 new File(WalletUtilsTest.class.getResource(
@@ -133,9 +133,9 @@ public class WalletUtilsTest {
     @Test
     public void testGetDefaultKeyDirectory() {
         assertTrue(WalletUtils.getDefaultKeyDirectory("Mac OS X")
-                .endsWith(String.format("%sLibrary%sEthereum", File.separator, File.separator)));
+                .endsWith(String.format("%sLibrary%sMoac", File.separator, File.separator)));
         assertTrue(WalletUtils.getDefaultKeyDirectory("Windows")
-                .endsWith(String.format("%sEthereum", File.separator)));
+                .endsWith(String.format("%sMoac", File.separator)));
         assertTrue(WalletUtils.getDefaultKeyDirectory("Linux")
                 .endsWith(String.format("%s.ethereum", File.separator)));
     }
@@ -146,8 +146,8 @@ public class WalletUtilsTest {
                 .endsWith(String.format("%skeystore", File.separator)));
         assertTrue(WalletUtils.getTestnetKeyDirectory()
                 .endsWith(String.format("%stestnet%skeystore", File.separator, File.separator)));
-        assertTrue(WalletUtils.getRinkebyKeyDirectory()
-                .endsWith(String.format("%srinkeby%skeystore", File.separator, File.separator)));
+        // assertTrue(WalletUtils.getRinkebyKeyDirectory()
+        //         .endsWith(String.format("%srinkeby%skeystore", File.separator, File.separator)));
         
     }
  

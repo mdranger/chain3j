@@ -21,6 +21,6 @@ public class RawTransactionManagerTest extends ManagedTransactionTester {
         TransactionManager transactionManager =
                 new RawTransactionManager(chain3j, SampleKeys.CREDENTIALS);
         Transfer transfer = new Transfer(chain3j, transactionManager);
-        transfer.sendFunds(ADDRESS, BigDecimal.ONE, Convert.Unit.ETHER).send();
+        transfer.sendFunds(ADDRESS, BigDecimal.ONE, Convert.Unit.MC).send();
     }
 }

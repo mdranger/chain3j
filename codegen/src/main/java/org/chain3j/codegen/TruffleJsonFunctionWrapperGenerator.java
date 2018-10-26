@@ -247,7 +247,7 @@ public class TruffleJsonFunctionWrapperGenerator extends FunctionWrapperGenerato
         /**
          * Convenience method to get the deployed address of the contract.
          *
-         * @param network the contract's address on this Ethereum network
+         * @param network the contract's address on this Moac network
          * @return the contract's address or <code>null</code> if there isn't one known.
          */
         public String getAddress(Network network) {
@@ -262,10 +262,11 @@ public class TruffleJsonFunctionWrapperGenerator extends FunctionWrapperGenerato
         enum Network {
             olympic(0),
             mainnet(ChainId.MAINNET),
-            morden(ChainId.EXPANSE_MAINNET),
-            ropsten(ChainId.ROPSTEN),
-            rinkeby(ChainId.RINKEBY),
-            kovan(ChainId.KOVAN);
+            testnet(ChainId.TESTNET);
+            // morden(ChainId.EXPANSE_MAINNET),
+            // ropsten(ChainId.ROPSTEN),
+            // rinkeby(ChainId.RINKEBY),
+            // kovan(ChainId.KOVAN);
 
             public final long id;
 

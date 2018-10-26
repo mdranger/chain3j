@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Integration test demonstrating integration with Greeter contract taken from the
  * <a href="https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial">Contract Tutorial</a>
- * on the Go Ethereum Wiki.
+ * on the Go Moac Wiki.
  */
 public class GreeterContractIT extends Scenario {
 

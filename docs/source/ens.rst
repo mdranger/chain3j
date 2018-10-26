@@ -20,7 +20,7 @@ contract wrappers, when you load them, such as::
    YourSmartContract contract = YourSmartContract.load(
            "0x<address>|<ensName>", chain3j, credentials, GAS_PRICE, GAS_LIMIT);
 
-Also, when performing Ether transfers, such as using the command line tools:
+Also, when performing Mc transfers, such as using the command line tools:
 
 .. code-block:: bash
 

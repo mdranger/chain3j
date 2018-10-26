@@ -28,7 +28,7 @@ import org.chain3j.abi.datatypes.generated.Uint160;
 import org.chain3j.utils.Numeric;
 
 /**
- * <p>Ethereum Contract Application Binary Interface (ABI) decoding for types.
+ * <p>Moac Contract Application Binary Interface (ABI) decoding for types.
  * Decoding is not documented, but is the reverse of the encoding details located
  * <a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI">here</a>.
  * </p>

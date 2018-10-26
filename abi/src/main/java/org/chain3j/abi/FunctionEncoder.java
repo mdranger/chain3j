@@ -12,7 +12,7 @@ import org.chain3j.crypto.Hash;
 import org.chain3j.utils.Numeric;
 
 /**
- * <p>Ethereum Contract Application Binary Interface (ABI) encoding for functions.
+ * <p>Moac Contract Application Binary Interface (ABI) encoding for functions.
  * Further details are available
  * <a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI">here</a>.
  * </p>

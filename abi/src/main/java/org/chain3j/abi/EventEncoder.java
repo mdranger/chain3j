@@ -9,7 +9,7 @@ import org.chain3j.crypto.Hash;
 import org.chain3j.utils.Numeric;
 
 /**
- * <p>Ethereum filter encoding.
+ * <p>Moac filter encoding.
  * Further limited details are available
  * <a href="https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI#events">here</a>.
  * </p>

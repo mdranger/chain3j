@@ -12,7 +12,7 @@ import static org.chain3j.codegen.Console.exitError;
 import static org.chain3j.crypto.Keys.PRIVATE_KEY_LENGTH_IN_HEX;
 
 /**
- * Create Ethereum wallet file from a provided private key.
+ * Create Moac wallet file from a provided private key.
  */
 public class KeyImporter extends WalletManager {
 

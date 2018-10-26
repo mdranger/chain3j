@@ -30,7 +30,7 @@ import static org.chain3j.tx.TransactionManager.DEFAULT_POLLING_ATTEMPTS_PER_TX_
 
 public class FastRawTransactionManagerIT extends Scenario {
 
-    private static final int COUNT = 10;  // don't set too high if using a real Ethereum network
+    private static final int COUNT = 10;  // don't set too high if using a real Moac network
     private static final long POLLING_FREQUENCY = 15000;
 
     @Rule
@@ -123,7 +123,7 @@ public class FastRawTransactionManagerIT extends Scenario {
     private RemoteCall<TransactionReceipt> createTransaction(
             Transfer transfer, BigInteger gasPrice) {
         return transfer.sendFunds(
-                BOB.getAddress(), BigDecimal.valueOf(1.0), Convert.Unit.KWEI,
+                BOB.getAddress(), BigDecimal.valueOf(1.0), Convert.Unit.KSHA,
                 gasPrice, Transfer.GAS_LIMIT);
     }
 }

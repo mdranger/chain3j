@@ -1,8 +1,8 @@
 Filters and Events
 ==================
 
-Filters provide notifications of certain events taking place in the Ethereum network. There are
-three classes of filter supported in Ethereum:
+Filters provide notifications of certain events taking place in the Moac network. There are
+three classes of filter supported in Moac:
 
 #. Block filters
 #. Pending transaction filters
@@ -15,7 +15,7 @@ Topic filters are more flexible. These allow you to create a filter based on spe
 that you provide.
 
 Unfortunately, unless you are using a WebSocket connection to Geth, working with filters via the
-JSON-RPC API is a tedious process, where you need to poll the Ethereum client in order to find out
+JSON-RPC API is a tedious process, where you need to poll the Moac client in order to find out
 if there are any updates to your filters due to the synchronous nature of HTTP and IPC requests.
 Additionally the block and transaction filters only provide the transaction or block hash, so a
 further request is required to obtain the actual transaction or block referred to by the hash.

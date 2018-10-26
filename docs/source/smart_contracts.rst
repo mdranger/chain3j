@@ -213,7 +213,7 @@ Construction and deployment of smart contracts happens with the *deploy* method:
 This will create a new instance of the smart contract on the Ethereum blockchain using the
 supplied credentials, and constructor parameter values.
 
-The *<initialValue>* parameter is only required if your smart contract accepts Ether on
+The *<initialValue>* parameter is only required if your smart contract accepts Mc on
 construction. This requires the Solidity
 `payable <http://solidity.readthedocs.io/en/develop/frequently-asked-questions.html?highlight=payable#how-do-i-initialize-a-contract-with-only-a-specific-amount-of-wei>`_
 modifier to be present in the contract.

@@ -1,6 +1,6 @@
 import java.text.SimpleDateFormat
 
-description 'chain3j is a lightweight Java library for integration with Ethereum clients'
+description 'chain3j is a lightweight Java library for integration with Moac clients'
 
 dependencies {
     compile project(':abi'),
