@@ -55,7 +55,7 @@ public class ConvertTest {
 
     @Test
     public void testUnit() {
-        assertThat(Convert.Unit.fromString("ether"), is(Convert.Unit.MC));
+        assertThat(Convert.Unit.fromString("mc"), is(Convert.Unit.MC));
         assertThat(Convert.Unit.fromString("MC"), is(Convert.Unit.MC));
         assertThat(Convert.Unit.fromString("sha"), is(Convert.Unit.SHA));
     }
