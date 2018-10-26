@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_getBlockTransactionCountByHash.
+ * mc_getBlockTransactionCountByHash.
  */
 public class McGetBlockTransactionCountByHash extends Response<String> {
     public BigInteger getTransactionCount() {

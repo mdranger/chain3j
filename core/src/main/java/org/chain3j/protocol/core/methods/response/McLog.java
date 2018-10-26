@@ -18,9 +18,9 @@ import org.chain3j.protocol.core.Response;
 /**
  * Log object returned by:
  * <ul>
- * <li>eth_getFilterChanges</li>
- * <li>eth_getFilterLogs</li>
- * <li>eth_getLogs</li>
+ * <li>mc_getFilterChanges</li>
+ * <li>mc_getFilterLogs</li>
+ * <li>mc_getLogs</li>
  * </ul>
  *
  * <p>See

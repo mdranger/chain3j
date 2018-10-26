@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_gasPrice.
+ * mc_gasPrice.
  */
 public class McGasPrice extends Response<String> {
     public BigInteger getGasPrice() {

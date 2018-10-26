@@ -20,10 +20,10 @@ import org.chain3j.utils.Numeric;
 /**
  * Block object returned by:
  * <ul>
- * <li>eth_getBlockByHash</li>
- * <li>eth_getBlockByNumber</li>
- * <li>eth_getUncleByBlockHashAndIndex</li>
- * <li>eth_getUncleByBlockNumberAndIndex</li>
+ * <li>mc_getBlockByHash</li>
+ * <li>mc_getBlockByNumber</li>
+ * <li>mc_getUncleByBlockHashAndIndex</li>
+ * <li>mc_getUncleByBlockNumberAndIndex</li>
  * </ul>
  *
  * <p>See

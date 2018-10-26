@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_getBalance.
+ * mc_getBalance.
  */
 public class McGetBalance extends Response<String> {
     public BigInteger getBalance() {

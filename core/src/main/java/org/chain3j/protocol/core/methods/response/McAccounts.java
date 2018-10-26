@@ -5,7 +5,7 @@ import java.util.List;
 import org.chain3j.protocol.core.Response;
 
 /**
- * eth_accounts.
+ * mc_accounts.
  */
 public class McAccounts extends Response<List<String>> {
     public List<String> getAccounts() {

@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_estimateGas.
+ * mc_estimateGas.
  */
 public class McEstimateGas extends Response<String> {
     public BigInteger getAmountUsed() {

@@ -14,7 +14,7 @@ import org.chain3j.protocol.ObjectMapperFactory;
 import org.chain3j.protocol.core.Response;
 
 /**
- * eth_syncing.
+ * mc_syncing.
  *
  * <p>Returns an object with data about the sync status or false.
  */

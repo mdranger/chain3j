@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_getTransactionCount.
+ * mc_getTransactionCount.
  */
 public class McGetTransactionCount extends Response<String> {
     public BigInteger getTransactionCount() {

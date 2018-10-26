@@ -7,7 +7,7 @@ import java.util.Map;
 import org.chain3j.protocol.core.Response;
 
 /**
- * eth_compileSolidity.
+ * mc_compileSolidity.
  */
 public class McCompileSolidity extends Response<Map<String, McCompileSolidity.Code>> {
 

@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_hashrate.
+ * mc_hashrate.
  */
 public class McHashrate extends Response<String> {
     public BigInteger getHashrate() {

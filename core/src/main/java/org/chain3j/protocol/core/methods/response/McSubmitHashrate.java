@@ -3,7 +3,7 @@ package org.chain3j.protocol.core.methods.response;
 import org.chain3j.protocol.core.Response;
 
 /**
- * eth_submitHashrate.
+ * mc_submitHashrate.
  */
 public class McSubmitHashrate extends Response<Boolean> {
 

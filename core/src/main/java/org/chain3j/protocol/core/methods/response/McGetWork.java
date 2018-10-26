@@ -5,7 +5,7 @@ import java.util.List;
 import org.chain3j.protocol.core.Response;
 
 /**
- * eth_getWork.
+ * mc_getWork.
  */
 public class McGetWork extends Response<List<String>> {
 

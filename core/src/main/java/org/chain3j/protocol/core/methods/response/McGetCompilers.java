@@ -5,7 +5,7 @@ import java.util.List;
 import org.chain3j.protocol.core.Response;
 
 /**
- * eth_getCompilers.
+ * mc_getCompilers.
  */
 public class McGetCompilers extends Response<List<String>> {
     public List<String> getCompilers() {

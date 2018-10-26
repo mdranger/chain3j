@@ -6,7 +6,7 @@ import org.chain3j.protocol.core.Response;
 import org.chain3j.utils.Numeric;
 
 /**
- * eth_getUncleCountByBlockNumber.
+ * mc_getUncleCountByBlockNumber.
  */
 public class McGetUncleCountByBlockNumber extends Response<String> {
     public BigInteger getUncleCount() {

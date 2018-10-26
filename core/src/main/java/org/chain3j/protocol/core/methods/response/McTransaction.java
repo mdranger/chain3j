@@ -15,9 +15,9 @@ import org.chain3j.protocol.core.Response;
 /**
  * Transaction object returned by:
  * <ul>
- * <li>eth_getTransactionByHash</li>
- * <li>eth_getTransactionByBlockHashAndIndex</li>
- * <li>eth_getTransactionByBlockNumberAndIndex</li>
+ * <li>mc_getTransactionByHash</li>
+ * <li>mc_getTransactionByBlockHashAndIndex</li>
+ * <li>mc_getTransactionByBlockNumberAndIndex</li>
  * </ul>
  *
  * <p>This differs slightly from the request {@link McSendTransaction} Transaction object.</p>
