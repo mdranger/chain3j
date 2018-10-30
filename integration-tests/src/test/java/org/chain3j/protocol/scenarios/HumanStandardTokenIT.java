@@ -28,6 +28,7 @@ import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
 import org.chain3j.utils.Numeric;
+import org.chain3j.utils.Convert;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -45,6 +46,9 @@ public class HumanStandardTokenIT extends Scenario {
     @Test
     public void testContract() throws Exception {
 
+        // Test on testnet
+        Integer chainId = 101;
+
         // deploy contract
         BigInteger aliceQty = BigInteger.valueOf(1_000_000);
 
@@ -58,7 +62,7 @@ public class HumanStandardTokenIT extends Scenario {
         BigInteger transferQuantity = BigInteger.valueOf(100_000);
 
         sendTransferTokensTransaction(
-                ALICE, BOB.getAddress(), contractAddress, transferQuantity);
+                ALICE, BOB.getAddress(), contractAddress, transferQuantity, chainId);
 
         aliceQty = aliceQty.subtract(transferQuantity);
 
@@ -73,7 +77,7 @@ public class HumanStandardTokenIT extends Scenario {
         confirmAllowance(ALICE.getAddress(), BOB.getAddress(), contractAddress, BigInteger.ZERO);
 
         transferQuantity = BigInteger.valueOf(50);
-        sendApproveTransaction(ALICE, BOB.getAddress(), transferQuantity, contractAddress);
+        sendApproveTransaction(ALICE, BOB.getAddress(), transferQuantity, contractAddress, chainId);
 
         confirmAllowance(
                 ALICE.getAddress(), BOB.getAddress(), contractAddress, transferQuantity);
@@ -82,7 +86,7 @@ public class HumanStandardTokenIT extends Scenario {
         transferQuantity = BigInteger.valueOf(25);
 
         sendTransferFromTransaction(BOB,
-                ALICE.getAddress(), BOB.getAddress(), transferQuantity, contractAddress);
+                ALICE.getAddress(), BOB.getAddress(), transferQuantity, contractAddress, chainId);
 
         aliceQty = aliceQty.subtract(transferQuantity);
         bobQty = bobQty.add(transferQuantity);
@@ -145,9 +149,11 @@ public class HumanStandardTokenIT extends Scenario {
         return contractAddress;
     }
 
+    // If send with RawTransaction, need to input chainId
     private String sendCreateContractTransaction(
             Credentials credentials, BigInteger initialSupply) throws Exception {
         BigInteger nonce = getNonce(credentials.getAddress());
+        Integer testChainId = 101; 
 
         String encodedConstructor =
                 FunctionEncoder.encodeConstructor(
@@ -162,7 +168,7 @@ public class HumanStandardTokenIT extends Scenario {
                 GAS_PRICE,
                 GAS_LIMIT,
                 BigInteger.ZERO,
-                getHumanStandardTokenBinary() + encodedConstructor);
+                getHumanStandardTokenBinary() + encodedConstructor, testChainId);
 
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
@@ -174,11 +180,11 @@ public class HumanStandardTokenIT extends Scenario {
     }
 
     private void sendTransferTokensTransaction(
-            Credentials credentials, String to, String contractAddress, BigInteger qty)
+            Credentials credentials, String to, String contractAddress, BigInteger qty, Integer chainId)
             throws Exception {
 
         Function function = transfer(to, qty);
-        String functionHash = execute(credentials, function, contractAddress);
+        String functionHash = execute(credentials, function, contractAddress, chainId);
 
         TransactionReceipt transferTransactionReceipt =
                 waitForTransactionReceipt(functionHash);
@@ -209,9 +215,9 @@ public class HumanStandardTokenIT extends Scenario {
 
     private void sendApproveTransaction(
             Credentials credentials, String spender, BigInteger value,
-            String contractAddress) throws Exception {
+            String contractAddress, Integer chainId) throws Exception {
         Function function = approve(spender, value);
-        String functionHash = execute(credentials, function, contractAddress);
+        String functionHash = execute(credentials, function, contractAddress, chainId);
 
         TransactionReceipt transferTransactionReceipt =
                 waitForTransactionReceipt(functionHash);
@@ -243,10 +249,10 @@ public class HumanStandardTokenIT extends Scenario {
 
     public void sendTransferFromTransaction(
             Credentials credentials, String from, String to, BigInteger value,
-            String contractAddress) throws Exception {
+            String contractAddress, Integer chainId) throws Exception {
 
         Function function = transferFrom(from, to, value);
-        String functionHash = execute(credentials, function, contractAddress);
+        String functionHash = execute(credentials, function, contractAddress, chainId);
 
         TransactionReceipt transferTransactionReceipt =
                 waitForTransactionReceipt(functionHash);
@@ -273,8 +279,10 @@ public class HumanStandardTokenIT extends Scenario {
     }
 
     private String execute(
-            Credentials credentials, Function function, String contractAddress) throws Exception {
+            Credentials credentials, Function function, String contractAddress, 
+            Integer chainId) throws Exception {
         BigInteger nonce = getNonce(credentials.getAddress());
+        BigInteger value = Convert.toSha("0", Convert.Unit.MC).toBigInteger();
 
         String encodedFunction = FunctionEncoder.encode(function);
 
@@ -282,8 +290,8 @@ public class HumanStandardTokenIT extends Scenario {
                 nonce,
                 GAS_PRICE,
                 GAS_LIMIT,
-                contractAddress,
-                encodedFunction);
+                contractAddress, value,
+                encodedFunction, chainId);
 
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);

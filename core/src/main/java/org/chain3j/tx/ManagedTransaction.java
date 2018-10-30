@@ -31,6 +31,7 @@ public abstract class ManagedTransaction {
         this.transactionManager = transactionManager;
         this.chain3j = chain3j;
         this.ensResolver = new EnsResolver(chain3j);
+        
     }
 
     /**

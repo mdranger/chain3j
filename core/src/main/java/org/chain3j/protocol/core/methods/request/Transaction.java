@@ -4,6 +4,7 @@ import java.math.BigInteger;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import org.chain3j.tx.ChainId;
 import org.chain3j.utils.Numeric;
 
 /**
@@ -16,7 +17,8 @@ import org.chain3j.utils.Numeric;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transaction {
-    // default as per https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction
+
+    // https://github.com/MOACChain/moac-core/wiki/JSON-RPC#mc_sendtransaction
     public static final BigInteger DEFAULT_GAS = BigInteger.valueOf(9000);
 
     private String from;
@@ -26,6 +28,11 @@ public class Transaction {
     private BigInteger value;
     private String data;
     private BigInteger nonce;  // nonce field is not present on mc_call/mc_estimateGas
+    // private Integer chainId;
+    private String shardingFlag;// 0 - MotherChain TX, 1 - MicroChain TX
+    private String systemFlag;  // 0 - non-system TX, default; 
+    //1 - system TX, internal use only, should not set
+    private String via;         // 
 
     public Transaction(String from, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit,
                        String to, BigInteger value, String data) {
@@ -35,11 +42,19 @@ public class Transaction {
         this.gasPrice = gasPrice;
         this.value = value;
 
+        //Set default values for new flags
+        this.shardingFlag = "0x0";
+        this.systemFlag = "0x0";
+        this.via = "0x0";
+
         if (data != null) {
             this.data = Numeric.prependHexPrefix(data);
         }
 
         this.nonce = nonce;
+        // if ( chainId.byteValue() > ChainId.NONE){
+        //     this.chainId = chainId;
+        // }
     }
 
     public static Transaction createContractTransaction(
@@ -107,6 +122,18 @@ public class Transaction {
 
     public String getNonce() {
         return convert(nonce);
+    }
+
+    public String getSystemFlag() {
+        return systemFlag;
+    }
+
+    public String getVia() {
+        return via;
+    }
+
+    public String getShardingFlag() {
+        return shardingFlag;
     }
 
     private static String convert(BigInteger value) {

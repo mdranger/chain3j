@@ -15,6 +15,7 @@ import static org.chain3j.protocol.core.JsonRpc2_0Chain3j.DEFAULT_BLOCK_TIME;
 /**
  * Transaction manager abstraction for executing transactions with Moac client via
  * various mechanisms.
+ * Notice the Transaction requires
  */
 public abstract class TransactionManager {
 
@@ -25,7 +26,8 @@ public abstract class TransactionManager {
     private final String fromAddress;
 
     protected TransactionManager(
-            TransactionReceiptProcessor transactionReceiptProcessor, String fromAddress) {
+            TransactionReceiptProcessor transactionReceiptProcessor, 
+            String fromAddress) {
         this.transactionReceiptProcessor = transactionReceiptProcessor;
         this.fromAddress = fromAddress;
     }
@@ -38,18 +40,20 @@ public abstract class TransactionManager {
 
     protected TransactionManager(
             Chain3j chain3j, int attempts, long sleepDuration, String fromAddress) {
-        this(new PollingTransactionReceiptProcessor(chain3j, sleepDuration, attempts), fromAddress);
+        this(new PollingTransactionReceiptProcessor(chain3j, sleepDuration, attempts), 
+        fromAddress);
     }
 
+    // Sned the TX for MotherChain
     protected TransactionReceipt executeTransaction(
-            BigInteger gasPrice, BigInteger gasLimit, String to,
-            String data, BigInteger value)
-            throws IOException, TransactionException {
+        BigInteger gasPrice, BigInteger gasLimit, String to,
+        String data, BigInteger value)
+        throws IOException, TransactionException {
 
-        McSendTransaction mcSendTransaction = sendTransaction(
-                gasPrice, gasLimit, to, data, value);
-        return processResponse(mcSendTransaction);
-    }
+    McSendTransaction mcSendTransaction = sendTransaction(
+            gasPrice, gasLimit, to, data, value);
+    return processResponse(mcSendTransaction);
+}
 
     public abstract McSendTransaction sendTransaction(
             BigInteger gasPrice, BigInteger gasLimit, String to,

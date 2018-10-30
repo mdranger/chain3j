@@ -12,8 +12,12 @@ public class SignedRawTransaction extends RawTransaction {
 
     public SignedRawTransaction(BigInteger nonce, BigInteger gasPrice,
             BigInteger gasLimit, String to, BigInteger value, String data,
+            int chainId,
+            String shardingFlag,
+            String via,
             Sign.SignatureData signatureData) {
-        super(nonce, gasPrice, gasLimit, to, value, data);
+        //Check
+        super(nonce, gasPrice, gasLimit, to, value, data, chainId, shardingFlag, via);
         this.signatureData = signatureData;
     }
 

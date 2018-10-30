@@ -19,9 +19,12 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Create, sign and send a raw transaction.
+ * For MOAC, this requires a chainId to sign the transaction.
+ * 
  */
 public class CreateRawTransactionIT extends Scenario {
 
+    private static final Integer testChainId = 101; 
     @Test
     public void testTransferMc() throws Exception {
         BigInteger nonce = getNonce(ALICE.getAddress());
@@ -70,13 +73,14 @@ public class CreateRawTransactionIT extends Scenario {
         BigInteger value = Convert.toSha("0.5", Convert.Unit.MC).toBigInteger();
 
         return RawTransaction.createMcTransaction(
-                nonce, GAS_PRICE, GAS_LIMIT, toAddress, value);
+                nonce, GAS_PRICE, GAS_LIMIT, toAddress, value, testChainId);
     }
 
     private static RawTransaction createSmartContractTransaction(BigInteger nonce)
             throws Exception {
         return RawTransaction.createContractTransaction(
-                nonce, GAS_PRICE, GAS_LIMIT, BigInteger.ZERO, getFibonacciSolidityBinary());
+                nonce, GAS_PRICE, GAS_LIMIT, BigInteger.ZERO, 
+                getFibonacciSolidityBinary(),testChainId);
     }
 
     BigInteger getNonce(String address) throws Exception {

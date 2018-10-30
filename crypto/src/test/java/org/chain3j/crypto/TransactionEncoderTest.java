@@ -13,12 +13,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
+// The test requires chainId input
 public class TransactionEncoderTest {
-
+        public static final Integer chainId = 101;
     @Test
     public void testSignMessage() {
         byte[] signedMessage = TransactionEncoder.signMessage(
-                createMcTransaction(), SampleKeys.CREDENTIALS);
+                createMcTransaction(chainId), SampleKeys.CREDENTIALS);
         String hexMessage = Numeric.toHexString(signedMessage);
         assertThat(hexMessage,
                 is("0xf85580010a840add5355887fffffffffffffff80"
@@ -29,59 +30,64 @@ public class TransactionEncoderTest {
 
     @Test
     public void testMcTransactionAsRlpValues() {
-        List<RlpType> rlpStrings = TransactionEncoder.asRlpValues(createMcTransaction(),
-                new Sign.SignatureData((byte) 0, new byte[32], new byte[32]));
-        assertThat(rlpStrings.size(), is(9));
+        List<RlpType> rlpStrings = TransactionEncoder.asRlpValues(createMcTransaction(chainId),
+                new Sign.SignatureData((byte) 101, new byte[32], new byte[32]));
+        assertThat(rlpStrings.size(), is(14));
         assertThat(rlpStrings.get(3), equalTo(RlpString.create(new BigInteger("add5355", 16))));
     }
 
     @Test
     public void testContractAsRlpValues() {
         List<RlpType> rlpStrings = TransactionEncoder.asRlpValues(
-                createContractTransaction(), null);
-        assertThat(rlpStrings.size(), is(6));
+                createContractTransaction(chainId), null);
+        assertThat(rlpStrings.size(), is(11));
         assertThat(rlpStrings.get(3), is(RlpString.create("")));
     }
 
     @Test
     public void testEip155Encode() {
-        assertThat(TransactionEncoder.encode(createEip155RawTransaction(), (byte) 1),
+        assertThat(TransactionEncoder.encode(createEip155RawTransaction(chainId), (byte) 1),
                 is(Numeric.hexStringToByteArray(
                         "0xec098504a817c800825208943535353535353535353535353535353535353535880de0"
                                 + "b6b3a764000080018080")));
     }
 
+    // All 
     @Test
-    public void testEip155Transaction() {
+    public void testEip155Transaction(Integer chainId) {
         // https://github.com/ethereum/EIPs/issues/155
         Credentials credentials = Credentials.create(
                 "0x4646464646464646464646464646464646464646464646464646464646464646");
-
-        assertThat(TransactionEncoder.signMessage(
-                createEip155RawTransaction(), (byte) 1, credentials),
-                is(Numeric.hexStringToByteArray(
+        try {
+                assertThat(TransactionEncoder.signMessage(
+                        createEip155RawTransaction(chainId), chainId, credentials),
+                        is(Numeric.hexStringToByteArray(
                         "0xf86c098504a817c800825208943535353535353535353535353535353535353535880"
                                 + "de0b6b3a76400008025a028ef61340bd939bc2195fe537567866003e1a15d"
                                 + "3c71ff63e1590620aa636276a067cbe9d8997f761aecb703304b3800ccf55"
                                 + "5c9f3dc64214b297fb1966a3b6d83")));
+        } catch(CipherException ie) {
+        ie.printStackTrace();
+        } 
+
     }
 
-    private static RawTransaction createMcTransaction() {
+    private static RawTransaction createMcTransaction(Integer chainId) {
         return RawTransaction.createMcTransaction(
                 BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN, "0xadd5355",
-                BigInteger.valueOf(Long.MAX_VALUE));
+                BigInteger.valueOf(Long.MAX_VALUE), chainId);
     }
 
-    static RawTransaction createContractTransaction() {
+    static RawTransaction createContractTransaction(Integer chainId) {
         return RawTransaction.createContractTransaction(
                 BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN, BigInteger.valueOf(Long.MAX_VALUE),
-                "01234566789");
+                "01234566789", chainId);
     }
 
-    private static RawTransaction createEip155RawTransaction() {
+    private static RawTransaction createEip155RawTransaction(Integer chainId) {
         return RawTransaction.createMcTransaction(
                 BigInteger.valueOf(9), BigInteger.valueOf(20000000000L),
                 BigInteger.valueOf(21000), "0x3535353535353535353535353535353535353535",
-                BigInteger.valueOf(1000000000000000000L));
+                BigInteger.valueOf(1000000000000000000L), chainId);
     }
 }

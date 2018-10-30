@@ -12,9 +12,12 @@ import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
 import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.tx.exceptions.TxHashMismatchException;
+import org.chain3j.tx.exceptions.ChainIdMismatchException;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
 import org.chain3j.utils.Numeric;
 import org.chain3j.utils.TxHashVerifier;
+
+import jnr.ffi.annotations.In;
 
 /**
  * TransactionManager implementation using Moac wallet file to create and sign transactions
@@ -22,6 +25,9 @@ import org.chain3j.utils.TxHashVerifier;
  *
  * <p>This transaction manager provides support for specifying the chain id for transactions as per
  * <a href="https://github.com/ethereum/EIPs/issues/155">EIP155</a>.
+ * 
+ * Use MOACTransactionEncoder and MOACTransaction
+ * to sign and send the raw transaction object.
  */
 public class RawTransactionManager extends TransactionManager {
 
@@ -33,6 +39,7 @@ public class RawTransactionManager extends TransactionManager {
     protected TxHashVerifier txHashVerifier = new TxHashVerifier();
 
     public RawTransactionManager(Chain3j chain3j, Credentials credentials, byte chainId) {
+
         super(chain3j, credentials.getAddress());
 
         this.chain3j = chain3j;
@@ -44,6 +51,7 @@ public class RawTransactionManager extends TransactionManager {
     public RawTransactionManager(
             Chain3j chain3j, Credentials credentials, byte chainId,
             TransactionReceiptProcessor transactionReceiptProcessor) {
+
         super(transactionReceiptProcessor, credentials.getAddress());
 
         this.chain3j = chain3j;
@@ -99,7 +107,7 @@ public class RawTransactionManager extends TransactionManager {
                 gasLimit,
                 to,
                 value,
-                data);
+                data,  Integer.valueOf(this.chainId));
 
         return signAndSend(rawTransaction);
     }
@@ -110,7 +118,7 @@ public class RawTransactionManager extends TransactionManager {
         byte[] signedMessage;
 
         if (chainId > ChainId.NONE) {
-            signedMessage = TransactionEncoder.signMessage(rawTransaction, chainId, credentials);
+            signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         } else {
             signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         }

@@ -1,13 +1,30 @@
 package org.chain3j.crypto;
 
-import java.math.BigInteger;
-
 import org.chain3j.utils.Numeric;
 
+import java.math.BigInteger;
+
 /**
- * Transaction class used for signing transactions locally.<br>
+ * Transaction class used for signing MOAC transactions locally.<br>
  * For the specification, refer to p4 of the <a href="http://gavwood.com/paper.pdf">
  * yellow paper</a>.
+ * To replace the RawTransaction.java in ETH
+ * Encode the TX for signature
+    type txdata struct {
+    AccountNonce uint64          `json:"nonce"    gencodec:"required"`
+    SystemContract uint64          `json:"syscnt" gencodec:"required"`
+    Price        *big.Int        `json:"gasPrice" gencodec:"required"`
+    GasLimit     *big.Int        `json:"gas"      gencodec:"required"`
+        // nil means contract creation
+    Amount       *big.Int        `json:"value"    gencodec:"required"`
+    Payload      []byte          `json:"input"    gencodec:"required"`
+    ShardingFlag uint64 `json:"shardingFlag" gencodec:"required"`
+    Via            *common.Address `json:"to"       rlp:"nil"`
+
+    // Signature values
+    V *big.Int `json:"v" gencodec:"required"`
+    R *big.Int `json:"r" gencodec:"required"`
+    S *big.Int `json:"s" gencodec:"required"`
  */
 public class RawTransaction {
 
@@ -17,47 +34,85 @@ public class RawTransaction {
     private String to;
     private BigInteger value;
     private String data;
+    private Integer chainId;
+    private String systemFlag;//Always 0
+    private String shardingFlag;// 0 - MotherChain TX, 1 - Microchain TX
+    private String via;// Vnode address to send the TX to MicroChains
 
-    protected RawTransaction(BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
-                           BigInteger value, String data) {
+    protected RawTransaction(BigInteger nonce, 
+    BigInteger gasPrice, 
+    BigInteger gasLimit,
+    String to, 
+    BigInteger value,
+    String data, 
+    Integer chainId,
+    String shardingFlag,
+    String via) {
         this.nonce = nonce;
         this.gasPrice = gasPrice;
         this.gasLimit = gasLimit;
+        this.chainId = chainId;
         this.to = to;
         this.value = value;
+        this.shardingFlag = shardingFlag;
+        this.via = via;
 
         if (data != null) {
-            this.data = Numeric.cleanHexPrefix(data);
+            //this.data = Numeric.cleanHexPrefix(data);
+            this.data = data;
         }
+
+        // SystemFlag should always be 0
+        this.systemFlag = "0x0";
     }
 
+    //Transfer MC only, no data 
+    public static RawTransaction createMcTransaction(
+        BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
+        BigInteger value, Integer chainId) {
+            String shardingFlag = "0x0";
+            String via = "0x";
+    return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",chainId, shardingFlag, via);
+
+    }
+    // For transaction to the MotherChain
+    // Add shardingFlag and via
+    public static RawTransaction createTransaction(BigInteger nonce, 
+    BigInteger gasPrice, BigInteger gasLimit,
+    String to, BigInteger value,
+    String data, Integer chainId) {
+        String shardingFlag = "0x0";
+        String via = "0x";
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, chainId, shardingFlag, via);
+    }
+
+
+    // For MicroChain input, need shardingFlag = '0x1'
+    public static RawTransaction createTransaction(BigInteger nonce, 
+    BigInteger gasPrice, BigInteger gasLimit,
+    String to, BigInteger value,
+    String data, Integer chainId,String shardingFlag,
+    String via) {
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, chainId, shardingFlag, via);
+    }
+
+    // Create MotherChain contract
+    // No need to add des address
+    public static RawTransaction createContractTransaction(
+            BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, 
+            BigInteger value,
+            String init, Integer chainId) {
+                String shardingFlag = "0x0";
+                String via = "0x";
+        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, chainId, shardingFlag, via);
+    }
+    // Create MicroChain contract with valid shardingFlag = 1, via = VNODE address.
     public static RawTransaction createContractTransaction(
             BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, BigInteger value,
-            String init) {
+            String init, Integer chainId, String shardingFlag, String via) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init);
+        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, chainId, shardingFlag, via);
     }
-
-    public static RawTransaction createMcTransaction(
-            BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
-            BigInteger value) {
-
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "");
-
-    }
-
-    public static RawTransaction createTransaction(
-            BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to, String data) {
-        return createTransaction(nonce, gasPrice, gasLimit, to, BigInteger.ZERO, data);
-    }
-
-    public static RawTransaction createTransaction(
-            BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
-            BigInteger value, String data) {
-
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data);
-    }
-
     public BigInteger getNonce() {
         return nonce;
     }
@@ -70,6 +125,10 @@ public class RawTransaction {
         return gasLimit;
     }
 
+    public String getData() {
+        return data;
+    }
+
     public String getTo() {
         return to;
     }
@@ -78,7 +137,9 @@ public class RawTransaction {
         return value;
     }
 
-    public String getData() {
-        return data;
-    }
+    public String getShardingFlag () {return  shardingFlag;};
+
+    public Integer getChainId() {return  chainId;}
+
+    public String getVia() {return via;}
 }

@@ -48,7 +48,7 @@ public abstract class Contract extends ManagedTransaction {
      * @deprecated ...
      * @see org.chain3j.tx.gas.DefaultGasProvider
      */
-    public static final BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000);
+    public static final BigInteger GAS_LIMIT = BigInteger.valueOf(9_000_000);
 
     public static final String FUNC_DEPLOY = "deploy";
 
@@ -212,7 +212,8 @@ public abstract class Contract extends ManagedTransaction {
         String encodedFunction = FunctionEncoder.encode(function);
         org.chain3j.protocol.core.methods.response.McCall mcCall = chain3j.mcCall(
                 Transaction.createMcCallTransaction(
-                        transactionManager.getFromAddress(), contractAddress, encodedFunction),
+                        transactionManager.getFromAddress(), 
+                        contractAddress, encodedFunction),
                 defaultBlockParameter)
                 .send();
 

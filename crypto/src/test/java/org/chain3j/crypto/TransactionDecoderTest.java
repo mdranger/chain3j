@@ -20,8 +20,9 @@ public class TransactionDecoderTest {
         BigInteger gasLimit = BigInteger.TEN;
         String to = "0x0add5355";
         BigInteger value = BigInteger.valueOf(Long.MAX_VALUE);
+        Integer chainId = 99;
         RawTransaction rawTransaction = RawTransaction.createMcTransaction(
-                nonce, gasPrice, gasLimit, to, value);
+                nonce, gasPrice, gasLimit, to, value, chainId);
         byte[] encodedMessage = TransactionEncoder.encode(rawTransaction);
         String hexMessage = Numeric.toHexString(encodedMessage);
 
@@ -42,8 +43,10 @@ public class TransactionDecoderTest {
         BigInteger gasLimit = BigInteger.TEN;
         String to = "0x0add5355";
         BigInteger value = BigInteger.valueOf(Long.MAX_VALUE);
+        Integer chainId = 99;
+        //Only create the mc transfer
         RawTransaction rawTransaction = RawTransaction.createMcTransaction(
-                nonce, gasPrice, gasLimit, to, value);
+                nonce, gasPrice, gasLimit, to, value, chainId);
         byte[] signedMessage = TransactionEncoder.signMessage(
                 rawTransaction, SampleKeys.CREDENTIALS);
         String hexMessage = Numeric.toHexString(signedMessage);
@@ -77,9 +80,9 @@ public class TransactionDecoderTest {
         BigInteger value = BigInteger.valueOf(Long.MAX_VALUE);
         Integer chainId = 1;
         RawTransaction rawTransaction = RawTransaction.createMcTransaction(
-                nonce, gasPrice, gasLimit, to, value);
+                nonce, gasPrice, gasLimit, to, value, chainId);
         byte[] signedMessage = TransactionEncoder.signMessage(
-                rawTransaction, chainId.byteValue(), SampleKeys.CREDENTIALS);
+                rawTransaction, chainId, SampleKeys.CREDENTIALS);
         String hexMessage = Numeric.toHexString(signedMessage);
 
         RawTransaction result = TransactionDecoder.decode(hexMessage);
