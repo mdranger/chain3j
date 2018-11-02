@@ -40,11 +40,10 @@ public class SignTransactionIT extends Scenario {
 
     private static RawTransaction createTransaction() {
         BigInteger value = Convert.toSha("1", Convert.Unit.MC).toBigInteger();
-        Integer chainId = 101;
 
         return RawTransaction.createMcTransaction(
                 BigInteger.valueOf(1048587), BigInteger.valueOf(500000), BigInteger.valueOf(500000),
                 "0x9C98E381Edc5Fe1Ac514935F3Cc3eDAA764cf004",
-                value, chainId);
+                value);
     }
 }

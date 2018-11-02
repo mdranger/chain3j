@@ -220,7 +220,12 @@ public class RequestTest extends RequestTester {
                         + "970870f072445675058bb8eb970870f072445675")).send();
 
         //CHECKSTYLE:OFF
-        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_sendTransaction\",\"params\":[{\"from\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\",\"to\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\",\"gas\":\"0x76c0\",\"gasPrice\":\"0x9184e72a000\",\"value\":\"0x9184e72a\",\"data\":\"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675\",\"nonce\":\"0x1\"}],\"id\":1}");
+        verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_sendTransaction\","
+        + "\"params\":[{\"from\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\","
+        + "\"to\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\","
+        + "\"gas\":\"0x76c0\",\"gasPrice\":\"0x9184e72a000\",\"value\":\"0x9184e72a\","
+        + "\"data\":\"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675\","
+        + "\"nonce\":\"0x1\",\"shardingFlag\":\"0\",\"systemFlag\":\"0\",\"via\":\"0\"}],\"id\":<generatedValue>}");
         //CHECKSTYLE:ON
     }
 
@@ -246,8 +251,9 @@ public class RequestTest extends RequestTester {
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_call\","
                 + "\"params\":[{\"from\":\"0xa70e8dd61c5d32be8058bb8eb970870f07233155\","
-                + "\"to\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\",\"data\":\"0x0\"},"
-                + "\"latest\"],\"id\":1}");
+                + "\"to\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\",\"data\":\"0x0\","
+                + "\"shardingFlag\":\"0\",\"systemFlag\":\"0\",\"via\":\"0\"},"
+                + "\"latest\"],\"id\":<generatedValue>}");
     }
 
     @Test
@@ -259,8 +265,9 @@ public class RequestTest extends RequestTester {
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_estimateGas\","
                 + "\"params\":[{\"from\":\"0xa70e8dd61c5d32be8058bb8eb970870f07233155\","
-                + "\"to\":\"0x52b93c80364dc2dd4444c146d73b9836bbbb2b3f\",\"data\":\"0x0\"}],"
-                + "\"id\":1}");
+                + "\"to\":\"0x52b93c80364dc2dd4444c146d73b9836bbbb2b3f\","
+                + "\"data\":\"0x0\",\"shardingFlag\":\"0\",\"systemFlag\":\"0\","
+                + "\"via\":\"0\"}],\"id\":<generatedValue>}");
     }
 
     @Test
@@ -272,7 +279,8 @@ public class RequestTest extends RequestTester {
 
         verifyResult("{\"jsonrpc\":\"2.0\",\"method\":\"mc_estimateGas\","
                 + "\"params\":[{\"from\":\"0x52b93c80364dc2dd4444c146d73b9836bbbb2b3f\","
-                + "\"gasPrice\":\"0xa\",\"data\":\"0x\",\"nonce\":\"0x1\"}],\"id\":1}");
+                + "\"gasPrice\":\"0xa\",\"data\":\"0x\",\"nonce\":\"0x1\","
+                + "\"shardingFlag\":\"0\",\"systemFlag\":\"0\",\"via\":\"0\"}],\"id\":1}");
     }
 
     @Test

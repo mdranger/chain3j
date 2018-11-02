@@ -75,7 +75,7 @@ public class ContractTest extends ManagedTransactionTester {
         super.setUp();
 
         contract = new TestContract(
-                ADDRESS, chain3j, getVerifiedTransactionManager(SampleKeys.CREDENTIALS),
+                ADDRESS, chain3j, getVerifiedTransactionManager(SampleKeys.CREDENTIALS, 101),
                 new DefaultGasProvider());
     }
 
@@ -275,8 +275,9 @@ public class ContractTest extends ManagedTransactionTester {
     public void testTimeout() throws Throwable {
         prepareTransaction(null);
 
+        // Need to setup a valid chainId 
         TransactionManager transactionManager =
-                getVerifiedTransactionManager(SampleKeys.CREDENTIALS, 1, 1);
+                getVerifiedTransactionManager(SampleKeys.CREDENTIALS, 101, 1, 1);
 
         contract = new TestContract(
                 ADDRESS, chain3j, transactionManager,
@@ -424,7 +425,7 @@ public class ContractTest extends ManagedTransactionTester {
                 Arrays.<Type>asList(new Uint256(BigInteger.TEN)));
 
         return TestContract.deployRemoteCall(
-                TestContract.class, chain3j, getVerifiedTransactionManager(SampleKeys.CREDENTIALS),
+                TestContract.class, chain3j, getVerifiedTransactionManager(SampleKeys.CREDENTIALS, 101),
                 ManagedTransaction.GAS_PRICE, Contract.GAS_LIMIT,
                 "0xcafed00d", encodedConstructor, BigInteger.ZERO).send();
     }

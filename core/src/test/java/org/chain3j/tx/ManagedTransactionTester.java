@@ -36,15 +36,18 @@ public abstract class ManagedTransactionTester {
     }
 
     public TransactionManager getVerifiedTransactionManager(Credentials credentials,
-                                                            int attempts, int sleepDuration) {
+                                                            Integer chainId, 
+                                                            int attempts, 
+                                                            int sleepDuration) {
         RawTransactionManager transactionManager =
-                new RawTransactionManager(chain3j, credentials, attempts, sleepDuration);
+                new RawTransactionManager(chain3j, credentials, chainId.byteValue(), attempts, sleepDuration);
         transactionManager.setTxHashVerifier(txHashVerifier);
         return transactionManager;
     }
 
-    public TransactionManager getVerifiedTransactionManager(Credentials credentials) {
-        RawTransactionManager transactionManager = new RawTransactionManager(chain3j, credentials);
+    public TransactionManager getVerifiedTransactionManager(Credentials credentials, Integer chainId) {
+        RawTransactionManager transactionManager = new RawTransactionManager(chain3j, 
+                credentials, chainId.byteValue());
         transactionManager.setTxHashVerifier(txHashVerifier);
         return transactionManager;
     }

@@ -19,19 +19,20 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Create, sign and send a raw transaction.
- * For MOAC, this requires a chainId to sign the transaction.
+ * For MOAC, this requires a chainId to sign all the transaction.
  * 
  */
 public class CreateRawTransactionIT extends Scenario {
 
     private static final Integer testChainId = 101; 
+    
     @Test
     public void testTransferMc() throws Exception {
         BigInteger nonce = getNonce(ALICE.getAddress());
         RawTransaction rawTransaction = createMcTransaction(
                 nonce, BOB.getAddress());
 
-        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, ALICE);
+        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, testChainId, ALICE);
         String hexValue = Numeric.toHexString(signedMessage);
 
         McSendTransaction mcSendTransaction =
@@ -51,7 +52,7 @@ public class CreateRawTransactionIT extends Scenario {
         BigInteger nonce = getNonce(ALICE.getAddress());
         RawTransaction rawTransaction = createSmartContractTransaction(nonce);
 
-        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, ALICE);
+        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, testChainId, ALICE);
         String hexValue = Numeric.toHexString(signedMessage);
 
         McSendTransaction mcSendTransaction =
@@ -73,14 +74,14 @@ public class CreateRawTransactionIT extends Scenario {
         BigInteger value = Convert.toSha("0.5", Convert.Unit.MC).toBigInteger();
 
         return RawTransaction.createMcTransaction(
-                nonce, GAS_PRICE, GAS_LIMIT, toAddress, value, testChainId);
+                nonce, GAS_PRICE, GAS_LIMIT, toAddress, value);
     }
 
     private static RawTransaction createSmartContractTransaction(BigInteger nonce)
             throws Exception {
         return RawTransaction.createContractTransaction(
                 nonce, GAS_PRICE, GAS_LIMIT, BigInteger.ZERO, 
-                getFibonacciSolidityBinary(),testChainId);
+                getFibonacciSolidityBinary());
     }
 
     BigInteger getNonce(String address) throws Exception {

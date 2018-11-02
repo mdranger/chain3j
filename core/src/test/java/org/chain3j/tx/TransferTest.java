@@ -24,7 +24,8 @@ import static org.junit.Assert.assertThat;
 public class TransferTest extends ManagedTransactionTester {
 
     protected TransactionReceipt transactionReceipt;
-
+    protected Integer chainId = 101;
+    
     @Before
     @Override
     public void setUp() throws Exception {
@@ -32,22 +33,25 @@ public class TransferTest extends ManagedTransactionTester {
         transactionReceipt = prepareTransfer();
     }
 
+    // Need to add chainId to send 
+    // 
     @Test
     public void testSendFunds() throws Exception {
         assertThat(sendFunds(SampleKeys.CREDENTIALS, ADDRESS,
-                BigDecimal.TEN, Convert.Unit.MC),
+                BigDecimal.TEN, Convert.Unit.MC, chainId),
                 is(transactionReceipt));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testTransferInvalidValue() throws Exception {
         sendFunds(SampleKeys.CREDENTIALS, ADDRESS,
-                new BigDecimal(0.1), Convert.Unit.SHA);
+                new BigDecimal(0.1), Convert.Unit.SHA, chainId);
     }
 
     protected TransactionReceipt sendFunds(Credentials credentials, String toAddress,
-                                           BigDecimal value, Convert.Unit unit) throws Exception {
-        return new Transfer(chain3j, getVerifiedTransactionManager(credentials))
+                                           BigDecimal value, Convert.Unit unit,
+                                           Integer chainId) throws Exception {
+        return new Transfer(chain3j, getVerifiedTransactionManager(credentials, chainId))
                 .sendFunds(toAddress, value, unit).send();
     }
 }

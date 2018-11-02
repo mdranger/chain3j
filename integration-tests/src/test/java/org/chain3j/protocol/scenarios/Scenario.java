@@ -38,7 +38,7 @@ public class Scenario {
             new StaticGasProvider(GAS_PRICE, GAS_LIMIT);
 
     // testnet
-    private static final String WALLET_PASSWORD = "";
+    private static final String WALLET_PASSWORD = "test";
 
     /*
     If you want to use regular Moac wallet addresses, provide a WALLET address variable
@@ -46,13 +46,13 @@ public class Scenario {
     WALLET address variable you've defined.
     */
     static final Credentials ALICE = Credentials.create(
-            "",  // 32 byte hex value
-            "0x"  // 64 byte hex value
+            "0x7312F4B8A4457a36827f185325Fd6B66a3f8BB8B",  // 32 byte hex value
+            "0xc75a5f85ef779dcf95c651612efb3c3b9a6dfafb1bb5375905454d9fc8be8a6b"  // 64 byte hex value
     );
 
     static final Credentials BOB = Credentials.create(
             "",  // 32 byte hex value
-            "0x"  // 64 byte hex value
+            "0xB017F0530A78ACB73BC10A90720AA77F4CBEE7889CBAD5059B3BCF256A310635"  // 64 byte hex value
     );
 
     private static final BigInteger ACCOUNT_UNLOCK_DURATION = BigInteger.valueOf(30);

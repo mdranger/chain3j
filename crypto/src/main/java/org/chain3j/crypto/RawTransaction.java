@@ -1,8 +1,8 @@
 package org.chain3j.crypto;
 
-import org.chain3j.utils.Numeric;
-
 import java.math.BigInteger;
+
+import org.chain3j.utils.Numeric;
 
 /**
  * Transaction class used for signing MOAC transactions locally.<br>
@@ -26,6 +26,7 @@ import java.math.BigInteger;
     R *big.Int `json:"r" gencodec:"required"`
     S *big.Int `json:"s" gencodec:"required"`
  */
+
 public class RawTransaction {
 
     private BigInteger nonce;
@@ -34,85 +35,90 @@ public class RawTransaction {
     private String to;
     private BigInteger value;
     private String data;
-    private Integer chainId;
+    // private Integer chainId;
     private String systemFlag;//Always 0
     private String shardingFlag;// 0 - MotherChain TX, 1 - Microchain TX
     private String via;// Vnode address to send the TX to MicroChains
 
     protected RawTransaction(BigInteger nonce, 
-    BigInteger gasPrice, 
-    BigInteger gasLimit,
-    String to, 
-    BigInteger value,
-    String data, 
-    Integer chainId,
-    String shardingFlag,
-    String via) {
+            BigInteger gasPrice, 
+            BigInteger gasLimit,
+            String to, 
+            BigInteger value,
+            String data, 
+            String shardingFlag,
+            String via) {
         this.nonce = nonce;
         this.gasPrice = gasPrice;
         this.gasLimit = gasLimit;
-        this.chainId = chainId;
         this.to = to;
         this.value = value;
         this.shardingFlag = shardingFlag;
         this.via = via;
 
         if (data != null) {
-            //this.data = Numeric.cleanHexPrefix(data);
-            this.data = data;
+            this.data = Numeric.cleanHexPrefix(data);
+            // this.data = data;
         }
 
         // SystemFlag should always be 0
-        this.systemFlag = "0x0";
+        this.systemFlag = "";
     }
 
     //Transfer MC only, no data 
+    
     public static RawTransaction createMcTransaction(
-        BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
-        BigInteger value, Integer chainId) {
-            String shardingFlag = "0x0";
-            String via = "0x";
-    return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",chainId, shardingFlag, via);
+            BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to,
+            BigInteger value) {
+        String shardingFlag = "";
+        String via = "";
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "", shardingFlag, via);
 
     }
     // For transaction to the MotherChain
     // Add shardingFlag and via
+    
     public static RawTransaction createTransaction(BigInteger nonce, 
-    BigInteger gasPrice, BigInteger gasLimit,
-    String to, BigInteger value,
-    String data, Integer chainId) {
-        String shardingFlag = "0x0";
-        String via = "0x";
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, chainId, shardingFlag, via);
+            BigInteger gasPrice, BigInteger gasLimit,
+            String to, BigInteger value,
+            String data) {
+        String shardingFlag = "";
+        String via = "";
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, shardingFlag, via);
     }
 
 
     // For MicroChain input, need shardingFlag = '0x1'
+    
     public static RawTransaction createTransaction(BigInteger nonce, 
-    BigInteger gasPrice, BigInteger gasLimit,
-    String to, BigInteger value,
-    String data, Integer chainId,String shardingFlag,
-    String via) {
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, chainId, shardingFlag, via);
+            BigInteger gasPrice, BigInteger gasLimit,
+            String to, BigInteger value,
+            String data, String shardingFlag,
+            String via) {
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, shardingFlag, via);
     }
 
     // Create MotherChain contract
     // No need to add des address
+    
     public static RawTransaction createContractTransaction(
             BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, 
             BigInteger value,
-            String init, Integer chainId) {
-                String shardingFlag = "0x0";
-                String via = "0x";
-        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, chainId, shardingFlag, via);
+            String init) {
+        String shardingFlag = "";
+        String via = "";
+        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, shardingFlag, via);
     }
+
     // Create MicroChain contract with valid shardingFlag = 1, via = VNODE address.
+    
     public static RawTransaction createContractTransaction(
             BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, BigInteger value,
-            String init, Integer chainId, String shardingFlag, String via) {
+            String init, String shardingFlag, String via) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, chainId, shardingFlag, via);
+        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, shardingFlag, via);
     }
+
     public BigInteger getNonce() {
         return nonce;
     }
@@ -137,9 +143,15 @@ public class RawTransaction {
         return value;
     }
 
-    public String getShardingFlag () {return  shardingFlag;};
+    public String getShardingFlag() {
+        return  shardingFlag;
+    }
 
-    public Integer getChainId() {return  chainId;}
+    public String getSystemFlag() {
+        return  systemFlag;
+    }
 
-    public String getVia() {return via;}
+    public String getVia() {
+        return via;
+    }
 }

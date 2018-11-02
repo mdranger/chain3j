@@ -12,12 +12,11 @@ public class SignedRawTransaction extends RawTransaction {
 
     public SignedRawTransaction(BigInteger nonce, BigInteger gasPrice,
             BigInteger gasLimit, String to, BigInteger value, String data,
-            int chainId,
             String shardingFlag,
             String via,
             Sign.SignatureData signatureData) {
         //Check
-        super(nonce, gasPrice, gasLimit, to, value, data, chainId, shardingFlag, via);
+        super(nonce, gasPrice, gasLimit, to, value, data, shardingFlag, via);
         this.signatureData = signatureData;
     }
 
@@ -48,6 +47,7 @@ public class SignedRawTransaction extends RawTransaction {
         }
     }
 
+
     private byte getRealV(byte v) {
         if (v == LOWER_REAL_V || v == (LOWER_REAL_V + 1)) {
             return v;
@@ -60,12 +60,22 @@ public class SignedRawTransaction extends RawTransaction {
         return (byte) (realV + inc);
     }
 
+    // Note, byte range from -128 - +127
+    // should convert negative v to positive by add 255
     public Integer getChainId() {
         byte v = signatureData.getV();
         if (v == LOWER_REAL_V || v == (LOWER_REAL_V + 1)) {
             return null;
         }
-        Integer chainId = (v - CHAIN_ID_INC) / 2;
+
+        //chainId should be larger than 0
+        Integer chainId;
+        if (v > 0) {
+            chainId = (v - CHAIN_ID_INC) / 2;
+        } else {
+            chainId = ((int)v + 255 - CHAIN_ID_INC) / 2;
+        }
+
         return chainId;
     }
 }

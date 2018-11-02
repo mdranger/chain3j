@@ -19,7 +19,7 @@ public class RawTransactionManagerTest extends ManagedTransactionTester {
         prepareTransaction(transactionReceipt);
 
         TransactionManager transactionManager =
-                new RawTransactionManager(chain3j, SampleKeys.CREDENTIALS);
+                new RawTransactionManager(chain3j, SampleKeys.CREDENTIALS, (byte)101);
         Transfer transfer = new Transfer(chain3j, transactionManager);
         transfer.sendFunds(ADDRESS, BigDecimal.ONE, Convert.Unit.MC).send();
     }

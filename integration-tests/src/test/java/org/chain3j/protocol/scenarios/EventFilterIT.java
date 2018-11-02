@@ -37,6 +37,7 @@ public class EventFilterIT extends Scenario {
     // Deployed Fibonacci contract instance in testnet
     private static final String CONTRACT_ADDRESS = "0x3c05b2564139fb55820b18b72e94b2178eaace7d";
     private static final Integer testChainId = 101; 
+    
     @Test
     public void testEventFilter() throws Exception {
         unlockAccount();

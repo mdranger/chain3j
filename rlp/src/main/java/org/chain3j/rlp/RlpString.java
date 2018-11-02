@@ -7,6 +7,13 @@ import org.chain3j.utils.Numeric;
 
 /**
  * RLP string type.
+ * https://github.com/ethereum/wiki/wiki/RLP#rlp-decoding
+ * Otherwise, if a string is 0-55 bytes long, the RLP encoding 
+ * consists of a single byte with value 0x80 plus the length 
+ * of the string followed by the string. 
+ * The range of the first byte is thus [0x80, 0xb7].
+ * The empty string ('null') = [ 0x80 ]
+ * The integer 0 = [ 0x80 ]
  */
 public class RlpString implements RlpType {
     private static final byte[] EMPTY = new byte[]{ };

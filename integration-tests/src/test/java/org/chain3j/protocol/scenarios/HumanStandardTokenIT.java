@@ -27,8 +27,8 @@ import org.chain3j.protocol.core.methods.request.Transaction;
 import org.chain3j.protocol.core.methods.response.Log;
 import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.protocol.core.methods.response.TransactionReceipt;
-import org.chain3j.utils.Numeric;
 import org.chain3j.utils.Convert;
+import org.chain3j.utils.Numeric;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.core.Is.is;
@@ -168,9 +168,9 @@ public class HumanStandardTokenIT extends Scenario {
                 GAS_PRICE,
                 GAS_LIMIT,
                 BigInteger.ZERO,
-                getHumanStandardTokenBinary() + encodedConstructor, testChainId);
+                getHumanStandardTokenBinary() + encodedConstructor);
 
-        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, testChainId, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
 
         McSendTransaction transactionResponse = chain3j.mcSendRawTransaction(hexValue)
@@ -291,9 +291,9 @@ public class HumanStandardTokenIT extends Scenario {
                 GAS_PRICE,
                 GAS_LIMIT,
                 contractAddress, value,
-                encodedFunction, chainId);
+                encodedFunction);
 
-        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, chainId, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
 
         McSendTransaction transactionResponse = chain3j.mcSendRawTransaction(hexValue)

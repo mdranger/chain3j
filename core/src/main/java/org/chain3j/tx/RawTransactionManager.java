@@ -12,12 +12,11 @@ import org.chain3j.protocol.core.DefaultBlockParameterName;
 import org.chain3j.protocol.core.methods.response.McGetTransactionCount;
 import org.chain3j.protocol.core.methods.response.McSendTransaction;
 import org.chain3j.tx.exceptions.TxHashMismatchException;
-import org.chain3j.tx.exceptions.ChainIdMismatchException;
+// import org.chain3j.tx.exceptions.ChainIdMismatchException;
 import org.chain3j.tx.response.TransactionReceiptProcessor;
 import org.chain3j.utils.Numeric;
 import org.chain3j.utils.TxHashVerifier;
 
-import jnr.ffi.annotations.In;
 
 /**
  * TransactionManager implementation using Moac wallet file to create and sign transactions
@@ -26,7 +25,7 @@ import jnr.ffi.annotations.In;
  * <p>This transaction manager provides support for specifying the chain id for transactions as per
  * <a href="https://github.com/ethereum/EIPs/issues/155">EIP155</a>.
  * 
- * Use MOACTransactionEncoder and MOACTransaction
+ * <p>Use MOACTransactionEncoder and MOACTransaction
  * to sign and send the raw transaction object.
  */
 public class RawTransactionManager extends TransactionManager {
@@ -56,7 +55,6 @@ public class RawTransactionManager extends TransactionManager {
 
         this.chain3j = chain3j;
         this.credentials = credentials;
-
         this.chainId = chainId;
     }
 
@@ -66,7 +64,6 @@ public class RawTransactionManager extends TransactionManager {
 
         this.chain3j = chain3j;
         this.credentials = credentials;
-
         this.chainId = chainId;
     }
 
@@ -107,7 +104,7 @@ public class RawTransactionManager extends TransactionManager {
                 gasLimit,
                 to,
                 value,
-                data,  Integer.valueOf(this.chainId));
+                data);
 
         return signAndSend(rawTransaction);
     }
@@ -118,9 +115,10 @@ public class RawTransactionManager extends TransactionManager {
         byte[] signedMessage;
 
         if (chainId > ChainId.NONE) {
-            signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+            signedMessage = TransactionEncoder.signMessage(rawTransaction, chainId, credentials);
         } else {
-            signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+            // signedMessage = TransactionEncoder.signMessage(rawTransaction, chainId, credentials);
+            throw new IOException("Invalid chain id for signing the Transaction!");
         }
 
         String hexValue = Numeric.toHexString(signedMessage);
