@@ -19,7 +19,7 @@ public class RequestTest extends RequestTester {
     private Chain3j chain3j;
 
     @Override
-    protected void initWeb3Client(HttpService httpService) {
+    protected void initChain3Client(HttpService httpService) {
         chain3j = Chain3j.build(httpService);
     }
 

@@ -30,10 +30,10 @@ public abstract class RequestTester {
                 .addInterceptor(requestInterceptor)
                 .build();
         httpService = new HttpService(httpClient);
-        initWeb3Client(httpService);
+        initChain3Client(httpService);
     }
 
-    protected abstract void initWeb3Client(HttpService httpService);
+    protected abstract void initChain3Client(HttpService httpService);
 
     protected void verifyResult(String expected) throws Exception {
         RequestBody requestBody = requestInterceptor.getRequestBody();

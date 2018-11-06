@@ -27,14 +27,14 @@ public class RawResponseTest extends ResponseTester {
 
     @Test
     public void testRawResponseEnabled() {
-        configureWeb3Service(true);
+        configureChain3Service(true);
         final Chain3ClientVersion chain3ClientVersion = deserialiseWeb3ClientVersionResponse();
         assertThat(chain3ClientVersion.getRawResponse(), is(RAW_RESPONSE));
     }
 
     @Test
     public void testLargeRawResponseEnabled() {
-        configureWeb3Service(true);
+        configureChain3Service(true);
 
         buildResponse(LARGE_RAW_RESPONSE);
 
@@ -45,7 +45,7 @@ public class RawResponseTest extends ResponseTester {
 
     @Test
     public void testRawResponseDisabled() {
-        configureWeb3Service(false);
+        configureChain3Service(false);
         final Chain3ClientVersion chain3ClientVersion = deserialiseWeb3ClientVersionResponse();
         assertThat(chain3ClientVersion.getRawResponse(), nullValue());
     }

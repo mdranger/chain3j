@@ -30,14 +30,14 @@ public abstract class ResponseTester {
         okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(responseInterceptor)
                 .build();
-        configureWeb3Service(false);
+        configureChain3Service(false);
     }
 
     protected void buildResponse(String data) {
         responseInterceptor.setJsonResponse(data);
     }
 
-    protected void configureWeb3Service(boolean includeRawResponses) {
+    protected void configureChain3Service(boolean includeRawResponses) {
         chain3jService = new HttpService(okHttpClient, includeRawResponses);
     }
 

@@ -73,7 +73,7 @@ public class TransactionDecoderTest {
         // assertEquals(key, SampleKeys.PUBLIC_KEY);
         // assertEquals(SampleKeys.ADDRESS, signedResult.getFrom());
         // signedResult.verify(SampleKeys.ADDRESS);
-        // assertNull(signedResult.getChainId());
+        assertEquals(signedResult.getChainId(), chainId);
     }
 
     @Test

@@ -18,26 +18,19 @@ overview of blockchain, Ethereum and chain3j.
 Features
 --------
 
-- Complete implementation of Ethereum's `JSON-RPC <https://github.com/MOACChain/moac-core/wiki/JSON-RPC>`_
+- Complete implementation of MOAC's `JSON-RPC <https://github.com/MOACChain/moac-core/wiki/JSON-RPC>`_
   client API over HTTP and IPC
-  // TODO
-- MOAC wallet support
+
 - Auto-generation of Java smart contract wrappers to create, deploy, transact with and call smart
   contracts from native Java code
   (`Solidity <http://solidity.readthedocs.io/en/latest/using-the-compiler.html#using-the-commandline-compiler>`_
   and
   `Truffle <https://github.com/trufflesuite/truffle-contract-schema>`_ definition formats supported)
 - Reactive-functional API for working with filters
-- `Ethereum Name Service (ENS) <https://ens.domains/>`_ support
-- Support for Parity's
-  `Personal <https://github.com/paritytech/parity/wiki/JSONRPC-personal-module>`__, and Geth's
-  `Personal <https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal>`__ client APIs
-- Support for `Infura <https://infura.io/>`_, so you don't have to run an Ethereum client yourself
+- Support for `MOAC gateway <https://gateway.moac.io/>`_, so you don't have to run an MOAC client yourself
 - Comprehensive integration tests demonstrating a number of the above scenarios
 - Command line tools
 - Android compatible
-- Support for JP Morgan's Quorum via `chain3j-quorum <https://github.com/chain3j/quorum>`_
-
 
 It has five runtime dependencies:
 
@@ -57,22 +50,10 @@ Full project documentation is available at
 `docs.chain3j.io <http://docs.chain3j.io>`_.
 
 
-Donate
-------
-
-You can help fund the development of chain3j by donating to the following wallet addresses:
-
-+----------+--------------------------------------------+
-| Ethereum | 0x2dfBf35bb7c3c0A466A6C48BEBf3eF7576d3C420 |
-+----------+--------------------------------------------+
-| Bitcoin  | 1DfUeRWUy4VjekPmmZUNqCjcJBMwsyp61G         |
-+----------+--------------------------------------------+
-
-
 Commercial support and training
 -------------------------------
 
-Commercial support and training is available from `blk.io <https://blk.io>`_.
+Commercial support and training is available from `moac.io <https://moac.io>`_.
 
 
 Quickstart
@@ -81,9 +62,9 @@ Quickstart
 A `chain3j sample project <https://github.com/chain3j/sample-project-gradle>`_ is available that
 demonstrates a number of core features of Ethereum with chain3j, including:
 
-- Connecting to a node on the Ethereum network
-- Loading an Ethereum wallet file
-- Sending Ether from one address to another
+- Connecting to a node on the MOAC network
+- Loading an MOAC keystore file
+- Sending Moac from one address to another
 - Deploying a smart contract to the network
 - Reading a value from the deployed smart contract
 - Updating a value in the deployed smart contract
@@ -141,24 +122,16 @@ Android:
 Start a client
 --------------
 
-Start up an Ethereum client if you don't already have one running, such as
-`Geth <https://github.com/ethereum/go-ethereum/wiki/geth>`_:
+Start up an MOAC client if you don't already have one running, check
+_:
 
 .. code-block:: bash
 
-   $ geth --rpcapi personal,db,eth,net,web3 --rpc --testnet
-
-Or `Parity <https://github.com/paritytech/parity>`_:
-
-.. code-block:: bash
-
-   $ parity --chain testnet
-
-Or use `Infura <https://infura.io/>`_, which provides **free clients** running in the cloud:
+   $ ./moac --rpcapi personal,mc,net,chain3 --rpc --testnet
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService("https://ropsten.infura.io/your-token"));
+   Chain3j chain3 = Chain3j.build(new HttpService("https://ropsten.infura.io/your-token"));
 
 For further information refer to
 `Using Infura with chain3j <https://chain3j.github.io/chain3j/infura.html>`_
@@ -174,25 +147,25 @@ To send synchronous requests:
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
-   Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().send();
-   String clientVersion = web3ClientVersion.getWeb3ClientVersion();
+   Chain3j chain3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3ClientVersion chain3ClientVersion = chain3.chain3ClientVersion().send();
+   String clientVersion = chain3ClientVersion.getWeb3ClientVersion();
 
 
 To send asynchronous requests using a CompletableFuture (Future on Android):
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
-   Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().sendAsync().get();
-   String clientVersion = web3ClientVersion.getWeb3ClientVersion();
+   Chain3j chain3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3ClientVersion chain3ClientVersion = chain3.chain3ClientVersion().sendAsync().get();
+   String clientVersion = chain3ClientVersion.getWeb3ClientVersion();
 
 To use an RxJava Observable:
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
-   web3.web3ClientVersion().observable().subscribe(x -> {
+   Chain3j chain3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
+   chain3.chain3ClientVersion().observable().subscribe(x -> {
        String clientVersion = x.getWeb3ClientVersion();
        ...
    });
@@ -201,7 +174,7 @@ To use an RxJava Observable:
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3jFactory.build(new HttpService());  // defaults to http://localhost:8545/
+   Chain3j chain3 = Chain3jFactory.build(new HttpService());  // defaults to http://localhost:8545/
    ...
 
 
@@ -215,11 +188,11 @@ the same host as chain3j. To connect simply use the relevant *IpcService* implem
 .. code-block:: java
 
    // OS X/Linux/Unix:
-   Chain3j web3 = Chain3j.build(new UnixIpcService("/path/to/socketfile"));
+   Chain3j chain3 = Chain3j.build(new UnixIpcService("/path/to/socketfile"));
    ...
 
    // Windows
-   Chain3j web3 = Chain3j.build(new WindowsIpcService("/path/to/namedpipefile"));
+   Chain3j chain3 = Chain3j.build(new WindowsIpcService("/path/to/namedpipefile"));
    ...
 
 **Note:** IPC is not currently available on chain3j-android.
@@ -247,7 +220,7 @@ Now you can create and deploy your smart contract:
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Chain3j chain3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
 
    YourSmartContract contract = YourSmartContract.deploy(
@@ -382,10 +355,10 @@ To send Mc to another party using your Ethereum wallet file:
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Chain3j chain3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
    TransactionReceipt transactionReceipt = Transfer.sendFunds(
-           web3, credentials, "0x<address>|<ensName>",
+           chain3, credentials, "0x<address>|<ensName>",
            BigDecimal.valueOf(1.0), Convert.Unit.MC)
            .send();
 
@@ -393,7 +366,7 @@ Or if you wish to create your own custom transaction:
 
 .. code-block:: java
 
-   Chain3j web3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Chain3j chain3 = Chain3j.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
 
    // get the next available nonce
